@@ -24,11 +24,11 @@ class GetFilmesDataSourceImpl(
         } catch (t: Throwable) {
             when (t) {
                 is IOException -> {
-                    Timber.tag("GetFilmesDataSourceImpl").e("Error -> $t")
+                    Timber.tag("GetFilmesDataSourceImpl/getAllFilmes").e("Error -> $t")
                     ResourceState.Undefined(message = "Erro de conexão.")
                 }
                 else -> {
-                    Timber.tag("GetFilmesDataSourceImpl").e("Error -> $t")
+                    Timber.tag("GetFilmesDataSourceImpl/getAllFilmes").e("Error -> $t")
                     ResourceState.Undefined(message = "Erro na conversão dos dados.")
                 }
             }
@@ -42,11 +42,11 @@ class GetFilmesDataSourceImpl(
         } catch (t: Throwable) {
             when (t) {
                 is IOException -> {
-                    Timber.tag("GetFilmesDataSourceImpl").e("Error -> $t")
+                    Timber.tag("GetFilmesDataSourceImpl/getSearchFilmes").e("Error -> $t")
                     ResourceState.Undefined(message = "Erro de conexão.")
                 }
                 else -> {
-                    Timber.tag("GetFilmesDataSourceImpl").e("Error -> $t")
+                    Timber.tag("GetFilmesDataSourceImpl/getSearchFilmes").e("Error -> $t")
                     ResourceState.Undefined(message = "Erro na conversão dos dados.")
                 }
             }
@@ -71,11 +71,11 @@ class GetFilmesDataSourceImpl(
         } catch (t: Throwable) {
             when (t) {
                 is IOException -> {
-                    Timber.tag("GetFilmesDataSourceImpl").e("Error -> $t")
+                    Timber.tag("GetFilmesDataSourceImpl/getDetailFilme").e("Error -> $t")
                     ResourceState.Undefined(message = "Erro de conexão.")
                 }
                 else -> {
-                    Timber.tag("GetFilmesDataSourceImpl").e("Error -> $t")
+                    Timber.tag("GetFilmesDataSourceImpl/getDetailFilme").e("Error -> $t")
                     ResourceState.Undefined(message = "Erro na conversão dos dados.")
                 }
             }
