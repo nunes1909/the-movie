@@ -12,7 +12,7 @@ class GeneroRemoteMapper : RemoteMapper<GeneroResponse, GeneroData> {
         )
     }
 
-    override fun mapFromData(type: GeneroData): GeneroResponse {
+    override fun mapFromRemote(type: GeneroData): GeneroResponse {
         return GeneroResponse(
             id = type.id,
             name = type.name

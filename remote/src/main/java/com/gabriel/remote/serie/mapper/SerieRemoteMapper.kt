@@ -14,7 +14,7 @@ class SerieRemoteMapper : RemoteMapper<SerieResponse, SerieData> {
         )
     }
 
-    override fun mapFromData(type: SerieData): SerieResponse {
+    override fun mapFromRemote(type: SerieData): SerieResponse {
         return SerieResponse(
             id = type.id,
             title = type.title,
