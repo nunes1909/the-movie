@@ -5,11 +5,12 @@ import com.gabriel.remote.serie.model.SerieDetailResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface SeriesService {
 
     @GET("tv/popular")
-    fun getSeries(): Response<SerieContainer>
+    fun getAllSeries(): Response<SerieContainer>
 
     @GET("tv/{tv_id}")
     fun getDetailSerie(

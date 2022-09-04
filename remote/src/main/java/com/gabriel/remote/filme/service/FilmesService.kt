@@ -23,5 +23,4 @@ interface FilmesService {
         @Query("query")
         query: String
     ) : Response<FilmeContainer>
-
 }

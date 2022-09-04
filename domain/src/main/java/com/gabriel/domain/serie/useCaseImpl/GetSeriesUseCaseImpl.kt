@@ -10,6 +10,6 @@ class GetSeriesUseCaseImpl(private val repository: GetSeriesRepository) : GetSer
     }
 
     override suspend fun getFilterSerie(query: String): SerieDomain {
-        return repository.getFilterSerie(query = query)
+        return repository.getFilterSerie(serieId = query)
     }
 }

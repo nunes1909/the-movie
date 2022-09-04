@@ -4,5 +4,5 @@ import com.gabriel.data.serie.model.SerieData
 
 interface GetSeriesDataSource {
     suspend fun getAllSeries(): List<SerieData>
-    suspend fun getFilterSerie(query: String): SerieData
+    suspend fun getDetailSerie(serieId: Int): SerieData
 }
