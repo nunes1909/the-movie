@@ -20,72 +20,74 @@ class GetFilmesDataSourceImpl(
     override suspend fun getAllFilmes(): ResourceState<List<FilmeData>> {
         return try {
             val response = api.getAllFilmes()
-            responseListValidate(response)
+            validateListResponse(response = response)
         } catch (t: Throwable) {
             when (t) {
                 is IOException -> {
-                    Timber.tag("GetFilmesDataSourceImpl").e("Error -> $t")
-                    ResourceState.Error(message = "Erro de conexão.")
+                    Timber.tag("GetFilmesDataSourceImpl/getAllFilmes").e("Error -> $t")
+                    ResourceState.Undefined(message = "Erro de conexão.")
                 }
                 else -> {
-                    Timber.tag("GetFilmesDataSourceImpl").e("Error -> $t")
-                    ResourceState.Error(message = "Erro na conversão dos dados.")
+                    Timber.tag("GetFilmesDataSourceImpl/getAllFilmes").e("Error -> $t")
+                    ResourceState.Undefined(message = "Erro na conversão dos dados.")
                 }
             }
         }
     }
 
-    private fun responseListValidate(response: Response<FilmeContainer>): ResourceState<List<FilmeData>> {
+    override suspend fun getSearchFilmes(query: String): ResourceState<List<FilmeData>> {
+        return try {
+            val response = api.getSearchFilmes(query = query)
+            validateListResponse(response = response)
+        } catch (t: Throwable) {
+            when (t) {
+                is IOException -> {
+                    Timber.tag("GetFilmesDataSourceImpl/getSearchFilmes").e("Error -> $t")
+                    ResourceState.Undefined(message = "Erro de conexão.")
+                }
+                else -> {
+                    Timber.tag("GetFilmesDataSourceImpl/getSearchFilmes").e("Error -> $t")
+                    ResourceState.Undefined(message = "Erro na conversão dos dados.")
+                }
+            }
+        }
+    }
+
+    private fun validateListResponse(response: Response<FilmeContainer>):
+            ResourceState<List<FilmeData>> {
         if (response.isSuccessful) {
             response.body()?.let { values ->
-                val resultsData = mapperFilmes.mapFromDataNonNull(values.results)
-                return ResourceState.Succes(resultsData)
+                val resultsData = mapperFilmes.mapFromDomainNonNull(values.results)
+                return ResourceState.Undefined(data = resultsData)
             }
         }
         return ResourceState.Error(cod = response.code(), message = response.message())
     }
 
-    override suspend fun searchFilmes(query: String): ResourceState<List<FilmeData>> {
+    override suspend fun getDetailFilme(filmeId: Int): ResourceState<FilmeData> {
         return try {
-            val response = api.searchFilmes(query = query)
-            responseListValidate(response)
+            val response = api.getDetailFilme(filmeId = filmeId)
+            validateDetailResponse(response)
         } catch (t: Throwable) {
             when (t) {
                 is IOException -> {
-                    Timber.tag("GetFilmesDataSourceImpl").e("Error -> $t")
-                    ResourceState.Error(message = "Erro de conexão.")
+                    Timber.tag("GetFilmesDataSourceImpl/getDetailFilme").e("Error -> $t")
+                    ResourceState.Undefined(message = "Erro de conexão.")
                 }
                 else -> {
-                    Timber.tag("GetFilmesDataSourceImpl").e("Error -> $t")
-                    ResourceState.Error(message = "Erro na conversão dos dados.")
+                    Timber.tag("GetFilmesDataSourceImpl/getDetailFilme").e("Error -> $t")
+                    ResourceState.Undefined(message = "Erro na conversão dos dados.")
                 }
             }
         }
     }
 
-    override suspend fun getDetailFilme(id: Int): ResourceState<FilmeData> {
-        return try {
-            val response = api.getDetailFilme(filmeId = id)
-            responseValidate(response)
-        } catch (t: Throwable) {
-            when (t) {
-                is IOException -> {
-                    Timber.tag("GetFilmesDataSourceImpl").e("Error -> $t")
-                    ResourceState.Error(message = "Erro de conexão.")
-                }
-                else -> {
-                    Timber.tag("GetFilmesDataSourceImpl").e("Error -> $t")
-                    ResourceState.Error(message = "Erro na conversão dos dados.")
-                }
-            }
-        }
-    }
-
-    private fun responseValidate(response: Response<FilmeDetailResponse>): ResourceState<FilmeData> {
+    private fun validateDetailResponse(response: Response<FilmeDetailResponse>):
+            ResourceState<FilmeData> {
         if (response.isSuccessful) {
             response.body()?.let { value ->
-                val resultsData = mapperDetail.mapToData(value)
-                return ResourceState.Succes(resultsData)
+                val resultData = mapperDetail.mapToData(value)
+                return ResourceState.Undefined(data = resultData)
             }
         }
         return ResourceState.Error(cod = response.code(), message = response.message())

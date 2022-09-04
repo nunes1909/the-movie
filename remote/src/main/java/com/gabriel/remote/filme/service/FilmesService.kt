@@ -19,7 +19,7 @@ interface FilmesService {
     ) : Response<FilmeDetailResponse>
 
     @GET("search/movie")
-    suspend fun searchFilmes(
+    suspend fun getSearchFilmes(
         @Query("query")
         query: String
     ) : Response<FilmeContainer>

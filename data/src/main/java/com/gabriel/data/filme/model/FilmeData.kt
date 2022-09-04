@@ -10,6 +10,6 @@ data class FilmeData(
     val nota: Double? = null,
     val background: String? = null,
     val banner: String? = null,
-    val generos: List<GeneroData>? = null,
+    val generos: List<GeneroData?>? = null,
     val favorito: Boolean = false
 ) : Serializable
