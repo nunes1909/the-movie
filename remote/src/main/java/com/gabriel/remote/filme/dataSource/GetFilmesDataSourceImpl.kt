@@ -2,12 +2,12 @@ package com.gabriel.remote.filme.dataSource
 
 import com.gabriel.data.filme.dataSource.GetFilmesDataSource
 import com.gabriel.data.filme.model.FilmeData
-import com.gabriel.data.util.state.ResourceState
 import com.gabriel.remote.filme.mapper.FilmeDetailRemoteMapper
 import com.gabriel.remote.filme.mapper.FilmeRemoteMapper
 import com.gabriel.remote.filme.model.FilmeContainer
 import com.gabriel.remote.filme.model.FilmeDetailResponse
 import com.gabriel.remote.filme.service.FilmesService
+import com.gabriel.data.util.state.ResourceState
 import retrofit2.Response
 import timber.log.Timber
 import java.io.IOException
@@ -61,7 +61,7 @@ class GetFilmesDataSourceImpl(
                 return ResourceState.Undefined(data = resultsData)
             }
         }
-        return ResourceState.Error(cod = response.code(), message = response.message())
+        return ResourceState.Undefined(cod = response.code(), message = response.message())
     }
 
     override suspend fun getDetailFilme(filmeId: Int): ResourceState<FilmeData> {
@@ -90,6 +90,6 @@ class GetFilmesDataSourceImpl(
                 return ResourceState.Undefined(data = resultData)
             }
         }
-        return ResourceState.Error(cod = response.code(), message = response.message())
+        return ResourceState.Undefined(cod = response.code(), message = response.message())
     }
 }
