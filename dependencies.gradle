@@ -10,7 +10,6 @@ ext {
     // Retrofit
     retrofit_version = '2.9.0'
     logging_version = '4.10.0'
-    timber_version = '5.0.1'
 
     // Room
     room_version = '2.4.3'
@@ -37,7 +36,6 @@ ext {
             retrofit       : "com.squareup.retrofit2:retrofit:$retrofit_version",
             gson           : "com.squareup.retrofit2:converter-gson:$retrofit_version",
             logging        : "com.squareup.okhttp3:logging-interceptor:$logging_version",
-            timber         : "com.jakewharton.timber:timber:$timber_version",
             room           : "androidx.room:room-runtime:$room_version",
             roomKtx        : "androidx.room:room-ktx:$room_version",
             kapt           : "androidx.room:room-compiler:$room_version",
