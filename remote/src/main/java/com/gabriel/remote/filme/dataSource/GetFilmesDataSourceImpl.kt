@@ -35,24 +35,6 @@ class GetFilmesDataSourceImpl(
         }
     }
 
-    override suspend fun getSearchFilmes(query: String): ResourceState<List<FilmeData>> {
-        return try {
-            val response = api.getSearchFilmes(query = query)
-            validateListResponse(response = response)
-        } catch (t: Throwable) {
-            when (t) {
-                is IOException -> {
-                    Timber.tag("GetFilmesDataSourceImpl/getSearchFilmes").e("Error -> $t")
-                    ResourceState.Undefined(message = "Erro de conexão.")
-                }
-                else -> {
-                    Timber.tag("GetFilmesDataSourceImpl/getSearchFilmes").e("Error -> $t")
-                    ResourceState.Undefined(message = "Erro na conversão dos dados.")
-                }
-            }
-        }
-    }
-
     private fun validateListResponse(response: Response<FilmeContainer>):
             ResourceState<List<FilmeData>> {
         if (response.isSuccessful) {

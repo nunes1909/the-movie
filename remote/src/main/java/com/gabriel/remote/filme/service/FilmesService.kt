@@ -18,9 +18,4 @@ interface FilmesService {
         filmeId: Int
     ) : Response<FilmeDetailResponse>
 
-    @GET("search/movie")
-    suspend fun getSearchFilmes(
-        @Query("query")
-        query: String
-    ) : Response<FilmeContainer>
 }

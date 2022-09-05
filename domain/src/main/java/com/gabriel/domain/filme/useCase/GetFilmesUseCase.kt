@@ -5,6 +5,5 @@ import com.gabriel.domain.util.state.ResourceState
 
 interface GetFilmesUseCase {
     suspend fun getAllFilmes(): ResourceState<List<FilmeDomain>>
-    suspend fun getSearchFilmes(): ResourceState<List<FilmeDomain>>
     suspend fun getDetailFilme(filmeId: Int): ResourceState<FilmeDomain>
 }

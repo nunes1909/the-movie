@@ -5,6 +5,5 @@ import com.gabriel.data.util.state.ResourceState
 
 interface GetFilmesDataSource {
     suspend fun getAllFilmes(): ResourceState<List<FilmeData>>
-    suspend fun getSearchFilmes(query: String): ResourceState<List<FilmeData>>
     suspend fun getDetailFilme(filmeId: Int): ResourceState<FilmeData>
 }
