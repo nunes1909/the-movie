@@ -1,12 +1,12 @@
 package com.gabriel.remote.util.di
 
-import com.gabriel.data.filme.dataSource.GetFilmesDataSource
-import com.gabriel.remote.filme.dataSource.GetFilmesDataSourceImpl
-import com.gabriel.remote.filme.mapper.FilmeDetailRemoteMapper
-import com.gabriel.remote.filme.mapper.FilmeRemoteMapper
-import com.gabriel.remote.filme.service.FilmesService
-import com.gabriel.remote.genero.mapper.GeneroRemoteMapper
-import com.gabriel.remote.genero.service.GeneroService
+import com.gabriel.data.features.filme.dataSource.GetFilmesDataSource
+import com.gabriel.remote.features.filme.dataSource.GetFilmesDataSourceImpl
+import com.gabriel.remote.features.filme.mapper.FilmeDetailRemoteMapper
+import com.gabriel.remote.features.filme.mapper.FilmeRemoteMapper
+import com.gabriel.remote.features.filme.service.FilmesService
+import com.gabriel.remote.features.genero.mapper.GeneroRemoteMapper
+import com.gabriel.remote.features.genero.service.GeneroService
 import org.koin.dsl.module
 
 fun getRemoteModules() = module {
