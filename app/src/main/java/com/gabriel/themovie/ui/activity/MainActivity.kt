@@ -1,7 +1,8 @@
-package com.gabriel.themovie
+package com.gabriel.themovie.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.gabriel.themovie.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

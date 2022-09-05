@@ -22,16 +22,37 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding true
     }
 }
 
 dependencies {
+    implementation project(path: ':domain')
+
+    def dependencies = rootProject.ext.dependencies
+    implementation dependencies.kotlin
+    implementation dependencies.koin
+    implementation dependencies.coroutine
+    implementation dependencies.lifecycle
+    implementation dependencies.navFragment
+    implementation dependencies.navUiKtx
+    implementation dependencies.fragmentKtx
+    implementation dependencies.coil
+
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    def koin_version = "3.2.0"
+    implementation "io.insert-koin:koin-android:$koin_version"
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.5.0'
