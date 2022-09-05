@@ -10,10 +10,6 @@ class GetFilmesUseCaseImpl(private val repository: GetFilmesRepository) : GetFil
         return repository.getAllFilmes()
     }
 
-    override suspend fun getSearchFilmes(): ResourceState<List<FilmeDomain>> {
-        return repository.getSearchFilmes()
-    }
-
     override suspend fun getDetailFilme(filmeId: Int): ResourceState<FilmeDomain> {
         return repository.getDetailFilme(filmeId)
     }

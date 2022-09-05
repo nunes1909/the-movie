@@ -14,8 +14,8 @@ class GetSeriesRepositoryImpl(
         return mapper.mapFromDomainNonNull(listaData)
     }
 
-    override suspend fun getFilterSerie(query: String): SerieDomain {
-        val serieDomain = dataSource.getFilterSerie(query = query)
+    override suspend fun getDetailSerie(serieId: Int): SerieDomain {
+        val serieDomain = dataSource.getDetailSerie(serieId = serieId)
         return mapper.mapToDomain(serieDomain)
     }
 }
