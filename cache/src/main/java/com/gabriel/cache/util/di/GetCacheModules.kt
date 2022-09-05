@@ -1,8 +1,8 @@
 package com.gabriel.cache.util.di
 
-import com.gabriel.cache.filme.mapper.FilmesCacheMapper
-import com.gabriel.cache.genero.mapper.GeneroCacheMapper
-import com.gabriel.cache.serie.mapper.SeriesCacheMapper
+import com.gabriel.cache.features.filme.mapper.FilmesCacheMapper
+import com.gabriel.cache.features.genero.mapper.GeneroCacheMapper
+import com.gabriel.cache.features.serie.mapper.SeriesCacheMapper
 import org.koin.dsl.module
 
 fun getCacheModules() = module {
