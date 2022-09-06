@@ -16,5 +16,4 @@ interface FilmesService {
         @Path(value = "movie_id", encoded = true)
         filmeId: Int
     ) : Response<FilmeDetailResponse>
-
 }
