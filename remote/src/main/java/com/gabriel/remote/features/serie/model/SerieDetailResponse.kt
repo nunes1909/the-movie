@@ -11,15 +11,15 @@ data class SerieDetailResponse(
     @SerializedName("name")
     val title: String,
     @SerializedName("overview")
-    val description: String,
+    val description: String? = null,
     @SerializedName("vote_average")
-    val nota: Double,
+    val nota: Double? = null,
     @SerializedName("poster_path")
     val background: String? = null,
     @SerializedName("backdrop_path")
     val banner: String? = null,
     @SerializedName("genres")
-    val generos: List<GeneroResponse>,
+    val generos: List<GeneroResponse>? = null,
     @Expose
-    val favorito: Boolean
+    val favorito: Boolean = false
 ) : Serializable
