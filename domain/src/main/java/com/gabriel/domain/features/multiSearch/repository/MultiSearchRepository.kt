@@ -4,5 +4,5 @@ import com.gabriel.domain.features.multiSearch.model.MultiDomain
 import com.gabriel.domain.util.state.ResourceState
 
 interface MultiSearchRepository {
-    suspend fun searchMulti(query: String): ResourceState<MultiDomain>
+    suspend fun searchMulti(query: String): ResourceState<List<MultiDomain>>
 }

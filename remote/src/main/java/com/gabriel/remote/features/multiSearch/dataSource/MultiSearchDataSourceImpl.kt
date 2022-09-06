@@ -2,7 +2,7 @@ package com.gabriel.remote.features.multiSearch.dataSource
 
 import com.gabriel.data.features.multiSearch.dataSource.MultiSearchDataSource
 import com.gabriel.data.features.multiSearch.model.MultiData
-import com.gabriel.data.util.state.ResourceState
+import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.remote.features.multiSearch.mapper.MultiRemoteMapper
 import com.gabriel.remote.features.multiSearch.model.MultiContainer
 import com.gabriel.remote.features.multiSearch.service.MultiService

@@ -7,7 +7,7 @@ import com.gabriel.remote.features.filme.mapper.FilmeRemoteMapper
 import com.gabriel.remote.features.filme.model.FilmeContainer
 import com.gabriel.remote.features.filme.model.FilmeDetailResponse
 import com.gabriel.remote.features.filme.service.FilmesService
-import com.gabriel.data.util.state.ResourceState
+import com.gabriel.domain.util.state.ResourceState
 import retrofit2.Response
 import timber.log.Timber
 import java.io.IOException
