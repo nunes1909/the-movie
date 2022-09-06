@@ -11,12 +11,26 @@ class GetSeriesRepositoryImpl(
     private val mapper: SerieDataMapper
 ) : GetSeriesRepository {
     override suspend fun getAllSeries(): ResourceState<List<SerieDomain>> {
-        val listaData = dataSource.getAllSeries()
-        return mapper.mapFromDomainNonNull(listaData)
+        val resource = dataSource.getAllSeries()
+        if (resource.data != null) {
+            val resultsDomain = mapper.mapFromDomainNonNull(resource.data!!)
+            return ResourceState.Undefined(data = resultsDomain)
+        }
+        return ResourceState.Undefined(
+            cod = resource.cod,
+            message = resource.message
+        )
     }
 
     override suspend fun getDetailSerie(serieId: Int): ResourceState<SerieDomain> {
-        val serieDomain = dataSource.getDetailSerie(serieId = serieId)
-        return mapper.mapToDomain(serieDomain)
+        val resource = dataSource.getDetailSerie(serieId = serieId)
+        if (resource.data != null) {
+            val resultDomain = mapper.mapToDomain(resource.data!!)
+            return ResourceState.Undefined(data = resultDomain)
+        }
+        return ResourceState.Undefined(
+            cod = resource.cod,
+            message = resource.message
+        )
     }
 }
