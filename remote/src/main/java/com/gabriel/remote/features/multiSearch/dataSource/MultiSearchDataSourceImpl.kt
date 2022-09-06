@@ -21,11 +21,11 @@ class MultiSearchDataSourceImpl(
         } catch (t: Throwable) {
             when (t) {
                 is IOException -> {
-                    Timber.tag("GetFilmesDataSourceImpl/getAllFilmes").e("Error -> $t")
+                    Timber.tag("GetFilmesDataSourceImpl/searchMulti").e("Error -> $t")
                     ResourceState.Undefined(message = "Erro de conexão.")
                 }
                 else -> {
-                    Timber.tag("GetFilmesDataSourceImpl/getAllFilmes").e("Error -> $t")
+                    Timber.tag("GetFilmesDataSourceImpl/searchMulti").e("Error -> $t")
                     ResourceState.Undefined(message = "Erro na conversão dos dados.")
                 }
             }

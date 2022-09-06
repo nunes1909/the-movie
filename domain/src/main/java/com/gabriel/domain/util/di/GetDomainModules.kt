@@ -14,13 +14,13 @@ import org.koin.dsl.module
 fun getDomainModules() = module {
     // Filmes modules
     factory<GetFilmesRepository> { get() }
-    factory<GetFilmesUseCase> { GetFilmesUseCaseImpl(get()) }
+    factory<GetFilmesUseCase> { GetFilmesUseCaseImpl(repository = get()) }
 
     // Series modules
     factory<GetSeriesRepository> { get() }
-    factory<GetSeriesUseCase> { GetSeriesUseCaseImpl(get()) }
+    factory<GetSeriesUseCase> { GetSeriesUseCaseImpl(repository = get()) }
 
     // Multi modules
     factory<MultiSearchRepository> { get() }
-    factory<SearchMultiUseCase> { SearchMultiUseCaseImpl(get()) }
+    factory<SearchMultiUseCase> { SearchMultiUseCaseImpl(repository = get()) }
 }

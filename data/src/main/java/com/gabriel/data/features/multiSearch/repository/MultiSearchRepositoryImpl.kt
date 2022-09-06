@@ -11,6 +11,14 @@ class MultiSearchRepositoryImpl(
     private val mapper: MultiDataMapper
 ) : MultiSearchRepository {
     override suspend fun searchMulti(query: String): ResourceState<List<MultiDomain>> {
-
+        val resourceState = dataSource.searchMulti(query = query)
+        if (resourceState.data != null) {
+            val resultsDomain = mapper.mapFromDomainNonNull(resourceState.data!!)
+            return ResourceState.Undefined(data = resultsDomain)
+        }
+        return ResourceState.Undefined(
+            cod = resourceState.cod,
+            message = resourceState.message
+        )
     }
 }

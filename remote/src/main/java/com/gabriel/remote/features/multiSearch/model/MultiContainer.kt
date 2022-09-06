@@ -7,4 +7,3 @@ data class MultiContainer(
     @SerializedName("results")
     val results: List<MultiResponse>
 ) : Serializable
-

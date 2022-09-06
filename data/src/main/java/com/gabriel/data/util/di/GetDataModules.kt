@@ -21,16 +21,16 @@ fun getDataModules() = module {
 
     // Filmes modules
     factory<GetFilmesDataSource> { get() }
-    factory { FilmeDataMapper(get()) }
-    factory<GetFilmesRepository> { GetFilmesRepositoryImpl(get(), get()) }
+    factory { FilmeDataMapper(mapper = get()) }
+    factory<GetFilmesRepository> { GetFilmesRepositoryImpl(dataSource = get(), mapper = get()) }
 
     // Series modules
     factory<GetSeriesDataSource> { get() }
-    factory { SerieDataMapper(get()) }
-    factory<GetSeriesRepository> { GetSeriesRepositoryImpl(get(), get()) }
+    factory { SerieDataMapper(mapper = get()) }
+    factory<GetSeriesRepository> { GetSeriesRepositoryImpl(dataSource = get(), mapper = get()) }
 
     // Multi modules
     factory<MultiSearchDataSource> { get() }
-    factory { MultiDataMapper(get()) }
-    factory<MultiSearchRepository> { MultiSearchRepositoryImpl(get()) }
+    factory { MultiDataMapper(mapper = get()) }
+    factory<MultiSearchRepository> { MultiSearchRepositoryImpl(dataSource = get(), mapper = get()) }
 }
