@@ -8,8 +8,8 @@ import retrofit2.http.Query
 interface GeneroService {
 
     @GET("genre/movie/list")
-    suspend fun getGenero(
-        @Query("api_key")
-        apiKey: String
-    ): Response<GeneroResponse>
+    suspend fun getGeneroFilme(): Response<GeneroResponse>
+
+    @GET("genre/tv/list")
+    suspend fun getGeneroSerie(): Response<GeneroResponse>
 }
