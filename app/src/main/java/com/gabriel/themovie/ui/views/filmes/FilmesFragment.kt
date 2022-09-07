@@ -7,12 +7,15 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import coil.load
 import com.gabriel.domain.util.state.ResourceState
+import com.gabriel.themovie.R
 import com.gabriel.themovie.databinding.FragmentFilmesBinding
 import com.gabriel.themovie.model.filme.model.FilmeView
 import com.gabriel.themovie.model.multiMovie.MultiMovie
 import com.gabriel.themovie.ui.adapters.FilmeAdapter
 import com.gabriel.themovie.util.base.BaseFragment
+import com.gabriel.themovie.util.constants.ConstantsView
 import com.gabriel.themovie.util.extensions.hide
 import com.gabriel.themovie.util.extensions.show
 import com.gabriel.themovie.util.extensions.toast
@@ -37,7 +40,6 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
         binding.rvFilme.apply {
             adapter = filmeAdapter
             layoutManager = GridLayoutManager(requireContext(), 4)
-            setHasFixedSize(false)
         }
     }
 
@@ -77,7 +79,7 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
                 is ResourceState.Error -> {
                     binding.progressFilme.hide()
                     toast("Um erro ocorreu.")
-                    Timber.tag("FilmesFragment/observer")
+                    Timber.tag("FilmesFragment/observerListaFilmes")
                         .e("Error -> ${resource.message} Cod -> ${resource.cod}")
                 }
                 is ResourceState.Loading -> {
@@ -88,8 +90,31 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
         }
     }
 
-    private fun observerFilmePrincipal() {
-        binding.filmeBannerPrincipal
+    private fun observerFilmePrincipal() = lifecycleScope.launch {
+        viewModel.listTranding.collect { resource ->
+            when (resource) {
+                is ResourceState.Success -> {
+                    resource.data?.let { results ->
+                        val filmeView = results[1]
+                        binding.filmeBannerPrincipal
+                            .load("${ConstantsView.BASE_URL_IMAGES}${filmeView.background}")
+                        binding.filmeTituloPrincipal.text = filmeView.title
+                    }
+                    if (resource.data != null ){
+                        toast("teste")
+                    }
+                }
+//                is ResourceState.Error -> {
+//                    binding.filmeBannerPrincipal.load(R.drawable.erro)
+//                    Timber.tag("FilmesFragment/observerFilmePrincipal")
+//                        .e("Error -> ${resource.message} Cod -> ${resource.cod}")
+//                }
+//                is ResourceState.Loading -> {
+//                    binding.filmeBannerPrincipal.load(androidx.appcompat.R.color.material_grey_600)
+//                }
+                else -> {}
+            }
+        }
     }
 
     override fun getViewBinding(

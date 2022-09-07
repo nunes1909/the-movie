@@ -12,5 +12,5 @@ fun getViewModules() = module {
     factory { FilmeViewMapper(get()) }
 
     // Filmes modules
-    viewModel { FilmesViewModel(get(), get()) }
+    viewModel { FilmesViewModel(get(), get(), get()) }
 }
