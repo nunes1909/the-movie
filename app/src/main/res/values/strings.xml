@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">The Movie</string>
+
+    <!-- region titles -->
+    <string name="title_menu_filmes">Filmes</string>
+    <string name="title_menu_series">Séries</string>
+    <string name="title_menu_pesquisar">Pesquisar</string>
+    <string name="title_menu_favoritos">Favoritos</string>
+    <!-- endregion -->
 </resources>

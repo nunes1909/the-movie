@@ -2,9 +2,9 @@ package com.gabriel.remote.network.retrofit
 
 import com.gabriel.remote.features.filme.service.FilmesService
 import com.gabriel.remote.features.serie.service.SeriesService
-import com.gabriel.themovie.util.constants.Constants.API_KEY
-import com.gabriel.themovie.util.constants.Constants.API_QUERY
-import com.gabriel.themovie.util.constants.Constants.BASE_URL
+import com.gabriel.remote.util.constants.ConstantsRemote.API_KEY
+import com.gabriel.remote.util.constants.ConstantsRemote.API_QUERY
+import com.gabriel.remote.util.constants.ConstantsRemote.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

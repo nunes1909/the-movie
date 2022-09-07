@@ -3,7 +3,6 @@ package com.gabriel.themovie.ui.features.filmes
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.gabriel.themovie.databinding.FragmentFilmesBinding
-import com.gabriel.themovie.ui.features.filmes.FilmesViewModel
 import com.gabriel.themovie.util.base.BaseFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
