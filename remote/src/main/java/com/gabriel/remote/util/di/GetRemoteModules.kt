@@ -17,15 +17,16 @@ import com.gabriel.remote.features.serie.mapper.SerieRemoteMapper
 import com.gabriel.remote.features.serie.service.SeriesService
 import com.gabriel.remote.network.retrofit.TheMovieRetrofit
 import okhttp3.OkHttpClient
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
 fun getRemoteModules() = module {
     // Retrofit Modules
-    single<OkHttpClient> { TheMovieRetrofit().getOkHttpClient() }
+    single { TheMovieRetrofit().getOkHttpClient() }
     single<Retrofit> { TheMovieRetrofit().getRetrofit(client = get()) }
-    single<FilmesService> { TheMovieRetrofit().getFilmesService(retrofit = get()) }
-    single<SeriesService> { TheMovieRetrofit().getSeriesService(retrofit = get()) }
+    single(named("FilmesService")) { TheMovieRetrofit().getFilmesService(retrofit = get()) }
+    single(named("SeriesService")) { TheMovieRetrofit().getSeriesService(retrofit = get()) }
 
     // Genero Modules
     factory { GeneroRemoteMapper() }
