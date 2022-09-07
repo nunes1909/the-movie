@@ -1,4 +1,4 @@
-package com.gabriel.themovie.ui.features.filmes
+package com.gabriel.themovie.ui.views.filmes
 
 import androidx.lifecycle.ViewModel
 

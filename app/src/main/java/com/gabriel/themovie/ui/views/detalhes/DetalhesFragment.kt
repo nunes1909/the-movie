@@ -1,4 +1,4 @@
-package com.gabriel.themovie.ui.features.detalhes
+package com.gabriel.themovie.ui.views.detalhes
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/filmesFragment"
         tools:layout="@layout/fragment_filmes"
-        android:name="com.gabriel.themovie.ui.features.filmes.FilmesFragment"
+        android:name="com.gabriel.themovie.ui.views.filmes.FilmesFragment"
         android:label="FilmesFragment">
         <action
             android:id="@+id/action_filmesFragment_to_detalhesFragment"
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/seriesFragment"
-        android:name="com.gabriel.themovie.ui.features.series.SeriesFragment"
+        android:name="com.gabriel.themovie.ui.views.series.SeriesFragment"
         android:label="SeriesFragment"
         tools:layout="@layout/fragment_series">
         <action
@@ -32,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoritosFragment"
-        android:name="com.gabriel.themovie.ui.features.favoritos.FavoritosFragment"
+        android:name="com.gabriel.themovie.ui.views.favoritos.FavoritosFragment"
         android:label="FavoritosFragment"
         tools:layout="@layout/fragment_favoritos">
         <action
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/pesquisaFragment"
-        android:name="com.gabriel.themovie.ui.features.pesquisa.PesquisaFragment"
+        android:name="com.gabriel.themovie.ui.views.pesquisa.PesquisaFragment"
         android:label="PesquisaFragment"
         tools:layout="@layout/fragment_pesquisa">
         <action
@@ -58,7 +58,11 @@
     </fragment>
     <fragment
         android:id="@+id/detalhesFragment"
-        android:name="com.gabriel.themovie.ui.features.detalhes.DetalhesFragment"
+        android:name="com.gabriel.themovie.ui.views.detalhes.DetalhesFragment"
         android:label="DetalhesFragment"
-        tools:layout="@layout/fragment_detalhes" />
+        tools:layout="@layout/fragment_detalhes" >
+        <argument
+            android:name="multiResult"
+            app:argType="com.gabriel.themovie.model.multiResult.MultiResult" />
+    </fragment>
 </navigation>

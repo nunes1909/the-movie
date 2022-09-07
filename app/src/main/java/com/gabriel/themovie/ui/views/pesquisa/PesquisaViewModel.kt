@@ -1,4 +1,4 @@
-package com.gabriel.themovie.ui.features.pesquisa
+package com.gabriel.themovie.ui.views.pesquisa
 
 import androidx.lifecycle.ViewModel
 
