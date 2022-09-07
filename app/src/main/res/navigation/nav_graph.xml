@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/filmesFragment">
+    <fragment
+        android:id="@+id/filmesFragment"
+        tools:layout="@layout/fragment_filmes"
+        android:name="com.gabriel.themovie.ui.features.filmes.FilmesFragment"
+        android:label="FilmesFragment">
+        <action
+            android:id="@+id/action_filmesFragment_to_detalhesFragment"
+            app:destination="@id/detalhesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/seriesFragment"
+        android:name="com.gabriel.themovie.ui.features.series.SeriesFragment"
+        android:label="SeriesFragment"
+        tools:layout="@layout/fragment_series">
+        <action
+            android:id="@+id/action_seriesFragment_to_detalhesFragment"
+            app:destination="@id/detalhesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritosFragment"
+        android:name="com.gabriel.themovie.ui.features.favoritos.FavoritosFragment"
+        android:label="FavoritosFragment"
+        tools:layout="@layout/fragment_favoritos">
+        <action
+            android:id="@+id/action_favoritosFragment_to_detalhesFragment"
+            app:destination="@id/detalhesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pesquisaFragment"
+        android:name="com.gabriel.themovie.ui.features.pesquisa.PesquisaFragment"
+        android:label="PesquisaFragment"
+        tools:layout="@layout/fragment_pesquisa">
+        <action
+            android:id="@+id/action_pesquisaFragment_to_detalhesFragment"
+            app:destination="@id/detalhesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detalhesFragment"
+        android:name="com.gabriel.themovie.ui.features.detalhes.DetalhesFragment"
+        android:label="DetalhesFragment"
+        tools:layout="@layout/fragment_detalhes" />
+</navigation>

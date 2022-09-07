@@ -16,7 +16,6 @@ import com.gabriel.remote.features.serie.mapper.SerieDetailRemoteMapper
 import com.gabriel.remote.features.serie.mapper.SerieRemoteMapper
 import com.gabriel.remote.features.serie.service.SeriesService
 import com.gabriel.remote.network.retrofit.TheMovieRetrofit
-import okhttp3.OkHttpClient
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
