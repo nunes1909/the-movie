@@ -29,6 +29,9 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <argument
+            android:name="multiMovie"
+            app:argType="com.gabriel.themovie.model.multiMovie.MultiMovie" />
     </fragment>
     <fragment
         android:id="@+id/favoritosFragment"
@@ -62,7 +65,7 @@
         android:label="DetalhesFragment"
         tools:layout="@layout/fragment_detalhes" >
         <argument
-            android:name="multiResult"
-            app:argType="com.gabriel.themovie.model.multiResult.MultiResult" />
+            android:name="multiMovie"
+            app:argType="com.gabriel.themovie.model.multiMovie.MultiMovie" />
     </fragment>
 </navigation>

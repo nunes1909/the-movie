@@ -16,7 +16,6 @@ import com.gabriel.remote.features.serie.mapper.SerieDetailRemoteMapper
 import com.gabriel.remote.features.serie.mapper.SerieRemoteMapper
 import com.gabriel.remote.features.serie.service.SeriesService
 import com.gabriel.remote.network.retrofit.TheMovieRetrofit
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
@@ -24,14 +23,13 @@ fun getRemoteModules() = module {
     // Retrofit Modules
     single { TheMovieRetrofit().getOkHttpClient() }
     single<Retrofit> { TheMovieRetrofit().getRetrofit(client = get()) }
-    single(named("FilmesService")) { TheMovieRetrofit().getFilmesService(retrofit = get()) }
-    single(named("SeriesService")) { TheMovieRetrofit().getSeriesService(retrofit = get()) }
+    single<FilmesService> { TheMovieRetrofit().getFilmesService(retrofit = get()) }
+    single<SeriesService> { TheMovieRetrofit().getSeriesService(retrofit = get()) }
 
     // Genero Modules
     factory { GeneroRemoteMapper() }
 
     // Filmes Modules
-    single<FilmesService> { get() }
     factory { FilmeRemoteMapper() }
     factory { FilmeDetailRemoteMapper(mapper = get()) }
     single<GetFilmesDataSource> {
@@ -39,7 +37,6 @@ fun getRemoteModules() = module {
     }
 
     // Series Modules
-    single<SeriesService> { get() }
     factory { SerieRemoteMapper() }
     factory { SerieDetailRemoteMapper(mapper = get()) }
     single<GetSeriesDataSource> {
