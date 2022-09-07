@@ -1,4 +1,4 @@
-package com.gabriel.themovie.ui.features.favoritos
+package com.gabriel.themovie.ui.views.favoritos
 
 import androidx.lifecycle.ViewModel
 
