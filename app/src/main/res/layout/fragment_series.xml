@@ -40,7 +40,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/serieBannerPrincipal"
         app:spanCount="4"
-        tools:listitem="@layout/item_relacionado" />
+        tools:listitem="@layout/item_list" />
 
     <ProgressBar
         android:id="@+id/progressSerie"
