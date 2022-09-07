@@ -2,6 +2,9 @@ package com.gabriel.remote.network.retrofit
 
 import com.gabriel.remote.features.filme.service.FilmesService
 import com.gabriel.remote.features.serie.service.SeriesService
+import com.gabriel.themovie.util.constants.Constants.API_KEY
+import com.gabriel.themovie.util.constants.Constants.API_QUERY
+import com.gabriel.themovie.util.constants.Constants.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -10,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class TheMovieRetrofit {
     fun getRetrofit(client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("BASE_URL")
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
@@ -32,7 +35,7 @@ class TheMovieRetrofit {
             .addInterceptor { chain ->
                 val newUrl = chain.request().url
                     .newBuilder()
-                    .addQueryParameter("API", "API_KEY")
+                    .addQueryParameter(API_QUERY, API_KEY)
                     .build()
 
                 val newResquest = chain.request()
