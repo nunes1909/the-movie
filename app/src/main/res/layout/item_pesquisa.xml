@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/itemFavoritoImage"
+            android:id="@+id/itemMovieImage"
             android:layout_width="130dp"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
@@ -22,17 +22,18 @@
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <TextView
+            android:id="@+id/itemMovieTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/itemFavoritoImage"
+            app:layout_constraintStart_toEndOf="@id/itemMovieImage"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Teste titulo filme" />
 
         <CheckBox
-            android:id="@+id/cbItemFavorito"
+            android:id="@+id/cb_item_movie_favorito"
             style="?android:attr/starStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

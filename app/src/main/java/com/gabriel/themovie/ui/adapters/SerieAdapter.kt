@@ -21,7 +21,7 @@ class SerieAdapter : RecyclerView.Adapter<SerieAdapter.SerieViewHolder>() {
         }
 
         override fun areContentsTheSame(oldItem: SerieView, newItem: SerieView): Boolean {
-            return oldItem.id == newItem.id &&
+            return  oldItem.id == newItem.id &&
                     oldItem.title == newItem.title &&
                     oldItem.description == newItem.description &&
                     oldItem.banner == newItem.banner &&
@@ -58,7 +58,7 @@ class SerieAdapter : RecyclerView.Adapter<SerieAdapter.SerieViewHolder>() {
         }
     }
 
-    fun setFilmeOnClickListener(listener: (SerieView) -> Unit) {
+    fun setSerieOnClickListener(listener: (SerieView) -> Unit) {
         onItemClickListener = listener
     }
 

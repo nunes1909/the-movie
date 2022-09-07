@@ -21,7 +21,7 @@ class FilmeAdapter : RecyclerView.Adapter<FilmeAdapter.FilmeViewHolder>() {
         }
 
         override fun areContentsTheSame(oldItem: FilmeView, newItem: FilmeView): Boolean {
-            return oldItem.id == newItem.id &&
+            return  oldItem.id == newItem.id &&
                     oldItem.title == newItem.title &&
                     oldItem.description == newItem.description &&
                     oldItem.banner == newItem.banner &&
