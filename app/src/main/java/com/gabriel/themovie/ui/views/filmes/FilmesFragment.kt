@@ -22,7 +22,6 @@ import com.gabriel.themovie.util.extensions.toast
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
-import kotlin.reflect.typeOf
 
 class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
 
@@ -33,7 +32,8 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
         super.onViewCreated(view, savedInstanceState)
         configuraRecyclerView()
         configuraClickAdapter()
-        observer()
+        observerListaFilmes()
+        observerFilmePrincipal()
     }
 
     private fun configuraRecyclerView() = with(binding) {
@@ -62,12 +62,7 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
         )
     }
 
-    private fun observer() = lifecycleScope.launch {
-        observerListaFilmes()
-        observerFilmePrincipal()
-    }
-
-    private suspend fun observerListaFilmes() {
+    private fun observerListaFilmes() = lifecycleScope.launch {
         viewModel.list.collect { resource ->
             when (resource) {
                 is ResourceState.Success -> {
@@ -96,22 +91,19 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
                 is ResourceState.Success -> {
                     resource.data?.let { results ->
                         val filmeView = results[1]
-                        binding.filmeBannerPrincipal
+                        binding.bannerFilmePrincipal
                             .load("${ConstantsView.BASE_URL_IMAGES}${filmeView.background}")
-                        binding.filmeTituloPrincipal.text = filmeView.title
-                    }
-                    if (resource.data != null ){
-                        toast("teste")
+                        binding.tituloFilmePrincipal.text = filmeView.title
                     }
                 }
-//                is ResourceState.Error -> {
-//                    binding.filmeBannerPrincipal.load(R.drawable.erro)
-//                    Timber.tag("FilmesFragment/observerFilmePrincipal")
-//                        .e("Error -> ${resource.message} Cod -> ${resource.cod}")
-//                }
-//                is ResourceState.Loading -> {
-//                    binding.filmeBannerPrincipal.load(androidx.appcompat.R.color.material_grey_600)
-//                }
+                is ResourceState.Error -> {
+                    binding.bannerFilmePrincipal.load(R.drawable.erro)
+                    Timber.tag("FilmesFragment/observerFilmePrincipal")
+                        .e("Error -> ${resource.message} Cod -> ${resource.cod}")
+                }
+                is ResourceState.Loading -> {
+                    binding.bannerFilmePrincipal.load(androidx.appcompat.R.color.material_grey_600)
+                }
                 else -> {}
             }
         }

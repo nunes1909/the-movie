@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/learn_more_constraint_ly"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true">
+
+    <ImageView
+        android:id="@+id/btnAddFav"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:clickable="false"
+        android:focusable="false"
+        app:layout_constraintBottom_toTopOf="@+id/tvAddFav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:srcCompat="@drawable/ic_add" />
+
+    <TextView
+        android:id="@+id/tvAddFav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:clickable="false"
+        android:focusable="false"
+        android:textStyle="bold"
+        android:text="Favoritos"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btnAddFav"
+        app:layout_constraintLeft_toLeftOf="@+id/btnAddFav"
+        app:layout_constraintRight_toRightOf="@+id/btnAddFav"
+        app:layout_constraintStart_toStartOf="@+id/btnAddFav"
+        app:layout_constraintTop_toBottomOf="@+id/btnAddFav" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
