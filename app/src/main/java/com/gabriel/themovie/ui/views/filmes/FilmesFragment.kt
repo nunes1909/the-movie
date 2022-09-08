@@ -27,6 +27,7 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
 
     override val viewModel: FilmesViewModel by viewModel()
     private val filmeAdapter by lazy { FilmeAdapter() }
+    lateinit var multiMovie: MultiMovie
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -59,7 +60,9 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
             type = filmeView.type,
             banner = filmeView.banner ?: "",
             favorito = filmeView.favorito
-        )
+        ).also {
+            multiMovie = it
+        }
     }
 
     private fun observerListaFilmes() = lifecycleScope.launch {
@@ -90,9 +93,9 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
             when (resource) {
                 is ResourceState.Success -> {
                     resource.data?.let { results ->
-                        val filmeView = results[1]
+                        val filmeView = results[0]
                         binding.bannerFilmePrincipal
-                            .load("${ConstantsView.BASE_URL_IMAGES}${filmeView.background}")
+                            .load("${ConstantsView.BASE_URL_IMAGES}${filmeView.banner}")
                         binding.tituloFilmePrincipal.text = filmeView.title
                     }
                 }
