@@ -14,8 +14,8 @@ class FilmeViewMapper(private val mapper: GeneroViewMapper) : ViewMapper<FilmeVi
             title = type.title,
             description = type.description,
             nota = type.nota,
-            background = type.background,
-            banner = type.banner,
+            background = type.banner,
+            banner = type.cartaz,
             generos = generosDomain,
             favorito = type.favorito
         )
@@ -29,8 +29,8 @@ class FilmeViewMapper(private val mapper: GeneroViewMapper) : ViewMapper<FilmeVi
             title = type.title,
             description = type.description,
             nota = type.nota,
-            background = type.background,
-            banner = type.banner,
+            banner = type.background,
+            cartaz = type.banner,
             generos = generosView,
             favorito = type.favorito
         )

@@ -3,6 +3,7 @@ package com.gabriel.themovie.model.multiMovie.mapper
 import com.gabriel.themovie.model.filme.model.FilmeView
 import com.gabriel.themovie.model.multiMovie.model.MultiMovie
 import com.gabriel.themovie.util.base.ViewMapper
+import com.gabriel.themovie.util.constants.ConstantsView
 
 class MultiMovieMapper : ViewMapper<MultiMovie, FilmeView> {
     override fun mapToDomain(type: MultiMovie): FilmeView {
@@ -16,8 +17,8 @@ class MultiMovieMapper : ViewMapper<MultiMovie, FilmeView> {
         return MultiMovie(
             id = type.id,
             title = type.title,
-            type = type.type,
-            banner = type.banner ?: "",
+            type = ConstantsView.TYPE_FILME,
+            banner = type.cartaz ?: "",
             favorito = type.favorito
         )
     }

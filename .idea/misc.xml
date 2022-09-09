@@ -6,10 +6,12 @@
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/drawable-anydpi/ic_add.xml" value="0.444" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/drawable-anydpi/ic_info.xml" value="0.444" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/drawable/gradiant.xml" value="0.444" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/drawable/gradiant_detalhes.xml" value="0.3675" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout-v23/buttons_filme_principal.xml" value="0.559375" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout-v28/fragment_detalhes.xml" value="0.559375" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/activity_main.xml" value="0.559375" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/buttons_filme_principal.xml" value="0.5583333333333333" />
-        <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/fragment_detalhes.xml" value="0.559375" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/fragment_detalhes.xml" value="0.45982694684796044" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/fragment_favoritos.xml" value="0.559375" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/fragment_filmes.xml" value="0.559375" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/fragment_pesquisa.xml" value="0.559375" />

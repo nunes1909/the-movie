@@ -36,7 +36,6 @@ class FilmesViewModel(
             ResourceState<List<FilmeView>> {
         if (resourceState.data != null) {
             val listView = mapper.mapToDomainNonNull(resourceState.data!!)
-            Timber.tag("tagabriel").i("${listView.map { it.title }}")
             return ResourceState.Success(listView)
         }
         return ResourceState.Error(cod = resourceState.cod, message = resourceState.message)

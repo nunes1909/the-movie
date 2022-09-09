@@ -49,7 +49,7 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
 
     private fun configuraClickAdapter() {
         filmeAdapter.setFilmeOnClickListener { filmeView ->
-            val multiMovie = preparaFilmeDetail(filmeView)
+            val multiMovie = multiMovieMapper.mapFromDomain(filmeView)
             actionGoDetails(entity = multiMovie)
         }
     }
@@ -64,16 +64,6 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
         val action = FilmesFragmentDirections
             .acaoFilmesParaDetalhes(entity)
         findNavController().navigate(action)
-    }
-
-    private fun preparaFilmeDetail(filmeView: FilmeView): MultiMovie {
-        return MultiMovie(
-            id = filmeView.id,
-            title = filmeView.title,
-            type = filmeView.type,
-            banner = filmeView.banner ?: "",
-            favorito = filmeView.favorito
-        )
     }
 
     private fun observerListaFilmes() = lifecycleScope.launch {
@@ -106,7 +96,7 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
                     resource.data?.let { results ->
                         val filmeView = results[0]
                         binding.bannerFilmePrincipal
-                            .load("${ConstantsView.BASE_URL_IMAGES}${filmeView.banner}")
+                            .load("${ConstantsView.BASE_URL_IMAGES}${filmeView.cartaz}")
 
                         binding.tituloFilmePrincipal.text = filmeView.title
                         inicializaGlobalMultiMovie(filmeView)

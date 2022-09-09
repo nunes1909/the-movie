@@ -25,4 +25,10 @@ interface FilmesService {
         @Path(value = "time_window", encoded = true)
         timeWindow: String
     ): Response<FilmeContainer>
+
+    @GET("movie/{movie_id}/similar")
+    suspend fun getSimilarMovies(
+        @Path(value = "movie_id", encoded = true)
+        filmeId: Int
+    ) : Response<FilmeContainer>
 }
