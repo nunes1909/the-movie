@@ -3,6 +3,7 @@ package com.gabriel.themovie.ui.views.detalhes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gabriel.domain.features.filme.model.FilmeDomain
+import com.gabriel.domain.features.filme.useCase.GetFilmesSimilaresUseCase
 import com.gabriel.domain.features.filme.useCase.GetFilmesUseCase
 import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.themovie.model.filme.mapper.FilmeViewMapper
@@ -14,6 +15,7 @@ import kotlinx.coroutines.launch
 
 class DetalhesViewModel(
     private val getFilmesUseCase: GetFilmesUseCase,
+    private val getFilmesSimilaresUseCase: GetFilmesSimilaresUseCase,
     private val filmeViewMapper: FilmeViewMapper
 ) : ViewModel() {
 
@@ -25,6 +27,7 @@ class DetalhesViewModel(
         when (movie.type) {
             "filme" -> {
                 getDetailFilme(movie.id)
+                getFilmesSimilares(movie.id)
             }
             "serie" -> {
                 // sem impl
@@ -45,6 +48,23 @@ class DetalhesViewModel(
         if (resourceState.data != null) {
             val filmeView = filmeViewMapper.mapFromDomain(resourceState.data!!)
             return ResourceState.Success(filmeView)
+        }
+        return ResourceState.Error(cod = resourceState.cod, message = resourceState.message)
+    }
+
+    private val _listSimilares = MutableStateFlow<ResourceState<List<FilmeView>>>(ResourceState.Loading())
+    val listSimilares: StateFlow<ResourceState<List<FilmeView>>> = _listSimilares
+
+    fun getFilmesSimilares(filmeId: Int) = viewModelScope.launch {
+        val resourceState = getFilmesSimilaresUseCase.getFilmesSimilares(filmeId = filmeId)
+        _listSimilares.value = safeStateGetFilmes(resourceState)
+    }
+
+    private fun safeStateGetFilmes(resourceState: ResourceState<List<FilmeDomain>>):
+            ResourceState<List<FilmeView>> {
+        if (resourceState.data != null) {
+            val listView = filmeViewMapper.mapToDomainNonNull(resourceState.data!!)
+            return ResourceState.Success(listView)
         }
         return ResourceState.Error(cod = resourceState.cod, message = resourceState.message)
     }

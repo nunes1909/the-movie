@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
 import coil.load
 import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.themovie.databinding.FragmentDetalhesBinding
 import com.gabriel.themovie.model.filme.model.FilmeView
+import com.gabriel.themovie.ui.adapters.FilmeAdapter
 import com.gabriel.themovie.util.base.BaseFragment
 import com.gabriel.themovie.util.constants.ConstantsView.BASE_URL_IMAGES
 import com.gabriel.themovie.util.constants.ConstantsView.EXIBE_ELLIPSIZE
@@ -27,11 +29,39 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
 
     override val viewModel: DetalhesViewModel by viewModel()
     private val args: DetalhesFragmentArgs by navArgs()
+    private val similaresAdapter by lazy { FilmeAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        configuraRecyclerView()
         buscaDetails()
         filmesObserver()
+        similaresObserver()
+    }
+
+    private fun similaresObserver() = lifecycleScope.launch {
+        viewModel.listSimilares.collect { resources ->
+            when (resources) {
+                is ResourceState.Success -> {
+                    resources.data?.let { results ->
+                        similaresAdapter.filmesList = results
+                    }
+                }
+                is ResourceState.Error -> {
+                    binding.progressDetalhes.hide()
+                    toast("Um erro ocorreu.")
+                }
+                is ResourceState.Loading -> {
+                    binding.progressDetalhes.show()
+                }
+                else -> {}
+            }
+        }
+    }
+
+    private fun configuraRecyclerView() = with(binding) {
+        rvDetalhesSemelhantes.adapter = similaresAdapter
+        rvDetalhesSemelhantes.layoutManager = GridLayoutManager(requireContext(), 4)
     }
 
     private fun buscaDetails() {
@@ -67,11 +97,11 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
         detalhesDescricao.text =
             filmeView.description?.limitValue(LIMIT_DESCRIPTION, EXIBE_ELLIPSIZE)
         filmeView.generos?.get(0)?.let { genero ->
-            detalhesGeneroUm.show()
+            detalhesContainerGeneroUm.show()
             detalhesGeneroUm.text = genero.name
         }
         filmeView.generos?.get(1)?.let { genero ->
-            detalhesGeneroDois.show()
+            detalhesContainerGeneroDois.show()
             detalhesGeneroDois.text = genero.name
         }
     }

@@ -9,6 +9,7 @@ import coil.load
 import com.gabriel.themovie.databinding.ItemListBinding
 import com.gabriel.themovie.model.filme.model.FilmeView
 import com.gabriel.themovie.util.constants.ConstantsView.BASE_URL_IMAGES
+import com.gabriel.themovie.util.extensions.limitValue
 
 class FilmeAdapter : RecyclerView.Adapter<FilmeAdapter.FilmeViewHolder>() {
 
@@ -49,6 +50,7 @@ class FilmeAdapter : RecyclerView.Adapter<FilmeAdapter.FilmeViewHolder>() {
         val filme = filmesList[position]
         holder.binding.apply {
             itemListImage.load("${BASE_URL_IMAGES}${filme.cartaz}")
+            itemListTitle.text = filme.title.limitValue(10, true)
         }
 
         holder.itemView.setOnClickListener {
