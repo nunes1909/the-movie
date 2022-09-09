@@ -27,7 +27,6 @@
         android:layout_marginTop="4dp"
         android:clickable="false"
         android:focusable="false"
-        android:textStyle="bold"
         android:text="Favoritos"
         android:textColor="@color/white"
         android:textSize="10sp"

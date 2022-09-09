@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.gabriel.themovie.databinding.ItemPesquisaBinding
-import com.gabriel.themovie.model.multiMovie.MultiMovie
+import com.gabriel.themovie.model.multiMovie.model.MultiMovie
 import com.gabriel.themovie.util.constants.ConstantsView.BASE_URL_IMAGES
 
 class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {

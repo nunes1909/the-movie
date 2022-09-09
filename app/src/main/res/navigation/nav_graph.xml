@@ -4,34 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/filmesFragment">
+
     <fragment
-        android:id="@+id/filmesFragment"
-        tools:layout="@layout/fragment_filmes"
-        android:name="com.gabriel.themovie.ui.views.filmes.FilmesFragment"
-        android:label="FilmesFragment">
-        <action
-            android:id="@+id/action_filmesFragment_to_detalhesFragment"
-            app:destination="@id/detalhesFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
-    </fragment>
-    <fragment
-        android:id="@+id/seriesFragment"
-        android:name="com.gabriel.themovie.ui.views.series.SeriesFragment"
-        android:label="SeriesFragment"
-        tools:layout="@layout/fragment_series">
-        <action
-            android:id="@+id/action_seriesFragment_to_detalhesFragment"
-            app:destination="@id/detalhesFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        android:id="@+id/detalhesFragment"
+        android:name="com.gabriel.themovie.ui.views.detalhes.DetalhesFragment"
+        android:label="DetalhesFragment"
+        tools:layout="@layout/fragment_detalhes">
         <argument
-            android:name="multiMovie"
-            app:argType="com.gabriel.themovie.model.multiMovie.MultiMovie" />
+            android:name="movie"
+            app:argType="com.gabriel.themovie.model.multiMovie.model.MultiMovie" />
     </fragment>
     <fragment
         android:id="@+id/favoritosFragment"
@@ -39,12 +20,8 @@
         android:label="FavoritosFragment"
         tools:layout="@layout/fragment_favoritos">
         <action
-            android:id="@+id/action_favoritosFragment_to_detalhesFragment"
-            app:destination="@id/detalhesFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            android:id="@+id/acaoFavoritosParaDetalhes"
+            app:destination="@id/detalhesFragment" />
     </fragment>
     <fragment
         android:id="@+id/pesquisaFragment"
@@ -52,20 +29,25 @@
         android:label="PesquisaFragment"
         tools:layout="@layout/fragment_pesquisa">
         <action
-            android:id="@+id/action_pesquisaFragment_to_detalhesFragment"
-            app:destination="@id/detalhesFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            android:id="@+id/acaoPesquisaParaDetalhes"
+            app:destination="@id/detalhesFragment" />
     </fragment>
     <fragment
-        android:id="@+id/detalhesFragment"
-        android:name="com.gabriel.themovie.ui.views.detalhes.DetalhesFragment"
-        android:label="DetalhesFragment"
-        tools:layout="@layout/fragment_detalhes" >
-        <argument
-            android:name="multiMovie"
-            app:argType="com.gabriel.themovie.model.multiMovie.MultiMovie" />
+        android:id="@+id/seriesFragment"
+        android:name="com.gabriel.themovie.ui.views.series.SeriesFragment"
+        android:label="SeriesFragment"
+        tools:layout="@layout/fragment_series">
+        <action
+            android:id="@+id/acaoSeriesParaDetalhes"
+            app:destination="@id/detalhesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/filmesFragment"
+        android:name="com.gabriel.themovie.ui.views.filmes.FilmesFragment"
+        android:label="FilmesFragment"
+        tools:layout="@layout/fragment_series">
+        <action
+            android:id="@+id/acaoFilmesParaDetalhes"
+            app:destination="@id/detalhesFragment" />
     </fragment>
 </navigation>

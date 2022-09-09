@@ -12,7 +12,8 @@ import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.themovie.R
 import com.gabriel.themovie.databinding.FragmentFilmesBinding
 import com.gabriel.themovie.model.filme.model.FilmeView
-import com.gabriel.themovie.model.multiMovie.MultiMovie
+import com.gabriel.themovie.model.multiMovie.mapper.MultiMovieMapper
+import com.gabriel.themovie.model.multiMovie.model.MultiMovie
 import com.gabriel.themovie.ui.adapters.FilmeAdapter
 import com.gabriel.themovie.util.base.BaseFragment
 import com.gabriel.themovie.util.constants.ConstantsView
@@ -27,7 +28,8 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
 
     override val viewModel: FilmesViewModel by viewModel()
     private val filmeAdapter by lazy { FilmeAdapter() }
-    lateinit var multiMovie: MultiMovie
+    private val multiMovieMapper by lazy { MultiMovieMapper() }
+    lateinit var globalMultiMovie: MultiMovie
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,10 +37,11 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
         configuraClickAdapter()
         observerListaFilmes()
         observerFilmePrincipal()
+        configuraClickFilmePrincipal()
     }
 
     private fun configuraRecyclerView() = with(binding) {
-        binding.rvFilme.apply {
+        rvFilme.apply {
             adapter = filmeAdapter
             layoutManager = GridLayoutManager(requireContext(), 4)
         }
@@ -47,10 +50,20 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
     private fun configuraClickAdapter() {
         filmeAdapter.setFilmeOnClickListener { filmeView ->
             val multiMovie = preparaFilmeDetail(filmeView)
-            val action = FilmesFragmentDirections
-                .actionFilmesFragmentToDetalhesFragment(multiMovie)
-            findNavController().navigate(action)
+            actionGoDetails(entity = multiMovie)
         }
+    }
+
+    /**
+     * Metodo universal com a ação de ir para a feature de Detalhes.
+     *
+     * @param entity é a entidade solicitada pela feature Detalhes.
+     * @param action é a ação do Navigation para mudar de tela.
+     */
+    private fun actionGoDetails(entity: MultiMovie) {
+        val action = FilmesFragmentDirections
+            .acaoFilmesParaDetalhes(entity)
+        findNavController().navigate(action)
     }
 
     private fun preparaFilmeDetail(filmeView: FilmeView): MultiMovie {
@@ -60,9 +73,7 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
             type = filmeView.type,
             banner = filmeView.banner ?: "",
             favorito = filmeView.favorito
-        ).also {
-            multiMovie = it
-        }
+        )
     }
 
     private fun observerListaFilmes() = lifecycleScope.launch {
@@ -96,7 +107,9 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
                         val filmeView = results[0]
                         binding.bannerFilmePrincipal
                             .load("${ConstantsView.BASE_URL_IMAGES}${filmeView.banner}")
+
                         binding.tituloFilmePrincipal.text = filmeView.title
+                        inicializaGlobalMultiMovie(filmeView)
                     }
                 }
                 is ResourceState.Error -> {
@@ -109,6 +122,23 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
                 }
                 else -> {}
             }
+        }
+    }
+
+    private fun inicializaGlobalMultiMovie(filmeView: FilmeView) {
+        globalMultiMovie = multiMovieMapper.mapFromDomain(filmeView)
+    }
+
+    private fun configuraClickFilmePrincipal() = with(binding){
+        actionFilmePrincipalGoDetails()
+        buttonAddFav.btnAddFav.setOnClickListener {
+            // implementar save
+        }
+    }
+
+    private fun FragmentFilmesBinding.actionFilmePrincipalGoDetails() {
+        buttonLerMais.btnLerMais.setOnClickListener {
+            actionGoDetails(globalMultiMovie)
         }
     }
 
