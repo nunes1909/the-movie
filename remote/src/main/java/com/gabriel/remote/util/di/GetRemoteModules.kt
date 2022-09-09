@@ -1,10 +1,12 @@
 package com.gabriel.remote.util.di
 
 import com.gabriel.data.features.filme.dataSource.GetFilmesDataSource
+import com.gabriel.data.features.filme.dataSource.GetFilmesSimilaresDataSource
 import com.gabriel.data.features.filme.dataSource.GetTrandingFilmesDataSource
 import com.gabriel.data.features.multiSearch.dataSource.MultiSearchDataSource
 import com.gabriel.data.features.serie.dataSource.GetSeriesDataSource
 import com.gabriel.remote.features.filme.dataSource.GetFilmesDataSourceImpl
+import com.gabriel.remote.features.filme.dataSource.GetFilmesSimilaresDataSourceImpl
 import com.gabriel.remote.features.filme.dataSource.GetTrandingFilmesDataSourceImpl
 import com.gabriel.remote.features.filme.mapper.FilmeDetailRemoteMapper
 import com.gabriel.remote.features.filme.mapper.FilmeRemoteMapper
@@ -36,6 +38,9 @@ fun getRemoteModules() = module {
     factory { FilmeDetailRemoteMapper(mapper = get()) }
     single<GetFilmesDataSource> {
         GetFilmesDataSourceImpl(api = get(), mapperFilmes = get(), mapperDetail = get())
+    }
+    single<GetFilmesSimilaresDataSource> {
+        GetFilmesSimilaresDataSourceImpl(api = get(), mapperFilmes = get())
     }
 
     single<GetTrandingFilmesDataSource> {

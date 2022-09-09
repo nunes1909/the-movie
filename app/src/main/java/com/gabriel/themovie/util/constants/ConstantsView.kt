@@ -7,4 +7,10 @@ object ConstantsView {
     // Movies types
     const val TYPE_FILME = "filme"
     const val TYPE_SERIE = "serie"
+
+    // Details
+    const val LIMIT_NOTA = 3
+    const val LIMIT_DESCRIPTION = 200
+    const val EXIBE_ELLIPSIZE = true
+    const val N_EXIBE_ELLIPSIZE = false
 }

@@ -12,6 +12,10 @@ import com.gabriel.themovie.databinding.FragmentDetalhesBinding
 import com.gabriel.themovie.model.filme.model.FilmeView
 import com.gabriel.themovie.util.base.BaseFragment
 import com.gabriel.themovie.util.constants.ConstantsView.BASE_URL_IMAGES
+import com.gabriel.themovie.util.constants.ConstantsView.EXIBE_ELLIPSIZE
+import com.gabriel.themovie.util.constants.ConstantsView.LIMIT_DESCRIPTION
+import com.gabriel.themovie.util.constants.ConstantsView.LIMIT_NOTA
+import com.gabriel.themovie.util.constants.ConstantsView.N_EXIBE_ELLIPSIZE
 import com.gabriel.themovie.util.extensions.hide
 import com.gabriel.themovie.util.extensions.limitValue
 import com.gabriel.themovie.util.extensions.show
@@ -39,12 +43,12 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
             when (resource) {
                 is ResourceState.Success -> {
                     resource.data?.let { result ->
-                        binding.progressDetalhes.hide()
                         preencheComponentes(result)
                     }
                 }
                 is ResourceState.Error -> {
-                    toast("erro")
+                    binding.progressDetalhes.hide()
+                    toast("Um erro ocorreu.")
                 }
                 is ResourceState.Loading -> {
                     binding.progressDetalhes.show()
@@ -55,22 +59,20 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
     }
 
     private fun preencheComponentes(filmeView: FilmeView) = with(binding) {
+        progressDetalhes.hide()
         imageCartaz.load("${BASE_URL_IMAGES}${filmeView.cartaz}")
         imageBanner.load("${BASE_URL_IMAGES}${filmeView.banner}")
         detalhesTitulo.text = filmeView.title
-        detalhesNota.text = filmeView.nota.toString().limitValue(3, false)
-        detalhesDescricao.text = filmeView.description?.limitValue(200, true)
+        detalhesNota.text = filmeView.nota.toString().limitValue(LIMIT_NOTA, N_EXIBE_ELLIPSIZE)
+        detalhesDescricao.text =
+            filmeView.description?.limitValue(LIMIT_DESCRIPTION, EXIBE_ELLIPSIZE)
         filmeView.generos?.get(0)?.let { genero ->
-            detalhesGeneroUm.apply {
-                show()
-                text = genero.name
-            }
+            detalhesGeneroUm.show()
+            detalhesGeneroUm.text = genero.name
         }
         filmeView.generos?.get(1)?.let { genero ->
-            detalhesGeneroDois.apply {
-                show()
-                text = genero.name
-            }
+            detalhesGeneroDois.show()
+            detalhesGeneroDois.text = genero.name
         }
     }
 
