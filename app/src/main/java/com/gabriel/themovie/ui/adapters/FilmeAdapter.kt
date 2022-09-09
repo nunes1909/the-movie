@@ -24,8 +24,8 @@ class FilmeAdapter : RecyclerView.Adapter<FilmeAdapter.FilmeViewHolder>() {
             return  oldItem.id == newItem.id &&
                     oldItem.title == newItem.title &&
                     oldItem.description == newItem.description &&
+                    oldItem.cartaz == newItem.cartaz &&
                     oldItem.banner == newItem.banner &&
-                    oldItem.background == newItem.background &&
                     oldItem.nota == newItem.nota &&
                     oldItem.favorito == newItem.favorito
         }
@@ -48,7 +48,7 @@ class FilmeAdapter : RecyclerView.Adapter<FilmeAdapter.FilmeViewHolder>() {
     override fun onBindViewHolder(holder: FilmeViewHolder, position: Int) {
         val filme = filmesList[position]
         holder.binding.apply {
-            itemListImage.load("${BASE_URL_IMAGES}${filme.banner}")
+            itemListImage.load("${BASE_URL_IMAGES}${filme.cartaz}")
         }
 
         holder.itemView.setOnClickListener {
