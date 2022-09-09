@@ -3,15 +3,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/drawable-anydpi/ic_add.xml" value="0.444" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/drawable-anydpi/ic_info.xml" value="0.444" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/drawable/gradiant.xml" value="0.444" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout-v23/buttons_filme_principal.xml" value="0.559375" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/activity_main.xml" value="0.559375" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/buttons_filme_principal.xml" value="0.5583333333333333" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/fragment_detalhes.xml" value="0.559375" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/fragment_favoritos.xml" value="0.559375" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/fragment_filmes.xml" value="0.559375" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/fragment_pesquisa.xml" value="0.559375" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/fragment_series.xml" value="0.559375" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/item_add_filme_principal.xml" value="0.559375" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/item_info_filme_principal.xml" value="0.559375" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/item_list.xml" value="0.559375" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/item_pesquisa.xml" value="0.559375" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/item_relacionado.xml" value="0.559375" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/teste.xml" value="0.45897435897435895" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.559375" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/menu/menu_nav.xml" value="0.559375" />
       </map>

@@ -1,4 +1,4 @@
-package com.gabriel.themovie.model.multiResult
+package com.gabriel.themovie.model.multiMovie.model
 
 import java.io.Serializable
 
