@@ -17,8 +17,12 @@ class MultiMovieMapper : ViewMapper<MultiMovie, FilmeView> {
         return MultiMovie(
             id = type.id,
             title = type.title,
+            description = type.description,
             type = ConstantsView.TYPE_FILME,
-            banner = type.cartaz ?: "",
+            nota = type.nota,
+            banner = type.banner,
+            generos = type.generos,
+            cartaz = type.cartaz,
             favorito = type.favorito
         )
     }

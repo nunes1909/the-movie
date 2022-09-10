@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import coil.load
 import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.themovie.databinding.FragmentDetalhesBinding
-import com.gabriel.themovie.model.filme.model.FilmeView
+import com.gabriel.themovie.model.multiMovie.model.MultiMovie
 import com.gabriel.themovie.ui.adapters.FilmeAdapter
 import com.gabriel.themovie.util.base.BaseFragment
 import com.gabriel.themovie.util.constants.ConstantsView.BASE_URL_IMAGES
@@ -35,7 +35,7 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
         super.onViewCreated(view, savedInstanceState)
         configuraRecyclerView()
         buscaDetails()
-        filmesObserver()
+        multiMovieObserver()
         similaresObserver()
     }
 
@@ -68,11 +68,12 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
         viewModel.getDetail(args.movie)
     }
 
-    private fun filmesObserver() = lifecycleScope.launch {
-        viewModel.filmeViewDetail.collect { resource ->
+    private fun multiMovieObserver() = lifecycleScope.launch {
+        viewModel.multiMovieDetail.collect { resource ->
             when (resource) {
                 is ResourceState.Success -> {
                     resource.data?.let { result ->
+                        binding.progressDetalhes.hide()
                         preencheComponentes(result)
                     }
                 }
@@ -88,22 +89,50 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
         }
     }
 
-    private fun preencheComponentes(filmeView: FilmeView) = with(binding) {
-        progressDetalhes.hide()
-        imageCartaz.load("${BASE_URL_IMAGES}${filmeView.cartaz}")
-        imageBanner.load("${BASE_URL_IMAGES}${filmeView.banner}")
-        detalhesTitulo.text = filmeView.title
-        detalhesNota.text = filmeView.nota.toString().limitValue(LIMIT_NOTA, N_EXIBE_ELLIPSIZE)
-        detalhesDescricao.text =
-            filmeView.description?.limitValue(LIMIT_DESCRIPTION, EXIBE_ELLIPSIZE)
-        filmeView.generos?.get(0)?.let { genero ->
-            detalhesContainerGeneroUm.show()
-            detalhesGeneroUm.text = genero.name
+    private fun preencheComponentes(multiMovie: MultiMovie) {
+        carregaImagens(multiMovie)
+        carregaTitle(multiMovie)
+        carregaNota(multiMovie)
+        carregaDescription(multiMovie)
+        carregaGeneros(multiMovie)
+    }
+
+    private fun carregaGeneros(multiMovie: MultiMovie) {
+        if (multiMovie.generos != null) {
+            resolveGeneroUm(multiMovie = multiMovie)
         }
-        filmeView.generos?.get(1)?.let { genero ->
-            detalhesContainerGeneroDois.show()
-            detalhesGeneroDois.text = genero.name
+        if (multiMovie.generos!!.size >= 2) {
+            resolveGeneroDois(multiMovie = multiMovie)
         }
+    }
+
+    private fun resolveGeneroUm(multiMovie: MultiMovie) {
+        binding.detalhesContainerGeneroUm.show()
+        binding.detalhesGeneroUm.text = multiMovie.generos!![0]!!.name
+    }
+
+    private fun resolveGeneroDois(multiMovie: MultiMovie) {
+        binding.detalhesContainerGeneroDois.show()
+        binding.detalhesGeneroDois.text = multiMovie.generos!![1]!!.name
+    }
+
+    private fun carregaDescription(multiMovie: MultiMovie) {
+        binding.detalhesDescricao.text =
+            multiMovie.description?.limitValue(LIMIT_DESCRIPTION, EXIBE_ELLIPSIZE)
+    }
+
+    private fun carregaNota(multiMovie: MultiMovie) {
+        binding.detalhesNota.text =
+            multiMovie.nota.toString().limitValue(LIMIT_NOTA, N_EXIBE_ELLIPSIZE)
+    }
+
+    private fun carregaTitle(multiMovie: MultiMovie) {
+        binding.detalhesTitulo.text = multiMovie.title
+    }
+
+    private fun carregaImagens(filmeView: MultiMovie) {
+        binding.imageCartaz.load("${BASE_URL_IMAGES}${filmeView.cartaz}")
+        binding.imageBanner.load("${BASE_URL_IMAGES}${filmeView.banner}")
     }
 
     override fun getViewBinding(

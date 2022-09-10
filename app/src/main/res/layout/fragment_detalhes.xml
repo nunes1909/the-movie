@@ -67,6 +67,7 @@
                 android:id="@+id/detalhesFavoritar"
                 style="?android:attr/starStyle"
                 android:layout_width="wrap_content"
+                android:layout_margin="8dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="@id/detalhesTitulo"
                 app:layout_constraintEnd_toEndOf="parent"
