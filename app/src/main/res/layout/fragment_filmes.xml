@@ -38,6 +38,7 @@
             android:elegantTextHeight="true"
             android:textColor="@color/white"
             android:textSize="26sp"
+            android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="@id/bannerFilmePrincipal"
             app:layout_constraintEnd_toEndOf="@id/bannerFilmePrincipal"
             app:layout_constraintStart_toStartOf="@id/bannerFilmePrincipal"

@@ -1,19 +1,19 @@
 package com.gabriel.themovie.model.multiMovie.mapper
 
-import com.gabriel.themovie.model.filme.model.FilmeView
 import com.gabriel.themovie.model.multiMovie.model.MultiMovie
+import com.gabriel.themovie.model.serie.model.SerieView
 import com.gabriel.themovie.util.base.ViewMapper
 import com.gabriel.themovie.util.constants.ConstantsView
 
-class MultiMovieMapper : ViewMapper<MultiMovie, FilmeView> {
-    override fun mapToDomain(type: MultiMovie): FilmeView {
-        return FilmeView(
+class MultiMovieMapperSerie : ViewMapper<MultiMovie, SerieView> {
+    override fun mapToDomain(type: MultiMovie): SerieView {
+        return SerieView(
             id = type.id,
             title = type.title
         )
     }
 
-    override fun mapFromDomain(type: FilmeView): MultiMovie {
+    override fun mapFromDomain(type: SerieView): MultiMovie {
         return MultiMovie(
             id = type.id,
             title = type.title,
@@ -22,7 +22,7 @@ class MultiMovieMapper : ViewMapper<MultiMovie, FilmeView> {
             nota = type.nota,
             banner = type.banner,
             generos = type.generos,
-            cartaz = type.cartaz,
+            cartaz = type.background,
             favorito = type.favorito
         )
     }

@@ -6,7 +6,7 @@ object ConstantsView {
 
     // Movies types
     const val TYPE_FILME = "filme"
-    const val TYPE_SERIE = "serie"
+    const val TYPE_SERIE = "tv"
 
     // Details
     const val LIMIT_NOTA = 3

@@ -6,14 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import coil.load
 import com.gabriel.domain.util.state.ResourceState
+import com.gabriel.themovie.R
 import com.gabriel.themovie.databinding.FragmentSeriesBinding
+import com.gabriel.themovie.model.multiMovie.mapper.MultiMovieMapperFilme
+import com.gabriel.themovie.model.multiMovie.mapper.MultiMovieMapperSerie
+import com.gabriel.themovie.model.multiMovie.model.MultiMovie
+import com.gabriel.themovie.model.serie.model.SerieView
 import com.gabriel.themovie.ui.adapters.SerieAdapter
 import com.gabriel.themovie.util.base.BaseFragment
+import com.gabriel.themovie.util.constants.ConstantsView
 import com.gabriel.themovie.util.extensions.hide
 import com.gabriel.themovie.util.extensions.show
 import com.gabriel.themovie.util.extensions.toast
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -22,11 +28,44 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
 
     override val viewModel: SeriesViewModel by viewModel()
     private val serieAdapter by lazy { SerieAdapter() }
+    private val multiMovieMapperSerie by lazy { MultiMovieMapperSerie() }
+    lateinit var globalMultiMovie: MultiMovie
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         configuraRecyclerView()
         observerListaSeries()
+        observerSeriePrincipal()
+    }
+
+    private fun observerSeriePrincipal() = lifecycleScope.launch {
+        viewModel.listTranding.collect { resource ->
+            when (resource) {
+                is ResourceState.Success -> {
+                    resource.data?.let { results ->
+                        val serieView = results[0]
+                        binding.serieBannerPrincipal
+                            .load("${ConstantsView.BASE_URL_IMAGES}${serieView.banner}")
+
+                        binding.serieTituloPrincipal.text = serieView.title
+                        inicializaGlobalMultiMovie(serieView)
+                    }
+                }
+                is ResourceState.Error -> {
+                    binding.serieBannerPrincipal.load(R.drawable.erro)
+                    Timber.tag("FilmesFragment/observerFilmePrincipal")
+                        .e("Error -> ${resource.message} Cod -> ${resource.cod}")
+                }
+                is ResourceState.Loading -> {
+                    binding.serieBannerPrincipal.load(androidx.appcompat.R.color.material_grey_600)
+                }
+                else -> {}
+            }
+        }
+    }
+
+    private fun inicializaGlobalMultiMovie(serieView: SerieView) {
+        globalMultiMovie = multiMovieMapperSerie.mapFromDomain(serieView)
     }
 
     private fun observerListaSeries() = lifecycleScope.launch {

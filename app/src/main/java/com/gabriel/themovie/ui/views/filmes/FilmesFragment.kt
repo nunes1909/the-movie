@@ -12,7 +12,7 @@ import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.themovie.R
 import com.gabriel.themovie.databinding.FragmentFilmesBinding
 import com.gabriel.themovie.model.filme.model.FilmeView
-import com.gabriel.themovie.model.multiMovie.mapper.MultiMovieMapper
+import com.gabriel.themovie.model.multiMovie.mapper.MultiMovieMapperFilme
 import com.gabriel.themovie.model.multiMovie.model.MultiMovie
 import com.gabriel.themovie.ui.adapters.FilmeAdapter
 import com.gabriel.themovie.util.base.BaseFragment
@@ -28,7 +28,7 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
 
     override val viewModel: FilmesViewModel by viewModel()
     private val filmeAdapter by lazy { FilmeAdapter() }
-    private val multiMovieMapper by lazy { MultiMovieMapper() }
+    private val multiMovieMapperFilme by lazy { MultiMovieMapperFilme() }
     lateinit var globalMultiMovie: MultiMovie
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,7 +49,7 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
 
     private fun configuraClickAdapter() {
         filmeAdapter.setFilmeOnClickListener { filmeView ->
-            val multiMovie = multiMovieMapper.mapFromDomain(filmeView)
+            val multiMovie = multiMovieMapperFilme.mapFromDomain(filmeView)
             actionGoDetails(entity = multiMovie)
         }
     }
@@ -116,7 +116,7 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
     }
 
     private fun inicializaGlobalMultiMovie(filmeView: FilmeView) {
-        globalMultiMovie = multiMovieMapper.mapFromDomain(filmeView)
+        globalMultiMovie = multiMovieMapperFilme.mapFromDomain(filmeView)
     }
 
     private fun configuraClickFilmePrincipal() = with(binding){
