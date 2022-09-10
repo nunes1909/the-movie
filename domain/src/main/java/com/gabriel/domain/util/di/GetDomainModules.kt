@@ -13,8 +13,11 @@ import com.gabriel.domain.features.multiSearch.repository.MultiSearchRepository
 import com.gabriel.domain.features.multiSearch.useCase.SearchMultiUseCase
 import com.gabriel.domain.features.multiSearch.useCaseImpl.SearchMultiUseCaseImpl
 import com.gabriel.domain.features.serie.repository.GetSeriesRepository
+import com.gabriel.domain.features.serie.repository.GetTrandingSeriesRepository
 import com.gabriel.domain.features.serie.useCase.GetSeriesUseCase
+import com.gabriel.domain.features.serie.useCase.GetTrandingSeriesUseCase
 import com.gabriel.domain.features.serie.useCaseImpl.GetSeriesUseCaseImpl
+import com.gabriel.domain.features.serie.useCaseImpl.GetTrandingSeriesUseCaseImpl
 import org.koin.dsl.module
 
 fun getDomainModules() = module {
@@ -31,6 +34,9 @@ fun getDomainModules() = module {
     // Series modules
     factory<GetSeriesRepository> { get() }
     factory<GetSeriesUseCase> { GetSeriesUseCaseImpl(repository = get()) }
+
+    factory<GetTrandingSeriesRepository> { get() }
+    factory<GetTrandingSeriesUseCase> { GetTrandingSeriesUseCaseImpl(repository = get()) }
 
     // Multi modules
     factory<MultiSearchRepository> { get() }

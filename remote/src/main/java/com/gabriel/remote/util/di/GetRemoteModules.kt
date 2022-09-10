@@ -5,6 +5,7 @@ import com.gabriel.data.features.filme.dataSource.GetFilmesSimilaresDataSource
 import com.gabriel.data.features.filme.dataSource.GetTrandingFilmesDataSource
 import com.gabriel.data.features.multiSearch.dataSource.MultiSearchDataSource
 import com.gabriel.data.features.serie.dataSource.GetSeriesDataSource
+import com.gabriel.data.features.serie.dataSource.GetTrandingSeriesDataSource
 import com.gabriel.remote.features.filme.dataSource.GetFilmesDataSourceImpl
 import com.gabriel.remote.features.filme.dataSource.GetFilmesSimilaresDataSourceImpl
 import com.gabriel.remote.features.filme.dataSource.GetTrandingFilmesDataSourceImpl
@@ -16,6 +17,7 @@ import com.gabriel.remote.features.multiSearch.dataSource.MultiSearchDataSourceI
 import com.gabriel.remote.features.multiSearch.mapper.MultiRemoteMapper
 import com.gabriel.remote.features.multiSearch.service.MultiService
 import com.gabriel.remote.features.serie.dataSource.GetSeriesDataSourceImpl
+import com.gabriel.remote.features.serie.dataSource.GetTrandingSeriesDataSourceImpl
 import com.gabriel.remote.features.serie.mapper.SerieDetailRemoteMapper
 import com.gabriel.remote.features.serie.mapper.SerieRemoteMapper
 import com.gabriel.remote.features.serie.service.SeriesService
@@ -39,6 +41,7 @@ fun getRemoteModules() = module {
     single<GetFilmesDataSource> {
         GetFilmesDataSourceImpl(api = get(), mapperFilmes = get(), mapperDetail = get())
     }
+
     single<GetFilmesSimilaresDataSource> {
         GetFilmesSimilaresDataSourceImpl(api = get(), mapperFilmes = get())
     }
@@ -52,6 +55,10 @@ fun getRemoteModules() = module {
     factory { SerieDetailRemoteMapper(mapper = get()) }
     single<GetSeriesDataSource> {
         GetSeriesDataSourceImpl(api = get(), mapperSerie = get(), detailMapper = get())
+    }
+
+    single<GetTrandingSeriesDataSource> {
+        GetTrandingSeriesDataSourceImpl(api = get(), mapper = get())
     }
 
     // Multi modules
