@@ -4,6 +4,7 @@ import com.gabriel.domain.features.serie.model.SerieDomain
 import com.gabriel.themovie.model.genero.mapper.GeneroViewMapper
 import com.gabriel.themovie.model.serie.model.SerieView
 import com.gabriel.themovie.util.base.ViewMapper
+import com.gabriel.themovie.util.constants.ConstantsView.TYPE_SERIE
 
 class SerieViewMapper(private val mapper: GeneroViewMapper) : ViewMapper<SerieView, SerieDomain> {
     override fun mapToDomain(type: SerieView): SerieDomain {
@@ -32,7 +33,8 @@ class SerieViewMapper(private val mapper: GeneroViewMapper) : ViewMapper<SerieVi
             background = type.background,
             banner = type.banner,
             generos = generosView,
-            favorito = type.favorito
+            favorito = type.favorito,
+            type = TYPE_SERIE
         )
     }
 }

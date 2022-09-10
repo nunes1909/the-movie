@@ -9,6 +9,7 @@ import coil.load
 import com.gabriel.themovie.databinding.ItemListBinding
 import com.gabriel.themovie.model.serie.model.SerieView
 import com.gabriel.themovie.util.constants.ConstantsView.BASE_URL_IMAGES
+import com.gabriel.themovie.util.extensions.limitValue
 
 class SerieAdapter : RecyclerView.Adapter<SerieAdapter.SerieViewHolder>() {
 
@@ -49,6 +50,7 @@ class SerieAdapter : RecyclerView.Adapter<SerieAdapter.SerieViewHolder>() {
         val serie = seriesList[position]
         holder.binding.apply {
             itemListImage.load("${BASE_URL_IMAGES}${serie.banner}")
+            itemListTitle.text = serie.title.limitValue(10, true)
         }
 
         holder.itemView.setOnClickListener {

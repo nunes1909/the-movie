@@ -8,7 +8,7 @@ import com.gabriel.domain.features.filme.useCase.GetFilmesUseCase
 import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.themovie.model.filme.mapper.FilmeViewMapper
 import com.gabriel.themovie.model.filme.model.FilmeView
-import com.gabriel.themovie.model.multiMovie.mapper.MultiMovieMapper
+import com.gabriel.themovie.model.multiMovie.mapper.MultiMovieMapperFilme
 import com.gabriel.themovie.model.multiMovie.model.MultiMovie
 import com.gabriel.themovie.util.constants.ConstantsView.TYPE_FILME
 import com.gabriel.themovie.util.constants.ConstantsView.TYPE_SERIE
@@ -20,7 +20,7 @@ class DetalhesViewModel(
     private val getFilmesUseCase: GetFilmesUseCase,
     private val getFilmesSimilaresUseCase: GetFilmesSimilaresUseCase,
     private val filmeViewMapper: FilmeViewMapper,
-    private val multiMovieMapper: MultiMovieMapper
+    private val multiMovieMapperFilme: MultiMovieMapperFilme
 ) : ViewModel() {
 
     /**
@@ -58,7 +58,7 @@ class DetalhesViewModel(
             ResourceState<MultiMovie> {
         if (resourceState.data != null) {
             val filmeView = filmeViewMapper.mapFromDomain(resourceState.data!!)
-            val multiMovie = multiMovieMapper.mapFromDomain(filmeView)
+            val multiMovie = multiMovieMapperFilme.mapFromDomain(filmeView)
             return ResourceState.Success(multiMovie)
         }
         return ResourceState.Error(cod = resourceState.cod, message = resourceState.message)
