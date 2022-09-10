@@ -1,6 +1,7 @@
 package com.gabriel.themovie.model.serie.model
 
 import com.gabriel.themovie.model.genero.model.GeneroView
+import com.gabriel.themovie.util.constants.ConstantsView.TYPE_SERIE
 import java.io.Serializable
 
 data class SerieView(
@@ -12,5 +13,5 @@ data class SerieView(
     val banner: String? = null,
     val generos: List<GeneroView?>? = null,
     val favorito: Boolean = false,
-    val type: String = ""
+    val type: String = TYPE_SERIE
 ) : Serializable
