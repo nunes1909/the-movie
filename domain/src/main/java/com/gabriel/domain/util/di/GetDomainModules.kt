@@ -23,7 +23,7 @@ fun getDomainModules() = module {
     factory<GetFilmesUseCase> { GetFilmesUseCaseImpl(getFilmesRepository = get()) }
 
     factory<GetTrandingFilmesRepository> { get() }
-    factory<GetTrandingFilmesUseCase> { GetTrandingFilmesUseCaseImpl(trandingRepository = get()) }
+    factory<GetTrandingFilmesUseCase> { GetTrandingFilmesUseCaseImpl(repository = get()) }
 
     factory<GetFilmesSimilaresRepository> { get() }
     factory<GetFilmesSimilaresUseCase> { GetFilmesSimilaresUseCaseImpl(repository = get()) }

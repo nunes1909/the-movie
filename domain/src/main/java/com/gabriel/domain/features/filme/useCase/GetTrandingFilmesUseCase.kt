@@ -4,6 +4,6 @@ import com.gabriel.domain.features.filme.model.FilmeDomain
 import com.gabriel.domain.util.state.ResourceState
 
 interface GetTrandingFilmesUseCase {
-    suspend fun getTrending(mediaType: String, timeWindow: String):
+    suspend fun getTrending(mediaType: String, timeWindow: String = "day"):
             ResourceState<List<FilmeDomain>>
 }
