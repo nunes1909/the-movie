@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import coil.load
 import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.themovie.R
+import com.gabriel.themovie.databinding.FragmentFilmesBinding
 import com.gabriel.themovie.databinding.FragmentSeriesBinding
 import com.gabriel.themovie.model.multiMovie.mapper.MultiMovieMapperFilme
 import com.gabriel.themovie.model.multiMovie.mapper.MultiMovieMapperSerie
@@ -39,6 +40,24 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
         configuraClickAdapter()
         observerListaSeries()
         observerSeriePrincipal()
+        configuraClickSeriePrincipal()
+    }
+
+    private fun configuraClickSeriePrincipal() = with(binding) {
+        actionSeriePrincipalGoDetails()
+        actionSeriePrincipalSave()
+    }
+
+    private fun FragmentSeriesBinding.actionSeriePrincipalSave() {
+        buttonAddFav.btnAddFav.setOnClickListener {
+            // implementar save
+        }
+    }
+
+    private fun FragmentSeriesBinding.actionSeriePrincipalGoDetails() {
+        buttonLerMais.btnLerMais.setOnClickListener {
+            actionGoDetails(globalMultiMovie)
+        }
     }
 
     private fun configuraClickAdapter() {

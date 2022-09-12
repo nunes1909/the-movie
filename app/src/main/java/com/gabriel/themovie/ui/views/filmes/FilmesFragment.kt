@@ -121,6 +121,10 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
 
     private fun configuraClickFilmePrincipal() = with(binding){
         actionFilmePrincipalGoDetails()
+        actionFilmePrincipalSave()
+    }
+
+    private fun FragmentFilmesBinding.actionFilmePrincipalSave() {
         buttonAddFav.btnAddFav.setOnClickListener {
             // implementar save
         }
