@@ -18,7 +18,7 @@ class MultiMovieMapperSerie : ViewMapper<MultiMovie, SerieView> {
             id = type.id,
             title = type.title,
             description = type.description,
-            type = TYPE_SERIE,
+            type = type.type,
             nota = type.nota,
             banner = type.banner,
             generos = type.generos,

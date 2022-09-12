@@ -21,7 +21,7 @@ fun getViewModules() = module {
 
     // Filmes modules
     viewModel { FilmesViewModel(get(), get(), get()) }
-    viewModel { DetalhesViewModel(get(), get(), get(), get(), get(), get(), get()) }
+    viewModel { DetalhesViewModel(get(), get(), get(), get(), get(), get(), get(), get()) }
 
     // Series modules
     viewModel { SeriesViewModel(get(), get(), get()) }

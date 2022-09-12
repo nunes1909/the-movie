@@ -1,22 +1,22 @@
-package com.gabriel.remote.features.filme.dataSource
+package com.gabriel.remote.features.serie.dataSource
 
-import com.gabriel.data.features.filme.dataSource.GetFilmesSimilaresDataSource
-import com.gabriel.data.features.filme.model.FilmeData
+import com.gabriel.data.features.serie.dataSource.GetSeriesSimilaresDataSource
+import com.gabriel.data.features.serie.model.SerieData
 import com.gabriel.domain.util.state.ResourceState
-import com.gabriel.remote.features.filme.mapper.FilmeRemoteMapper
-import com.gabriel.remote.features.filme.model.FilmeContainer
-import com.gabriel.remote.features.filme.service.FilmesService
+import com.gabriel.remote.features.serie.mapper.SerieRemoteMapper
+import com.gabriel.remote.features.serie.model.SerieContainer
+import com.gabriel.remote.features.serie.service.SeriesService
 import retrofit2.Response
 import timber.log.Timber
 import java.io.IOException
 
-class GetFilmesSimilaresDataSourceImpl(
-    private val api: FilmesService,
-    private val mapperFilmes: FilmeRemoteMapper
-) : GetFilmesSimilaresDataSource {
-    override suspend fun getFilmesSimilares(filmeId: Int): ResourceState<List<FilmeData>> {
+class GetSeriesSimilaresDataSourceImpl(
+    private val api: SeriesService,
+    private val mapperSeries: SerieRemoteMapper
+) : GetSeriesSimilaresDataSource {
+    override suspend fun getSeriesSimilares(serieId: Int): ResourceState<List<SerieData>> {
         return try {
-            val response = api.getSimilarFilmes(filmeId = filmeId)
+            val response = api.getSimilarSeries(serieId = serieId)
             validateListResponse(response = response)
         } catch (t: Throwable) {
             when (t) {
@@ -32,11 +32,11 @@ class GetFilmesSimilaresDataSourceImpl(
         }
     }
 
-    private fun validateListResponse(response: Response<FilmeContainer>):
-            ResourceState<List<FilmeData>> {
+    private fun validateListResponse(response: Response<SerieContainer>):
+            ResourceState<List<SerieData>> {
         if (response.isSuccessful) {
             response.body()?.let { values ->
-                val resultsData = mapperFilmes.mapFromDomainNonNull(values.results)
+                val resultsData = mapperSeries.mapFromDomainNonNull(values.results)
                 return ResourceState.Undefined(data = resultsData)
             }
         }
