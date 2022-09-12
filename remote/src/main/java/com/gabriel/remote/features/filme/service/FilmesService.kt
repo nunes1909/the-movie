@@ -27,7 +27,7 @@ interface FilmesService {
     ): Response<FilmeContainer>
 
     @GET("movie/{movie_id}/similar")
-    suspend fun getSimilarMovies(
+    suspend fun getSimilarFilmes(
         @Path(value = "movie_id", encoded = true)
         filmeId: Int
     ) : Response<FilmeContainer>

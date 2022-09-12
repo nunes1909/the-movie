@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import coil.load
 import com.gabriel.domain.util.state.ResourceState
@@ -15,6 +16,7 @@ import com.gabriel.themovie.model.multiMovie.mapper.MultiMovieMapperSerie
 import com.gabriel.themovie.model.multiMovie.model.MultiMovie
 import com.gabriel.themovie.model.serie.model.SerieView
 import com.gabriel.themovie.ui.adapters.SerieAdapter
+import com.gabriel.themovie.ui.views.filmes.FilmesFragmentDirections
 import com.gabriel.themovie.util.base.BaseFragment
 import com.gabriel.themovie.util.constants.ConstantsView
 import com.gabriel.themovie.util.extensions.hide
@@ -34,8 +36,28 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         configuraRecyclerView()
+        configuraClickAdapter()
         observerListaSeries()
         observerSeriePrincipal()
+    }
+
+    private fun configuraClickAdapter() {
+        serieAdapter.setSerieOnClickListener { serieView ->
+            val multiMovie = multiMovieMapperSerie.mapFromDomain(serieView)
+            actionGoDetails(multiMovie)
+        }
+    }
+
+    /**
+     * Metodo universal com a ação de ir para a feature de Detalhes.
+     *
+     * @param entity é a entidade solicitada pela feature Detalhes.
+     * @param action é a ação do Navigation para mudar de tela.
+     */
+    private fun actionGoDetails(entity: MultiMovie) {
+        val action = SeriesFragmentDirections
+            .acaoSeriesParaDetalhes(entity)
+        findNavController().navigate(action)
     }
 
     private fun observerSeriePrincipal() = lifecycleScope.launch {
