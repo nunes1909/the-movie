@@ -1,9 +1,9 @@
-package com.gabriel.remote.features.filme.model
+package com.gabriel.remote.features.movie.modelsApi.serie
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-data class FilmesSemelhantesContainer(
+data class SerieContainer(
     @SerializedName("results")
-    val results: List<FilmeResponse>
+    val results: List<SerieResponse>
 ) : Serializable

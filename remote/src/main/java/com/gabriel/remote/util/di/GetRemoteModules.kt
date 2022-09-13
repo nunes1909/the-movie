@@ -3,6 +3,8 @@ package com.gabriel.remote.util.di
 import com.gabriel.data.features.filme.dataSource.GetFilmesDataSource
 import com.gabriel.data.features.filme.dataSource.GetFilmesSimilaresDataSource
 import com.gabriel.data.features.filme.dataSource.GetTrandingFilmesDataSource
+import com.gabriel.data.features.movie.dataSource.GetAllFilmesDataSource
+import com.gabriel.data.features.movie.dataSource.GetAllSeriesDataSource
 import com.gabriel.data.features.multiSearch.dataSource.MultiSearchDataSource
 import com.gabriel.data.features.serie.dataSource.GetSeriesDataSource
 import com.gabriel.data.features.serie.dataSource.GetSeriesSimilaresDataSource
@@ -11,9 +13,12 @@ import com.gabriel.remote.features.filme.dataSource.GetFilmesDataSourceImpl
 import com.gabriel.remote.features.filme.dataSource.GetFilmesSimilaresDataSourceImpl
 import com.gabriel.remote.features.filme.dataSource.GetTrandingFilmesDataSourceImpl
 import com.gabriel.remote.features.filme.mapper.FilmeDetailRemoteMapper
-import com.gabriel.remote.features.filme.mapper.FilmeRemoteMapper
-import com.gabriel.remote.features.filme.service.FilmesService
 import com.gabriel.remote.features.genero.mapper.GeneroRemoteMapper
+import com.gabriel.remote.features.movie.datasource.GetAllFilmesDataSourceImpl
+import com.gabriel.remote.features.movie.datasource.GetAllSeriesDataSourceImpl
+import com.gabriel.remote.features.movie.mapper.FilmeResponseToDataMapper
+import com.gabriel.remote.features.movie.mapper.SerieResponseToDataMapper
+import com.gabriel.remote.features.movie.service.FilmesService
 import com.gabriel.remote.features.multiSearch.dataSource.MultiSearchDataSourceImpl
 import com.gabriel.remote.features.multiSearch.mapper.MultiRemoteMapper
 import com.gabriel.remote.features.multiSearch.service.MultiService
@@ -37,11 +42,17 @@ fun getRemoteModules() = module {
     // Genero Modules
     factory { GeneroRemoteMapper() }
 
+    // Region Movie modules
+    factory { FilmeResponseToDataMapper() }
+    factory { SerieResponseToDataMapper() }
+    single<GetAllFilmesDataSource> { GetAllFilmesDataSourceImpl(service = get(), mapper = get()) }
+    single<GetAllSeriesDataSource> { GetAllSeriesDataSourceImpl(service = get(), mapper = get()) }
+    // Endregion
+
     // Filmes Modules
-    factory { FilmeRemoteMapper() }
     factory { FilmeDetailRemoteMapper(mapper = get()) }
     single<GetFilmesDataSource> {
-        GetFilmesDataSourceImpl(api = get(), mapperFilmes = get(), mapperDetail = get())
+        GetFilmesDataSourceImpl(api = get(), mapperDetail = get())
     }
 
     single<GetFilmesSimilaresDataSource> {

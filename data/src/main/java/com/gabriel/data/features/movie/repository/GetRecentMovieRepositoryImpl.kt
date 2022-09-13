@@ -1,6 +1,6 @@
 package com.gabriel.data.features.movie.repository
 
-import com.gabriel.data.features.movie.datasource.GetRecentMovieDataSource
+import com.gabriel.data.features.movie.dataSource.GetRecentMovieDataSource
 import com.gabriel.data.features.movie.mapper.MovieDataMapper
 import com.gabriel.domain.features.movie.model.MovieDomain
 import com.gabriel.domain.features.movie.repository.GetRecentMovieRepository
@@ -10,8 +10,8 @@ class GetRecentMovieRepositoryImpl(
     private val dataSource: GetRecentMovieDataSource,
     private val mapper: MovieDataMapper
 ) : GetRecentMovieRepository {
-    override suspend fun getRecentMovie(): ResourceState<MovieDomain> {
-        val resourceState = dataSource.getRecentMovie()
+    override suspend fun getRecentMovie(type: String): ResourceState<MovieDomain> {
+        val resourceState = dataSource.getRecentMovie(type = type)
         if (resourceState.data != null) {
             val resultsDomain = mapper.mapToDomain(resourceState.data!!)
             return ResourceState.Undefined(data = resultsDomain)

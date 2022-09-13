@@ -6,7 +6,7 @@ import com.gabriel.domain.features.movie.useCase.GetRecentMovieUseCase
 import com.gabriel.domain.util.state.ResourceState
 
 class GetRecentMovieUseCaseImpl(private val repository: GetRecentMovieRepository): GetRecentMovieUseCase {
-    override suspend fun getRecentMovie(): ResourceState<MovieDomain> {
-        return repository.getRecentMovie()
+    override suspend fun getRecentMovie(type: String): ResourceState<MovieDomain> {
+        return repository.getRecentMovie(type = type)
     }
 }

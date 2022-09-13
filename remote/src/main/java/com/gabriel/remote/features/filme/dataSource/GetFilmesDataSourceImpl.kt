@@ -2,19 +2,17 @@ package com.gabriel.remote.features.filme.dataSource
 
 import com.gabriel.data.features.filme.dataSource.GetFilmesDataSource
 import com.gabriel.data.features.filme.model.FilmeData
-import com.gabriel.remote.features.filme.mapper.FilmeDetailRemoteMapper
-import com.gabriel.remote.features.filme.mapper.FilmeRemoteMapper
-import com.gabriel.remote.features.filme.model.FilmeContainer
-import com.gabriel.remote.features.filme.model.FilmeDetailResponse
-import com.gabriel.remote.features.filme.service.FilmesService
 import com.gabriel.domain.util.state.ResourceState
+import com.gabriel.remote.features.filme.mapper.FilmeDetailRemoteMapper
+import com.gabriel.remote.features.movie.modelsApi.filme.FilmeContainer
+import com.gabriel.remote.features.movie.modelsApi.filme.FilmeDetailResponse
+import com.gabriel.remote.features.movie.service.FilmesService
 import retrofit2.Response
 import timber.log.Timber
 import java.io.IOException
 
 class GetFilmesDataSourceImpl(
     private val api: FilmesService,
-    private val mapperFilmes: FilmeRemoteMapper,
     private val mapperDetail: FilmeDetailRemoteMapper
 ) : GetFilmesDataSource {
     override suspend fun getAllFilmes(): ResourceState<List<FilmeData>> {

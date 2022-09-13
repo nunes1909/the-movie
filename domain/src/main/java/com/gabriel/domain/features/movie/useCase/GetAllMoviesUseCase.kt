@@ -4,5 +4,5 @@ import com.gabriel.domain.features.movie.model.MovieDomain
 import com.gabriel.domain.util.state.ResourceState
 
 interface GetAllMoviesUseCase {
-    suspend fun getAllMovies(): ResourceState<List<MovieDomain>>
+    suspend fun getAllMovies(type: String): ResourceState<List<MovieDomain>>
 }

@@ -7,7 +7,7 @@ import com.gabriel.domain.util.state.ResourceState
 
 class GetAllMoviesUseCaseImpl(private val repository: GetAllMoviesRepository) :
     GetAllMoviesUseCase {
-    override suspend fun getAllMovies(): ResourceState<List<MovieDomain>> {
-        return repository.getAllMovies()
+    override suspend fun getAllMovies(type: String): ResourceState<List<MovieDomain>> {
+        return repository.getAllMovies(type = type)
     }
 }

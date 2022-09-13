@@ -9,7 +9,7 @@ class SerieRemoteMapper : RemoteMapper<SerieResponse, SerieData> {
         return SerieData(
             id = type.id,
             title = type.title,
-            background = type.background,
+            background = type.cartaz,
             banner = type.banner
         )
     }
@@ -18,7 +18,7 @@ class SerieRemoteMapper : RemoteMapper<SerieResponse, SerieData> {
         return SerieResponse(
             id = type.id,
             title = type.title,
-            background = type.background,
+            cartaz = type.background,
             banner = type.banner
         )
     }

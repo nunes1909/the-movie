@@ -1,11 +1,10 @@
-package com.gabriel.remote.features.filme.service
+package com.gabriel.remote.features.movie.service
 
-import com.gabriel.remote.features.filme.model.FilmeContainer
-import com.gabriel.remote.features.filme.model.FilmeDetailResponse
+import com.gabriel.remote.features.movie.modelsApi.filme.FilmeContainer
+import com.gabriel.remote.features.movie.modelsApi.filme.FilmeDetailResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 interface FilmesService {
 
@@ -16,7 +15,7 @@ interface FilmesService {
     suspend fun getDetailFilme(
         @Path(value = "movie_id", encoded = true)
         filmeId: Int
-    ) : Response<FilmeDetailResponse>
+    ): Response<FilmeDetailResponse>
 
     @GET("trending/{media_type}/{time_window}")
     suspend fun getTrending(
@@ -30,5 +29,5 @@ interface FilmesService {
     suspend fun getSimilarFilmes(
         @Path(value = "movie_id", encoded = true)
         filmeId: Int
-    ) : Response<FilmeContainer>
+    ): Response<FilmeContainer>
 }

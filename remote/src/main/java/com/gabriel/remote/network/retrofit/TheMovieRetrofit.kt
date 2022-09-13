@@ -1,6 +1,5 @@
 package com.gabriel.remote.network.retrofit
 
-import com.gabriel.remote.features.filme.service.FilmesService
 import com.gabriel.remote.features.serie.service.SeriesService
 import com.gabriel.remote.util.constants.ConstantsRemote.API_KEY
 import com.gabriel.remote.util.constants.ConstantsRemote.API_QUERY

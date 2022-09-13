@@ -1,4 +1,4 @@
-package com.gabriel.remote.features.filme.model
+package com.gabriel.remote.features.movie.modelsApi.filme
 
 import com.gabriel.remote.features.genero.model.GeneroResponse
 import com.google.gson.annotations.Expose
@@ -15,7 +15,7 @@ data class FilmeDetailResponse(
     @SerializedName("vote_average")
     val nota: Double? = null,
     @SerializedName("poster_path")
-    val background: String? = null,
+    val cartaz: String? = null,
     @SerializedName("backdrop_path")
     val banner: String? = null,
     @SerializedName("genres")

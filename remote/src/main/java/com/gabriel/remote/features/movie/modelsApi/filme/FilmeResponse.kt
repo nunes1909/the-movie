@@ -1,12 +1,12 @@
-package com.gabriel.remote.features.serie.model
+package com.gabriel.remote.features.movie.modelsApi.filme
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-data class SerieResponse(
+data class FilmeResponse(
     @SerializedName("id")
     val id: Int,
-    @SerializedName("name")
+    @SerializedName("title")
     val title: String,
     @SerializedName("poster_path")
     val cartaz: String? = null,

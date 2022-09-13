@@ -2,11 +2,8 @@ package com.gabriel.remote.features.filme.dataSource
 
 import com.gabriel.data.features.filme.dataSource.GetTrandingFilmesDataSource
 import com.gabriel.data.features.filme.model.FilmeData
-import com.gabriel.domain.features.filme.model.FilmeDomain
 import com.gabriel.domain.util.state.ResourceState
-import com.gabriel.remote.features.filme.mapper.FilmeRemoteMapper
 import com.gabriel.remote.features.filme.model.FilmeContainer
-import com.gabriel.remote.features.filme.service.FilmesService
 import retrofit2.Response
 import timber.log.Timber
 import java.io.IOException
