@@ -7,7 +7,7 @@ import com.gabriel.domain.util.state.ResourceState
 
 class GetDetailMovieUseCaseImpl(private val repository: GetDetailMovieRepository) :
     GetDetailMovieUseCase {
-    override suspend fun getDetailMovie(movieId: Int, type: String): ResourceState<MovieDomain> {
-        return repository.getDetailMovie(movieId = movieId, type = type)
+    override suspend fun getDetailMovie(type: String, movieId: Int): ResourceState<MovieDomain> {
+        return repository.getDetailMovie(type = type, movieId = movieId)
     }
 }

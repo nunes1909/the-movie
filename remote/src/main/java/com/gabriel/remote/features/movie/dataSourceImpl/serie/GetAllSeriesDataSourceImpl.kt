@@ -1,22 +1,22 @@
-package com.gabriel.remote.features.movie.datasource
+package com.gabriel.remote.features.movie.dataSourceImpl.serie
 
-import com.gabriel.data.features.movie.dataSource.GetAllFilmesDataSource
+import com.gabriel.data.features.movie.dataSource.serie.GetAllSeriesDataSource
 import com.gabriel.data.features.movie.model.MovieData
 import com.gabriel.domain.util.state.ResourceState
-import com.gabriel.remote.features.movie.mapper.FilmeResponseToDataMapper
-import com.gabriel.remote.features.movie.modelsApi.filme.FilmeContainer
-import com.gabriel.remote.features.movie.service.FilmesService
+import com.gabriel.remote.features.movie.mapper.serie.SerieResponseToDataMapper
+import com.gabriel.remote.features.serie.model.SerieContainer
+import com.gabriel.remote.features.serie.service.SeriesService
 import retrofit2.Response
 import timber.log.Timber
 import java.io.IOException
 
-class GetAllFilmesDataSourceImpl(
-    private val service: FilmesService,
-    private val mapper: FilmeResponseToDataMapper
-) : GetAllFilmesDataSource {
-    override suspend fun getAllMovies(type: String): ResourceState<List<MovieData>> {
+class GetAllSeriesDataSourceImpl(
+    private val service: SeriesService,
+    private val mapper: SerieResponseToDataMapper
+) : GetAllSeriesDataSource {
+    override suspend fun getAllSeries(type: String): ResourceState<List<MovieData>> {
         return try {
-            val response = service.getAllFilmes()
+            val response = service.getAllSeries()
             validateListResponse(response)
         } catch (t: Throwable) {
             when (t) {
@@ -32,7 +32,7 @@ class GetAllFilmesDataSourceImpl(
         }
     }
 
-    private fun validateListResponse(response: Response<FilmeContainer>):
+    private fun validateListResponse(response: Response<SerieContainer>):
             ResourceState<List<MovieData>> {
         if (response.isSuccessful) {
             response.body()?.let { values ->

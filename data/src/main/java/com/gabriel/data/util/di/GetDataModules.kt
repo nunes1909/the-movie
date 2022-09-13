@@ -8,12 +8,11 @@ import com.gabriel.data.features.filme.repository.GetFilmesRepositoryImpl
 import com.gabriel.data.features.filme.repository.GetFilmesSimilaresRepositoryImpl
 import com.gabriel.data.features.filme.repository.GetTrandingFilmesRepositoryImpl
 import com.gabriel.data.features.genero.mapper.GeneroDataMapper
-import com.gabriel.data.features.movie.dataSource.GetAllFilmesDataSource
-import com.gabriel.data.features.movie.dataSource.GetDetailMovieDataSource
-import com.gabriel.data.features.movie.dataSource.GetRecentMovieDataSource
-import com.gabriel.data.features.movie.dataSource.GetSimilarMoviesDataSource
+import com.gabriel.data.features.movie.dataSource.filme.GetAllFilmesDataSource
 import com.gabriel.data.features.movie.dataStore.GetAllMoviesDataStore
+import com.gabriel.data.features.movie.dataStore.GetDetailMovieDataStore
 import com.gabriel.data.features.movie.dataStoreImpl.GetAllMoviesDataStoreImpl
+import com.gabriel.data.features.movie.dataStoreImpl.GetDetailMovieDataStoreImpl
 import com.gabriel.data.features.movie.mapper.MovieDataMapper
 import com.gabriel.data.features.movie.repository.GetAllMoviesRepositoryImpl
 import com.gabriel.data.features.movie.repository.GetDetailMovieRepositoryImpl
@@ -48,26 +47,26 @@ fun getDataModules() = module {
 
     // Region Movie modules
     factory { MovieDataMapper() }
-
     factory<GetAllFilmesDataSource> { get() }
-    factory<GetDetailMovieDataSource> { get() }
-    factory<GetRecentMovieDataSource> { get() }
-    factory<GetSimilarMoviesDataSource> { get() }
-
     factory<GetAllMoviesRepository> {
-        GetAllMoviesRepositoryImpl(dataStore = get(),mapper = get())
+        GetAllMoviesRepositoryImpl(dataStore = get(), mapper = get())
     }
     factory<GetDetailMovieRepository> {
-        GetDetailMovieRepositoryImpl(dataSource = get(),mapper = get())
+        GetDetailMovieRepositoryImpl(dataSource = get(), mapper = get())
     }
     factory<GetRecentMovieRepository> {
-        GetRecentMovieRepositoryImpl(dataSource = get(),mapper = get())
+        GetRecentMovieRepositoryImpl(dataSource = get(), mapper = get())
     }
     factory<GetSimilarMoviesRepository> {
-        GetSimilarMoviesRepositoryImpl(dataSource = get(),mapper = get())
+        GetSimilarMoviesRepositoryImpl(dataSource = get(), mapper = get())
     }
 
-    factory<GetAllMoviesDataStore> { GetAllMoviesDataStoreImpl(filmesSource = get(), seriesSource = get()) }
+    factory<GetAllMoviesDataStore> {
+        GetAllMoviesDataStoreImpl(filmesSource = get(), seriesSource = get())
+    }
+    factory<GetDetailMovieDataStore> {
+        GetDetailMovieDataStoreImpl(filmesSource = get(), seriesService = get())
+    }
     // Endregion
 
     // Filmes modules

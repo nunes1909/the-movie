@@ -15,7 +15,7 @@ data class SerieDetailResponse(
     @SerializedName("vote_average")
     val nota: Double? = null,
     @SerializedName("poster_path")
-    val background: String? = null,
+    val cartaz: String? = null,
     @SerializedName("backdrop_path")
     val banner: String? = null,
     @SerializedName("genres")

@@ -1,6 +1,5 @@
 package com.gabriel.data.features.movie.repository
 
-import com.gabriel.data.features.movie.dataSource.GetSimilarMoviesDataSource
 import com.gabriel.data.features.movie.mapper.MovieDataMapper
 import com.gabriel.domain.features.movie.model.MovieDomain
 import com.gabriel.domain.features.movie.repository.GetSimilarMoviesRepository

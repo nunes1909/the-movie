@@ -1,4 +1,4 @@
-package com.gabriel.remote.features.movie.mapper
+package com.gabriel.remote.features.movie.mapper.filme
 
 import com.gabriel.data.features.movie.model.MovieData
 import com.gabriel.remote.features.movie.modelsApi.filme.FilmeResponse

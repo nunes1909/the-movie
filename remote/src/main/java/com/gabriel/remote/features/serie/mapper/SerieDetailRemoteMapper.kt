@@ -15,7 +15,7 @@ class SerieDetailRemoteMapper(private val mapper: GeneroRemoteMapper) :
             title = type.title,
             description = type.description,
             nota = type.nota,
-            background = type.background,
+            background = type.cartaz,
             banner = type.banner,
             generos = generosData,
             favorito = type.favorito

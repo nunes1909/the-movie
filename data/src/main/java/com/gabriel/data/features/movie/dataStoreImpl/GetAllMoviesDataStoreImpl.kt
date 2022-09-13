@@ -1,7 +1,7 @@
 package com.gabriel.data.features.movie.dataStoreImpl
 
-import com.gabriel.data.features.movie.dataSource.GetAllFilmesDataSource
-import com.gabriel.data.features.movie.dataSource.GetAllSeriesDataSource
+import com.gabriel.data.features.movie.dataSource.filme.GetAllFilmesDataSource
+import com.gabriel.data.features.movie.dataSource.serie.GetAllSeriesDataSource
 import com.gabriel.data.features.movie.dataStore.GetAllMoviesDataStore
 import com.gabriel.data.features.movie.model.MovieData
 import com.gabriel.domain.util.state.ResourceState
