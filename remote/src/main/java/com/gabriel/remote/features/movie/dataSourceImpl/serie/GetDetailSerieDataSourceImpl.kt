@@ -4,8 +4,8 @@ import com.gabriel.data.features.movie.dataSource.serie.GetDetailSerieDataSource
 import com.gabriel.data.features.movie.model.MovieData
 import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.remote.features.movie.mapper.serie.SerieDetailResponseToDataMapper
-import com.gabriel.remote.features.movie.service.SeriesService
-import com.gabriel.remote.features.serie.model.SerieDetailResponse
+import com.gabriel.remote.features.movie.modelsApi.serie.SerieDetailResponse
+import com.gabriel.remote.features.movie.service.serie.SeriesService
 import retrofit2.Response
 import timber.log.Timber
 import java.io.IOException

@@ -11,5 +11,5 @@ data class MovieData(
     val generos: List<GeneroDomain>? = null,
     val favorito: Boolean? = false,
     val cartaz: String? = null,
-    val banner: String? = null,
+    val banner: String? = null
 )

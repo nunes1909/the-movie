@@ -1,7 +1,6 @@
 package com.gabriel.remote.features.movie.mapper.serie
 
 import com.gabriel.data.features.movie.model.MovieData
-import com.gabriel.remote.features.movie.modelsApi.filme.FilmeResponse
 import com.gabriel.remote.features.serie.model.SerieResponse
 import com.gabriel.remote.util.base.RemoteMapper
 

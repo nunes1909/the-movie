@@ -21,9 +21,9 @@ import com.gabriel.domain.features.movie.useCaseImpl.GetAllMoviesUseCaseImpl
 import com.gabriel.domain.features.movie.useCaseImpl.GetDetailMovieUseCaseImpl
 import com.gabriel.domain.features.movie.useCaseImpl.GetRecentMovieUseCaseImpl
 import com.gabriel.domain.features.movie.useCaseImpl.GetSimilarMoviesUseCaseImpl
-import com.gabriel.domain.features.multiSearch.repository.MultiSearchRepository
-import com.gabriel.domain.features.multiSearch.useCase.SearchMultiUseCase
-import com.gabriel.domain.features.multiSearch.useCaseImpl.SearchMultiUseCaseImpl
+import com.gabriel.domain.features.movie.repository.SearchMovieRepository
+import com.gabriel.domain.features.movie.useCase.SearchMovieUseCase
+import com.gabriel.domain.features.movie.useCaseImpl.SearchMovieUseCaseImpl
 import com.gabriel.domain.features.serie.repository.GetSeriesRepository
 import com.gabriel.domain.features.serie.repository.GetSeriesSimilaresRepository
 import com.gabriel.domain.features.serie.repository.GetTrandingSeriesRepository
@@ -71,6 +71,6 @@ fun getDomainModules() = module {
     factory<GetSeriesSimilaresUseCase> { GetSeriesSimilaresUseCaseImpl(repository = get()) }
 
     // Multi modules
-    factory<MultiSearchRepository> { get() }
-    factory<SearchMultiUseCase> { SearchMultiUseCaseImpl(repository = get()) }
+    factory<SearchMovieRepository> { get() }
+    factory<SearchMovieUseCase> { SearchMovieUseCaseImpl(repository = get()) }
 }

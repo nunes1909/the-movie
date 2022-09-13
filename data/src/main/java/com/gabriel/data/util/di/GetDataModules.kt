@@ -18,9 +18,9 @@ import com.gabriel.data.features.movie.repository.GetAllMoviesRepositoryImpl
 import com.gabriel.data.features.movie.repository.GetDetailMovieRepositoryImpl
 import com.gabriel.data.features.movie.repository.GetRecentMovieRepositoryImpl
 import com.gabriel.data.features.movie.repository.GetSimilarMoviesRepositoryImpl
-import com.gabriel.data.features.multiSearch.dataSource.MultiSearchDataSource
+import com.gabriel.data.features.movie.dataSource.movie.SearchMovieDataSource
 import com.gabriel.data.features.multiSearch.mapper.MultiDataMapper
-import com.gabriel.data.features.multiSearch.repository.MultiSearchRepositoryImpl
+import com.gabriel.data.features.movie.repository.SearchMovieRepositoryImpl
 import com.gabriel.data.features.serie.dataSource.GetSeriesDataSource
 import com.gabriel.data.features.serie.dataSource.GetSeriesSimilaresDataSource
 import com.gabriel.data.features.serie.dataSource.GetTrandingSeriesDataSource
@@ -35,7 +35,7 @@ import com.gabriel.domain.features.movie.repository.GetAllMoviesRepository
 import com.gabriel.domain.features.movie.repository.GetDetailMovieRepository
 import com.gabriel.domain.features.movie.repository.GetRecentMovieRepository
 import com.gabriel.domain.features.movie.repository.GetSimilarMoviesRepository
-import com.gabriel.domain.features.multiSearch.repository.MultiSearchRepository
+import com.gabriel.domain.features.movie.repository.SearchMovieRepository
 import com.gabriel.domain.features.serie.repository.GetSeriesRepository
 import com.gabriel.domain.features.serie.repository.GetSeriesSimilaresRepository
 import com.gabriel.domain.features.serie.repository.GetTrandingSeriesRepository
@@ -106,7 +106,7 @@ fun getDataModules() = module {
     }
 
     // Multi modules
-    factory<MultiSearchDataSource> { get() }
+    factory<SearchMovieDataSource> { get() }
     factory { MultiDataMapper(mapper = get()) }
-    factory<MultiSearchRepository> { MultiSearchRepositoryImpl(dataSource = get(), mapper = get()) }
+    factory<SearchMovieRepository> { SearchMovieRepositoryImpl(dataSource = get(), mapper = get()) }
 }
