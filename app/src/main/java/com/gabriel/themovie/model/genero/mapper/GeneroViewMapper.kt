@@ -1,6 +1,6 @@
 package com.gabriel.themovie.model.genero.mapper
 
-import com.gabriel.domain.features.genero.model.GeneroDomain
+import com.gabriel.domain.genero.model.GeneroDomain
 import com.gabriel.themovie.model.genero.model.GeneroView
 import com.gabriel.themovie.util.base.ViewMapper
 

@@ -2,7 +2,7 @@ package com.gabriel.cache.features.genero.mapper
 
 import com.gabriel.cache.features.genero.model.GeneroCache
 import com.gabriel.cache.util.base.CacheMapper
-import com.gabriel.data.features.genero.model.GeneroData
+import com.gabriel.data.genero.model.GeneroData
 
 class GeneroCacheMapper : CacheMapper<GeneroCache, GeneroData> {
     override fun mapToData(type: GeneroCache): GeneroData {
