@@ -5,7 +5,7 @@ object ConstantsView {
     const val BASE_URL_IMAGES = "https://image.tmdb.org/t/p/original"
 
     // Movies types
-    const val TYPE_FILME = "filme"
+    const val TYPE_FILME = "movie"
     const val TYPE_SERIE = "tv"
 
     // Details

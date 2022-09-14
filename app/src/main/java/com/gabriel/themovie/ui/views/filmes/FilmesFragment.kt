@@ -11,9 +11,7 @@ import coil.load
 import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.themovie.R
 import com.gabriel.themovie.databinding.FragmentFilmesBinding
-import com.gabriel.themovie.model.filme.model.FilmeView
-import com.gabriel.themovie.model.multiMovie.mapper.MultiMovieMapperFilme
-import com.gabriel.themovie.model.multiMovie.model.MultiMovie
+import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.ui.adapters.FilmeAdapter
 import com.gabriel.themovie.util.base.BaseFragment
 import com.gabriel.themovie.util.constants.ConstantsView
@@ -24,19 +22,19 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
+
 class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
 
     override val viewModel: FilmesViewModel by viewModel()
     private val filmeAdapter by lazy { FilmeAdapter() }
-    private val multiMovieMapperFilme by lazy { MultiMovieMapperFilme() }
-    lateinit var globalMultiMovie: MultiMovie
+    lateinit var globalMultiMovie: MovieView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         configuraRecyclerView()
-        configuraClickAdapter()
         observerListaFilmes()
         observerFilmePrincipal()
+        configuraClickAdapter()
         configuraClickFilmePrincipal()
     }
 
@@ -48,9 +46,8 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
     }
 
     private fun configuraClickAdapter() {
-        filmeAdapter.setFilmeOnClickListener { filmeView ->
-            val multiMovie = multiMovieMapperFilme.mapFromDomain(filmeView)
-            actionGoDetails(entity = multiMovie)
+        filmeAdapter.setFilmeOnClickListener { movieView ->
+            actionGoDetails(entity = movieView)
         }
     }
 
@@ -60,7 +57,7 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
      * @param entity é a entidade solicitada pela feature Detalhes.
      * @param action é a ação do Navigation para mudar de tela.
      */
-    private fun actionGoDetails(entity: MultiMovie) {
+    private fun actionGoDetails(entity: MovieView) {
         val action = FilmesFragmentDirections
             .acaoFilmesParaDetalhes(entity)
         findNavController().navigate(action)
@@ -72,7 +69,7 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
                 is ResourceState.Success -> {
                     resource.data?.let { results ->
                         binding.progressFilme.hide()
-                        filmeAdapter.filmesList = results
+                        filmeAdapter.moviesList = results
                     }
                 }
                 is ResourceState.Error -> {
@@ -90,16 +87,15 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
     }
 
     private fun observerFilmePrincipal() = lifecycleScope.launch {
-        viewModel.listTranding.collect { resource ->
+        viewModel.recent.collect { resource ->
             when (resource) {
                 is ResourceState.Success -> {
-                    resource.data?.let { results ->
-                        val filmeView = results[0]
+                    resource.data?.let { result ->
                         binding.bannerFilmePrincipal
-                            .load("${ConstantsView.BASE_URL_IMAGES}${filmeView.cartaz}")
+                            .load("${ConstantsView.BASE_URL_IMAGES}${result.cartaz}")
 
-                        binding.tituloFilmePrincipal.text = filmeView.title
-                        inicializaGlobalMultiMovie(filmeView)
+                        binding.tituloFilmePrincipal.text = result.title
+                        inicializaGlobalMultiMovie(result)
                     }
                 }
                 is ResourceState.Error -> {
@@ -115,8 +111,8 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
         }
     }
 
-    private fun inicializaGlobalMultiMovie(filmeView: FilmeView) {
-        globalMultiMovie = multiMovieMapperFilme.mapFromDomain(filmeView)
+    private fun inicializaGlobalMultiMovie(movieView: MovieView) {
+        globalMultiMovie = movieView
     }
 
     private fun configuraClickFilmePrincipal() = with(binding){

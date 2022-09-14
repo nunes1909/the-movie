@@ -1,4 +1,4 @@
-package com.gabriel.themovie.model.genero.model
+package com.gabriel.themovie.genero.model
 
 data class GeneroView(
     val id: Int,

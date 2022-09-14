@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.gabriel.themovie.databinding.ItemListBinding
-import com.gabriel.themovie.model.serie.model.SerieView
+import com.gabriel.themovie.movie.serie.model.SerieView
 import com.gabriel.themovie.util.constants.ConstantsView.BASE_URL_IMAGES
 import com.gabriel.themovie.util.extensions.limitValue
 

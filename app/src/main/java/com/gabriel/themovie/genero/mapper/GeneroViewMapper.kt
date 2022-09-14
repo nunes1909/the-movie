@@ -1,7 +1,7 @@
-package com.gabriel.themovie.model.genero.mapper
+package com.gabriel.themovie.genero.mapper
 
 import com.gabriel.domain.genero.model.GeneroDomain
-import com.gabriel.themovie.model.genero.model.GeneroView
+import com.gabriel.themovie.genero.model.GeneroView
 import com.gabriel.themovie.util.base.ViewMapper
 
 class GeneroViewMapper : ViewMapper<GeneroView, GeneroDomain> {
