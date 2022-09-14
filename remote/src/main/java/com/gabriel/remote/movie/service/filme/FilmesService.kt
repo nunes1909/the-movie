@@ -17,13 +17,8 @@ interface FilmesService {
         filmeId: Int
     ): Response<FilmeDetailResponse>
 
-    @GET("trending/{media_type}/{time_window}")
-    suspend fun getTrending(
-        @Path(value = "media_type", encoded = true)
-        mediaType: String,
-        @Path(value = "time_window", encoded = true)
-        timeWindow: String
-    ): Response<FilmeContainer>
+    @GET("movie/latest")
+    suspend fun getRecentFilme(): Response<FilmeDetailResponse>
 
     @GET("movie/{movie_id}/similar")
     suspend fun getSimilarFilmes(

@@ -1,7 +1,7 @@
 package com.gabriel.remote.movie.mapper.serie
 
 import com.gabriel.data.movie.model.MovieData
-import com.gabriel.remote.features.serie.model.SerieDetailResponse
+import com.gabriel.remote.movie.modelsApi.serie.SerieDetailResponse
 import com.gabriel.remote.util.base.RemoteMapper
 
 class SerieDetailResponseToDataMapper : RemoteMapper<SerieDetailResponse, MovieData> {

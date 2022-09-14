@@ -17,13 +17,8 @@ interface SeriesService {
         serieId: Int
     ): Response<SerieDetailResponse>
 
-    @GET("trending/{media_type}/{time_window}")
-    suspend fun getTrending(
-        @Path(value = "media_type", encoded = true)
-        mediaType: String,
-        @Path(value = "time_window", encoded = true)
-        timeWindow: String
-    ): Response<SerieContainer>
+    @GET("tv/latest")
+    suspend fun getRecentSerie(): Response<SerieDetailResponse>
 
     @GET("tv/{tv_id}/similar")
     suspend fun getSimilarSeries(

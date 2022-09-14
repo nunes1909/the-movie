@@ -4,5 +4,5 @@ import com.gabriel.domain.movie.model.MovieDomain
 import com.gabriel.domain.util.state.ResourceState
 
 interface GetSimilarMoviesUseCase {
-    suspend fun getSimilarMovies(movieId: Int, type: String): ResourceState<List<MovieDomain>>
+    suspend fun getSimilarMovies(type: String, movieId: Int): ResourceState<List<MovieDomain>>
 }

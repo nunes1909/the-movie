@@ -13,7 +13,7 @@ class GetAllMoviesRepositoryImpl(
     override suspend fun getAllMovies(type: String): ResourceState<List<MovieDomain>> {
         val resourceState = dataStore.getAllMovies(type = type)
         if (resourceState.data != null) {
-            val resultsDomain = mapper.mapFromDomainNonNull(entity = resourceState.data!!)
+            val resultsDomain = mapper.mapFromDomainNonNull(entityNonNull = resourceState.data!!)
             return ResourceState.Undefined(data = resultsDomain)
         }
         return ResourceState.Undefined(
