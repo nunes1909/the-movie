@@ -10,14 +10,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import coil.load
 import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.themovie.R
-import com.gabriel.themovie.databinding.FragmentFilmesBinding
 import com.gabriel.themovie.databinding.FragmentSeriesBinding
-import com.gabriel.themovie.model.multiMovie.mapper.MultiMovieMapperFilme
-import com.gabriel.themovie.model.multiMovie.mapper.MultiMovieMapperSerie
-import com.gabriel.themovie.model.multiMovie.model.MultiMovie
-import com.gabriel.themovie.model.serie.model.SerieView
-import com.gabriel.themovie.ui.adapters.SerieAdapter
-import com.gabriel.themovie.ui.views.filmes.FilmesFragmentDirections
+import com.gabriel.themovie.movie.model.MovieView
+import com.gabriel.themovie.ui.adapters.FilmeAdapter
 import com.gabriel.themovie.util.base.BaseFragment
 import com.gabriel.themovie.util.constants.ConstantsView
 import com.gabriel.themovie.util.extensions.hide
@@ -30,9 +25,8 @@ import timber.log.Timber
 class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
 
     override val viewModel: SeriesViewModel by viewModel()
-    private val serieAdapter by lazy { SerieAdapter() }
-    private val multiMovieMapperSerie by lazy { MultiMovieMapperSerie() }
-    lateinit var globalMultiMovie: MultiMovie
+    private val serieAdapter by lazy { FilmeAdapter() }
+    lateinit var globalMultiMovie: MovieView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -61,9 +55,8 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
     }
 
     private fun configuraClickAdapter() {
-        serieAdapter.setSerieOnClickListener { serieView ->
-            val multiMovie = multiMovieMapperSerie.mapFromDomain(serieView)
-            actionGoDetails(multiMovie)
+        serieAdapter.setFilmeOnClickListener { movieView ->
+            actionGoDetails(movieView)
         }
     }
 
@@ -73,23 +66,22 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
      * @param entity é a entidade solicitada pela feature Detalhes.
      * @param action é a ação do Navigation para mudar de tela.
      */
-    private fun actionGoDetails(entity: MultiMovie) {
+    private fun actionGoDetails(entity: MovieView) {
         val action = SeriesFragmentDirections
             .acaoSeriesParaDetalhes(entity)
         findNavController().navigate(action)
     }
 
     private fun observerSeriePrincipal() = lifecycleScope.launch {
-        viewModel.listTranding.collect { resource ->
+        viewModel.recent.collect { resource ->
             when (resource) {
                 is ResourceState.Success -> {
                     resource.data?.let { results ->
-                        val serieView = results[0]
                         binding.serieBannerPrincipal
-                            .load("${ConstantsView.BASE_URL_IMAGES}${serieView.banner}")
+                            .load("${ConstantsView.BASE_URL_IMAGES}${results.banner}")
 
-                        binding.serieTituloPrincipal.text = serieView.title
-                        inicializaGlobalMultiMovie(serieView)
+                        binding.serieTituloPrincipal.text = results.title
+                        inicializaGlobalMultiMovie(results)
                     }
                 }
                 is ResourceState.Error -> {
@@ -105,8 +97,8 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
         }
     }
 
-    private fun inicializaGlobalMultiMovie(serieView: SerieView) {
-        globalMultiMovie = multiMovieMapperSerie.mapFromDomain(serieView)
+    private fun inicializaGlobalMultiMovie(movieView: MovieView) {
+        globalMultiMovie = movieView
     }
 
     private fun observerListaSeries() = lifecycleScope.launch {
@@ -115,7 +107,7 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
                 is ResourceState.Success -> {
                     resources.data?.let { results ->
                         binding.progressSerie.hide()
-                        serieAdapter.seriesList = results
+                        serieAdapter.moviesList = results
                     }
                 }
                 is ResourceState.Error -> {

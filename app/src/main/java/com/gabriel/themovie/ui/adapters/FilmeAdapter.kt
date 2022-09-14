@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.gabriel.themovie.databinding.ItemListBinding
-import com.gabriel.themovie.model.filme.model.FilmeView
+import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.util.constants.ConstantsView.BASE_URL_IMAGES
 import com.gabriel.themovie.util.extensions.limitValue
 
@@ -16,12 +16,12 @@ class FilmeAdapter : RecyclerView.Adapter<FilmeAdapter.FilmeViewHolder>() {
     inner class FilmeViewHolder(val binding: ItemListBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    private val differConfig = object : DiffUtil.ItemCallback<FilmeView>() {
-        override fun areItemsTheSame(oldItem: FilmeView, newItem: FilmeView): Boolean {
+    private val differConfig = object : DiffUtil.ItemCallback<MovieView>() {
+        override fun areItemsTheSame(oldItem: MovieView, newItem: MovieView): Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
 
-        override fun areContentsTheSame(oldItem: FilmeView, newItem: FilmeView): Boolean {
+        override fun areContentsTheSame(oldItem: MovieView, newItem: MovieView): Boolean {
             return  oldItem.id == newItem.id &&
                     oldItem.title == newItem.title &&
                     oldItem.description == newItem.description &&
@@ -34,7 +34,7 @@ class FilmeAdapter : RecyclerView.Adapter<FilmeAdapter.FilmeViewHolder>() {
 
     private val differ = AsyncListDiffer(this, differConfig)
 
-    var filmesList: List<FilmeView>
+    var moviesList: List<MovieView>
         get() = differ.currentList
         set(value) = differ.submitList(value)
 
@@ -44,10 +44,10 @@ class FilmeAdapter : RecyclerView.Adapter<FilmeAdapter.FilmeViewHolder>() {
         )
     }
 
-    override fun getItemCount(): Int = filmesList.size
+    override fun getItemCount(): Int = moviesList.size
 
     override fun onBindViewHolder(holder: FilmeViewHolder, position: Int) {
-        val filme = filmesList[position]
+        val filme = moviesList[position]
         holder.binding.apply {
             itemListImage.load("${BASE_URL_IMAGES}${filme.cartaz}")
             itemListTitle.text = filme.title.limitValue(10, true)
@@ -60,9 +60,9 @@ class FilmeAdapter : RecyclerView.Adapter<FilmeAdapter.FilmeViewHolder>() {
         }
     }
 
-    fun setFilmeOnClickListener(listener: (FilmeView) -> Unit) {
+    fun setFilmeOnClickListener(listener: (MovieView) -> Unit) {
         onItemClickListener = listener
     }
 
-    private var onItemClickListener: ((FilmeView) -> Unit)? = null
+    private var onItemClickListener: ((MovieView) -> Unit)? = null
 }

@@ -2,20 +2,12 @@ package com.gabriel.themovie.ui.views.detalhes
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gabriel.domain.features.filme.model.FilmeDomain
-import com.gabriel.domain.features.filme.useCase.GetFilmesSimilaresUseCase
-import com.gabriel.domain.features.filme.useCase.GetFilmesUseCase
-import com.gabriel.domain.features.serie.model.SerieDomain
-import com.gabriel.domain.features.serie.useCase.GetSeriesSimilaresUseCase
-import com.gabriel.domain.features.serie.useCase.GetSeriesUseCase
+import com.gabriel.domain.movie.model.MovieDomain
+import com.gabriel.domain.movie.useCase.GetDetailMovieUseCase
+import com.gabriel.domain.movie.useCase.GetSimilarMoviesUseCase
 import com.gabriel.domain.util.state.ResourceState
-import com.gabriel.themovie.model.filme.mapper.FilmeViewMapper
-import com.gabriel.themovie.model.filme.model.FilmeView
-import com.gabriel.themovie.model.multiMovie.mapper.MultiMovieMapperFilme
-import com.gabriel.themovie.model.multiMovie.mapper.MultiMovieMapperSerie
-import com.gabriel.themovie.model.multiMovie.model.MultiMovie
-import com.gabriel.themovie.model.serie.mapper.SerieViewMapper
-import com.gabriel.themovie.model.serie.model.SerieView
+import com.gabriel.themovie.movie.mapper.MovieViewMapper
+import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.util.constants.ConstantsView.TYPE_FILME
 import com.gabriel.themovie.util.constants.ConstantsView.TYPE_SERIE
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,120 +15,67 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class DetalhesViewModel(
-    private val getFilmesUseCase: GetFilmesUseCase,
-    private val getFilmesSimilaresUseCase: GetFilmesSimilaresUseCase,
-    private val getSerisSimilaresUseCase: GetSeriesSimilaresUseCase,
-    private val getSeriesUseCase: GetSeriesUseCase,
-    private val filmeViewMapper: FilmeViewMapper,
-    private val serieViewMapper: SerieViewMapper,
-    private val multiMovieMapperFilme: MultiMovieMapperFilme,
-    private val multiMovieMapperSerie: MultiMovieMapperSerie
+    private val getDetailMovieUseCase: GetDetailMovieUseCase,
+    private val getSimilarMoviesUseCase: GetSimilarMoviesUseCase,
+    private val mapper: MovieViewMapper
 ) : ViewModel() {
-
-    /**
-     * Região dos detalhes de um [movie]
-     * Foi optado por um metodo universal, pois o [DetalhesFragment] não espera uma model
-     * específica.
-     */
+    // Region StateFlow
     private val _multiMovieDetail =
-        MutableStateFlow<ResourceState<MultiMovie>>(ResourceState.Loading())
-    val multiMovieDetail: StateFlow<ResourceState<MultiMovie>> = _multiMovieDetail
+        MutableStateFlow<ResourceState<MovieView>>(ResourceState.Loading())
+    val multiMovieDetail: StateFlow<ResourceState<MovieView>> = _multiMovieDetail
 
-    fun getDetail(movie: MultiMovie) {
+    private val _listSimilares =
+        MutableStateFlow<ResourceState<List<MovieView>>>(ResourceState.Loading())
+    val listSimilares: StateFlow<ResourceState<List<MovieView>>> = _listSimilares
+    // Endregion
+
+    // Region get fragment
+    fun getDetail(movie: MovieView) {
         when (movie.type) {
             TYPE_FILME -> {
-                getDetailFilme(movie.id)
-                getFilmesSimilares(movie.id)
+                getDetailMovie(TYPE_FILME, movie.id)
+                getSimilarMovies(TYPE_FILME, movie.id)
             }
             TYPE_SERIE -> {
-                getDetailSerie(movie.id)
-                getSeriesSimilares(movie.id)
+                getDetailMovie(TYPE_SERIE, movie.id)
+                getSimilarMovies(TYPE_SERIE, movie.id)
             }
             else -> {
                 // sem impl
             }
         }
     }
+    // Endregion
 
-    /**
-     * Região da busca pelos detalhes de uma Serie.
-     */
-    private fun getDetailSerie(serieId: Int) = viewModelScope.launch {
-        val resourceState = getSeriesUseCase.getDetailSerie(serieId = serieId)
-        _multiMovieDetail.value = safeStateGetDetailSerie(resourceState)
-    }
-
-    private fun safeStateGetDetailSerie(resourceState: ResourceState<SerieDomain>):
-            ResourceState<MultiMovie> {
-        if (resourceState.data != null) {
-            val filmeView = serieViewMapper.mapFromDomain(resourceState.data!!)
-            val multiMovie = multiMovieMapperSerie.mapFromDomain(filmeView)
-            return ResourceState.Success(multiMovie)
-        }
-        return ResourceState.Error(cod = resourceState.cod, message = resourceState.message)
-    }
-
-    /**
-     * Região dos series similares.
-     * Foi optado por fazer as buscas de filmes e series similares de forma separa. Isso para que
-     * não fosse necessário modificar os models esperados pelos adapters das recycler view.
-     */
-    private val _listSeriesSimilares =
-        MutableStateFlow<ResourceState<List<SerieView>>>(ResourceState.Loading())
-    val listSeriesSimilares: StateFlow<ResourceState<List<SerieView>>> = _listSeriesSimilares
-
-    fun getSeriesSimilares(serieId: Int) = viewModelScope.launch {
-        val resourceState = getSerisSimilaresUseCase.getSeriesSimilares(serieId = serieId)
-        _listSeriesSimilares.value = safeStateGetSeries(resourceState)
-    }
-
-    private fun safeStateGetSeries(resourceState: ResourceState<List<SerieDomain>>):
-            ResourceState<List<SerieView>> {
-        if (resourceState.data != null) {
-            val listView = serieViewMapper.mapToDomainNonNull(resourceState.data!!)
-            return ResourceState.Success(listView)
-        }
-        return ResourceState.Error(cod = resourceState.cod, message = resourceState.message)
-    }
-
-    /**
-     * Região da busca pelos detalhes de um filme.
-     */
-    private fun getDetailFilme(filmeId: Int) = viewModelScope.launch {
-        val resourceState = getFilmesUseCase.getDetailFilme(filmeId = filmeId)
+    // Region get details
+    private fun getDetailMovie(type: String, movieId: Int) = viewModelScope.launch {
+        val resourceState = getDetailMovieUseCase.getDetailMovie(type = type, movieId = movieId)
         _multiMovieDetail.value = safeStateGetDetailFilme(resourceState)
     }
 
-    private fun safeStateGetDetailFilme(resourceState: ResourceState<FilmeDomain>):
-            ResourceState<MultiMovie> {
+    private fun safeStateGetDetailFilme(resourceState: ResourceState<MovieDomain>):
+            ResourceState<MovieView> {
         if (resourceState.data != null) {
-            val filmeView = filmeViewMapper.mapFromDomain(resourceState.data!!)
-            val multiMovie = multiMovieMapperFilme.mapFromDomain(filmeView)
-            return ResourceState.Success(multiMovie)
+            val movieView = mapper.mapFromDomain(resourceState.data!!)
+            return ResourceState.Success(movieView)
         }
         return ResourceState.Error(cod = resourceState.cod, message = resourceState.message)
     }
+    // Endregion
 
-    /**
-     * Região dos filmes similares.
-     * Foi optado por fazer as buscas de filmes e series similares de forma separa. Isso para que
-     * não fosse necessário modificar os models esperados pelos adapters das recycler view.
-     */
-    private val _listFilmesSimilares =
-        MutableStateFlow<ResourceState<List<FilmeView>>>(ResourceState.Loading())
-    val listFilmesSimilares: StateFlow<ResourceState<List<FilmeView>>> = _listFilmesSimilares
-
-    fun getFilmesSimilares(filmeId: Int) = viewModelScope.launch {
-        val resourceState = getFilmesSimilaresUseCase.getFilmesSimilares(filmeId = filmeId)
-        _listFilmesSimilares.value = safeStateGetFilmes(resourceState)
+    // Region get similar movies
+    fun getSimilarMovies(type: String, movieId: Int) = viewModelScope.launch {
+        val resourceState = getSimilarMoviesUseCase.getSimilarMovies(type = type, movieId = movieId)
+        _listSimilares.value = safeStateGetFilmes(resourceState)
     }
 
-    private fun safeStateGetFilmes(resourceState: ResourceState<List<FilmeDomain>>):
-            ResourceState<List<FilmeView>> {
+    private fun safeStateGetFilmes(resourceState: ResourceState<List<MovieDomain>>):
+            ResourceState<List<MovieView>> {
         if (resourceState.data != null) {
-            val listView = filmeViewMapper.mapToDomainNonNull(resourceState.data!!)
+            val listView = mapper.mapToDomainNonNull(resourceState.data!!)
             return ResourceState.Success(listView)
         }
         return ResourceState.Error(cod = resourceState.cod, message = resourceState.message)
     }
+    // Endregion
 }

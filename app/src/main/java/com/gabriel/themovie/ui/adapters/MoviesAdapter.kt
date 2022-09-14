@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.gabriel.themovie.databinding.ItemPesquisaBinding
-import com.gabriel.themovie.model.multiMovie.model.MultiMovie
+import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.util.constants.ConstantsView.BASE_URL_IMAGES
 
 class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
@@ -15,20 +15,20 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
     inner class MoviesViewHolder(val binding: ItemPesquisaBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    private val differConfig = object : DiffUtil.ItemCallback<MultiMovie>() {
-        override fun areItemsTheSame(oldItem: MultiMovie, newItem: MultiMovie): Boolean {
+    private val differConfig = object : DiffUtil.ItemCallback<MovieView>() {
+        override fun areItemsTheSame(oldItem: MovieView, newItem: MovieView): Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
 
-        override fun areContentsTheSame(oldItem: MultiMovie, newItem: MultiMovie): Boolean {
-            return  oldItem.id == newItem.id &&
+        override fun areContentsTheSame(oldItem: MovieView, newItem: MovieView): Boolean {
+            return oldItem.id == newItem.id &&
                     oldItem.title == newItem.title
         }
     }
 
     private val differ = AsyncListDiffer(this, differConfig)
 
-    var movieList: List<MultiMovie>
+    var movieList: List<MovieView>
         get() = differ.currentList
         set(value) = differ.submitList(value)
 
@@ -45,7 +45,7 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
         holder.binding.apply {
             itemMovieImage.load("${BASE_URL_IMAGES}${movie.banner}")
             itemMovieTitle.text = movie.title
-            cbItemMovieFavorito.isChecked = movie.favorito
+            cbItemMovieFavorito.isChecked = movie.favorito!!
         }
 
         holder.itemView.setOnClickListener {
@@ -55,9 +55,9 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
         }
     }
 
-    fun setMovieOnClickListener(listener: (MultiMovie) -> Unit) {
+    fun setMovieOnClickListener(listener: (MovieView) -> Unit) {
         onItemClickListener = listener
     }
 
-    private var onItemClickListener: ((MultiMovie) -> Unit)? = null
+    private var onItemClickListener: ((MovieView) -> Unit)? = null
 }
