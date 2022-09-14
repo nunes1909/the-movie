@@ -43,7 +43,7 @@ fun getRemoteModules() = module {
     factory { GeneroRemoteMapper() }
 
     // Region Movie modules
-    factory { FilmeDetailResponseToDataMapper() }
+    factory { FilmeDetailResponseToDataMapper(mapper = get()) }
     factory { FilmeResponseToDataMapper() }
     factory { SerieDetailResponseToDataMapper() }
     factory { SerieResponseToDataMapper() }

@@ -32,7 +32,7 @@ fun getDataModules() = module {
     factory { GeneroDataMapper() }
 
     // Region Movie modules
-    factory { MovieDataMapper() }
+    factory { MovieDataMapper(mapper = get()) }
 
     factory<GetAllFilmesDataSource> { get() }
     factory<GetDetailFilmeDataSource> { get() }

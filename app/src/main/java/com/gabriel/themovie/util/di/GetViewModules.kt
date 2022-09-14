@@ -11,7 +11,7 @@ import org.koin.dsl.module
 fun getViewModules() = module {
     // Mappers
     factory { GeneroViewMapper() }
-    factory { MovieViewMapper() }
+    factory { MovieViewMapper(mapper = get()) }
 
     // Filmes modules
     viewModel {
