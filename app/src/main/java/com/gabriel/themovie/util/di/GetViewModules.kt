@@ -14,9 +14,29 @@ fun getViewModules() = module {
     factory { MovieViewMapper() }
 
     // Filmes modules
-    viewModel { FilmesViewModel(get(), get(), get()) }
-    viewModel { DetalhesViewModel(get(), get(), get(), get(), get(), get(), get(), get()) }
+    viewModel {
+        FilmesViewModel(
+            getAllMoviesUseCase = get(),
+            getRecentMovieUseCase = get(),
+            mapper = get()
+        )
+    }
 
     // Series modules
-    viewModel { SeriesViewModel(get(), get(), get()) }
+    viewModel {
+        SeriesViewModel(
+            getAllMoviesUseCase = get(),
+            getRecentMovieUseCase = get(),
+            mapper = get()
+        )
+    }
+
+    // Detalhes modules
+    viewModel {
+        DetalhesViewModel(
+            getDetailMovieUseCase = get(),
+            getSimilarMoviesUseCase = get(),
+            mapper = get()
+        )
+    }
 }
