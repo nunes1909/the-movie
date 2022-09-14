@@ -1,4 +1,4 @@
-package com.gabriel.themovie.ui.views.detalhes
+package com.gabriel.themovie.ui.view.detalhes
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

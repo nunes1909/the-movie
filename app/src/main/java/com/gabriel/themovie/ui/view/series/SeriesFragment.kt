@@ -1,4 +1,4 @@
-package com.gabriel.themovie.ui.views.series
+package com.gabriel.themovie.ui.view.series
 
 import android.os.Bundle
 import android.view.LayoutInflater
