@@ -15,10 +15,11 @@ import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.ui.adapters.MovieAdapter
 import com.gabriel.themovie.util.base.BaseFragment
 import com.gabriel.themovie.util.constants.ConstantsView.BASE_URL_IMAGES
+import com.gabriel.themovie.util.constants.ConstantsView.COLUNS
 import com.gabriel.themovie.util.constants.ConstantsView.EXIBE_ELLIPSIZE
 import com.gabriel.themovie.util.constants.ConstantsView.LIMIT_DESCRIPTION
 import com.gabriel.themovie.util.constants.ConstantsView.LIMIT_NOTA
-import com.gabriel.themovie.util.constants.ConstantsView.N_EXIBE_ELLIPSIZE
+import com.gabriel.themovie.util.constants.ConstantsView.NOT_EXIBE_ELLIPSIZE
 import com.gabriel.themovie.util.extensions.hide
 import com.gabriel.themovie.util.extensions.limitValue
 import com.gabriel.themovie.util.extensions.show
@@ -42,7 +43,7 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
 
     private fun configuraRecyclerView() = with(binding) {
         rvDetalhesSemelhantes.adapter = movieAdapter
-        rvDetalhesSemelhantes.layoutManager = GridLayoutManager(requireContext(), 4)
+        rvDetalhesSemelhantes.layoutManager = GridLayoutManager(requireContext(), COLUNS)
     }
 
     private fun getDetails() {
@@ -141,7 +142,7 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
 
     private fun carregaNota(movieView: MovieView) {
         binding.detalhesNota.text =
-            movieView.nota.toString().limitValue(LIMIT_NOTA, N_EXIBE_ELLIPSIZE)
+            movieView.nota.toString().limitValue(LIMIT_NOTA, NOT_EXIBE_ELLIPSIZE)
     }
 
     private fun carregaTitle(movieView: MovieView) {

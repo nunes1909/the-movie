@@ -7,5 +7,6 @@
     <string name="title_menu_pesquisar">Pesquisar</string>
     <string name="title_menu_favoritos">Favoritos</string>
     <string name="um_erro_ocorreu">Um erro ocorreu.</string>
+    <string name="salvo_favoritos">Salvo nos favoritos.</string>
     <!-- endregion -->
 </resources>

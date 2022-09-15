@@ -18,15 +18,21 @@ class FilmesViewModel(
     private val getTrendingMovieUseCase: GetTrendingMovieUseCase,
     private val mapper: MovieViewMapper
 ) : ViewModel() {
-
+    // Region StateFlow
     private val _list = MutableStateFlow<ResourceState<List<MovieView>>>(ResourceState.Loading())
     val list: StateFlow<ResourceState<List<MovieView>>> = _list
+
+    private val _trending =
+        MutableStateFlow<ResourceState<List<MovieView>>>(ResourceState.Loading())
+    val trending: StateFlow<ResourceState<List<MovieView>>> = _trending
+    // Endregion
 
     init {
         getFilmes()
         getTranding()
     }
 
+    // Region get filmes populares
     private fun getFilmes() = viewModelScope.launch {
         val resourceState = getAllMoviesUseCase.getAllMovies(TYPE_FILME)
         _list.value = safeStateGetFilmes(resourceState)
@@ -40,11 +46,9 @@ class FilmesViewModel(
         }
         return ResourceState.Error(cod = resourceState.cod, message = resourceState.message)
     }
+    // Endregion
 
-    private val _trending =
-        MutableStateFlow<ResourceState<List<MovieView>>>(ResourceState.Loading())
-    val trending: StateFlow<ResourceState<List<MovieView>>> = _trending
-
+    // Region get filmes tendência
     private fun getTranding() = viewModelScope.launch {
         val resourceState = getTrendingMovieUseCase.getTrendingMovie(TYPE_FILME)
         _trending.value = safeStateTrandingFilmes(resourceState)
@@ -58,4 +62,5 @@ class FilmesViewModel(
         }
         return ResourceState.Error(cod = resourceState.cod, message = resourceState.message)
     }
+    // Endregion
 }

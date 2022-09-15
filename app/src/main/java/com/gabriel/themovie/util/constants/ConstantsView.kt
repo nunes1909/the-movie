@@ -8,9 +8,12 @@ object ConstantsView {
     const val TYPE_FILME = "movie"
     const val TYPE_SERIE = "tv"
 
+    // Recycler types
+    const val COLUNS = 4
+
     // Details
     const val LIMIT_NOTA = 3
     const val LIMIT_DESCRIPTION = 200
     const val EXIBE_ELLIPSIZE = true
-    const val N_EXIBE_ELLIPSIZE = false
+    const val NOT_EXIBE_ELLIPSIZE = false
 }
