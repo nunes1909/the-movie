@@ -21,7 +21,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/imageCartaz"
+                android:id="@+id/image_banner"
                 android:layout_width="0dp"
                 android:layout_height="250dp"
                 android:scaleType="centerCrop"
@@ -38,10 +38,10 @@
                 app:cardCornerRadius="12dp"
                 app:cardElevation="12dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageCartaz">
+                app:layout_constraintTop_toBottomOf="@id/image_banner">
 
                 <ImageView
-                    android:id="@+id/imageBanner"
+                    android:id="@+id/image_cartaz"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
@@ -60,7 +60,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/detalhesFavoritar"
                 app:layout_constraintStart_toEndOf="@id/detalhesContainerBanner"
-                app:layout_constraintTop_toBottomOf="@id/imageCartaz"
+                app:layout_constraintTop_toBottomOf="@id/image_banner"
                 tools:text="Título de Teste" />
 
             <CheckBox

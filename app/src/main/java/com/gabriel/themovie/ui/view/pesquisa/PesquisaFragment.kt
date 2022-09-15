@@ -1,4 +1,4 @@
-package com.gabriel.themovie.ui.views.pesquisa
+package com.gabriel.themovie.ui.view.pesquisa
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

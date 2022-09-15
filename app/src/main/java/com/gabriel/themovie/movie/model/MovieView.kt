@@ -7,7 +7,7 @@ data class MovieView(
     val id: Int,
     val title: String,
     val description: String? = null,
-    val type: String? = null,
+    var type: String? = null,
     val nota: Double? = null,
     val generos: List<GeneroView>? = null,
     val favorito: Boolean? = false,

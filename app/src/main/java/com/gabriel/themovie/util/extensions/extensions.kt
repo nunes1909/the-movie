@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 import coil.load
 import com.gabriel.themovie.R
 

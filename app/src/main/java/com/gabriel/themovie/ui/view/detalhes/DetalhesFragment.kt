@@ -1,4 +1,4 @@
-package com.gabriel.themovie.ui.views.detalhes
+package com.gabriel.themovie.ui.view.detalhes
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -34,12 +34,12 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         configuraRecyclerView()
-        buscaDetails()
-        multiMovieObserver()
-        filmesSimilaresObserver()
+        getDetails()
+        movieObserver()
+        similarObserver()
     }
 
-    private fun filmesSimilaresObserver() = lifecycleScope.launch {
+    private fun similarObserver() = lifecycleScope.launch {
         viewModel.listSimilares.collect { resources ->
             when (resources) {
                 is ResourceState.Success -> {
@@ -64,12 +64,12 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
         rvDetalhesSemelhantes.layoutManager = GridLayoutManager(requireContext(), 4)
     }
 
-    private fun buscaDetails() {
+    private fun getDetails() {
         viewModel.getDetail(args.movieView)
     }
 
-    private fun multiMovieObserver() = lifecycleScope.launch {
-        viewModel.multiMovieDetail.collect { resource ->
+    private fun movieObserver() = lifecycleScope.launch {
+        viewModel.movieDetail.collect { resource ->
             when (resource) {
                 is ResourceState.Success -> {
                     resource.data?.let { result ->
@@ -98,11 +98,15 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
     }
 
     private fun carregaGeneros(movieView: MovieView) {
-        if (movieView.generos != null) {
-            resolveGeneroUm(movieView = movieView)
-        }
-        if (movieView.generos!!.size >= 2) {
-            resolveGeneroDois(movieView = movieView)
+        when (movieView.generos?.size) {
+            1 -> {
+                resolveGeneroUm(movieView = movieView)
+            }
+            2 -> {
+                resolveGeneroUm(movieView = movieView)
+                resolveGeneroDois(movieView = movieView)
+            }
+            else -> {}
         }
     }
 
@@ -131,8 +135,8 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
     }
 
     private fun carregaImagens(filmeView: MovieView) {
-        binding.imageCartaz.load("${BASE_URL_IMAGES}${filmeView.cartaz}")
         binding.imageBanner.load("${BASE_URL_IMAGES}${filmeView.banner}")
+        binding.imageCartaz.load("${BASE_URL_IMAGES}${filmeView.cartaz}")
     }
 
     override fun getViewBinding(

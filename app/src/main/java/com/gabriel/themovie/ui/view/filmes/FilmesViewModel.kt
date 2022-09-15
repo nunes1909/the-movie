@@ -1,4 +1,4 @@
-package com.gabriel.themovie.ui.views.series
+package com.gabriel.themovie.ui.view.filmes
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,12 +8,12 @@ import com.gabriel.domain.movie.useCase.GetRecentMovieUseCase
 import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.themovie.movie.mapper.MovieViewMapper
 import com.gabriel.themovie.movie.model.MovieView
-import com.gabriel.themovie.util.constants.ConstantsView.TYPE_SERIE
+import com.gabriel.themovie.util.constants.ConstantsView.TYPE_FILME
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class SeriesViewModel(
+class FilmesViewModel(
     private val getAllMoviesUseCase: GetAllMoviesUseCase,
     private val getRecentMovieUseCase: GetRecentMovieUseCase,
     private val mapper: MovieViewMapper
@@ -23,30 +23,29 @@ class SeriesViewModel(
     val list: StateFlow<ResourceState<List<MovieView>>> = _list
 
     init {
-        getSeries()
+        getFilmes()
         getTranding()
     }
 
-    private fun getSeries() = viewModelScope.launch {
-        val resource = getAllMoviesUseCase.getAllMovies(TYPE_SERIE)
-        _list.value = safeStateGetSeries(resource)
+    private fun getFilmes() = viewModelScope.launch {
+        val resourceState = getAllMoviesUseCase.getAllMovies(TYPE_FILME)
+        _list.value = safeStateGetFilmes(resourceState)
     }
 
-    private fun safeStateGetSeries(resource: ResourceState<List<MovieDomain>>):
+    private fun safeStateGetFilmes(resourceState: ResourceState<List<MovieDomain>>):
             ResourceState<List<MovieView>> {
-        if (resource.data != null) {
-            val listView = mapper.mapToDomainNonNull(resource.data!!)
+        if (resourceState.data != null) {
+            val listView = mapper.mapToDomainNonNull(resourceState.data!!)
             return ResourceState.Success(listView)
         }
-        return ResourceState.Error(cod = resource.cod, message = resource.message)
+        return ResourceState.Error(cod = resourceState.cod, message = resourceState.message)
     }
 
-    private val _recent =
-        MutableStateFlow<ResourceState<MovieView>>(ResourceState.Loading())
+    private val _recent = MutableStateFlow<ResourceState<MovieView>>(ResourceState.Loading())
     val recent: StateFlow<ResourceState<MovieView>> = _recent
 
     fun getTranding() = viewModelScope.launch {
-            val resourceState = getRecentMovieUseCase.getRecentMovie(TYPE_SERIE)
+            val resourceState = getRecentMovieUseCase.getRecentMovie(TYPE_FILME)
             _recent.value = safeStateTrandingFilmes(resourceState)
         }
 
