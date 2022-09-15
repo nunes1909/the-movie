@@ -10,11 +10,9 @@ import com.gabriel.themovie.movie.mapper.MovieViewMapper
 import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.util.constants.ConstantsView.TYPE_FILME
 import com.gabriel.themovie.util.constants.ConstantsView.TYPE_SERIE
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class DetalhesViewModel(
     private val getDetailMovieUseCase: GetDetailMovieUseCase,
@@ -31,7 +29,7 @@ class DetalhesViewModel(
     val listSimilares: StateFlow<ResourceState<List<MovieView>>> = _listSimilares
     // Endregion
 
-    // Region get fragment
+    // Region get movie
     fun getDetail(movie: MovieView) {
         when (movie.type) {
             TYPE_FILME -> {
@@ -52,13 +50,13 @@ class DetalhesViewModel(
     // Region get details
     private fun getDetailMovie(type: String, movieId: Int) = viewModelScope.launch {
         val resourceState = getDetailMovieUseCase.getDetailMovie(type = type, movieId = movieId)
-        _movieDetail.value = safeStateGetDetailFilme(resourceState)
+        _movieDetail.value = safeStateGetDetailMovie(resourceState)
     }
 
-    private fun safeStateGetDetailFilme(resourceState: ResourceState<MovieDomain>):
+    private fun safeStateGetDetailMovie(resourceState: ResourceState<MovieDomain>):
             ResourceState<MovieView> {
         if (resourceState.data != null) {
-            val movieView = mapper.mapFromDomain(resourceState.data!!)
+            val movieView = mapper.mapToView(resourceState.data!!)
             return ResourceState.Success(movieView)
         }
         return ResourceState.Error(cod = resourceState.cod, message = resourceState.message)
@@ -68,13 +66,13 @@ class DetalhesViewModel(
     // Region get similar movies
     fun getSimilarMovies(type: String, movieId: Int) = viewModelScope.launch {
         val resourceState = getSimilarMoviesUseCase.getSimilarMovies(type = type, movieId = movieId)
-        _listSimilares.value = safeStateGetFilmes(resourceState)
+        _listSimilares.value = safeStateGetMovies(resourceState)
     }
 
-    private fun safeStateGetFilmes(resourceState: ResourceState<List<MovieDomain>>):
+    private fun safeStateGetMovies(resourceState: ResourceState<List<MovieDomain>>):
             ResourceState<List<MovieView>> {
         if (resourceState.data != null) {
-            val listView = mapper.mapToDomainNonNull(resourceState.data!!)
+            val listView = mapper.mapToViewNonNull(resourceState.data!!)
             return ResourceState.Success(listView)
         }
         return ResourceState.Error(cod = resourceState.cod, message = resourceState.message)

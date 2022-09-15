@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -12,9 +13,10 @@ import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.themovie.R
 import com.gabriel.themovie.databinding.FragmentSeriesBinding
 import com.gabriel.themovie.movie.model.MovieView
-import com.gabriel.themovie.ui.adapters.FilmeAdapter
+import com.gabriel.themovie.ui.adapters.MovieAdapter
 import com.gabriel.themovie.util.base.BaseFragment
 import com.gabriel.themovie.util.constants.ConstantsView
+import com.gabriel.themovie.util.constants.ConstantsView.RV_COLUNS_DEFAULT
 import com.gabriel.themovie.util.constants.ConstantsView.TYPE_SERIE
 import com.gabriel.themovie.util.extensions.hide
 import com.gabriel.themovie.util.extensions.show
@@ -26,7 +28,7 @@ import timber.log.Timber
 class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
 
     override val viewModel: SeriesViewModel by viewModel()
-    private val serieAdapter by lazy { FilmeAdapter() }
+    private val serieAdapter by lazy { MovieAdapter() }
     lateinit var globalMultiMovie: MovieView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,15 +40,116 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
         configuraClickSeriePrincipal()
     }
 
+    private fun configuraRecyclerView() = with(binding) {
+        rvSerie.adapter = serieAdapter
+        rvSerie.layoutManager = GridLayoutManager(requireContext(), RV_COLUNS_DEFAULT)
+    }
+
+    private fun configuraClickAdapter() {
+        serieAdapter.setFilmeOnClickListener { movieView ->
+            actionGoDetails(entity = movieView)
+        }
+    }
+
+    private fun observerListaSeries() = lifecycleScope.launch {
+        viewModel.list.collect { resources ->
+            when (resources) {
+                is ResourceState.Success -> {
+                    exibeSeriesPopulares(resources)
+                    ocultaProgressBar(binding.progressSerie)
+                }
+                is ResourceState.Error -> {
+                    ocultaProgressBar(binding.progressSerie)
+                    toast("Um erro ocorreu: ${resources.message}")
+                    Timber.tag("SeriesFragment/observerListaSeries")
+                        .e("Error -> ${resources.message} Cod -> ${resources.cod}")
+                }
+                is ResourceState.Loading -> {
+                    exibeProgressBar(binding.progressSerie)
+                }
+                else -> {}
+            }
+        }
+    }
+
+    private fun exibeSeriesPopulares(resources: ResourceState<List<MovieView>>) {
+        resources.data?.let { results ->
+            serieAdapter.moviesList = results
+        }
+    }
+
+    private fun observerSeriePrincipal() = lifecycleScope.launch {
+        viewModel.trending.collect { resource ->
+            when (resource) {
+                is ResourceState.Success -> {
+                    ocultaProgressBar(binding.progressSerie)
+                    preencheSeriePrincipal(resource)
+                }
+                is ResourceState.Error -> {
+                    toast(getString(R.string.um_erro_ocorreu))
+                    ocultaProgressBar(binding.progressSerie)
+                    exibeImagemDefault(binding.serieBannerPrincipal)
+
+                    Timber.tag("FilmesFragment/observerFilmePrincipal")
+                        .e("Error -> ${resource.message} Cod -> ${resource.cod}")
+                }
+                is ResourceState.Loading -> {
+                    exibeProgressBar(binding.progressSerie)
+                    exibeImagemDefault(binding.serieBannerPrincipal)
+                }
+                else -> {}
+            }
+        }
+    }
+
+    private fun preencheSeriePrincipal(resource: ResourceState<List<MovieView>>) {
+        resource.data?.let { results ->
+            val movie = buscaSerieMaisVotada(results)
+            carregaImagem(movie)
+            carregaTitulo(movie)
+            inicializaGlobalMultiMovie(movie)
+        }
+    }
+
+    private fun buscaSerieMaisVotada(results: List<MovieView>): MovieView {
+        return results.sortedByDescending { it.nota }.first()
+    }
+
+    private fun carregaImagem(movie: MovieView) {
+        binding.serieBannerPrincipal
+            .load("${ConstantsView.BASE_URL_IMAGES}${movie.banner}")
+    }
+
+    private fun carregaTitulo(movie: MovieView) {
+        binding.serieTituloPrincipal.text = movie.title
+    }
+
+    private fun exibeImagemDefault(image: ImageView) {
+        image.load(androidx.appcompat.R.color.material_grey_600)
+    }
+
+    private fun ocultaProgressBar(progress: View) {
+        progress.hide()
+    }
+
+    private fun exibeProgressBar(progress: View) {
+        progress.show()
+    }
+
+    /**
+     * Inicializando um objeto global para utilizar ao abrir os detalhes do movie principal.
+     * Isso pois eu não tenho acesso ao [objeto] ao clicar no movie principal.
+     *
+     * @param globalMovie é o objeto global.
+     * @param movieView é o objeto inicializado.
+     */
+    private fun inicializaGlobalMultiMovie(movieView: MovieView) {
+        globalMultiMovie = movieView
+    }
+
     private fun configuraClickSeriePrincipal() = with(binding) {
         actionSeriePrincipalGoDetails()
         actionSeriePrincipalSave()
-    }
-
-    private fun FragmentSeriesBinding.actionSeriePrincipalSave() {
-        buttonAddFav.btnAddFav.setOnClickListener {
-            // implementar save
-        }
     }
 
     private fun FragmentSeriesBinding.actionSeriePrincipalGoDetails() {
@@ -55,81 +158,23 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
         }
     }
 
-    private fun configuraClickAdapter() {
-        serieAdapter.setFilmeOnClickListener { movieView ->
-            actionGoDetails(movieView)
+    private fun FragmentSeriesBinding.actionSeriePrincipalSave() {
+        buttonAddFav.btnAddFav.setOnClickListener {
+            toast(getString(R.string.salvo_favoritos))
+            // implementar save dao
         }
     }
 
     /**
-     * Metodo universal com a ação de ir para a feature de Detalhes.
+     * Função global de acesso a tela de Detalhes.
      *
-     * @param entity é a entidade solicitada pela feature Detalhes.
-     * @param action é a ação do Navigation para mudar de tela.
+     * @param entity é o argumento esperado pela tela de Detalhes.
      */
     private fun actionGoDetails(entity: MovieView) {
         entity.type = TYPE_SERIE
         val action = SeriesFragmentDirections
             .acaoSeriesParaDetalhes(entity)
         findNavController().navigate(action)
-    }
-
-    private fun observerSeriePrincipal() = lifecycleScope.launch {
-        viewModel.trending.collect { resource ->
-            when (resource) {
-                is ResourceState.Success -> {
-                    resource.data?.let { results ->
-                        val movie = results.sortedBy { it.nota } [0]
-                        binding.serieBannerPrincipal
-                            .load("${ConstantsView.BASE_URL_IMAGES}${movie.banner}")
-
-                        binding.serieTituloPrincipal.text = movie.title
-                        inicializaGlobalMultiMovie(movie)
-                    }
-                }
-                is ResourceState.Error -> {
-                    binding.serieBannerPrincipal.load(R.drawable.erro)
-                    Timber.tag("FilmesFragment/observerFilmePrincipal")
-                        .e("Error -> ${resource.message} Cod -> ${resource.cod}")
-                }
-                is ResourceState.Loading -> {
-                    binding.serieBannerPrincipal.load(androidx.appcompat.R.color.material_grey_600)
-                }
-                else -> {}
-            }
-        }
-    }
-
-    private fun inicializaGlobalMultiMovie(movieView: MovieView) {
-        globalMultiMovie = movieView
-    }
-
-    private fun observerListaSeries() = lifecycleScope.launch {
-        viewModel.list.collect { resources ->
-            when (resources) {
-                is ResourceState.Success -> {
-                    resources.data?.let { results ->
-                        binding.progressSerie.hide()
-                        serieAdapter.moviesList = results
-                    }
-                }
-                is ResourceState.Error -> {
-                    binding.progressSerie.hide()
-                    toast("Um erro ocorreu: ${resources.message}")
-                    Timber.tag("SeriesFragment/observerListaSeries")
-                        .e("Error -> ${resources.message} Cod -> ${resources.cod}")
-                }
-                is ResourceState.Loading -> {
-                    binding.progressSerie.show()
-                }
-                else -> {}
-            }
-        }
-    }
-
-    private fun configuraRecyclerView() = with(binding) {
-        rvSerie.adapter = serieAdapter
-        rvSerie.layoutManager = GridLayoutManager(requireContext(), 4)
     }
 
     override fun getViewBinding(

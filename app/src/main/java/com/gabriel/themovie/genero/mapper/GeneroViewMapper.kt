@@ -12,7 +12,7 @@ class GeneroViewMapper : ViewMapper<GeneroView, GeneroDomain> {
         )
     }
 
-    override fun mapFromDomain(type: GeneroDomain): GeneroView {
+    override fun mapToView(type: GeneroDomain): GeneroView {
         return GeneroView(
             id = type.id,
             name = type.name

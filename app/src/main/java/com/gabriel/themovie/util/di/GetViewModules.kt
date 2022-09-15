@@ -9,11 +9,12 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 fun getViewModules() = module {
-    // Mappers
+    // Region Mappers
     factory { GeneroViewMapper() }
     factory { MovieViewMapper(mapper = get()) }
+    // Endregion
 
-    // Filmes modules
+    // Region ViewModels
     viewModel {
         FilmesViewModel(
             getAllMoviesUseCase = get(),
@@ -22,7 +23,6 @@ fun getViewModules() = module {
         )
     }
 
-    // Series modules
     viewModel {
         SeriesViewModel(
             getAllMoviesUseCase = get(),
@@ -31,7 +31,6 @@ fun getViewModules() = module {
         )
     }
 
-    // Detalhes modules
     viewModel {
         DetalhesViewModel(
             getDetailMovieUseCase = get(),
@@ -39,4 +38,5 @@ fun getViewModules() = module {
             mapper = get()
         )
     }
+    // Endregion
 }
