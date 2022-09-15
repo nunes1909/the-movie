@@ -9,7 +9,7 @@ object ConstantsView {
     const val TYPE_SERIE = "tv"
 
     // Recycler types
-    const val COLUNS = 4
+    const val RV_COLUNS_DEFAULT = 4
 
     // Details
     const val LIMIT_NOTA = 3

@@ -16,7 +16,7 @@ import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.ui.adapters.MovieAdapter
 import com.gabriel.themovie.util.base.BaseFragment
 import com.gabriel.themovie.util.constants.ConstantsView
-import com.gabriel.themovie.util.constants.ConstantsView.COLUNS
+import com.gabriel.themovie.util.constants.ConstantsView.RV_COLUNS_DEFAULT
 import com.gabriel.themovie.util.constants.ConstantsView.TYPE_FILME
 import com.gabriel.themovie.util.extensions.hide
 import com.gabriel.themovie.util.extensions.show
@@ -42,7 +42,7 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
 
     private fun configuraRecyclerView() = with(binding) {
         rvFilme.adapter = movieAdapter
-        rvFilme.layoutManager = GridLayoutManager(requireContext(), COLUNS)
+        rvFilme.layoutManager = GridLayoutManager(requireContext(), RV_COLUNS_DEFAULT)
     }
 
     private fun configuraClickAdapter() {
@@ -82,6 +82,7 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
         viewModel.trending.collect { resource ->
             when (resource) {
                 is ResourceState.Success -> {
+                    ocultaProgressBar(binding.progressFilme)
                     preencheFilmePrincipal(resource)
                 }
                 is ResourceState.Error -> {
@@ -93,6 +94,7 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
                         .e("Error -> ${resource.message} Cod -> ${resource.cod}")
                 }
                 is ResourceState.Loading -> {
+                    exibeProgressBar(binding.progressFilme)
                     exibeImagemDefault(binding.bannerFilmePrincipal)
                 }
                 else -> {}

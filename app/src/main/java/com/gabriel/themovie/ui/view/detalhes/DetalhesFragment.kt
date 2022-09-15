@@ -15,7 +15,7 @@ import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.ui.adapters.MovieAdapter
 import com.gabriel.themovie.util.base.BaseFragment
 import com.gabriel.themovie.util.constants.ConstantsView.BASE_URL_IMAGES
-import com.gabriel.themovie.util.constants.ConstantsView.COLUNS
+import com.gabriel.themovie.util.constants.ConstantsView.RV_COLUNS_DEFAULT
 import com.gabriel.themovie.util.constants.ConstantsView.EXIBE_ELLIPSIZE
 import com.gabriel.themovie.util.constants.ConstantsView.LIMIT_DESCRIPTION
 import com.gabriel.themovie.util.constants.ConstantsView.LIMIT_NOTA
@@ -43,7 +43,7 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
 
     private fun configuraRecyclerView() = with(binding) {
         rvDetalhesSemelhantes.adapter = movieAdapter
-        rvDetalhesSemelhantes.layoutManager = GridLayoutManager(requireContext(), COLUNS)
+        rvDetalhesSemelhantes.layoutManager = GridLayoutManager(requireContext(), RV_COLUNS_DEFAULT)
     }
 
     private fun getDetails() {
