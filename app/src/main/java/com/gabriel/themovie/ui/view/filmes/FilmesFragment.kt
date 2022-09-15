@@ -12,7 +12,7 @@ import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.themovie.R
 import com.gabriel.themovie.databinding.FragmentFilmesBinding
 import com.gabriel.themovie.movie.model.MovieView
-import com.gabriel.themovie.ui.adapters.FilmeAdapter
+import com.gabriel.themovie.ui.adapters.MovieAdapter
 import com.gabriel.themovie.util.base.BaseFragment
 import com.gabriel.themovie.util.constants.ConstantsView
 import com.gabriel.themovie.util.constants.ConstantsView.TYPE_FILME
@@ -27,7 +27,7 @@ import timber.log.Timber
 class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
 
     override val viewModel: FilmesViewModel by viewModel()
-    private val filmeAdapter by lazy { FilmeAdapter() }
+    private val movieAdapter by lazy { MovieAdapter() }
     lateinit var globalMultiMovie: MovieView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,13 +41,13 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
 
     private fun configuraRecyclerView() = with(binding) {
         rvFilme.apply {
-            adapter = filmeAdapter
+            adapter = movieAdapter
             layoutManager = GridLayoutManager(requireContext(), 4)
         }
     }
 
     private fun configuraClickAdapter() {
-        filmeAdapter.setFilmeOnClickListener { movieView ->
+        movieAdapter.setFilmeOnClickListener { movieView ->
             actionGoDetails(entity = movieView)
         }
     }
@@ -71,7 +71,7 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
                 is ResourceState.Success -> {
                     resource.data?.let { results ->
                         binding.progressFilme.hide()
-                        filmeAdapter.moviesList = results
+                        movieAdapter.moviesList = results
                     }
                 }
                 is ResourceState.Error -> {

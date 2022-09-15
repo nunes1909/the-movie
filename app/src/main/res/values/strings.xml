@@ -6,5 +6,6 @@
     <string name="title_menu_series">Séries</string>
     <string name="title_menu_pesquisar">Pesquisar</string>
     <string name="title_menu_favoritos">Favoritos</string>
+    <string name="um_erro_ocorreu">Um erro ocorreu.</string>
     <!-- endregion -->
 </resources>

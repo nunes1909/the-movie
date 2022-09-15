@@ -6,13 +6,14 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.gabriel.themovie.databinding.ItemPesquisaBinding
+import com.gabriel.themovie.databinding.ItemListBinding
 import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.util.constants.ConstantsView.BASE_URL_IMAGES
+import com.gabriel.themovie.util.extensions.limitValue
 
-class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
+class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
-    inner class MoviesViewHolder(val binding: ItemPesquisaBinding) :
+    inner class MovieViewHolder(val binding: ItemListBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     private val differConfig = object : DiffUtil.ItemCallback<MovieView>() {
@@ -22,40 +23,44 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
 
         override fun areContentsTheSame(oldItem: MovieView, newItem: MovieView): Boolean {
             return oldItem.id == newItem.id &&
-                    oldItem.title == newItem.title
+                    oldItem.title == newItem.title &&
+                    oldItem.description == newItem.description &&
+                    oldItem.cartaz == newItem.cartaz &&
+                    oldItem.banner == newItem.banner &&
+                    oldItem.nota == newItem.nota &&
+                    oldItem.favorito == newItem.favorito
         }
     }
 
     private val differ = AsyncListDiffer(this, differConfig)
 
-    var movieList: List<MovieView>
+    var moviesList: List<MovieView>
         get() = differ.currentList
         set(value) = differ.submitList(value)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
-        return MoviesViewHolder(
-            ItemPesquisaBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+    override fun getItemCount(): Int = moviesList.size
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
+        return MovieViewHolder(
+            ItemListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
-    override fun getItemCount(): Int = movieList.size
-
-    override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
-        val movie = movieList[position]
+    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
+        val filme = moviesList[position]
         holder.binding.apply {
-            itemMovieImage.load("${BASE_URL_IMAGES}${movie.banner}")
-            itemMovieTitle.text = movie.title
-            cbItemMovieFavorito.isChecked = movie.favorito!!
+            itemListImage.load("${BASE_URL_IMAGES}${filme.cartaz}")
+            itemListTitle.text = filme.title.limitValue(10, true)
         }
 
         holder.itemView.setOnClickListener {
             onItemClickListener?.let {
-                it(movie)
+                it(filme)
             }
         }
     }
 
-    fun setMovieOnClickListener(listener: (MovieView) -> Unit) {
+    fun setFilmeOnClickListener(listener: (MovieView) -> Unit) {
         onItemClickListener = listener
     }
 
