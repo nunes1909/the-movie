@@ -17,7 +17,7 @@ fun getViewModules() = module {
     viewModel {
         FilmesViewModel(
             getAllMoviesUseCase = get(),
-            getRecentMovieUseCase = get(),
+            getTrendingMovieUseCase = get(),
             mapper = get()
         )
     }
@@ -26,7 +26,7 @@ fun getViewModules() = module {
     viewModel {
         SeriesViewModel(
             getAllMoviesUseCase = get(),
-            getRecentMovieUseCase = get(),
+            getTrendingMovieUseCase = get(),
             mapper = get()
         )
     }

@@ -2,23 +2,17 @@ package com.gabriel.remote.util.di
 
 import com.gabriel.data.movie.dataSource.filme.GetAllFilmesDataSource
 import com.gabriel.data.movie.dataSource.filme.GetDetailFilmeDataSource
-import com.gabriel.data.movie.dataSource.filme.GetRecentFilmeDataSource
+import com.gabriel.data.movie.dataSource.filme.GetTrendingFilmeDataSource
 import com.gabriel.data.movie.dataSource.filme.GetSimilarFilmesDataSource
-import com.gabriel.data.movie.dataSource.serie.GetAllSeriesDataSource
-import com.gabriel.data.movie.dataSource.serie.GetDetailSerieDataSource
 import com.gabriel.data.movie.dataSource.movie.SearchMovieDataSource
-import com.gabriel.data.movie.dataSource.serie.GetRecentSerieDataSource
-import com.gabriel.data.movie.dataSource.serie.GetSimilarSeriesDataSource
+import com.gabriel.data.movie.dataSource.serie.*
 import com.gabriel.remote.genero.mapper.GeneroRemoteMapper
 import com.gabriel.remote.movie.dataSourceImpl.filme.GetAllFilmesDataSourceImpl
 import com.gabriel.remote.movie.dataSourceImpl.filme.GetDetailFilmeDataSourceImpl
-import com.gabriel.remote.movie.dataSourceImpl.filme.GetRecentFilmeDataSourceImpl
+import com.gabriel.remote.movie.dataSourceImpl.filme.GetTrendingFilmeDataSourceImpl
 import com.gabriel.remote.movie.dataSourceImpl.filme.GetSimilarFilmesDataSourceImpl
 import com.gabriel.remote.movie.dataSourceImpl.multi.SearchMovieDataSourceImpl
-import com.gabriel.remote.movie.dataSourceImpl.serie.GetAllSeriesDataSourceImpl
-import com.gabriel.remote.movie.dataSourceImpl.serie.GetDetailSerieDataSourceImpl
-import com.gabriel.remote.movie.dataSourceImpl.serie.GetRecentSerieDataSourceImpl
-import com.gabriel.remote.movie.dataSourceImpl.serie.GetSimilarSeriesDataSourceImpl
+import com.gabriel.remote.movie.dataSourceImpl.serie.*
 import com.gabriel.remote.movie.mapper.filme.FilmeDetailResponseToDataMapper
 import com.gabriel.remote.movie.mapper.filme.FilmeResponseToDataMapper
 import com.gabriel.remote.movie.mapper.multi.MultiRemoteToMovieMapper
@@ -27,6 +21,7 @@ import com.gabriel.remote.movie.mapper.serie.SerieResponseToDataMapper
 import com.gabriel.remote.movie.service.filme.FilmesService
 import com.gabriel.remote.movie.service.multi.MultiService
 import com.gabriel.remote.movie.service.serie.SeriesService
+import com.gabriel.remote.movie.service.trending.TrendingService
 import com.gabriel.remote.network.retrofit.TheMovieRetrofit
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -38,6 +33,7 @@ fun getRemoteModules() = module {
     single<FilmesService> { TheMovieRetrofit().getFilmesService(retrofit = get()) }
     single<SeriesService> { TheMovieRetrofit().getSeriesService(retrofit = get()) }
     single<MultiService> { TheMovieRetrofit().getMultiService(retrofit = get()) }
+    single<TrendingService> { TheMovieRetrofit().getTrendingService(retrofit = get()) }
 
     // Genero Modules
     factory { GeneroRemoteMapper() }
@@ -61,8 +57,14 @@ fun getRemoteModules() = module {
             mapper = get()
         )
     }
-    single<GetRecentFilmeDataSource> {
-        GetRecentFilmeDataSourceImpl(
+    single<GetTrendingFilmeDataSource> {
+        GetTrendingFilmeDataSourceImpl(
+            service = get(),
+            mapper = get()
+        )
+    }
+    single<GetTrendingSerieDataSource> {
+        GetTrendingSerieDataSourceImpl(
             service = get(),
             mapper = get()
         )

@@ -3,6 +3,7 @@ package com.gabriel.remote.network.retrofit
 import com.gabriel.remote.movie.service.filme.FilmesService
 import com.gabriel.remote.movie.service.multi.MultiService
 import com.gabriel.remote.movie.service.serie.SeriesService
+import com.gabriel.remote.movie.service.trending.TrendingService
 import com.gabriel.remote.util.constants.ConstantsRemote.API_KEY
 import com.gabriel.remote.util.constants.ConstantsRemote.API_QUERY
 import com.gabriel.remote.util.constants.ConstantsRemote.BASE_URL
@@ -30,6 +31,10 @@ class TheMovieRetrofit {
 
     fun getMultiService(retrofit: Retrofit): MultiService {
         return retrofit.create(MultiService::class.java)
+    }
+
+    fun getTrendingService(retrofit: Retrofit): TrendingService {
+        return retrofit.create(TrendingService::class.java)
     }
 
     fun getOkHttpClient(): OkHttpClient {

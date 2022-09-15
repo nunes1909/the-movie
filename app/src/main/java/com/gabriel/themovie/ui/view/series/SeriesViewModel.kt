@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gabriel.domain.movie.model.MovieDomain
 import com.gabriel.domain.movie.useCase.GetAllMoviesUseCase
-import com.gabriel.domain.movie.useCase.GetRecentMovieUseCase
+import com.gabriel.domain.movie.useCase.GetTrendingMovieUseCase
 import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.themovie.movie.mapper.MovieViewMapper
 import com.gabriel.themovie.movie.model.MovieView
@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 
 class SeriesViewModel(
     private val getAllMoviesUseCase: GetAllMoviesUseCase,
-    private val getRecentMovieUseCase: GetRecentMovieUseCase,
+    private val getTrendingMovieUseCase: GetTrendingMovieUseCase,
     private val mapper: MovieViewMapper
 ) : ViewModel() {
 
@@ -41,19 +41,19 @@ class SeriesViewModel(
         return ResourceState.Error(cod = resource.cod, message = resource.message)
     }
 
-    private val _recent =
-        MutableStateFlow<ResourceState<MovieView>>(ResourceState.Loading())
-    val recent: StateFlow<ResourceState<MovieView>> = _recent
+    private val _trending =
+        MutableStateFlow<ResourceState<List<MovieView>>>(ResourceState.Loading())
+    val trending: StateFlow<ResourceState<List<MovieView>>> = _trending
 
     fun getTranding() = viewModelScope.launch {
-            val resourceState = getRecentMovieUseCase.getRecentMovie(TYPE_SERIE)
-            _recent.value = safeStateTrandingFilmes(resourceState)
+            val resourceState = getTrendingMovieUseCase.getTrendingMovie(TYPE_SERIE)
+            _trending.value = safeStateTrandingFilmes(resourceState)
         }
 
-    private fun safeStateTrandingFilmes(resourceState: ResourceState<MovieDomain>):
-            ResourceState<MovieView> {
+    private fun safeStateTrandingFilmes(resourceState: ResourceState<List<MovieDomain>>):
+            ResourceState<List<MovieView>> {
         if (resourceState.data != null) {
-            val listView = mapper.mapFromDomain(resourceState.data!!)
+            val listView = mapper.mapToDomainNonNull(resourceState.data!!)
             return ResourceState.Success(listView)
         }
         return ResourceState.Error(cod = resourceState.cod, message = resourceState.message)

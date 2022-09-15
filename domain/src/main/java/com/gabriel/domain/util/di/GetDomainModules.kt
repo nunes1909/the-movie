@@ -12,7 +12,7 @@ fun getDomainModules() = module {
 
     factory<GetSimilarMoviesUseCase> { GetSimilarMoviesUseCaseImpl(repository = get()) }
 
-    factory<GetRecentMovieUseCase> { GetRecentMovieUseCaseImpl(repository = get()) }
+    factory<GetTrendingMovieUseCase> { GetTrendingMovieUseCaseImpl(repository = get()) }
     // Endregion
 
     // Multi modules

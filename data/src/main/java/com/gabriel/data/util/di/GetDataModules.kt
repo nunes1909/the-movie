@@ -1,13 +1,6 @@
 package com.gabriel.data.util.di
 
 import com.gabriel.data.genero.mapper.GeneroDataMapper
-import com.gabriel.data.movie.dataSource.filme.GetAllFilmesDataSource
-import com.gabriel.data.movie.dataSource.filme.GetDetailFilmeDataSource
-import com.gabriel.data.movie.dataSource.filme.GetSimilarFilmesDataSource
-import com.gabriel.data.movie.dataSource.movie.SearchMovieDataSource
-import com.gabriel.data.movie.dataSource.serie.GetAllSeriesDataSource
-import com.gabriel.data.movie.dataSource.serie.GetDetailSerieDataSource
-import com.gabriel.data.movie.dataSource.serie.GetSimilarSeriesDataSource
 import com.gabriel.data.movie.dataStore.*
 import com.gabriel.data.movie.dataStoreImpl.*
 import com.gabriel.data.movie.mapper.MovieDataMapper
@@ -49,10 +42,10 @@ fun getDataModules() = module {
         )
     }
 
-    factory<GetRecentMovieDataStore> {
-        GetRecentMovieDataStoreImpl(
+    factory<GetTrendingMovieDataStore> {
+        GetTrendingMovieDataStoreImpl(
             filmesSource = get(),
-            seriesService = get()
+            seriesSource = get()
         )
     }
 
@@ -70,8 +63,8 @@ fun getDataModules() = module {
         )
     }
 
-    factory<GetRecentMovieRepository> {
-        GetRecentMovieRepositoryImpl(
+    factory<GetTrendingMovieRepository> {
+        GetTrendingMovieRepositoryImpl(
             dataStore = get(),
             mapper = get()
         )
