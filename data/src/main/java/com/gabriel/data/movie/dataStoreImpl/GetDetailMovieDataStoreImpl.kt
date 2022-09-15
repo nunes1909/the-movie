@@ -14,9 +14,15 @@ class GetDetailMovieDataStoreImpl(
 ) : GetDetailMovieDataStore {
     override suspend fun getDetailMovie(type: String, movieId: Int): ResourceState<MovieData> {
         return when (type) {
-            TYPE_FILME -> { filmesSource.getDetailFilme(type = type, movieId = movieId) }
-            TYPE_SERIE -> { seriesService.getDetailSerie(type = type, movieId = movieId) }
-            else -> { ResourceState.Empty() }
+            TYPE_FILME -> {
+                filmesSource.getDetailFilme(type = type, movieId = movieId)
+            }
+            TYPE_SERIE -> {
+                seriesService.getDetailSerie(type = type, movieId = movieId)
+            }
+            else -> {
+                ResourceState.Empty()
+            }
         }
     }
 }

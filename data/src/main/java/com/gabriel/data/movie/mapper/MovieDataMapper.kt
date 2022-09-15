@@ -8,7 +8,7 @@ import com.gabriel.domain.movie.model.MovieDomain
 class MovieDataMapper(private val mapper: GeneroDataMapper) : DataMapper<MovieData, MovieDomain> {
     override fun mapToDomain(type: MovieData): MovieDomain {
         val generos = type.generos?.let {
-            mapper.mapFromDomainNonNull(it)
+            mapper.mapToDomainNonNull(it)
         } ?: listOf()
 
         return MovieDomain(
@@ -24,9 +24,9 @@ class MovieDataMapper(private val mapper: GeneroDataMapper) : DataMapper<MovieDa
         )
     }
 
-    override fun mapFromDomain(type: MovieDomain): MovieData {
+    override fun mapToData(type: MovieDomain): MovieData {
         val generos = type.generos?.let {
-            mapper.mapToDomainNonNull(it)
+            mapper.mapToDataNonNull(it)
         } ?: listOf()
 
         return MovieData(

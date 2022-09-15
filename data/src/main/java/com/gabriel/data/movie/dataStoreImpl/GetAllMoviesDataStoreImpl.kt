@@ -14,9 +14,15 @@ class GetAllMoviesDataStoreImpl(
 ) : GetAllMoviesDataStore {
     override suspend fun getAllMovies(type: String): ResourceState<List<MovieData>> {
         return when (type) {
-            TYPE_FILME -> { filmesSource.getAllMovies(type = type) }
-            TYPE_SERIE -> { seriesSource.getAllSeries(type = type) }
-            else -> { ResourceState.Empty() }
+            TYPE_FILME -> {
+                filmesSource.getAllMovies(type = type)
+            }
+            TYPE_SERIE -> {
+                seriesSource.getAllSeries(type = type)
+            }
+            else -> {
+                ResourceState.Empty()
+            }
         }
     }
 }

@@ -12,11 +12,20 @@ class GetSimilarMoviesDataStoreImpl(
     private val filmesSource: GetSimilarFilmesDataSource,
     private val seriesSource: GetSimilarSeriesDataSource
 ) : GetSimilarMoviesDataStore {
-    override suspend fun getSimilarMovies(type: String, movieId: Int): ResourceState<List<MovieData>> {
+    override suspend fun getSimilarMovies(
+        type: String,
+        movieId: Int
+    ): ResourceState<List<MovieData>> {
         return when (type) {
-            TYPE_FILME -> { filmesSource.getSimilarFilmes(type = type, movieId = movieId) }
-            TYPE_SERIE -> { seriesSource.getSimilarSeries(type = type, serieId = movieId) }
-            else -> { ResourceState.Empty() }
+            TYPE_FILME -> {
+                filmesSource.getSimilarFilmes(type = type, movieId = movieId)
+            }
+            TYPE_SERIE -> {
+                seriesSource.getSimilarSeries(type = type, serieId = movieId)
+            }
+            else -> {
+                ResourceState.Empty()
+            }
         }
     }
 }
