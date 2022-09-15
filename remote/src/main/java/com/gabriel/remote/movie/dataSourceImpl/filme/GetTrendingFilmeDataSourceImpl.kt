@@ -17,26 +17,30 @@ class GetTrendingFilmeDataSourceImpl(
     override suspend fun getTrendingFilme(type: String): ResourceState<List<MovieData>> {
         return try {
             val response = service.getTrendingFilme(typeMovie = type)
-            validateListFilmeResponse(response = response)
+            validateListResponse(response = response)
         } catch (t: Throwable) {
             when (t) {
                 is IOException -> {
-                    Timber.tag("GetRecentFilmeDataSourceImpl/getRecentMovie").e("Error -> $t")
+                    Timber
+                        .tag("GetRecentFilmeDataSourceImpl/getRecentMovie")
+                        .e("Error -> $t")
                     ResourceState.Undefined(message = "Erro de conexão.")
                 }
                 else -> {
-                    Timber.tag("GetRecentFilmeDataSourceImpl/getRecentMovie").e("Error -> $t")
+                    Timber
+                        .tag("GetRecentFilmeDataSourceImpl/getRecentMovie")
+                        .e("Error -> $t")
                     ResourceState.Undefined(message = "Erro na conversão dos dados.")
                 }
             }
         }
     }
 
-    private fun validateListFilmeResponse(response: Response<FilmeContainer>):
+    private fun validateListResponse(response: Response<FilmeContainer>):
             ResourceState<List<MovieData>> {
         if (response.isSuccessful) {
             response.body()?.let { values ->
-                val resultData = mapper.mapFromDomainNonNull(values.results)
+                val resultData = mapper.mapToDataNonNull(values.results)
                 return ResourceState.Undefined(data = resultData)
             }
         }

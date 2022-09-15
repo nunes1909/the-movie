@@ -21,11 +21,15 @@ class GetAllFilmesDataSourceImpl(
         } catch (t: Throwable) {
             when (t) {
                 is IOException -> {
-                    Timber.tag("GetAllFilmesDataSourceImpl/getAllMovies").e("Error -> $t")
+                    Timber
+                        .tag("GetAllFilmesDataSourceImpl/getAllMovies")
+                        .e("Error -> $t")
                     ResourceState.Undefined(message = "Erro de conexão.")
                 }
                 else -> {
-                    Timber.tag("GetAllFilmesDataSourceImpl/getAllMovies").e("Error -> $t")
+                    Timber
+                        .tag("GetAllFilmesDataSourceImpl/getAllMovies")
+                        .e("Error -> $t")
                     ResourceState.Undefined(message = "Erro na conversão dos dados.")
                 }
             }
@@ -36,7 +40,7 @@ class GetAllFilmesDataSourceImpl(
             ResourceState<List<MovieData>> {
         if (response.isSuccessful) {
             response.body()?.let { values ->
-                val resultsData = mapper.mapFromDomainNonNull(entity = values.results)
+                val resultsData = mapper.mapToDataNonNull(entity = values.results)
                 return ResourceState.Undefined(data = resultsData)
             }
         }

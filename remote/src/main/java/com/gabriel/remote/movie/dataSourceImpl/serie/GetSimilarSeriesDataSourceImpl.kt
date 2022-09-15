@@ -14,18 +14,25 @@ class GetSimilarSeriesDataSourceImpl(
     private val service: SeriesService,
     private val mapper: SerieResponseToDataMapper
 ) : GetSimilarSeriesDataSource {
-    override suspend fun getSimilarSeries(type: String, serieId: Int): ResourceState<List<MovieData>> {
+    override suspend fun getSimilarSeries(
+        type: String,
+        serieId: Int
+    ): ResourceState<List<MovieData>> {
         return try {
             val response = service.getSimilarSeries(serieId = serieId)
             validateListResponse(response = response)
         } catch (t: Throwable) {
             when (t) {
                 is IOException -> {
-                    Timber.tag("GetAllFilmesDataSourceImpl/getAllMovies").e("Error -> $t")
+                    Timber
+                        .tag("GetAllFilmesDataSourceImpl/getAllMovies")
+                        .e("Error -> $t")
                     ResourceState.Undefined(message = "Erro de conexão.")
                 }
                 else -> {
-                    Timber.tag("GetAllFilmesDataSourceImpl/getAllMovies").e("Error -> $t")
+                    Timber
+                        .tag("GetAllFilmesDataSourceImpl/getAllMovies")
+                        .e("Error -> $t")
                     ResourceState.Undefined(message = "Erro na conversão dos dados.")
                 }
             }
@@ -36,7 +43,7 @@ class GetSimilarSeriesDataSourceImpl(
             ResourceState<List<MovieData>> {
         if (response.isSuccessful) {
             response.body()?.let { values ->
-                val resultsData = mapper.mapFromDomainNonNull(entity = values.results)
+                val resultsData = mapper.mapToDataNonNull(entity = values.results)
                 return ResourceState.Undefined(data = resultsData)
             }
         }

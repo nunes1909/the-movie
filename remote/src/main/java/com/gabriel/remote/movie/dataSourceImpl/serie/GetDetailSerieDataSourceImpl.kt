@@ -21,11 +21,15 @@ class GetDetailSerieDataSourceImpl(
         } catch (t: Throwable) {
             when (t) {
                 is IOException -> {
-                    Timber.tag("GetDetailSerieDataSourceImpl/getDetailSerie").e("Error -> $t")
+                    Timber
+                        .tag("GetDetailSerieDataSourceImpl/getDetailSerie")
+                        .e("Error -> $t")
                     ResourceState.Undefined(message = "Erro de conexão.")
                 }
                 else -> {
-                    Timber.tag("GetDetailSerieDataSourceImpl/getDetailSerie").e("Error -> $t")
+                    Timber
+                        .tag("GetDetailSerieDataSourceImpl/getDetailSerie")
+                        .e("Error -> $t")
                     ResourceState.Undefined(message = "Erro na conversão dos dados.")
                 }
             }

@@ -2,15 +2,15 @@ package com.gabriel.remote.util.di
 
 import com.gabriel.data.movie.dataSource.filme.GetAllFilmesDataSource
 import com.gabriel.data.movie.dataSource.filme.GetDetailFilmeDataSource
-import com.gabriel.data.movie.dataSource.filme.GetTrendingFilmeDataSource
 import com.gabriel.data.movie.dataSource.filme.GetSimilarFilmesDataSource
+import com.gabriel.data.movie.dataSource.filme.GetTrendingFilmeDataSource
 import com.gabriel.data.movie.dataSource.movie.SearchMovieDataSource
 import com.gabriel.data.movie.dataSource.serie.*
 import com.gabriel.remote.genero.mapper.GeneroRemoteMapper
 import com.gabriel.remote.movie.dataSourceImpl.filme.GetAllFilmesDataSourceImpl
 import com.gabriel.remote.movie.dataSourceImpl.filme.GetDetailFilmeDataSourceImpl
-import com.gabriel.remote.movie.dataSourceImpl.filme.GetTrendingFilmeDataSourceImpl
 import com.gabriel.remote.movie.dataSourceImpl.filme.GetSimilarFilmesDataSourceImpl
+import com.gabriel.remote.movie.dataSourceImpl.filme.GetTrendingFilmeDataSourceImpl
 import com.gabriel.remote.movie.dataSourceImpl.multi.SearchMovieDataSourceImpl
 import com.gabriel.remote.movie.dataSourceImpl.serie.*
 import com.gabriel.remote.movie.mapper.filme.FilmeDetailResponseToDataMapper
@@ -34,17 +34,21 @@ fun getRemoteModules() = module {
     single<SeriesService> { TheMovieRetrofit().getSeriesService(retrofit = get()) }
     single<MultiService> { TheMovieRetrofit().getMultiService(retrofit = get()) }
     single<TrendingService> { TheMovieRetrofit().getTrendingService(retrofit = get()) }
+    // Endregion
 
     // Genero Modules
     factory { GeneroRemoteMapper() }
+    // Endregion
 
-    // Region Movie modules
+    // Region Remote mappers
     factory { FilmeDetailResponseToDataMapper(mapper = get()) }
     factory { FilmeResponseToDataMapper() }
     factory { SerieDetailResponseToDataMapper() }
     factory { SerieResponseToDataMapper() }
     factory { MultiRemoteToMovieMapper() }
+    // Endregion
 
+    // Region Data Source modules
     single<GetAllFilmesDataSource> {
         GetAllFilmesDataSourceImpl(
             service = get(),
@@ -63,14 +67,8 @@ fun getRemoteModules() = module {
             mapper = get()
         )
     }
-    single<GetTrendingSerieDataSource> {
-        GetTrendingSerieDataSourceImpl(
-            service = get(),
-            mapper = get()
-        )
-    }
-    single<GetRecentSerieDataSource> {
-        GetRecentSerieDataSourceImpl(
+    single<GetSimilarFilmesDataSource> {
+        GetSimilarFilmesDataSourceImpl(
             service = get(),
             mapper = get()
         )
@@ -87,20 +85,26 @@ fun getRemoteModules() = module {
             mapper = get()
         )
     }
-    single<SearchMovieDataSource> {
-        SearchMovieDataSourceImpl(
-            service = get(),
-            mapper = get()
-        )
-    }
-    single<GetSimilarFilmesDataSource> {
-        GetSimilarFilmesDataSourceImpl(
+    single<GetTrendingSerieDataSource> {
+        GetTrendingSerieDataSourceImpl(
             service = get(),
             mapper = get()
         )
     }
     single<GetSimilarSeriesDataSource> {
         GetSimilarSeriesDataSourceImpl(
+            service = get(),
+            mapper = get()
+        )
+    }
+    single<GetRecentSerieDataSource> {
+        GetRecentSerieDataSourceImpl(
+            service = get(),
+            mapper = get()
+        )
+    }
+    single<SearchMovieDataSource> {
+        SearchMovieDataSourceImpl(
             service = get(),
             mapper = get()
         )

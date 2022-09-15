@@ -11,7 +11,7 @@ class FilmeDetailResponseToDataMapper(
 ) : RemoteMapper<FilmeDetailResponse, MovieData> {
     override fun mapToData(type: FilmeDetailResponse): MovieData {
         val generos = type.generos?.let {
-            mapper.mapFromDomainNonNull(it)
+            mapper.mapToDataNonNull(it)
         } ?: listOf()
 
         return MovieData(
@@ -27,9 +27,9 @@ class FilmeDetailResponseToDataMapper(
         )
     }
 
-    override fun mapFromRemote(type: MovieData): FilmeDetailResponse {
+    override fun mapToRemote(type: MovieData): FilmeDetailResponse {
         val generos = type.generos?.let {
-            mapper.mapToDomainNonNull(it)
+            mapper.mapToRemoteNonNull(it)
         } ?: listOf()
 
         return FilmeDetailResponse(
