@@ -8,7 +8,7 @@ import com.gabriel.themovie.util.base.ViewMapper
 class MovieViewMapper(private val mapper: GeneroViewMapper) : ViewMapper<MovieView, MovieDomain> {
     override fun mapToDomain(type: MovieView): MovieDomain {
         val generos = type.generos?.let {
-            mapper.mapFromDomainNonNull(it)
+            mapper.mapToDomainNonNull(it)
         } ?: listOf()
 
         return MovieDomain(
@@ -24,9 +24,9 @@ class MovieViewMapper(private val mapper: GeneroViewMapper) : ViewMapper<MovieVi
         )
     }
 
-    override fun mapFromDomain(type: MovieDomain): MovieView {
+    override fun mapToView(type: MovieDomain): MovieView {
         val generos = type.generos?.let {
-            mapper.mapToDomainNonNull(it)
+            mapper.mapToViewNonNull(it)
         } ?: listOf()
 
         return MovieView(

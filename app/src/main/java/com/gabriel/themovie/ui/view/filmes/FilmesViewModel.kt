@@ -41,7 +41,7 @@ class FilmesViewModel(
     private fun safeStateGetFilmes(resourceState: ResourceState<List<MovieDomain>>):
             ResourceState<List<MovieView>> {
         if (resourceState.data != null) {
-            val listView = mapper.mapToDomainNonNull(resourceState.data!!)
+            val listView = mapper.mapToViewNonNull(resourceState.data!!)
             return ResourceState.Success(listView)
         }
         return ResourceState.Error(cod = resourceState.cod, message = resourceState.message)
@@ -57,7 +57,7 @@ class FilmesViewModel(
     private fun safeStateTrandingFilmes(resourceState: ResourceState<List<MovieDomain>>):
             ResourceState<List<MovieView>> {
         if (resourceState.data != null) {
-            val listView = mapper.mapToDomainNonNull(resourceState.data!!)
+            val listView = mapper.mapToViewNonNull(resourceState.data!!)
             return ResourceState.Success(listView)
         }
         return ResourceState.Error(cod = resourceState.cod, message = resourceState.message)

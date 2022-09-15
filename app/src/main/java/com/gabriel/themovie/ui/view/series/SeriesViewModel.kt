@@ -41,7 +41,7 @@ class SeriesViewModel(
     private fun safeStateGetSeries(resource: ResourceState<List<MovieDomain>>):
             ResourceState<List<MovieView>> {
         if (resource.data != null) {
-            val listView = mapper.mapToDomainNonNull(resource.data!!)
+            val listView = mapper.mapToViewNonNull(resource.data!!)
             return ResourceState.Success(listView)
         }
         return ResourceState.Error(cod = resource.cod, message = resource.message)
@@ -57,7 +57,7 @@ class SeriesViewModel(
     private fun safeStateTrandingSeries(resourceState: ResourceState<List<MovieDomain>>):
             ResourceState<List<MovieView>> {
         if (resourceState.data != null) {
-            val listView = mapper.mapToDomainNonNull(resourceState.data!!)
+            val listView = mapper.mapToViewNonNull(resourceState.data!!)
             return ResourceState.Success(listView)
         }
         return ResourceState.Error(cod = resourceState.cod, message = resourceState.message)

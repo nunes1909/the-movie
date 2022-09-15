@@ -7,7 +7,6 @@ import com.gabriel.remote.util.di.getRemoteModules
 import org.koin.core.module.Module
 
 object GetTheMovieModules {
-
     fun getTheMovieModules(): List<Module> {
         return listOf(
             getViewModules(),

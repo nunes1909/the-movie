@@ -112,7 +112,7 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
     }
 
     private fun buscaFilmeMaisVotado(results: List<MovieView>): MovieView {
-        return results.sortedBy { it.nota }[0]
+        return results.sortedByDescending { it.nota }.first()
     }
 
     private fun carregaImagem(movie: MovieView) {

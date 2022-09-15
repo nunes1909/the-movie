@@ -56,7 +56,7 @@ class DetalhesViewModel(
     private fun safeStateGetDetailMovie(resourceState: ResourceState<MovieDomain>):
             ResourceState<MovieView> {
         if (resourceState.data != null) {
-            val movieView = mapper.mapFromDomain(resourceState.data!!)
+            val movieView = mapper.mapToView(resourceState.data!!)
             return ResourceState.Success(movieView)
         }
         return ResourceState.Error(cod = resourceState.cod, message = resourceState.message)
@@ -72,7 +72,7 @@ class DetalhesViewModel(
     private fun safeStateGetMovies(resourceState: ResourceState<List<MovieDomain>>):
             ResourceState<List<MovieView>> {
         if (resourceState.data != null) {
-            val listView = mapper.mapToDomainNonNull(resourceState.data!!)
+            val listView = mapper.mapToViewNonNull(resourceState.data!!)
             return ResourceState.Success(listView)
         }
         return ResourceState.Error(cod = resourceState.cod, message = resourceState.message)

@@ -112,7 +112,7 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
     }
 
     private fun buscaSerieMaisVotada(results: List<MovieView>): MovieView {
-        return results.sortedBy { it.nota }[0]
+        return results.sortedByDescending { it.nota }.first()
     }
 
     private fun carregaImagem(movie: MovieView) {
