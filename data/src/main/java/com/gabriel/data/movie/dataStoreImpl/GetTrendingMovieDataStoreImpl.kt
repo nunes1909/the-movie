@@ -13,10 +13,16 @@ class GetTrendingMovieDataStoreImpl(
     private val seriesSource: GetTrendingSerieDataSource
 ) : GetTrendingMovieDataStore {
     override suspend fun getTrendingMovie(type: String): ResourceState<List<MovieData>> {
-        return when(type) {
-            TYPE_FILME -> { filmesSource.getTrendingFilme(type = type) }
-            TYPE_SERIE -> { seriesSource.getTrendingSerie(type = type) }
-            else -> { ResourceState.Empty() }
+        return when (type) {
+            TYPE_FILME -> {
+                filmesSource.getTrendingFilme(type = type)
+            }
+            TYPE_SERIE -> {
+                seriesSource.getTrendingSerie(type = type)
+            }
+            else -> {
+                ResourceState.Empty()
+            }
         }
     }
 }

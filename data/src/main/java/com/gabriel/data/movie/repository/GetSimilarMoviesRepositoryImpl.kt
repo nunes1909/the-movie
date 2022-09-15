@@ -10,10 +10,13 @@ class GetSimilarMoviesRepositoryImpl(
     private val dataStore: GetSimilarMoviesDataStore,
     private val mapper: MovieDataMapper
 ) : GetSimilarMoviesRepository {
-    override suspend fun getSimilarMovies(type: String, movieId: Int): ResourceState<List<MovieDomain>> {
+    override suspend fun getSimilarMovies(
+        type: String,
+        movieId: Int
+    ): ResourceState<List<MovieDomain>> {
         val resourceState = dataStore.getSimilarMovies(movieId = movieId, type = type)
         if (resourceState.data != null) {
-            val resultsDomain = mapper.mapFromDomainNonNull(resourceState.data!!)
+            val resultsDomain = mapper.mapToDomainNonNull(resourceState.data!!)
             return ResourceState.Undefined(data = resultsDomain)
         }
         return ResourceState.Undefined(

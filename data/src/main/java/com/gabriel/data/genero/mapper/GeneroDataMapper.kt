@@ -12,7 +12,7 @@ class GeneroDataMapper : DataMapper<GeneroData, GeneroDomain> {
         )
     }
 
-    override fun mapFromDomain(type: GeneroDomain): GeneroData {
+    override fun mapToData(type: GeneroDomain): GeneroData {
         return GeneroData(
             id = type.id,
             name = type.name

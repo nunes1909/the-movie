@@ -13,7 +13,7 @@ class SearchMovieRepositoryImpl(
     override suspend fun searchMovie(query: String): ResourceState<List<MovieDomain>> {
         val resourceState = dataStore.searchMovie(query = query)
         if (resourceState.data != null) {
-            val resultsDomain = mapper.mapFromDomainNonNull(resourceState.data!!)
+            val resultsDomain = mapper.mapToDomainNonNull(resourceState.data!!)
             return ResourceState.Undefined(data = resultsDomain)
         }
         return ResourceState.Undefined(

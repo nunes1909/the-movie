@@ -11,10 +11,13 @@ import org.koin.dsl.module
 fun getDataModules() = module {
     // Genero modules
     factory { GeneroDataMapper() }
+    // Endregion
 
-    // Region Movie modules
+    // Region data mapper
     factory { MovieDataMapper(mapper = get()) }
+    // Endregion
 
+    // Region Data Store
     factory<GetAllMoviesDataStore> {
         GetAllMoviesDataStoreImpl(
             filmesSource = get(),
@@ -29,9 +32,10 @@ fun getDataModules() = module {
         )
     }
 
-    factory<SearchMovieDataStore> {
-        SearchMovieDataStoreImpl(
-            source = get()
+    factory<GetTrendingMovieDataStore> {
+        GetTrendingMovieDataStoreImpl(
+            filmesSource = get(),
+            seriesSource = get()
         )
     }
 
@@ -42,13 +46,14 @@ fun getDataModules() = module {
         )
     }
 
-    factory<GetTrendingMovieDataStore> {
-        GetTrendingMovieDataStoreImpl(
-            filmesSource = get(),
-            seriesSource = get()
+    factory<SearchMovieDataStore> {
+        SearchMovieDataStoreImpl(
+            source = get()
         )
     }
+    // Endregion
 
+    // Region Repository
     factory<GetAllMoviesRepository> {
         GetAllMoviesRepositoryImpl(
             dataStore = get(),
@@ -70,15 +75,15 @@ fun getDataModules() = module {
         )
     }
 
-    factory<SearchMovieRepository> {
-        SearchMovieRepositoryImpl(
+    factory<GetSimilarMoviesRepository> {
+        GetSimilarMoviesRepositoryImpl(
             dataStore = get(),
             mapper = get()
         )
     }
 
-    factory<GetSimilarMoviesRepository> {
-        GetSimilarMoviesRepositoryImpl(
+    factory<SearchMovieRepository> {
+        SearchMovieRepositoryImpl(
             dataStore = get(),
             mapper = get()
         )
