@@ -15,6 +15,7 @@ import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.ui.adapters.FilmeAdapter
 import com.gabriel.themovie.util.base.BaseFragment
 import com.gabriel.themovie.util.constants.ConstantsView
+import com.gabriel.themovie.util.constants.ConstantsView.TYPE_SERIE
 import com.gabriel.themovie.util.extensions.hide
 import com.gabriel.themovie.util.extensions.show
 import com.gabriel.themovie.util.extensions.toast
@@ -67,6 +68,7 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
      * @param action é a ação do Navigation para mudar de tela.
      */
     private fun actionGoDetails(entity: MovieView) {
+        entity.type = TYPE_SERIE
         val action = SeriesFragmentDirections
             .acaoSeriesParaDetalhes(entity)
         findNavController().navigate(action)

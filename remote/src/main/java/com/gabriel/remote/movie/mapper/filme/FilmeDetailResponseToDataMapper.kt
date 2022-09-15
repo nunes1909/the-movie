@@ -1,6 +1,7 @@
 package com.gabriel.remote.movie.mapper.filme
 
 import com.gabriel.data.movie.model.MovieData
+import com.gabriel.domain.util.constants.ConstantsDomain.TYPE_FILME
 import com.gabriel.remote.genero.mapper.GeneroRemoteMapper
 import com.gabriel.remote.movie.modelsApi.filme.FilmeDetailResponse
 import com.gabriel.remote.util.base.RemoteMapper
@@ -18,6 +19,7 @@ class FilmeDetailResponseToDataMapper(
             title = type.title,
             description = type.description,
             cartaz = type.cartaz,
+            type = TYPE_FILME,
             banner = type.banner,
             nota = type.nota,
             generos = generos,

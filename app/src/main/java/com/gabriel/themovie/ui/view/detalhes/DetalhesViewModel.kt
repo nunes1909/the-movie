@@ -10,9 +10,11 @@ import com.gabriel.themovie.movie.mapper.MovieViewMapper
 import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.util.constants.ConstantsView.TYPE_FILME
 import com.gabriel.themovie.util.constants.ConstantsView.TYPE_SERIE
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class DetalhesViewModel(
     private val getDetailMovieUseCase: GetDetailMovieUseCase,
@@ -20,9 +22,9 @@ class DetalhesViewModel(
     private val mapper: MovieViewMapper
 ) : ViewModel() {
     // Region StateFlow
-    private val _multiMovieDetail =
+    private val _movieDetail =
         MutableStateFlow<ResourceState<MovieView>>(ResourceState.Loading())
-    val multiMovieDetail: StateFlow<ResourceState<MovieView>> = _multiMovieDetail
+    val movieDetail: StateFlow<ResourceState<MovieView>> = _movieDetail
 
     private val _listSimilares =
         MutableStateFlow<ResourceState<List<MovieView>>>(ResourceState.Loading())
@@ -50,7 +52,7 @@ class DetalhesViewModel(
     // Region get details
     private fun getDetailMovie(type: String, movieId: Int) = viewModelScope.launch {
         val resourceState = getDetailMovieUseCase.getDetailMovie(type = type, movieId = movieId)
-        _multiMovieDetail.value = safeStateGetDetailFilme(resourceState)
+        _movieDetail.value = safeStateGetDetailFilme(resourceState)
     }
 
     private fun safeStateGetDetailFilme(resourceState: ResourceState<MovieDomain>):
