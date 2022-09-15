@@ -19,7 +19,7 @@ class MultiRemoteToMovieMapper() :
         )
     }
 
-    override fun mapFromRemote(type: MovieData): MultiResponse {
+    override fun mapToRemote(type: MovieData): MultiResponse {
         return MultiResponse(
             id = type.id,
             title = type.title,

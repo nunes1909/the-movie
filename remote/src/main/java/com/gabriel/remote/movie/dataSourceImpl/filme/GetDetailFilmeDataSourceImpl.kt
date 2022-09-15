@@ -21,11 +21,15 @@ class GetDetailFilmeDataSourceImpl(
         } catch (t: Throwable) {
             when (t) {
                 is IOException -> {
-                    Timber.tag("GetDetailFilmeDataSourceImpl/getDetailFilme").e("Error -> $t")
+                    Timber
+                        .tag("GetDetailFilmeDataSourceImpl/getDetailFilme")
+                        .e("Error -> $t")
                     ResourceState.Undefined(message = "Erro de conexão.")
                 }
                 else -> {
-                    Timber.tag("GetDetailFilmeDataSourceImpl/getDetailFilme").e("Error -> $t")
+                    Timber
+                        .tag("GetDetailFilmeDataSourceImpl/getDetailFilme")
+                        .e("Error -> $t")
                     ResourceState.Undefined(message = "Erro na conversão dos dados.")
                 }
             }

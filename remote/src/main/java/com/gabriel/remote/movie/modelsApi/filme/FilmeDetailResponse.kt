@@ -23,6 +23,3 @@ data class FilmeDetailResponse(
     @Expose
     val favorito: Boolean? = false
 ) : Serializable
-/**
- * Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
- */

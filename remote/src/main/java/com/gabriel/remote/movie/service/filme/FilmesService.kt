@@ -7,7 +7,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface FilmesService {
-
     @GET("movie/popular")
     suspend fun getAllFilmes(): Response<FilmeContainer>
 

@@ -21,11 +21,15 @@ class GetRecentSerieDataSourceImpl(
         } catch (t: Throwable) {
             when (t) {
                 is IOException -> {
-                    Timber.tag("GetRecentFilmeDataSourceImpl/getRecentMovie").e("Error -> $t")
+                    Timber
+                        .tag("GetRecentFilmeDataSourceImpl/getRecentMovie")
+                        .e("Error -> $t")
                     ResourceState.Undefined(message = "Erro de conexão.")
                 }
                 else -> {
-                    Timber.tag("GetRecentFilmeDataSourceImpl/getRecentMovie").e("Error -> $t")
+                    Timber
+                        .tag("GetRecentFilmeDataSourceImpl/getRecentMovie")
+                        .e("Error -> $t")
                     ResourceState.Undefined(message = "Erro na conversão dos dados.")
                 }
             }

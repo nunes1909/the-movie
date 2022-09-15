@@ -7,7 +7,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface SeriesService {
-
     @GET("tv/popular")
     suspend fun getAllSeries(): Response<SerieContainer>
 
