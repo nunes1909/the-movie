@@ -7,4 +7,8 @@ object ConstantsRemote {
     // Keys
     const val API_KEY = "5f191b700828006c09a4a2680892cfef"
     const val API_QUERY = "api_key"
+
+    // Movies types
+    const val TYPE_FILME = "movie"
+    const val TYPE_SERIE = "tv"
 }

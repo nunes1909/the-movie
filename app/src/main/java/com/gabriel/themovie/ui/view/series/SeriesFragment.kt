@@ -75,15 +75,16 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
     }
 
     private fun observerSeriePrincipal() = lifecycleScope.launch {
-        viewModel.recent.collect { resource ->
+        viewModel.trending.collect { resource ->
             when (resource) {
                 is ResourceState.Success -> {
                     resource.data?.let { results ->
+                        val movie = results.sortedBy { it.nota } [0]
                         binding.serieBannerPrincipal
-                            .load("${ConstantsView.BASE_URL_IMAGES}${results.banner}")
+                            .load("${ConstantsView.BASE_URL_IMAGES}${movie.banner}")
 
-                        binding.serieTituloPrincipal.text = results.title
-                        inicializaGlobalMultiMovie(results)
+                        binding.serieTituloPrincipal.text = movie.title
+                        inicializaGlobalMultiMovie(movie)
                     }
                 }
                 is ResourceState.Error -> {

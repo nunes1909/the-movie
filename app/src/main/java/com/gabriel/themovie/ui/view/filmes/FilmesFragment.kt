@@ -89,15 +89,16 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
     }
 
     private fun observerFilmePrincipal() = lifecycleScope.launch {
-        viewModel.recent.collect { resource ->
+        viewModel.trending.collect { resource ->
             when (resource) {
                 is ResourceState.Success -> {
-                    resource.data?.let { result ->
+                    resource.data?.let { results ->
+                        val movie = results.sortedBy { it.nota } [0]
                         binding.bannerFilmePrincipal
-                            .load("${ConstantsView.BASE_URL_IMAGES}${result.cartaz}")
+                            .load("${ConstantsView.BASE_URL_IMAGES}${movie.cartaz}")
 
-                        binding.tituloFilmePrincipal.text = result.title
-                        inicializaGlobalMultiMovie(result)
+                        binding.tituloFilmePrincipal.text = movie.title
+                        inicializaGlobalMultiMovie(movie)
                     }
                 }
                 is ResourceState.Error -> {

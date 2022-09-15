@@ -1,25 +1,23 @@
 package com.gabriel.remote.movie.dataSourceImpl.filme
 
-import com.gabriel.data.movie.dataSource.filme.GetRecentFilmeDataSource
+import com.gabriel.data.movie.dataSource.filme.GetTrendingFilmeDataSource
 import com.gabriel.data.movie.model.MovieData
 import com.gabriel.domain.util.state.ResourceState
-import com.gabriel.remote.movie.mapper.filme.FilmeDetailResponseToDataMapper
 import com.gabriel.remote.movie.mapper.filme.FilmeResponseToDataMapper
 import com.gabriel.remote.movie.modelsApi.filme.FilmeContainer
-import com.gabriel.remote.movie.modelsApi.filme.FilmeDetailResponse
-import com.gabriel.remote.movie.service.filme.FilmesService
+import com.gabriel.remote.movie.service.trending.TrendingService
 import retrofit2.Response
 import timber.log.Timber
 import java.io.IOException
 
-class GetRecentFilmeDataSourceImpl(
-    private val service: FilmesService,
-    private val mapper: FilmeDetailResponseToDataMapper
-) : GetRecentFilmeDataSource {
-    override suspend fun getRecentFilme(type: String): ResourceState<MovieData> {
+class GetTrendingFilmeDataSourceImpl(
+    private val service: TrendingService,
+    private val mapper: FilmeResponseToDataMapper
+) : GetTrendingFilmeDataSource {
+    override suspend fun getTrendingFilme(type: String): ResourceState<List<MovieData>> {
         return try {
-            val response = service.getRecentFilme()
-            validateListResponse(response = response)
+            val response = service.getTrendingFilme(typeMovie = type)
+            validateListFilmeResponse(response = response)
         } catch (t: Throwable) {
             when (t) {
                 is IOException -> {
@@ -34,11 +32,11 @@ class GetRecentFilmeDataSourceImpl(
         }
     }
 
-    private fun validateListResponse(response: Response<FilmeDetailResponse>):
-            ResourceState<MovieData> {
+    private fun validateListFilmeResponse(response: Response<FilmeContainer>):
+            ResourceState<List<MovieData>> {
         if (response.isSuccessful) {
-            response.body()?.let { value ->
-                val resultData = mapper.mapToData(value)
+            response.body()?.let { values ->
+                val resultData = mapper.mapFromDomainNonNull(values.results)
                 return ResourceState.Undefined(data = resultData)
             }
         }
