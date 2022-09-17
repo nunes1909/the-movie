@@ -51,6 +51,18 @@ fun getDataModules() = module {
             source = get()
         )
     }
+
+    factory<SaveMovieDataStore> {
+        SaveMovieDataStoreImpl(
+            source = get()
+        )
+    }
+
+    factory<GetFavMovieDataStore> {
+        GetFavMovieDataStoreImpl(
+            source = get()
+        )
+    }
     // Endregion
 
     // Region Repository
@@ -84,6 +96,20 @@ fun getDataModules() = module {
 
     factory<SearchMovieRepository> {
         SearchMovieRepositoryImpl(
+            dataStore = get(),
+            mapper = get()
+        )
+    }
+
+    factory<SaveMovieRepository> {
+        SaveMovieRepositoryImpl(
+            dataStore = get(),
+            mapper = get()
+        )
+    }
+
+    factory<GetFavMovieRespository> {
+        GetFavMovieRespositoryImpl(
             dataStore = get(),
             mapper = get()
         )
