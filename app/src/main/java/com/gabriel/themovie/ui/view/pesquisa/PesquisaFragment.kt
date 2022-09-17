@@ -47,6 +47,9 @@ class PesquisaFragment : BaseFragment<FragmentPesquisaBinding, PesquisaViewModel
         override fun onTextChanged(query: CharSequence, p1: Int, p2: Int, p3: Int) {
             if (query.isNotEmpty()) {
                 viewModel.searchMovie(query = query.toString())
+                binding.rvPesquisa.show()
+            } else {
+                binding.rvPesquisa.hide()
             }
         }
 

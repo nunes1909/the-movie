@@ -20,10 +20,6 @@ class PesquisaViewModel(
     val search: StateFlow<ResourceState<List<MovieView>>> = _search
     // Endregion
 
-    init {
-        searchMovie("iron")
-    }
-
     // Region search movie
     fun searchMovie(query: String) = viewModelScope.launch {
         val resourceState = searchMovieUseCase.searchMovie(query = query)

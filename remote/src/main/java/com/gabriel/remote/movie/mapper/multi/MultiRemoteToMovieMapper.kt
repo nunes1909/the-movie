@@ -9,6 +9,7 @@ class MultiRemoteToMovieMapper : RemoteMapper<MultiResponse, MovieData> {
         return MovieData(
             id = type.id,
             title = type.title,
+            description = type.description,
             cartaz = type.cartaz,
             banner = type.banner
         )
@@ -18,6 +19,7 @@ class MultiRemoteToMovieMapper : RemoteMapper<MultiResponse, MovieData> {
         return MultiResponse(
             id = type.id,
             title = type.title,
+            description = type.description,
             cartaz = type.cartaz,
             banner = type.banner
         )

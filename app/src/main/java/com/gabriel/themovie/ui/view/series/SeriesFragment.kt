@@ -153,13 +153,13 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
     }
 
     private fun FragmentSeriesBinding.actionSeriePrincipalGoDetails() {
-        buttonLerMais.btnLerMais.setOnClickListener {
+        includeActionsPrincipal.btnLerMais.setOnClickListener {
             actionGoDetails(globalMultiMovie)
         }
     }
 
     private fun FragmentSeriesBinding.actionSeriePrincipalSave() {
-        buttonAddFav.btnAddFav.setOnClickListener {
+        includeActionsPrincipal.btnAddFav.setOnClickListener {
             toast(getString(R.string.salvo_favoritos))
             // implementar save dao
         }

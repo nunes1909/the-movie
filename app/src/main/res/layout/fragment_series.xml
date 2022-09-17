@@ -36,8 +36,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
             android:elegantTextHeight="true"
-            android:textColor="@color/white"
+            android:shadowColor="@color/black"
+            android:shadowRadius="20"
             android:textAlignment="center"
+            android:textColor="@color/white"
             android:textSize="26sp"
             app:layout_constraintBottom_toBottomOf="@id/serieBannerPrincipal"
             app:layout_constraintEnd_toEndOf="@id/serieBannerPrincipal"
@@ -49,21 +51,17 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:padding="6dp"
+            android:background="#1E575353"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="@id/serieBannerPrincipal"
             app:layout_constraintStart_toStartOf="@id/serieBannerPrincipal"
             app:layout_constraintTop_toBottomOf="@id/serieTituloPrincipal">
 
             <include
-                android:id="@+id/button_add_fav"
-                layout="@layout/item_add_filme_principal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="25dp" />
-
-            <include
-                android:id="@+id/button_ler_mais"
-                layout="@layout/item_info_filme_principal"
+                android:id="@+id/includeActionsPrincipal"
+                layout="@layout/itens_actions_principal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 

@@ -153,13 +153,13 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
     }
 
     private fun FragmentFilmesBinding.actionFilmePrincipalGoDetails() {
-        buttonLerMais.btnLerMais.setOnClickListener {
+        includeActionsPrincipal.btnLerMais.setOnClickListener {
             actionGoDetails(globalMovie)
         }
     }
 
     private fun FragmentFilmesBinding.actionFilmePrincipalSave() {
-        buttonAddFav.btnAddFav.setOnClickListener {
+        includeActionsPrincipal.btnAddFav.setOnClickListener {
             toast(getString(R.string.salvo_favoritos))
             // implementar save dao
         }

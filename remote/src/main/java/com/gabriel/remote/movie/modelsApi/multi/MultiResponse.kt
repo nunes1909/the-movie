@@ -8,6 +8,8 @@ data class MultiResponse(
     val id: Int,
     @SerializedName("title")
     val title: String,
+    @SerializedName("overview")
+    val description: String? = null,
     @SerializedName("poster_path")
     val cartaz: String? = null,
     @SerializedName("backdrop_path")
