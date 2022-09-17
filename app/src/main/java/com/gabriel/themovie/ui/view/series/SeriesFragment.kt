@@ -13,7 +13,7 @@ import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.themovie.R
 import com.gabriel.themovie.databinding.FragmentSeriesBinding
 import com.gabriel.themovie.movie.model.MovieView
-import com.gabriel.themovie.ui.adapters.MovieAdapter
+import com.gabriel.themovie.ui.adapters.MovieAdapterPrimary
 import com.gabriel.themovie.util.base.BaseFragment
 import com.gabriel.themovie.util.constants.ConstantsView
 import com.gabriel.themovie.util.constants.ConstantsView.RV_COLUNS_DEFAULT
@@ -28,7 +28,7 @@ import timber.log.Timber
 class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
 
     override val viewModel: SeriesViewModel by viewModel()
-    private val serieAdapter by lazy { MovieAdapter() }
+    private val serieAdapter by lazy { MovieAdapterPrimary() }
     lateinit var globalMultiMovie: MovieView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,7 +46,7 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
     }
 
     private fun configuraClickAdapter() {
-        serieAdapter.setFilmeOnClickListener { movieView ->
+        serieAdapter.setMovieOnClickListener { movieView ->
             actionGoDetails(entity = movieView)
         }
     }

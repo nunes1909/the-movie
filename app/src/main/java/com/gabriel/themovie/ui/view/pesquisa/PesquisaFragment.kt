@@ -12,7 +12,7 @@ import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.themovie.R
 import com.gabriel.themovie.databinding.FragmentPesquisaBinding
 import com.gabriel.themovie.movie.model.MovieView
-import com.gabriel.themovie.ui.adapters.MovieAdapter
+import com.gabriel.themovie.ui.adapters.MovieAdapterSecondary
 import com.gabriel.themovie.util.base.BaseFragment
 import com.gabriel.themovie.util.extensions.hide
 import com.gabriel.themovie.util.extensions.show
@@ -24,7 +24,7 @@ import timber.log.Timber
 class PesquisaFragment : BaseFragment<FragmentPesquisaBinding, PesquisaViewModel>() {
 
     override val viewModel: PesquisaViewModel by viewModel()
-    private val movieAdapter by lazy { MovieAdapter() }
+    private val movieAdapter by lazy { MovieAdapterSecondary() }
     lateinit var globalMovie: MovieView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,8 +36,7 @@ class PesquisaFragment : BaseFragment<FragmentPesquisaBinding, PesquisaViewModel
 
     private fun configuraRecyclerView() = with(binding) {
         rvPesquisa.adapter = movieAdapter
-        rvPesquisa.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        rvPesquisa.layoutManager = LinearLayoutManager(requireContext())
     }
 
     private fun configuraPesquisa() = with(binding) {

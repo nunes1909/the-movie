@@ -79,7 +79,7 @@
             app:layout_constraintTop_toBottomOf="@id/bannerFilmePrincipal"
             app:spanCount="4"
             tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            tools:listitem="@layout/item_list" />
+            tools:listitem="@layout/item_list_primary" />
 
         <ProgressBar
             android:id="@+id/progressFilme"

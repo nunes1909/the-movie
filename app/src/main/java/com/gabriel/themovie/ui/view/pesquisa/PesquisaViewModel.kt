@@ -21,7 +21,7 @@ class PesquisaViewModel(
     // Endregion
 
     init {
-        searchMovie("thor")
+        searchMovie("iron")
     }
 
     // Region search movie

@@ -188,7 +188,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ddd"
             app:spanCount="4"
-            tools:listitem="@layout/item_list" />
+            tools:listitem="@layout/item_list_primary" />
 
         <ProgressBar
             android:id="@+id/progressDetalhes"
