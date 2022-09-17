@@ -39,6 +39,8 @@ dependencies {
     implementation dependencies.kotlin
     implementation dependencies.koin
     implementation dependencies.coroutine
+    implementation dependencies.room
+    implementation dependencies.roomKtx
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.5.0'
