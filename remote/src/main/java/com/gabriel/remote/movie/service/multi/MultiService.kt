@@ -7,8 +7,8 @@ import retrofit2.http.Query
 
 interface MultiService {
     @GET("search/multi")
-    fun searchMulti(
+    suspend fun searchMulti(
         @Query("query")
-        query: String
+        query: String = "thor"
     ): Response<MultiContainer>
 }
