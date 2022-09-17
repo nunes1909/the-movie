@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.gabriel.themovie.databinding.ItemListBinding
+import com.gabriel.themovie.databinding.ItemListPrimaryBinding
 import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.util.constants.ConstantsView.BASE_URL_IMAGES
 import com.gabriel.themovie.util.extensions.limitValue
 
-class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapterPrimary : RecyclerView.Adapter<MovieAdapterPrimary.MovieViewHolder>() {
 
-    inner class MovieViewHolder(val binding: ItemListBinding) :
+    inner class MovieViewHolder(val binding: ItemListPrimaryBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     private val differConfig = object : DiffUtil.ItemCallback<MovieView>() {
@@ -42,25 +42,25 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder(
-            ItemListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemListPrimaryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        val filme = moviesList[position]
+        val movie = moviesList[position]
         holder.binding.apply {
-            itemListImage.load("${BASE_URL_IMAGES}${filme.cartaz}")
-            itemListTitle.text = filme.title.limitValue(10, true)
+            itemListImage.load("${BASE_URL_IMAGES}${movie.cartaz}")
+            itemListTitle.text = movie.title.limitValue(10, true)
         }
 
         holder.itemView.setOnClickListener {
             onItemClickListener?.let {
-                it(filme)
+                it(movie)
             }
         }
     }
 
-    fun setFilmeOnClickListener(listener: (MovieView) -> Unit) {
+    fun setMovieOnClickListener(listener: (MovieView) -> Unit) {
         onItemClickListener = listener
     }
 

@@ -12,7 +12,7 @@ import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.themovie.R
 import com.gabriel.themovie.databinding.FragmentDetalhesBinding
 import com.gabriel.themovie.movie.model.MovieView
-import com.gabriel.themovie.ui.adapters.MovieAdapter
+import com.gabriel.themovie.ui.adapters.MovieAdapterPrimary
 import com.gabriel.themovie.util.base.BaseFragment
 import com.gabriel.themovie.util.constants.ConstantsView.BASE_URL_IMAGES
 import com.gabriel.themovie.util.constants.ConstantsView.RV_COLUNS_DEFAULT
@@ -31,7 +31,7 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
 
     override val viewModel: DetalhesViewModel by viewModel()
     private val args: DetalhesFragmentArgs by navArgs()
-    private val movieAdapter by lazy { MovieAdapter() }
+    private val movieAdapterPrimary by lazy { MovieAdapterPrimary() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,7 +42,7 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
     }
 
     private fun configuraRecyclerView() = with(binding) {
-        rvDetalhesSemelhantes.adapter = movieAdapter
+        rvDetalhesSemelhantes.adapter = movieAdapterPrimary
         rvDetalhesSemelhantes.layoutManager = GridLayoutManager(requireContext(), RV_COLUNS_DEFAULT)
     }
 
@@ -90,7 +90,7 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
 
     private fun exibeListaSimilares(resources: ResourceState<List<MovieView>>) {
         resources.data?.let { results ->
-            movieAdapter.moviesList = results
+            movieAdapterPrimary.moviesList = results
         }
     }
 

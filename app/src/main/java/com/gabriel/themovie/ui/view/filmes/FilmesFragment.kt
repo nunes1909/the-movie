@@ -13,7 +13,7 @@ import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.themovie.R
 import com.gabriel.themovie.databinding.FragmentFilmesBinding
 import com.gabriel.themovie.movie.model.MovieView
-import com.gabriel.themovie.ui.adapters.MovieAdapter
+import com.gabriel.themovie.ui.adapters.MovieAdapterPrimary
 import com.gabriel.themovie.util.base.BaseFragment
 import com.gabriel.themovie.util.constants.ConstantsView
 import com.gabriel.themovie.util.constants.ConstantsView.RV_COLUNS_DEFAULT
@@ -28,7 +28,7 @@ import timber.log.Timber
 class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
 
     override val viewModel: FilmesViewModel by viewModel()
-    private val movieAdapter by lazy { MovieAdapter() }
+    private val movieAdapterPrimary by lazy { MovieAdapterPrimary() }
     lateinit var globalMovie: MovieView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,12 +41,12 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
     }
 
     private fun configuraRecyclerView() = with(binding) {
-        rvFilme.adapter = movieAdapter
+        rvFilme.adapter = movieAdapterPrimary
         rvFilme.layoutManager = GridLayoutManager(requireContext(), RV_COLUNS_DEFAULT)
     }
 
     private fun configuraClickAdapter() {
-        movieAdapter.setFilmeOnClickListener { movieView ->
+        movieAdapterPrimary.setMovieOnClickListener { movieView ->
             actionGoDetails(entity = movieView)
         }
     }
@@ -74,7 +74,7 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
 
     private fun exibeFilmesPopulares(resource: ResourceState<List<MovieView>>) {
         resource.data?.let { results ->
-            movieAdapter.moviesList = results
+            movieAdapterPrimary.moviesList = results
         }
     }
 
@@ -153,13 +153,13 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
     }
 
     private fun FragmentFilmesBinding.actionFilmePrincipalGoDetails() {
-        buttonLerMais.btnLerMais.setOnClickListener {
+        includeActionsPrincipal.btnLerMais.setOnClickListener {
             actionGoDetails(globalMovie)
         }
     }
 
     private fun FragmentFilmesBinding.actionFilmePrincipalSave() {
-        buttonAddFav.btnAddFav.setOnClickListener {
+        includeActionsPrincipal.btnAddFav.setOnClickListener {
             toast(getString(R.string.salvo_favoritos))
             // implementar save dao
         }
