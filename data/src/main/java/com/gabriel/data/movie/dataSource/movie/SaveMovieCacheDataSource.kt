@@ -5,5 +5,5 @@ import com.gabriel.domain.util.state.ResourceState
 import kotlinx.coroutines.flow.Flow
 
 interface SaveMovieCacheDataSource {
-    fun save(entity: MovieData): Flow<ResourceState<Boolean>>
+    suspend fun save(entity: MovieData): ResourceState<Boolean>
 }

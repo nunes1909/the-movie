@@ -7,7 +7,7 @@ import com.gabriel.domain.util.state.ResourceState
 import kotlinx.coroutines.flow.Flow
 
 class GetFavMovieUseCaseImpl(private val repository: GetFavMovieRespository): GetFavMovieUseCase {
-    override fun getAllFav(): Flow<ResourceState<List<MovieDomain>>> {
+    override suspend fun getAllFav(): Flow<ResourceState<List<MovieDomain>>> {
         return repository.getAllFav()
     }
 }

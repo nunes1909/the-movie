@@ -16,12 +16,17 @@ import com.gabriel.cache.util.constants.CacheConstants.DB_NAME
 abstract class TheMovieDataBase : RoomDatabase() {
     abstract fun getFavoritosDao(): FavoritosDao
     companion object {
+        @Volatile
+        private var db: TheMovieDataBase? = null
+
         fun getInstance(context: Context): TheMovieDataBase {
-            return Room.databaseBuilder(
+            return db ?: Room.databaseBuilder(
                 context,
                 TheMovieDataBase::class.java,
                 DB_NAME
-            ).build()
+            ).build().also {
+                db = it
+            }
         }
     }
 }

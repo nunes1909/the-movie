@@ -26,19 +26,23 @@ import com.gabriel.themovie.util.extensions.show
 import com.gabriel.themovie.util.extensions.toast
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel>() {
 
     override val viewModel: DetalhesViewModel by viewModel()
     private val args: DetalhesFragmentArgs by navArgs()
     private val movieAdapterPrimary by lazy { MovieAdapterPrimary() }
+    lateinit var globalMovie: MovieView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        globalMovie = args.movieView
         configuraRecyclerView()
         getDetails()
         movieObserver()
         similarObserver()
+        favoritoObserver()
     }
 
     private fun configuraRecyclerView() = with(binding) {
@@ -88,6 +92,33 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
         }
     }
 
+    private fun favoritoObserver() = lifecycleScope.launch {
+        salvaMovie()
+        resolveReturnSave()
+    }
+
+    private suspend fun resolveReturnSave() {
+        viewModel.save.collect { resource ->
+            when (resource) {
+                is ResourceState.Success -> {
+                    toast("${globalMovie.title} salvo com sucesso.")
+                }
+                is ResourceState.Error -> {
+                    toast(resource.message.toString())
+                }
+                else -> {}
+            }
+        }
+    }
+
+    private fun salvaMovie() {
+        binding.detalhesFavoritar.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                viewModel.saveFavorito(movieView = globalMovie)
+            }
+        }
+    }
+
     private fun exibeListaSimilares(resources: ResourceState<List<MovieView>>) {
         resources.data?.let { results ->
             movieAdapterPrimary.moviesList = results
@@ -109,6 +140,7 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
             carregaNota(movieView)
             carregaDescription(movieView)
             carregaGeneros(movieView)
+            carregaFev(movieView)
         }
     }
 
@@ -149,9 +181,13 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
         binding.detalhesTitulo.text = movieView.title
     }
 
-    private fun carregaImagens(filmeView: MovieView) {
-        binding.imageBanner.load("${BASE_URL_IMAGES}${filmeView.banner}")
-        binding.imageCartaz.load("${BASE_URL_IMAGES}${filmeView.cartaz}")
+    private fun carregaImagens(movieView: MovieView) {
+        binding.imageBanner.load("${BASE_URL_IMAGES}${movieView.banner}")
+        binding.imageCartaz.load("${BASE_URL_IMAGES}${movieView.cartaz}")
+    }
+
+    private fun carregaFev(movieView: MovieView) {
+
     }
 
     override fun getViewBinding(

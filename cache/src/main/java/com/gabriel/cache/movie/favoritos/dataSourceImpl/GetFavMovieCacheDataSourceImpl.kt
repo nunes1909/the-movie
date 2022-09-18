@@ -17,16 +17,16 @@ class GetFavMovieCacheDataSourceImpl(
         return collectFlow(dao.getAllFav())
     }
 
-    private suspend fun collectFlow(flowAllFav: Flow<ResourceState<List<FavoritoCache>>>) = flow {
+    private suspend fun collectFlow(flowAllFav: Flow<List<FavoritoCache>>) = flow {
         flowAllFav.collect { resourceState ->
             emit(validateState(resourceState = resourceState))
         }
     }
 
-    private fun validateState(resourceState: ResourceState<List<FavoritoCache>>):
+    private fun validateState(resourceState: List<FavoritoCache>):
             ResourceState<List<MovieData>> {
-        if (resourceState.data != null) {
-            val resultsDomain = mapper.mapToDataNonNull(resourceState.data!!)
+        if (resourceState != null) {
+            val resultsDomain = mapper.mapToDataNonNull(resourceState)
             return ResourceState.Undefined(data = resultsDomain)
         }
         return ResourceState.Undefined(

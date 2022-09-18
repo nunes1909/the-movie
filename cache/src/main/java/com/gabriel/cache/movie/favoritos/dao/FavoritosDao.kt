@@ -9,11 +9,7 @@ import kotlinx.coroutines.flow.flow
 @Dao
 interface FavoritosDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun save(entity: FavoritoCache): Flow<ResourceState<Boolean>> {
-        return flow {
-            emit(ResourceState.Success(data = true))
-        }
-    }
+    fun save(entity: FavoritoCache): Long
 
     @Delete
     fun delete(entity: FavoritoCache): Flow<ResourceState<Boolean>> {
@@ -23,5 +19,5 @@ interface FavoritosDao {
     }
 
     @Query("SELECT * FROM MOVIES_FAVORITOS ORDER BY ID")
-    fun getAllFav(): Flow<ResourceState<List<FavoritoCache>>>
+    fun getAllFav(): Flow<List<FavoritoCache>>
 }

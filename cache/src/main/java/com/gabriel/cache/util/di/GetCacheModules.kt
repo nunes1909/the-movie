@@ -10,8 +10,8 @@ import org.koin.dsl.module
 
 fun getCacheModules() = module {
     // Region cache modules
+    factory<TheMovieDataBase> { TheMovieDataBase.getInstance(context = get()) }
     single { get<TheMovieDataBase>().getFavoritosDao() }
-    single { TheMovieDataBase.getInstance(context = get()) }
     // Endregion
 
     // Region mapper

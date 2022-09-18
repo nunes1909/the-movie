@@ -3,6 +3,9 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdk 32
 
@@ -39,8 +42,11 @@ dependencies {
     implementation dependencies.kotlin
     implementation dependencies.koin
     implementation dependencies.coroutine
-    implementation dependencies.room
-    implementation dependencies.roomKtx
+
+    def room_version = '2.4.2'
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.5.0'
