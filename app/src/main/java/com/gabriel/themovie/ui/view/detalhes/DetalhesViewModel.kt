@@ -3,10 +3,7 @@ package com.gabriel.themovie.ui.view.detalhes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gabriel.domain.movie.model.MovieDomain
-import com.gabriel.domain.movie.useCase.GetDetailMovieUseCase
-import com.gabriel.domain.movie.useCase.GetSimilarMoviesUseCase
-import com.gabriel.domain.movie.useCase.SaveMovieUseCase
-import com.gabriel.domain.movie.useCase.VerifyExistsMovieUseCase
+import com.gabriel.domain.movie.useCase.*
 import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.themovie.movie.mapper.MovieViewMapper
 import com.gabriel.themovie.movie.model.MovieView
@@ -23,6 +20,7 @@ class DetalhesViewModel(
     private val getSimilarMoviesUseCase: GetSimilarMoviesUseCase,
     private val saveMovieUseCase: SaveMovieUseCase,
     private val verifyExists: VerifyExistsMovieUseCase,
+    private val deleteMovieUseCase: DeleteMovieUseCase,
     private val mapper: MovieViewMapper
 ) : ViewModel() {
     // Region StateFlow
@@ -33,9 +31,6 @@ class DetalhesViewModel(
     private val _listSimilares =
         MutableStateFlow<ResourceState<List<MovieView>>>(ResourceState.Loading())
     val listSimilares: StateFlow<ResourceState<List<MovieView>>> = _listSimilares
-
-    private val _save = MutableStateFlow<ResourceState<Boolean>>(ResourceState.Empty())
-    val save: StateFlow<ResourceState<Boolean>> = _save
 
     private val _verify = MutableStateFlow<ResourceState<Boolean>>(ResourceState.Empty())
     val verify: StateFlow<ResourceState<Boolean>> = _verify
@@ -97,15 +92,8 @@ class DetalhesViewModel(
     fun saveFavorito(movieView: MovieView) {
         CoroutineScope(IO).launch {
             val movieDomain = mapper.mapToDomain(movieView)
-            _save.value = safeSateSave(saveMovieUseCase.save(entity = movieDomain))
+            saveMovieUseCase.save(entity = movieDomain)
         }
-    }
-
-    private fun safeSateSave(save: ResourceState<Boolean>): ResourceState<Boolean> {
-        if (save.data != null) {
-            return ResourceState.Success(save.data!!)
-        }
-        return ResourceState.Error(message = save.message)
     }
     // Endregion
 
@@ -113,6 +101,15 @@ class DetalhesViewModel(
     private fun verifyExistsMovie(movieId: Int) {
         CoroutineScope(IO).launch {
             _verify.value = verifyExists.verifyExistsMovie(id = movieId)
+        }
+    }
+    // Endregion
+
+    // Region delete movie
+    fun deleteMovie(movieView: MovieView) {
+        CoroutineScope(IO).launch {
+            val movieDomain = mapper.mapToDomain(movieView)
+            deleteMovieUseCase.delete(movieDomain)
         }
     }
     // Endregion
