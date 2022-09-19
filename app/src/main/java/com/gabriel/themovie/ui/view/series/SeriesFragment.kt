@@ -14,6 +14,7 @@ import com.gabriel.themovie.R
 import com.gabriel.themovie.databinding.FragmentSeriesBinding
 import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.ui.adapters.MovieAdapterPrimary
+import com.gabriel.themovie.ui.view.detalhes.DetalhesViewModel
 import com.gabriel.themovie.util.base.BaseFragment
 import com.gabriel.themovie.util.constants.ConstantsView
 import com.gabriel.themovie.util.constants.ConstantsView.RV_COLUNS_DEFAULT
@@ -28,8 +29,9 @@ import timber.log.Timber
 class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
 
     override val viewModel: SeriesViewModel by viewModel()
+    private val viewModelDetail: DetalhesViewModel by viewModel()
     private val serieAdapter by lazy { MovieAdapterPrimary() }
-    lateinit var globalMultiMovie: MovieView
+    lateinit var globalMovie: MovieView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -144,7 +146,7 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
      * @param movieView é o objeto inicializado.
      */
     private fun inicializaGlobalMultiMovie(movieView: MovieView) {
-        globalMultiMovie = movieView
+        globalMovie = movieView
     }
 
     private fun configuraClickSeriePrincipal() = with(binding) {
@@ -154,14 +156,14 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
 
     private fun FragmentSeriesBinding.actionSeriePrincipalGoDetails() {
         includeActionsPrincipal.btnLerMais.setOnClickListener {
-            actionGoDetails(globalMultiMovie)
+            actionGoDetails(globalMovie)
         }
     }
 
     private fun FragmentSeriesBinding.actionSeriePrincipalSave() {
         includeActionsPrincipal.btnAddFav.setOnClickListener {
-            toast(getString(R.string.salvo_favoritos))
-            // implementar save dao
+            toast("${globalMovie.title} salvo com sucesso.")
+            viewModelDetail.saveFavorito(globalMovie)
         }
     }
 

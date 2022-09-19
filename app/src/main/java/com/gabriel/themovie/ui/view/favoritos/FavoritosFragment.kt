@@ -7,14 +7,12 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gabriel.domain.util.state.ResourceState
-import com.gabriel.themovie.R
 import com.gabriel.themovie.databinding.FragmentFavoritosBinding
 import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.ui.adapters.MovieAdapterSecondary
 import com.gabriel.themovie.util.base.BaseFragment
 import com.gabriel.themovie.util.extensions.hide
 import com.gabriel.themovie.util.extensions.show
-import com.gabriel.themovie.util.extensions.toast
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber

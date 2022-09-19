@@ -95,6 +95,13 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
         resolveReturnSave()
     }
 
+    /**
+     * Foi feita essa validação ao exibir o toast, pois sempre que a tela de detalhes é
+     * aberta o ischecked é atribuido. E sempre que é true, o [resource] é de success e
+     * o toast é exibido.
+     *
+     * Então primeiro é verificado se o movie existe no banco, e se não existir é exibido o toast.
+     */
     private suspend fun resolveReturnSave() {
         viewModel.save.collect { resource ->
             when (resource) {
