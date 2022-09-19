@@ -14,7 +14,7 @@ import com.gabriel.cache.util.constants.CacheConstants.TABLE_FAV
 @Entity(tableName = TABLE_FAV)
 data class FavoritoCache(
     @ColumnInfo(name = COLUMN_ID)
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = false)
     val id: Int? = null,
     @ColumnInfo(name = COLUMN_TITULO)
     val title: String,

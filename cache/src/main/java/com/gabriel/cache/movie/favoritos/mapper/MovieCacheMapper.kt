@@ -17,6 +17,7 @@ class MovieCacheMapper : CacheMapper<FavoritoCache, MovieData> {
 
     override fun mapToCache(type: MovieData): FavoritoCache {
         return FavoritoCache(
+            id = type.id,
             title = type.title,
             description = type.description,
             cartaz = type.cartaz,

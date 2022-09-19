@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "cf90b63a5ed07272ac1774315523b418",
+    "identityHash": "0ca460a7c41d23b335e13ad9b16edf7f",
     "entities": [
       {
         "tableName": "MOVIES_FAVORITOS",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ID` INTEGER PRIMARY KEY AUTOINCREMENT, `TITULO` TEXT NOT NULL, `DESCRICAO` TEXT, `PATH_CARTAZ` TEXT, `PATH_BANNER` TEXT, `ID_API` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ID` INTEGER, `TITULO` TEXT NOT NULL, `DESCRICAO` TEXT, `PATH_CARTAZ` TEXT, `PATH_BANNER` TEXT, `ID_API` INTEGER NOT NULL, PRIMARY KEY(`ID`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -49,7 +49,7 @@
           "columnNames": [
             "ID"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [],
         "foreignKeys": []
@@ -58,7 +58,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'cf90b63a5ed07272ac1774315523b418')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0ca460a7c41d23b335e13ad9b16edf7f')"
     ]
   }
 }
