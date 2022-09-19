@@ -1,6 +1,6 @@
 package com.gabriel.data.movie.dataStoreImpl
 
-import com.gabriel.data.movie.dataSource.VerifyExistsMovieDataSource
+import com.gabriel.data.movie.dataSource.movie.VerifyExistsMovieDataSource
 import com.gabriel.data.movie.dataStore.VerifyExistsMovieDataStore
 import com.gabriel.domain.util.state.ResourceState
 

@@ -1,7 +1,7 @@
 package com.gabriel.cache.movie.favoritos.dataSourceImpl
 
 import com.gabriel.cache.movie.favoritos.dao.FavoritosDao
-import com.gabriel.data.movie.dataSource.VerifyExistsMovieDataSource
+import com.gabriel.data.movie.dataSource.movie.VerifyExistsMovieDataSource
 import com.gabriel.domain.util.state.ResourceState
 
 class VerifyExistsMovieDataSourceImpl(
