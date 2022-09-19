@@ -26,7 +26,6 @@ import com.gabriel.themovie.util.extensions.show
 import com.gabriel.themovie.util.extensions.toast
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel>() {
 
@@ -140,7 +139,7 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
             carregaNota(movieView)
             carregaDescription(movieView)
             carregaGeneros(movieView)
-            carregaFev(movieView)
+            carregaFav()
         }
     }
 
@@ -186,8 +185,10 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
         binding.imageCartaz.load("${BASE_URL_IMAGES}${movieView.cartaz}")
     }
 
-    private fun carregaFev(movieView: MovieView) {
-
+    private fun carregaFav() = lifecycleScope.launch {
+        viewModel.verify.collect { resource ->
+            binding.detalhesFavoritar.isChecked = resource.data!!
+        }
     }
 
     override fun getViewBinding(

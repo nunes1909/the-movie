@@ -29,6 +29,10 @@ fun getDomainModules() = module {
     factory<GetFavMovieUseCase> {
         GetFavMovieUseCaseImpl(repository = get())
     }
+
+    factory<VerifyExistsMovieUseCase> {
+        VerifyExistsMovieUseCaseImpl(repository = get())
+    }
     // Endregion
 
     // Multi modules

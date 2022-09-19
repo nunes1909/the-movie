@@ -63,6 +63,12 @@ fun getDataModules() = module {
             source = get()
         )
     }
+
+    factory<VerifyExistsMovieDataStore> {
+        VerifyExistsMovieDataStoreImpl(
+            source = get()
+        )
+    }
     // Endregion
 
     // Region Repository
@@ -112,6 +118,12 @@ fun getDataModules() = module {
         GetFavMovieRespositoryImpl(
             dataStore = get(),
             mapper = get()
+        )
+    }
+
+    factory<VerifyExistsMovieRespository> {
+        VerifyExistsMovieRespositoryImpl(
+            dataStore = get()
         )
     }
     // Endregion

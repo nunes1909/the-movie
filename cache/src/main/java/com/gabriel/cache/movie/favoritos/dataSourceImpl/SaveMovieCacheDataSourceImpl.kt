@@ -12,10 +12,10 @@ class SaveMovieCacheDataSourceImpl(
 ): SaveMovieCacheDataSource {
     override suspend fun save(entity: MovieData): ResourceState<Boolean> {
         val movieCache = mapper.mapToCache(type = entity)
-        return validateState(dao.save(entity = movieCache))
+        return validateAndReturnState(dao.save(entity = movieCache))
     }
 
-    private fun validateState(id: Long?): ResourceState<Boolean> {
+    private fun validateAndReturnState(id: Long?): ResourceState<Boolean> {
         if (id != null) {
             return ResourceState.Success(data = true)
         }
