@@ -7,7 +7,7 @@ import com.gabriel.domain.util.state.ResourceState
 class VerifyExistsMovieRespositoryImpl(
     private val dataStore: VerifyExistsMovieDataStore,
 ): VerifyExistsMovieRespository {
-    override suspend fun verifyExistsMovie(idApi: Int): ResourceState<Boolean> {
-        return dataStore.verifyExistsMovie(idApi = idApi)
+    override suspend fun verifyExistsMovie(id: Int): ResourceState<Boolean> {
+        return dataStore.verifyExistsMovie(id = id)
     }
 }

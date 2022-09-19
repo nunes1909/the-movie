@@ -40,16 +40,21 @@ class FavoritosFragment : BaseFragment<FragmentFavoritosBinding, FavoritosViewMo
             when (resource) {
                 is ResourceState.Success -> {
                     exibeFavoritos(resource)
-                    ocultaProgressBar(binding.progressFavoritos)
+                    binding.layoutEditPesquisa.show()
+                    binding.progressFavoritos.hide()
+                    binding.includeLayoutEmpty.imageEmpty.hide()
+                    binding.includeLayoutEmpty.textViewEmpty.hide()
                 }
                 is ResourceState.Error -> {
-                    ocultaProgressBar(binding.progressFavoritos)
-                    toast(getString(R.string.um_erro_ocorreu))
+                    binding.progressFavoritos.hide()
+                    binding.layoutEditPesquisa.hide()
+                    binding.includeLayoutEmpty.imageEmpty.show()
+                    binding.includeLayoutEmpty.textViewEmpty.show()
                     Timber.tag("FilmesFragment/observerListaFilmes")
                         .e("Error -> ${resource.message} Cod -> ${resource.cod}")
                 }
                 is ResourceState.Loading -> {
-                    exibeProgressBar(binding.progressFavoritos)
+                    binding.progressFavoritos.show()
                 }
                 else -> {}
             }
@@ -60,14 +65,6 @@ class FavoritosFragment : BaseFragment<FragmentFavoritosBinding, FavoritosViewMo
         resource.data?.let { results ->
             movieAdapter.moviesList = results
         }
-    }
-
-    private fun ocultaProgressBar(progress: View) {
-        progress.hide()
-    }
-
-    private fun exibeProgressBar(progress: View) {
-        progress.show()
     }
 
     override fun getViewBinding(

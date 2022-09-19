@@ -13,7 +13,6 @@ import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.util.constants.ConstantsView.TYPE_FILME
 import com.gabriel.themovie.util.constants.ConstantsView.TYPE_SERIE
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -113,7 +112,7 @@ class DetalhesViewModel(
     // Region verify if exists movie
     private fun verifyExistsMovie(movieId: Int) {
         CoroutineScope(IO).launch {
-            _verify.value = verifyExists.verifyExistsMovie(idApi = movieId)
+            _verify.value = verifyExists.verifyExistsMovie(id = movieId)
         }
     }
     // Endregion

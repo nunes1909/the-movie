@@ -13,6 +13,6 @@ object CacheConstants {
     const val COLUMN_DESC = "DESCRICAO"
     const val COLUMN_CARTAZ = "PATH_CARTAZ"
     const val COLUMN_BANNER = "PATH_BANNER"
-    const val COLUMN_ID_API = "ID_API"
+    const val COLUMN_TYPE = "TIPO"
     // Endregion
 }

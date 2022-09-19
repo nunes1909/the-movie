@@ -55,7 +55,7 @@ class FavoritosViewModel(
 
     private fun safeStateGetFav(resource: ResourceState<List<MovieDomain>>):
             ResourceState<List<MovieView>> {
-        if (resource.data != null) {
+        if (resource.data != null && resource.data!!.isNotEmpty()) {
             val listView = mapper.mapToViewNonNull(resource.data!!)
             return ResourceState.Success(listView)
         }
