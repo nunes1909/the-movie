@@ -36,7 +36,6 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        globalMovie = args.movieView
         configuraRecyclerView()
         getDetails()
         movieObserver()
@@ -100,7 +99,9 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
         viewModel.save.collect { resource ->
             when (resource) {
                 is ResourceState.Success -> {
-                    toast("${globalMovie.title} salvo com sucesso.")
+                    if (viewModel.verify.value.data == false) {
+                        toast("${globalMovie.title} salvo com sucesso.")
+                    }
                 }
                 is ResourceState.Error -> {
                     toast(resource.message.toString())
@@ -134,6 +135,7 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
 
     private fun preencheDetails(resource: ResourceState<MovieView>) {
         resource.data?.let { movieView ->
+            globalMovie = movieView
             carregaImagens(movieView)
             carregaTitle(movieView)
             carregaNota(movieView)
