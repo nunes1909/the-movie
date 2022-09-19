@@ -7,14 +7,12 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gabriel.domain.util.state.ResourceState
-import com.gabriel.themovie.R
 import com.gabriel.themovie.databinding.FragmentFavoritosBinding
 import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.ui.adapters.MovieAdapterSecondary
 import com.gabriel.themovie.util.base.BaseFragment
 import com.gabriel.themovie.util.extensions.hide
 import com.gabriel.themovie.util.extensions.show
-import com.gabriel.themovie.util.extensions.toast
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -40,16 +38,21 @@ class FavoritosFragment : BaseFragment<FragmentFavoritosBinding, FavoritosViewMo
             when (resource) {
                 is ResourceState.Success -> {
                     exibeFavoritos(resource)
-                    ocultaProgressBar(binding.progressFavoritos)
+                    binding.layoutEditPesquisa.show()
+                    binding.progressFavoritos.hide()
+                    binding.includeLayoutEmpty.imageEmpty.hide()
+                    binding.includeLayoutEmpty.textViewEmpty.hide()
                 }
                 is ResourceState.Error -> {
-                    ocultaProgressBar(binding.progressFavoritos)
-                    toast(getString(R.string.um_erro_ocorreu))
+                    binding.progressFavoritos.hide()
+                    binding.layoutEditPesquisa.hide()
+                    binding.includeLayoutEmpty.imageEmpty.show()
+                    binding.includeLayoutEmpty.textViewEmpty.show()
                     Timber.tag("FilmesFragment/observerListaFilmes")
                         .e("Error -> ${resource.message} Cod -> ${resource.cod}")
                 }
                 is ResourceState.Loading -> {
-                    exibeProgressBar(binding.progressFavoritos)
+                    binding.progressFavoritos.show()
                 }
                 else -> {}
             }
@@ -60,14 +63,6 @@ class FavoritosFragment : BaseFragment<FragmentFavoritosBinding, FavoritosViewMo
         resource.data?.let { results ->
             movieAdapter.moviesList = results
         }
-    }
-
-    private fun ocultaProgressBar(progress: View) {
-        progress.hide()
-    }
-
-    private fun exibeProgressBar(progress: View) {
-        progress.show()
     }
 
     override fun getViewBinding(

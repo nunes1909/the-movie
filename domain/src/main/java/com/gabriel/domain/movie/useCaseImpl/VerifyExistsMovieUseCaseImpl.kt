@@ -6,7 +6,7 @@ import com.gabriel.domain.util.state.ResourceState
 
 class VerifyExistsMovieUseCaseImpl(private val repository: VerifyExistsMovieRespository):
     VerifyExistsMovieUseCase {
-    override suspend fun verifyExistsMovie(idApi: Int): ResourceState<Boolean> {
-        return repository.verifyExistsMovie(idApi = idApi)
+    override suspend fun verifyExistsMovie(id: Int): ResourceState<Boolean> {
+        return repository.verifyExistsMovie(id = id)
     }
 }

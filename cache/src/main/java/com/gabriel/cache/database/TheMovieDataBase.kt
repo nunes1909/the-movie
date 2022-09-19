@@ -5,11 +5,11 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.gabriel.cache.movie.favoritos.dao.FavoritosDao
-import com.gabriel.cache.movie.favoritos.model.FavoritoCache
+import com.gabriel.cache.movie.favoritos.model.MovieCache
 import com.gabriel.cache.util.constants.CacheConstants.DB_NAME
 
 @Database(
-    entities = [FavoritoCache::class],
+    entities = [MovieCache::class],
     version = 1,
     exportSchema = true
 )
@@ -24,7 +24,7 @@ abstract class TheMovieDataBase : RoomDatabase() {
                 context,
                 TheMovieDataBase::class.java,
                 DB_NAME
-            ).build().also {
+            ).fallbackToDestructiveMigration().build().also {
                 db = it
             }
         }
