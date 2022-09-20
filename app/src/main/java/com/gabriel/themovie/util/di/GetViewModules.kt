@@ -30,6 +30,8 @@ fun getViewModules() = module {
             getTrendingMovieUseCase = get(),
             saveMovieUseCase = get(),
             getDetailMovieUseCase = get(),
+            verifyExists = get(),
+            deleteMovieUseCase = get(),
             mapper = get()
         )
     }

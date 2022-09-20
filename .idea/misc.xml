@@ -4,8 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/drawable-anydpi/ic_add.xml" value="0.444" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/drawable-anydpi/ic_delete.xml" value="0.1935" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/drawable-anydpi/ic_info.xml" value="0.444" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/drawable-anydpi/ic_play.xml" value="0.4315" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/drawable-anydpi/ic_remove.xml" value="0.1935" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/drawable/gradiant.xml" value="0.444" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/drawable/gradiant_detalhes.xml" value="0.3675" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/drawable/gradiant_movies.xml" value="0.4315" />

@@ -116,7 +116,18 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
             inicializaGlobalMultiMovie(movie)
             carregaImagem(movie)
             carregaTitulo(movie)
+            observerActionAdd()
             carregaActionTrailer(movie)
+        }
+    }
+
+    private fun observerActionAdd() = lifecycleScope.launch {
+        viewModel.verify.collect { resource ->
+            if (resource.data!!) {
+                binding.includeActionsPrincipal.btnAddFav.load(R.drawable.ic_remove)
+            } else {
+                binding.includeActionsPrincipal.btnAddFav.load(R.drawable.ic_add)
+            }
         }
     }
 
@@ -195,8 +206,11 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
 
     private fun FragmentFilmesBinding.actionFilmePrincipalSave() {
         includeActionsPrincipal.btnAddFav.setOnClickListener {
-            toast("${globalMovie.title} salvo com sucesso.")
-            viewModel.saveFavorito(globalMovie)
+            if (viewModel.verify.value.data!!) {
+                viewModel.deleteMovie(globalMovie)
+            } else {
+                viewModel.saveFavorito(globalMovie)
+            }
         }
     }
 
