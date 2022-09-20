@@ -3,14 +3,15 @@ package com.gabriel.themovie.ui.view.series
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gabriel.domain.movie.model.MovieDomain
-import com.gabriel.domain.movie.useCase.GetAllMoviesUseCase
-import com.gabriel.domain.movie.useCase.GetDetailMovieUseCase
-import com.gabriel.domain.movie.useCase.GetTrendingMovieUseCase
+import com.gabriel.domain.movie.useCase.*
 import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.themovie.movie.mapper.MovieViewMapper
 import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.util.constants.ConstantsView
 import com.gabriel.themovie.util.constants.ConstantsView.TYPE_SERIE
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -19,6 +20,9 @@ class SeriesViewModel(
     private val getAllMoviesUseCase: GetAllMoviesUseCase,
     private val getTrendingMovieUseCase: GetTrendingMovieUseCase,
     private val getDetailMovieUseCase: GetDetailMovieUseCase,
+    private val saveMovieUseCase: SaveMovieUseCase,
+    private val verifyExists: VerifyExistsMovieUseCase,
+    private val deleteMovieUseCase: DeleteMovieUseCase,
     private val mapper: MovieViewMapper
 ) : ViewModel() {
     // Region StateFlow
@@ -28,6 +32,9 @@ class SeriesViewModel(
     private val _movieDetail =
         MutableStateFlow<ResourceState<MovieView>>(ResourceState.Loading())
     val movieDetail: StateFlow<ResourceState<MovieView>> = _movieDetail
+
+    private val _verify = MutableStateFlow<ResourceState<Boolean>>(ResourceState.Empty())
+    val verify: StateFlow<ResourceState<Boolean>> = _verify
     // Endregion
 
     init {
@@ -73,9 +80,12 @@ class SeriesViewModel(
     }
 
     // Region get details
-    private fun getDetailMovie(type: String, movieId: Int) = viewModelScope.launch {
-        val resourceState = getDetailMovieUseCase.getDetailMovie(type = type, movieId = movieId)
-        _movieDetail.value = safeStateGetDetailMovie(resourceState)
+    private fun getDetailMovie(type: String, movieId: Int) {
+        CoroutineScope(IO).launch {
+            val resourceState = getDetailMovieUseCase.getDetailMovie(type = type, movieId = movieId)
+            verifyExistsMovie(movieId = movieId)
+            _movieDetail.value = safeStateGetDetailMovie(resourceState)
+        }
     }
 
     private fun safeStateGetDetailMovie(resourceState: ResourceState<MovieDomain>):
@@ -88,4 +98,39 @@ class SeriesViewModel(
     }
     // Endregion get details
     // Endregion tendência
+
+    // Region save fav
+    fun saveFavorito(movieView: MovieView) {
+        CoroutineScope(IO).launch {
+            val movieDomain = mapper.mapToDomain(movieView)
+            safeSateSave(saveMovieUseCase.save(entity = movieDomain))
+            verifyExistsMovie(movieId = movieView.id)
+        }
+    }
+
+    private fun safeSateSave(save: ResourceState<Boolean>): ResourceState<Boolean> {
+        if (save.data != null) {
+            return ResourceState.Success(save.data!!)
+        }
+        return ResourceState.Error(message = save.message)
+    }
+    // Endregion
+
+    // Region verify if exists movie
+    private fun verifyExistsMovie(movieId: Int) {
+        CoroutineScope(IO).launch {
+            _verify.value = verifyExists.verifyExistsMovie(id = movieId)
+        }
+    }
+    // Endregion
+
+    // Region delete movie
+    fun deleteMovie(movieView: MovieView) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val movieDomain = mapper.mapToDomain(movieView)
+            deleteMovieUseCase.delete(movieDomain)
+            verifyExistsMovie(movieId = movieView.id)
+        }
+    }
+    // Endregion
 }

@@ -27,8 +27,8 @@ class FavoritosViewModel(
     }
 
     // Region get list fav
-    fun getAllFav() = viewModelScope.launch {
-        collectFlow(getFavMovieUseCase.getAllFav())
+    fun getAllFav(query: String = "") = viewModelScope.launch {
+        collectFlow(getFavMovieUseCase.getAllFav(query = query))
     }
 
     private suspend fun collectFlow(flowFav: Flow<ResourceState<List<MovieDomain>>>) {

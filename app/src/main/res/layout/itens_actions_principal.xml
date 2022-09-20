@@ -43,12 +43,13 @@
         android:clickable="false"
         android:focusable="false"
         app:cardBackgroundColor="#FFFFFF"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="2dp"
         app:cardElevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btnLerMais"
         app:layout_constraintStart_toEndOf="@id/btnAddFav"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3">
 
         <TextView
             android:id="@+id/textViewTrailer"

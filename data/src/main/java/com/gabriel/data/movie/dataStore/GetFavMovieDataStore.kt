@@ -5,5 +5,5 @@ import com.gabriel.domain.util.state.ResourceState
 import kotlinx.coroutines.flow.Flow
 
 interface GetFavMovieDataStore {
-    suspend fun getAllFav(): Flow<ResourceState<List<MovieData>>>
+    suspend fun getAllFav(query: String): Flow<ResourceState<List<MovieData>>>
 }

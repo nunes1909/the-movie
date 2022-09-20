@@ -17,6 +17,9 @@ interface FavoritosDao {
     @Query("SELECT * FROM MOVIES_FAVORITOS ORDER BY ID")
     fun getAllFav(): Flow<List<MovieCache>>
 
+    @Query("SELECT * FROM MOVIES_FAVORITOS WHERE TITULO LIKE :query")
+    fun getQueryFav(query: String): Flow<List<MovieCache>>
+
     @Query("SELECT EXISTS (SELECT ID FROM MOVIES_FAVORITOS WHERE id = :id)")
     fun verifyExistsMovie(id: Int): Boolean
 }

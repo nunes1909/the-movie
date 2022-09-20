@@ -26,6 +26,7 @@ import com.gabriel.themovie.util.constants.ConstantsView.TYPE_FILME
 import com.gabriel.themovie.util.constants.ConstantsView.TYPE_VIDEO
 import com.gabriel.themovie.util.extensions.hide
 import com.gabriel.themovie.util.extensions.show
+import com.gabriel.themovie.util.extensions.tentaCarregar
 import com.gabriel.themovie.util.extensions.toast
 import com.gabriel.themovie.video.model.VideoView
 import kotlinx.coroutines.launch
@@ -35,7 +36,6 @@ import timber.log.Timber
 class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
 
     override val viewModel: FilmesViewModel by viewModel()
-    private val viewModelDetail: DetalhesViewModel by viewModel()
     private val movieAdapterPrimary by lazy { MovieAdapterPrimary() }
     lateinit var globalMovie: MovieView
 
@@ -116,12 +116,23 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
             carregaImagem(movie)
             carregaTitulo(movie)
             carregaActionTrailer(movie)
+            observerActionAdd()
+        }
+    }
+
+    private fun observerActionAdd() = lifecycleScope.launch {
+        viewModel.verify.collect { resource ->
+            if (resource.data != null && resource.data == true) {
+                binding.includeActionsPrincipal.btnAddFav.load(R.drawable.ic_remove)
+            } else {
+                binding.includeActionsPrincipal.btnAddFav.load(R.drawable.ic_add)
+            }
         }
     }
 
     private fun carregaImagem(movie: MovieView) {
         binding.bannerFilmePrincipal
-            .load("${ConstantsView.BASE_URL_IMAGES}${movie.cartaz}")
+            .tentaCarregar("${ConstantsView.BASE_URL_IMAGES}${movie.cartaz}")
     }
 
     private fun carregaTitulo(movie: MovieView) {
@@ -134,22 +145,16 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
         }
     }
 
-    /**
-     * 1. É verificado se a lista de vídeos não é nula ou vazia.
-     * 2. Caso seja, é exibido o toast informativo.
-     * 3. É obtido a [key] do video index 0 que seja do tipo [Trailer] e seja [official]
-     * 4. É executado a Intent somente se a [key] não é nula.
-     */
     private fun goTrailer(videos: List<VideoView>?) {
         if (!videos.isNullOrEmpty()) {
             val videoKey = videos.filter {
-                it.type == TYPE_VIDEO && it.official == true
+                (it.type == TYPE_VIDEO) || (it.official == true)
             }[0].key
 
             if (!videoKey.isNullOrEmpty()) {
                 Intent(
                     Intent.ACTION_VIEW,
-                    Uri.parse("${BASE_URL_VIDEOS}$videoKey")
+                    Uri.parse("${ConstantsView.BASE_URL_VIDEOS}$videoKey")
                 ).apply { startActivity(this) }
             }
         } else {
@@ -194,8 +199,13 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
 
     private fun FragmentFilmesBinding.actionFilmePrincipalSave() {
         includeActionsPrincipal.btnAddFav.setOnClickListener {
-            toast("${globalMovie.title} salvo com sucesso.")
-            viewModel.saveFavorito(globalMovie)
+            if (viewModel.verify.value.data!!) {
+                viewModel.deleteMovie(globalMovie)
+                toast("${globalMovie.title} removido dos favoritos.")
+            } else {
+                viewModel.saveFavorito(globalMovie)
+                toast("${globalMovie.title} adicionado aos favoritos.")
+            }
         }
     }
 
