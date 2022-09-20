@@ -7,7 +7,7 @@ import com.gabriel.domain.util.state.ResourceState
 import kotlinx.coroutines.flow.Flow
 
 class GetFavMovieDataStoreImpl(private val source: GetFavMovieCacheDataSource): GetFavMovieDataStore {
-    override suspend fun getAllFav(): Flow<ResourceState<List<MovieData>>> {
-        return source.getAllFav()
+    override suspend fun getAllFav(query: String): Flow<ResourceState<List<MovieData>>> {
+        return source.getAllFav(query = query)
     }
 }

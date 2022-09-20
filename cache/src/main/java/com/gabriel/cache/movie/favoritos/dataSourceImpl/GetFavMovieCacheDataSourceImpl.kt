@@ -13,8 +13,13 @@ class GetFavMovieCacheDataSourceImpl(
     private val dao: FavoritosDao,
     private val mapper: MovieCacheMapper
 ) : GetFavMovieCacheDataSource {
-    override suspend fun getAllFav(): Flow<ResourceState<List<MovieData>>> {
-        return collectFlow(dao.getAllFav())
+    override suspend fun getAllFav(query: String): Flow<ResourceState<List<MovieData>>> {
+        return if (query.isEmpty()) {
+            collectFlow(dao.getAllFav())
+        } else {
+            val queryLike = "%$query%"
+            collectFlow(dao.getQueryFav(query = queryLike))
+        }
     }
 
     private suspend fun collectFlow(flowAllFav: Flow<List<MovieCache>>) = flow {

@@ -10,6 +10,7 @@ import com.gabriel.themovie.databinding.ItemListPrimaryBinding
 import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.util.constants.ConstantsView.BASE_URL_IMAGES
 import com.gabriel.themovie.util.extensions.limitValue
+import com.gabriel.themovie.util.extensions.tentaCarregar
 
 class MovieAdapterPrimary : RecyclerView.Adapter<MovieAdapterPrimary.MovieViewHolder>() {
 
@@ -49,7 +50,7 @@ class MovieAdapterPrimary : RecyclerView.Adapter<MovieAdapterPrimary.MovieViewHo
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = moviesList[position]
         holder.binding.apply {
-            itemListImage.load("${BASE_URL_IMAGES}${movie.cartaz}")
+            itemListImage.tentaCarregar("${BASE_URL_IMAGES}${movie.cartaz}")
             itemListTitle.text = movie.title.limitValue(10, true)
         }
 

@@ -23,10 +23,7 @@ import com.gabriel.themovie.util.constants.ConstantsView.EXIBE_ELLIPSIZE
 import com.gabriel.themovie.util.constants.ConstantsView.LIMIT_DESCRIPTION
 import com.gabriel.themovie.util.constants.ConstantsView.LIMIT_NOTA
 import com.gabriel.themovie.util.constants.ConstantsView.NOT_EXIBE_ELLIPSIZE
-import com.gabriel.themovie.util.extensions.hide
-import com.gabriel.themovie.util.extensions.limitValue
-import com.gabriel.themovie.util.extensions.show
-import com.gabriel.themovie.util.extensions.toast
+import com.gabriel.themovie.util.extensions.*
 import com.gabriel.themovie.video.model.VideoView
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -203,8 +200,8 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
     }
 
     private fun carregaImagens(movieView: MovieView) {
-        binding.imageBanner.load("${BASE_URL_IMAGES}${movieView.banner}")
-        binding.imageCartaz.load("${BASE_URL_IMAGES}${movieView.cartaz}")
+        binding.imageBanner.tentaCarregar("${BASE_URL_IMAGES}${movieView.banner}")
+        binding.imageCartaz.tentaCarregar("${BASE_URL_IMAGES}${movieView.cartaz}")
     }
 
     private fun carregaFav() = lifecycleScope.launch {

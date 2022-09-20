@@ -26,6 +26,7 @@ import com.gabriel.themovie.util.constants.ConstantsView.TYPE_FILME
 import com.gabriel.themovie.util.constants.ConstantsView.TYPE_VIDEO
 import com.gabriel.themovie.util.extensions.hide
 import com.gabriel.themovie.util.extensions.show
+import com.gabriel.themovie.util.extensions.tentaCarregar
 import com.gabriel.themovie.util.extensions.toast
 import com.gabriel.themovie.video.model.VideoView
 import kotlinx.coroutines.launch
@@ -121,7 +122,7 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
 
     private fun carregaImagem(movie: MovieView) {
         binding.bannerFilmePrincipal
-            .load("${ConstantsView.BASE_URL_IMAGES}${movie.cartaz}")
+            .tentaCarregar("${ConstantsView.BASE_URL_IMAGES}${movie.cartaz}")
     }
 
     private fun carregaTitulo(movie: MovieView) {

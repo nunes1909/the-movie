@@ -12,6 +12,7 @@ import com.gabriel.themovie.util.constants.ConstantsView.BASE_URL_IMAGES
 import com.gabriel.themovie.util.constants.ConstantsView.EXIBE_ELLIPSIZE
 import com.gabriel.themovie.util.constants.ConstantsView.LIMIT_DESCRIPTION
 import com.gabriel.themovie.util.extensions.limitValue
+import com.gabriel.themovie.util.extensions.tentaCarregar
 
 class MovieAdapterSecondary : RecyclerView.Adapter<MovieAdapterSecondary.SearchMovieHolder>() {
 
@@ -52,7 +53,7 @@ class MovieAdapterSecondary : RecyclerView.Adapter<MovieAdapterSecondary.SearchM
     override fun onBindViewHolder(holder: SearchMovieHolder, position: Int) {
         val movie = moviesList[position]
         holder.binding.apply {
-            itemMovieImage.load("${BASE_URL_IMAGES}${movie.cartaz}")
+            itemMovieImage.tentaCarregar("${BASE_URL_IMAGES}${movie.cartaz}")
             itemMovieTitle.text = movie.title.limitValue(15, true)
             itemMovieDescription.text = movie.description?.limitValue(LIMIT_DESCRIPTION, EXIBE_ELLIPSIZE)
         }

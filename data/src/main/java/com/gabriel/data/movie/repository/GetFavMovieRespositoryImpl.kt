@@ -13,8 +13,8 @@ class GetFavMovieRespositoryImpl(
     private val dataStore: GetFavMovieDataStore,
     private val mapper: MovieDataMapper
 ) : GetFavMovieRespository {
-    override suspend fun getAllFav(): Flow<ResourceState<List<MovieDomain>>> {
-        return collectFlow(dataStore.getAllFav())
+    override suspend fun getAllFav(query: String): Flow<ResourceState<List<MovieDomain>>> {
+        return collectFlow(dataStore.getAllFav(query = query))
     }
 
     private suspend fun collectFlow(flowAllFav: Flow<ResourceState<List<MovieData>>>) = flow {

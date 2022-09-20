@@ -24,6 +24,7 @@ import com.gabriel.themovie.util.constants.ConstantsView.RV_COLUNS_DEFAULT
 import com.gabriel.themovie.util.constants.ConstantsView.TYPE_SERIE
 import com.gabriel.themovie.util.extensions.hide
 import com.gabriel.themovie.util.extensions.show
+import com.gabriel.themovie.util.extensions.tentaCarregar
 import com.gabriel.themovie.util.extensions.toast
 import com.gabriel.themovie.video.model.VideoView
 import kotlinx.coroutines.launch
@@ -119,7 +120,7 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
 
     private fun carregaImagem(movie: MovieView) {
         binding.serieBannerPrincipal
-            .load("${ConstantsView.BASE_URL_IMAGES}${movie.banner}")
+            .tentaCarregar("${ConstantsView.BASE_URL_IMAGES}${movie.banner}")
     }
 
     private fun carregaTitulo(movie: MovieView) {
