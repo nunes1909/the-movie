@@ -5,16 +5,23 @@ import com.gabriel.data.movie.dataStore.*
 import com.gabriel.data.movie.dataStoreImpl.*
 import com.gabriel.data.movie.mapper.MovieDataMapper
 import com.gabriel.data.movie.repository.*
+import com.gabriel.data.video.mapper.VideoDataMapper
 import com.gabriel.domain.movie.repository.*
 import org.koin.dsl.module
 
 fun getDataModules() = module {
     // Genero modules
     factory { GeneroDataMapper() }
+    factory { VideoDataMapper() }
     // Endregion
 
     // Region data mapper
-    factory { MovieDataMapper(mapper = get()) }
+    factory {
+        MovieDataMapper(
+            generoMapper = get(),
+            videoMapper = get()
+        )
+    }
     // Endregion
 
     // Region Data Store
@@ -66,6 +73,12 @@ fun getDataModules() = module {
 
     factory<VerifyExistsMovieDataStore> {
         VerifyExistsMovieDataStoreImpl(
+            source = get()
+        )
+    }
+
+    factory<DeleteMovieDataStore> {
+        DeleteMovieDataStoreImpl(
             source = get()
         )
     }
@@ -124,6 +137,13 @@ fun getDataModules() = module {
     factory<VerifyExistsMovieRespository> {
         VerifyExistsMovieRespositoryImpl(
             dataStore = get()
+        )
+    }
+
+    factory<DeleteMovieRepository> {
+        DeleteMovieRepositoryImpl(
+            dataStore = get(),
+            mapper = get()
         )
     }
     // Endregion

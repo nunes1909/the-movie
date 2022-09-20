@@ -5,5 +5,5 @@ import com.gabriel.domain.util.state.ResourceState
 import kotlinx.coroutines.flow.Flow
 
 interface DeleteMovieUseCase {
-    fun delete(entity: MovieDomain): Flow<ResourceState<Boolean>>
+    fun delete(entity: MovieDomain): ResourceState<Boolean>
 }

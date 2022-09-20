@@ -1,4 +1,4 @@
-package com.gabriel.remote.movie.dataSourceImpl.multi
+package com.gabriel.remote.movie.dataSourceImpl.movie
 
 import com.gabriel.data.movie.dataSource.movie.SearchMovieDataSource
 import com.gabriel.data.movie.model.MovieData

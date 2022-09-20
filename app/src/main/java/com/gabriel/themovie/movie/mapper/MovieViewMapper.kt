@@ -4,11 +4,19 @@ import com.gabriel.domain.movie.model.MovieDomain
 import com.gabriel.themovie.genero.mapper.GeneroViewMapper
 import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.util.base.ViewMapper
+import com.gabriel.themovie.video.mapper.VideoViewMapper
 
-class MovieViewMapper(private val mapper: GeneroViewMapper) : ViewMapper<MovieView, MovieDomain> {
+class MovieViewMapper(
+    private val generoMapper: GeneroViewMapper,
+    private val videoMapper: VideoViewMapper
+) : ViewMapper<MovieView, MovieDomain> {
     override fun mapToDomain(type: MovieView): MovieDomain {
         val generos = type.generos?.let {
-            mapper.mapToDomainNonNull(it)
+            generoMapper.mapToDomainNonNull(it)
+        } ?: listOf()
+
+        val videos = type.videos?.let {
+            videoMapper.mapToDomainNonNull(it)
         } ?: listOf()
 
         return MovieDomain(
@@ -17,8 +25,9 @@ class MovieViewMapper(private val mapper: GeneroViewMapper) : ViewMapper<MovieVi
             description = type.description,
             type = type.type,
             nota = type.nota,
-            generos = generos,
             favorito = type.favorito,
+            generos = generos,
+            videos = videos,
             cartaz = type.cartaz,
             banner = type.banner
         )
@@ -26,7 +35,11 @@ class MovieViewMapper(private val mapper: GeneroViewMapper) : ViewMapper<MovieVi
 
     override fun mapToView(type: MovieDomain): MovieView {
         val generos = type.generos?.let {
-            mapper.mapToViewNonNull(it)
+            generoMapper.mapToViewNonNull(it)
+        } ?: listOf()
+
+        val videos = type.videos?.let {
+            videoMapper.mapToViewNonNull(it)
         } ?: listOf()
 
         return MovieView(
@@ -35,8 +48,9 @@ class MovieViewMapper(private val mapper: GeneroViewMapper) : ViewMapper<MovieVi
             description = type.description,
             type = type.type,
             nota = type.nota,
-            generos = generos,
             favorito = type.favorito,
+            generos = generos,
+            videos = videos,
             cartaz = type.cartaz,
             banner = type.banner
         )

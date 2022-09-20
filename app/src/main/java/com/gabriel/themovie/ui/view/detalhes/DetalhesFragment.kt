@@ -1,5 +1,7 @@
 package com.gabriel.themovie.ui.view.detalhes
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +16,7 @@ import com.gabriel.themovie.databinding.FragmentDetalhesBinding
 import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.ui.adapters.MovieAdapterPrimary
 import com.gabriel.themovie.util.base.BaseFragment
+import com.gabriel.themovie.util.constants.ConstantsView
 import com.gabriel.themovie.util.constants.ConstantsView.BASE_URL_IMAGES
 import com.gabriel.themovie.util.constants.ConstantsView.RV_COLUNS_DEFAULT
 import com.gabriel.themovie.util.constants.ConstantsView.EXIBE_ELLIPSIZE
@@ -24,6 +27,7 @@ import com.gabriel.themovie.util.extensions.hide
 import com.gabriel.themovie.util.extensions.limitValue
 import com.gabriel.themovie.util.extensions.show
 import com.gabriel.themovie.util.extensions.toast
+import com.gabriel.themovie.video.model.VideoView
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -43,9 +47,16 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
         favoritoObserver()
     }
 
+    /**
+     * Após fechar o trailer e voltar pra tela de detalhes, o foco da tela estava indo para
+     * o fim da recycler view. Isso foi resolvido alterando o [isFocusable] para false.
+     *
+     * @param isFocusable é o parâmetro de foco.
+     */
     private fun configuraRecyclerView() = with(binding) {
         rvDetalhesSemelhantes.adapter = movieAdapterPrimary
         rvDetalhesSemelhantes.layoutManager = GridLayoutManager(requireContext(), RV_COLUNS_DEFAULT)
+        rvDetalhesSemelhantes.isFocusable = false
     }
 
     private fun getDetails() {
@@ -92,36 +103,14 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
 
     private fun favoritoObserver() = lifecycleScope.launch {
         salvaMovie()
-        resolveReturnSave()
-    }
-
-    /**
-     * Foi feita essa validação ao exibir o toast, pois sempre que a tela de detalhes é
-     * aberta o ischecked é atribuido. E sempre que é true, o [resource] é de success e
-     * o toast é exibido.
-     *
-     * Então primeiro é verificado se o movie existe no banco, e se não existir é exibido o toast.
-     */
-    private suspend fun resolveReturnSave() {
-        viewModel.save.collect { resource ->
-            when (resource) {
-                is ResourceState.Success -> {
-                    if (viewModel.verify.value.data == false) {
-                        toast("${globalMovie.title} salvo com sucesso.")
-                    }
-                }
-                is ResourceState.Error -> {
-                    toast(resource.message.toString())
-                }
-                else -> {}
-            }
-        }
     }
 
     private fun salvaMovie() {
         binding.detalhesFavoritar.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 viewModel.saveFavorito(movieView = globalMovie)
+            } else {
+                viewModel.deleteMovie(movieView = globalMovie)
             }
         }
     }
@@ -144,11 +133,35 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
         resource.data?.let { movieView ->
             globalMovie = movieView
             carregaImagens(movieView)
+            configuraClickTrailer(movieView)
             carregaTitle(movieView)
             carregaNota(movieView)
             carregaDescription(movieView)
             carregaGeneros(movieView)
             carregaFav()
+        }
+    }
+
+    private fun configuraClickTrailer(movieView: MovieView) = with(binding) {
+        imagePlay.setOnClickListener {
+            goTrailer(movieView.videos)
+        }
+    }
+
+    private fun goTrailer(videos: List<VideoView>?) {
+        if (!videos.isNullOrEmpty()) {
+            val videoKey = videos.filter {
+                it.type == ConstantsView.TYPE_VIDEO && it.official == true
+            }[0].key
+
+            if (!videoKey.isNullOrEmpty()) {
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("${ConstantsView.BASE_URL_VIDEOS}$videoKey")
+                ).apply { startActivity(this) }
+            }
+        } else {
+            toast("Este movie não possui vídeo.")
         }
     }
 

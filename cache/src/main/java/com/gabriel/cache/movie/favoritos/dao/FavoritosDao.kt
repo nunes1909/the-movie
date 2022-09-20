@@ -12,11 +12,7 @@ interface FavoritosDao {
     fun save(entity: MovieCache): Long
 
     @Delete
-    fun delete(entity: MovieCache): Flow<ResourceState<Boolean>> {
-        return flow {
-            emit(ResourceState.Success(data = true))
-        }
-    }
+    fun delete(entity: MovieCache)
 
     @Query("SELECT * FROM MOVIES_FAVORITOS ORDER BY ID")
     fun getAllFav(): Flow<List<MovieCache>>

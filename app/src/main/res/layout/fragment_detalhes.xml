@@ -29,6 +29,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageView
+                android:id="@+id/imagePlay"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/play"
+                app:layout_constraintEnd_toEndOf="@+id/image_banner"
+                app:layout_constraintStart_toStartOf="@+id/image_banner"
+                app:layout_constraintTop_toTopOf="@+id/image_banner"
+                app:layout_constraintBottom_toBottomOf="@+id/image_banner"/>
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/detalhesContainerBanner"
                 android:layout_width="130dp"
@@ -53,7 +64,7 @@
                 android:id="@+id/detalhesTitulo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="8dp"
                 android:textColor="@color/white"
                 android:textSize="20sp"
@@ -79,7 +90,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:textColor="@color/white"
+                android:textColor="#8BC34A"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/detalhesTitulo"

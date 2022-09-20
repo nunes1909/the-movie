@@ -1,4 +1,4 @@
-package com.gabriel.data.movie.dataSource
+package com.gabriel.data.movie.dataSource.movie
 
 import com.gabriel.domain.util.state.ResourceState
 

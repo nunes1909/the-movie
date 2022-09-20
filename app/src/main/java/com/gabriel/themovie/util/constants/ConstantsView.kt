@@ -1,19 +1,26 @@
 package com.gabriel.themovie.util.constants
 
 object ConstantsView {
-    // Base url
+    // Base url region
     const val BASE_URL_IMAGES = "https://image.tmdb.org/t/p/original"
+    const val BASE_URL_VIDEOS = "http://www.youtube.com/watch?v="
+    // Endregion
 
-    // Movies types
+    // Movies types region
     const val TYPE_FILME = "movie"
     const val TYPE_SERIE = "tv"
 
-    // Recycler types
-    const val RV_COLUNS_DEFAULT = 4
+    const val TYPE_VIDEO = "Trailer"
+    // Endregion
 
-    // Details
+    // Recycler types region
+    const val RV_COLUNS_DEFAULT = 4
+    // Endregion
+
+    // Details region
     const val LIMIT_NOTA = 3
     const val LIMIT_DESCRIPTION = 200
     const val EXIBE_ELLIPSIZE = true
     const val NOT_EXIBE_ELLIPSIZE = false
+    // Endregion
 }
