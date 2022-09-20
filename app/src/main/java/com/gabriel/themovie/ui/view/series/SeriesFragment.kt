@@ -19,6 +19,7 @@ import com.gabriel.themovie.ui.adapters.MovieAdapterPrimary
 import com.gabriel.themovie.ui.view.detalhes.DetalhesViewModel
 import com.gabriel.themovie.util.base.BaseFragment
 import com.gabriel.themovie.util.constants.ConstantsView
+import com.gabriel.themovie.util.constants.ConstantsView.BASE_URL_VIDEOS
 import com.gabriel.themovie.util.constants.ConstantsView.RV_COLUNS_DEFAULT
 import com.gabriel.themovie.util.constants.ConstantsView.TYPE_SERIE
 import com.gabriel.themovie.util.extensions.hide
@@ -131,6 +132,12 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
         }
     }
 
+    /**
+     * 1. É verificado se a lista de vídeos não é nula ou vazia.
+     * 2. Caso seja, é exibido o toast informativo.
+     * 3. É obtido a [key] do video index 0 que seja do tipo [Trailer] e seja [official]
+     * 4. É executado a Intent somente se a [key] não é nula.
+     */
     private fun goTrailer(videos: List<VideoView>?) {
         if (!videos.isNullOrEmpty()) {
             val videoKey = videos.filter {
@@ -140,7 +147,7 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
             if (!videoKey.isNullOrEmpty()) {
                 Intent(
                     Intent.ACTION_VIEW,
-                    Uri.parse("${ConstantsView.BASE_URL_VIDEOS}$videoKey")
+                    Uri.parse("${BASE_URL_VIDEOS}$videoKey")
                 ).apply { startActivity(this) }
             }
         } else {
