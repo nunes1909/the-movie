@@ -1,7 +1,7 @@
 package com.gabriel.remote.movie.service.video
 
-import com.gabriel.remote.movie.modelsApi.filme.FilmeVideoContainer
-import com.gabriel.remote.movie.modelsApi.serie.SerieVideoContainer
+import com.gabriel.remote.video.model.filme.FilmeVideoContainer
+import com.gabriel.remote.video.model.serie.SerieVideoContainer
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

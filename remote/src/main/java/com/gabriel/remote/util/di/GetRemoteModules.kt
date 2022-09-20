@@ -24,6 +24,8 @@ import com.gabriel.remote.movie.service.serie.SeriesService
 import com.gabriel.remote.movie.service.trending.TrendingService
 import com.gabriel.remote.movie.service.video.VideoService
 import com.gabriel.remote.network.retrofit.TheMovieRetrofit
+import com.gabriel.remote.video.mapper.filme.VideoFilmeRemoteMapper
+import com.gabriel.remote.video.mapper.serie.VideoSerieRemoteMapper
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
@@ -40,6 +42,8 @@ fun getRemoteModules() = module {
 
     // Genero Modules
     factory { GeneroRemoteMapper() }
+    factory { VideoFilmeRemoteMapper() }
+    factory { VideoSerieRemoteMapper() }
     // Endregion
 
     // Region Remote mappers
@@ -59,7 +63,8 @@ fun getRemoteModules() = module {
     }
     single<GetDetailFilmeDataSource> {
         GetDetailFilmeDataSourceImpl(
-            service = get(),
+            filmeService = get(),
+            videoService = get(),
             mapper = get()
         )
     }
@@ -83,7 +88,8 @@ fun getRemoteModules() = module {
     }
     single<GetDetailSerieDataSource> {
         GetDetailSerieDataSourceImpl(
-            service = get(),
+            serieService = get(),
+            videoService = get(),
             mapper = get()
         )
     }

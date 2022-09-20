@@ -1,6 +1,7 @@
 package com.gabriel.remote.movie.modelsApi.filme
 
 import com.gabriel.remote.genero.model.GeneroResponse
+import com.gabriel.remote.video.model.filme.FilmeVideoResponse
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
@@ -19,7 +20,9 @@ data class FilmeDetailResponse(
     @SerializedName("backdrop_path")
     val banner: String? = null,
     @SerializedName("genres")
-    val generos: List<GeneroResponse>? = null,
+    var generos: List<GeneroResponse>? = null,
+    @Expose
+    val videos: List<FilmeVideoResponse>? = null,
     @Expose
     val favorito: Boolean? = false
 ) : Serializable

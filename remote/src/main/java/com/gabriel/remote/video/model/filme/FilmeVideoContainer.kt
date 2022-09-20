@@ -1,4 +1,4 @@
-package com.gabriel.remote.movie.modelsApi.filme
+package com.gabriel.remote.video.model.filme
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable

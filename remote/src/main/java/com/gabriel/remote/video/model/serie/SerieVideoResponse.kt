@@ -1,13 +1,15 @@
-package com.gabriel.remote.movie.modelsApi.filme
+package com.gabriel.remote.video.model.serie
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-data class FilmeVideoResponse(
+data class SerieVideoResponse(
     @SerializedName("id")
     val id: String? = null,
     @SerializedName("key")
     val key: String? = null,
+    @SerializedName("type")
+    val type: String? = null,
     @SerializedName("official")
     val official: Boolean? = null,
 ) : Serializable

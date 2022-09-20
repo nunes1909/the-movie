@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gabriel.domain.movie.model.MovieDomain
 import com.gabriel.domain.movie.useCase.GetAllMoviesUseCase
+import com.gabriel.domain.movie.useCase.GetDetailMovieUseCase
 import com.gabriel.domain.movie.useCase.GetTrendingMovieUseCase
 import com.gabriel.domain.movie.useCase.SaveMovieUseCase
 import com.gabriel.domain.util.state.ResourceState
@@ -19,6 +20,7 @@ import kotlinx.coroutines.launch
 class FilmesViewModel(
     private val getAllMoviesUseCase: GetAllMoviesUseCase,
     private val getTrendingMovieUseCase: GetTrendingMovieUseCase,
+    private val getDetailMovieUseCase: GetDetailMovieUseCase,
     private val saveMovieUseCase: SaveMovieUseCase,
     private val mapper: MovieViewMapper
 ) : ViewModel() {
@@ -26,12 +28,9 @@ class FilmesViewModel(
     private val _list = MutableStateFlow<ResourceState<List<MovieView>>>(ResourceState.Loading())
     val list: StateFlow<ResourceState<List<MovieView>>> = _list
 
-    private val _trending =
-        MutableStateFlow<ResourceState<List<MovieView>>>(ResourceState.Loading())
-    val trending: StateFlow<ResourceState<List<MovieView>>> = _trending
-
-    private val _save = MutableStateFlow<ResourceState<Boolean>>(ResourceState.Empty())
-    val save: StateFlow<ResourceState<Boolean>> = _save
+    private val _movieDetail =
+        MutableStateFlow<ResourceState<MovieView>>(ResourceState.Loading())
+    val movieDetail: StateFlow<ResourceState<MovieView>> = _movieDetail
     // Endregion
 
     init {
@@ -55,10 +54,12 @@ class FilmesViewModel(
     }
     // Endregion
 
-    // Region get filmes tendência
+    // Region tendência
     private fun getTranding() = viewModelScope.launch {
         val resourceState = getTrendingMovieUseCase.getTrendingMovie(TYPE_FILME)
-        _trending.value = safeStateTrandingFilmes(resourceState)
+        val safeState = safeStateTrandingFilmes(resourceState)
+        val firstMovie = getFirstMovie(safeState).also { it.type = TYPE_FILME }
+        getDetailMovie(firstMovie.type!!, firstMovie.id)
     }
 
     private fun safeStateTrandingFilmes(resourceState: ResourceState<List<MovieDomain>>):
@@ -69,13 +70,32 @@ class FilmesViewModel(
         }
         return ResourceState.Error(cod = resourceState.cod, message = resourceState.message)
     }
-    // Endregion
+
+    private fun getFirstMovie(safeState: ResourceState<List<MovieView>>): MovieView {
+        return safeState.data?.sortedByDescending { it.nota }?.first()!!
+    }
+
+    // Region get details
+    private fun getDetailMovie(type: String, movieId: Int) = viewModelScope.launch {
+        val resourceState = getDetailMovieUseCase.getDetailMovie(type = type, movieId = movieId)
+        _movieDetail.value = safeStateGetDetailMovie(resourceState)
+    }
+    private fun safeStateGetDetailMovie(resourceState: ResourceState<MovieDomain>):
+            ResourceState<MovieView> {
+        if (resourceState.data != null) {
+            val movieView = mapper.mapToView(resourceState.data!!)
+            return ResourceState.Success(movieView)
+        }
+        return ResourceState.Error(cod = resourceState.cod, message = resourceState.message)
+    }
+    // Endregion get details
+    // Endregion tendência
 
     // Region save fav
     fun saveFavorito(movieView: MovieView) {
         CoroutineScope(IO).launch {
             val movieDomain = mapper.mapToDomain(movieView)
-            _save.value = safeSateSave(saveMovieUseCase.save(entity = movieDomain))
+            safeSateSave(saveMovieUseCase.save(entity = movieDomain))
         }
     }
 
