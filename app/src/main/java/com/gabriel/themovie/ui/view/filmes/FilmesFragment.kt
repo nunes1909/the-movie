@@ -36,7 +36,6 @@ import timber.log.Timber
 class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
 
     override val viewModel: FilmesViewModel by viewModel()
-    private val viewModelDetail: DetalhesViewModel by viewModel()
     private val movieAdapterPrimary by lazy { MovieAdapterPrimary() }
     lateinit var globalMovie: MovieView
 
@@ -116,14 +115,14 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
             inicializaGlobalMultiMovie(movie)
             carregaImagem(movie)
             carregaTitulo(movie)
-            observerActionAdd()
             carregaActionTrailer(movie)
+            observerActionAdd()
         }
     }
 
     private fun observerActionAdd() = lifecycleScope.launch {
         viewModel.verify.collect { resource ->
-            if (resource.data!!) {
+            if (resource.data != null && resource.data == true) {
                 binding.includeActionsPrincipal.btnAddFav.load(R.drawable.ic_remove)
             } else {
                 binding.includeActionsPrincipal.btnAddFav.load(R.drawable.ic_add)
@@ -146,22 +145,16 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
         }
     }
 
-    /**
-     * 1. É verificado se a lista de vídeos não é nula ou vazia.
-     * 2. Caso seja, é exibido o toast informativo.
-     * 3. É obtido a [key] do video index 0 que seja do tipo [Trailer] e seja [official]
-     * 4. É executado a Intent somente se a [key] não é nula.
-     */
     private fun goTrailer(videos: List<VideoView>?) {
         if (!videos.isNullOrEmpty()) {
             val videoKey = videos.filter {
-                it.type == TYPE_VIDEO && it.official == true
+                (it.type == TYPE_VIDEO) || (it.official == true)
             }[0].key
 
             if (!videoKey.isNullOrEmpty()) {
                 Intent(
                     Intent.ACTION_VIEW,
-                    Uri.parse("${BASE_URL_VIDEOS}$videoKey")
+                    Uri.parse("${ConstantsView.BASE_URL_VIDEOS}$videoKey")
                 ).apply { startActivity(this) }
             }
         } else {
@@ -208,8 +201,10 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
         includeActionsPrincipal.btnAddFav.setOnClickListener {
             if (viewModel.verify.value.data!!) {
                 viewModel.deleteMovie(globalMovie)
+                toast("${globalMovie.title} removido dos favoritos.")
             } else {
                 viewModel.saveFavorito(globalMovie)
+                toast("${globalMovie.title} adicionado aos favoritos.")
             }
         }
     }

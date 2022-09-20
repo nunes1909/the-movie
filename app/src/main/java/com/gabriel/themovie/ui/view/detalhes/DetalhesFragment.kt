@@ -23,6 +23,7 @@ import com.gabriel.themovie.util.constants.ConstantsView.EXIBE_ELLIPSIZE
 import com.gabriel.themovie.util.constants.ConstantsView.LIMIT_DESCRIPTION
 import com.gabriel.themovie.util.constants.ConstantsView.LIMIT_NOTA
 import com.gabriel.themovie.util.constants.ConstantsView.NOT_EXIBE_ELLIPSIZE
+import com.gabriel.themovie.util.constants.ConstantsView.TYPE_VIDEO
 import com.gabriel.themovie.util.extensions.*
 import com.gabriel.themovie.video.model.VideoView
 import kotlinx.coroutines.launch
@@ -148,7 +149,7 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
     private fun goTrailer(videos: List<VideoView>?) {
         if (!videos.isNullOrEmpty()) {
             val videoKey = videos.filter {
-                it.type == ConstantsView.TYPE_VIDEO && it.official == true
+                (it.type == TYPE_VIDEO) || (it.official == true)
             }[0].key
 
             if (!videoKey.isNullOrEmpty()) {
