@@ -11,4 +11,8 @@ object ConstantsRemote {
     // Movies types
     const val TYPE_FILME = "movie"
     const val TYPE_SERIE = "tv"
+
+    // Traducao types
+    const val TYPE_BR = "BR"
+    const val TYPE_US = "US"
 }
