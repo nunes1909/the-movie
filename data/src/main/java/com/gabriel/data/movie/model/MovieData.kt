@@ -6,7 +6,7 @@ import com.gabriel.data.video.model.VideoData
 data class MovieData(
     val id: Int,
     val title: String,
-    val description: String? = null,
+    var description: String? = null,
     val type: String? = null,
     val nota: Double? = null,
     val generos: List<GeneroData>? = null,

@@ -3,6 +3,7 @@ package com.gabriel.remote.network.retrofit
 import com.gabriel.remote.movie.service.filme.FilmesService
 import com.gabriel.remote.movie.service.multi.MultiService
 import com.gabriel.remote.movie.service.serie.SeriesService
+import com.gabriel.remote.movie.service.traducao.TraducaoService
 import com.gabriel.remote.movie.service.trending.TrendingService
 import com.gabriel.remote.movie.service.video.VideoService
 import com.gabriel.remote.util.constants.ConstantsRemote.API_KEY
@@ -40,6 +41,10 @@ class TheMovieRetrofit {
 
     fun getVideoService(retrofit: Retrofit): VideoService {
         return retrofit.create(VideoService::class.java)
+    }
+
+    fun getTraducaoService(retrofit: Retrofit): TraducaoService {
+        return retrofit.create(TraducaoService::class.java)
     }
 
     fun getOkHttpClient(): OkHttpClient {

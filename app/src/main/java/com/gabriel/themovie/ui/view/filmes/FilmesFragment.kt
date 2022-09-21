@@ -154,7 +154,7 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
             if (!videoKey.isNullOrEmpty()) {
                 Intent(
                     Intent.ACTION_VIEW,
-                    Uri.parse("${ConstantsView.BASE_URL_VIDEOS}$videoKey")
+                    Uri.parse("${BASE_URL_VIDEOS}$videoKey")
                 ).apply { startActivity(this) }
             }
         } else {

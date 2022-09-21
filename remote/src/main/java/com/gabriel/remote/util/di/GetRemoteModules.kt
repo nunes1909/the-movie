@@ -21,6 +21,7 @@ import com.gabriel.remote.movie.mapper.serie.SerieResponseToDataMapper
 import com.gabriel.remote.movie.service.filme.FilmesService
 import com.gabriel.remote.movie.service.multi.MultiService
 import com.gabriel.remote.movie.service.serie.SeriesService
+import com.gabriel.remote.movie.service.traducao.TraducaoService
 import com.gabriel.remote.movie.service.trending.TrendingService
 import com.gabriel.remote.movie.service.video.VideoService
 import com.gabriel.remote.network.retrofit.TheMovieRetrofit
@@ -31,13 +32,30 @@ import retrofit2.Retrofit
 
 fun getRemoteModules() = module {
     // Retrofit Modules
-    single { TheMovieRetrofit().getOkHttpClient() }
-    single<Retrofit> { TheMovieRetrofit().getRetrofit(client = get()) }
-    single<FilmesService> { TheMovieRetrofit().getFilmesService(retrofit = get()) }
-    single<SeriesService> { TheMovieRetrofit().getSeriesService(retrofit = get()) }
-    single<MultiService> { TheMovieRetrofit().getMultiService(retrofit = get()) }
-    single<TrendingService> { TheMovieRetrofit().getTrendingService(retrofit = get()) }
-    single<VideoService> { TheMovieRetrofit().getVideoService(retrofit = get()) }
+    single {
+        TheMovieRetrofit().getOkHttpClient()
+    }
+    single<Retrofit> {
+        TheMovieRetrofit().getRetrofit(client = get())
+    }
+    single<FilmesService> {
+        TheMovieRetrofit().getFilmesService(retrofit = get())
+    }
+    single<SeriesService> {
+        TheMovieRetrofit().getSeriesService(retrofit = get())
+    }
+    single<MultiService> {
+        TheMovieRetrofit().getMultiService(retrofit = get())
+    }
+    single<TrendingService> {
+        TheMovieRetrofit().getTrendingService(retrofit = get())
+    }
+    single<VideoService> {
+        TheMovieRetrofit().getVideoService(retrofit = get())
+    }
+    single<TraducaoService> {
+        TheMovieRetrofit().getTraducaoService(retrofit = get())
+    }
     // Endregion
 
     // Genero Modules
@@ -65,7 +83,8 @@ fun getRemoteModules() = module {
         GetDetailFilmeDataSourceImpl(
             filmeService = get(),
             videoService = get(),
-            mapper = get()
+            traducaoService = get(),
+            filmeMapper = get()
         )
     }
     single<GetTrendingFilmeDataSource> {
@@ -90,6 +109,7 @@ fun getRemoteModules() = module {
         GetDetailSerieDataSourceImpl(
             serieService = get(),
             videoService = get(),
+            traducaoService = get(),
             mapper = get()
         )
     }
