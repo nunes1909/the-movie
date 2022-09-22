@@ -31,6 +31,9 @@
         <argument
             android:name="movieView"
             app:argType="com.gabriel.themovie.movie.model.MovieView" />
+        <action
+            android:id="@+id/acaoSimilaresParaDetalhes"
+            app:destination="@id/detalhesFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoritosFragment"

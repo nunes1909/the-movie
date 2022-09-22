@@ -6,8 +6,12 @@ import com.gabriel.cache.movie.favoritos.model.MovieCache
 import com.gabriel.data.movie.dataSource.movie.GetFavMovieCacheDataSource
 import com.gabriel.data.movie.model.MovieData
 import com.gabriel.domain.util.state.ResourceState
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 
 class GetFavMovieCacheDataSourceImpl(
     private val dao: FavoritosDao,
@@ -23,8 +27,10 @@ class GetFavMovieCacheDataSourceImpl(
     }
 
     private suspend fun collectFlow(flowAllFav: Flow<List<MovieCache>>) = flow {
-        flowAllFav.collect { resourceState ->
-            emit(validateState(resourceState = resourceState))
+        CoroutineScope(Dispatchers.Default).launch {
+            flowAllFav.collect { resourceState ->
+                emit(validateState(resourceState = resourceState))
+            }
         }
     }
 

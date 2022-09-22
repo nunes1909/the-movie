@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.themovie.databinding.FragmentFavoritosBinding
@@ -30,6 +31,15 @@ class FavoritosFragment : BaseFragment<FragmentFavoritosBinding, FavoritosViewMo
         configuraRecyclerView()
         configuraPesquisa()
         observerListaFav()
+        configuraClickAdapter()
+    }
+
+    private fun configuraClickAdapter() {
+        movieAdapter.setMovieOnClickListener { movieView ->
+            val action = FavoritosFragmentDirections
+                .acaoFavoritosParaDetalhes(movieView = movieView)
+            findNavController().navigate(action)
+        }
     }
 
     private fun configuraPesquisa() = with(binding) {

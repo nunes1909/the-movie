@@ -57,6 +57,12 @@ class MovieAdapterSecondary : RecyclerView.Adapter<MovieAdapterSecondary.SearchM
             itemMovieTitle.text = movie.title.limitValue(15, true)
             itemMovieDescription.text = movie.description?.limitValue(LIMIT_DESCRIPTION, EXIBE_ELLIPSIZE)
         }
+
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.let {
+                it(movie)
+            }
+        }
     }
 
     fun setMovieOnClickListener(listener: (MovieView) -> Unit) {
