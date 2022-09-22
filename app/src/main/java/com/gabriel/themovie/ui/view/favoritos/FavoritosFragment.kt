@@ -16,7 +16,6 @@ import com.gabriel.themovie.ui.adapters.MovieAdapterSecondary
 import com.gabriel.themovie.util.base.BaseFragment
 import com.gabriel.themovie.util.extensions.hide
 import com.gabriel.themovie.util.extensions.show
-import com.gabriel.themovie.util.extensions.toast
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -31,6 +30,7 @@ class FavoritosFragment : BaseFragment<FragmentFavoritosBinding, FavoritosViewMo
         configuraRecyclerView()
         configuraPesquisa()
         observerListaFav()
+        observerEmpty()
         configuraClickAdapter()
     }
 
@@ -64,11 +64,11 @@ class FavoritosFragment : BaseFragment<FragmentFavoritosBinding, FavoritosViewMo
         }
     }
 
-
     private fun configuraRecyclerView() = with(binding) {
         rvFavoritos.adapter = movieAdapter
         rvFavoritos.layoutManager = LinearLayoutManager(requireContext())
     }
+
 
     private fun observerListaFav() = lifecycleScope.launch {
         viewModel.getFav.collect { resource ->
@@ -77,14 +77,10 @@ class FavoritosFragment : BaseFragment<FragmentFavoritosBinding, FavoritosViewMo
                     exibeFavoritos(resource)
                     binding.layoutEditPesquisa.show()
                     binding.progressFavoritos.hide()
-                    binding.includeLayoutEmpty.imageEmpty.hide()
-                    binding.includeLayoutEmpty.textViewEmpty.hide()
                 }
                 is ResourceState.Error -> {
                     binding.progressFavoritos.hide()
                     binding.layoutEditPesquisa.hide()
-                    binding.includeLayoutEmpty.imageEmpty.show()
-                    binding.includeLayoutEmpty.textViewEmpty.show()
                     Timber.tag("FilmesFragment/observerListaFilmes")
                         .e("Error -> ${resource.message} Cod -> ${resource.cod}")
                 }
@@ -93,6 +89,19 @@ class FavoritosFragment : BaseFragment<FragmentFavoritosBinding, FavoritosViewMo
                     binding.editPesquisa.isEnabled = false
                 }
                 else -> {}
+            }
+        }
+    }
+
+    private fun observerEmpty() = lifecycleScope.launch {
+        viewModel.empty.collect {
+            if (!it) {
+                movieAdapter.moviesList = listOf()
+                binding.includeLayoutEmpty.imageEmpty.show()
+                binding.includeLayoutEmpty.textViewEmpty.show()
+            } else {
+                binding.includeLayoutEmpty.imageEmpty.hide()
+                binding.includeLayoutEmpty.textViewEmpty.hide()
             }
         }
     }

@@ -7,6 +7,7 @@ import com.gabriel.data.movie.dataSource.movie.GetFavMovieCacheDataSource
 import com.gabriel.data.movie.model.MovieData
 import com.gabriel.domain.util.state.ResourceState
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 
 class GetFavMovieCacheDataSourceImpl(
@@ -23,9 +24,9 @@ class GetFavMovieCacheDataSourceImpl(
     }
 
     private suspend fun collectFlow(flowAllFav: Flow<List<MovieCache>>) = flow {
-        flowAllFav.collect { resourceState ->
-            emit(validateState(resourceState = resourceState))
-        }
+        emit(
+            validateState(flowAllFav.first())
+        )
     }
 
     private fun validateState(resourceState: List<MovieCache>):
