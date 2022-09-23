@@ -36,6 +36,13 @@
             app:destination="@id/detalhesFragment"
             app:popUpTo="@id/detalhesFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/acaoDetalhesParaDialog"
+            app:destination="@id/detalhesInfoDialog"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/favoritosFragment"
@@ -55,4 +62,13 @@
             android:id="@+id/acaoPesquisaParaDetalhes"
             app:destination="@id/detalhesFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/detalhesInfoDialog"
+        tools:layout="@layout/dialog_info_movie"
+        android:name="com.gabriel.themovie.ui.view.detalhes.DetalhesInfoDialog"
+        android:label="DetalhesInfoDialog" >
+        <argument
+            android:name="movieView"
+            app:argType="com.gabriel.themovie.movie.model.MovieView" />
+    </dialog>
 </navigation>
