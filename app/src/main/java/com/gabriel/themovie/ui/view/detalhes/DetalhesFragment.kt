@@ -7,9 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
-import coil.load
 import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.themovie.R
 import com.gabriel.themovie.databinding.FragmentDetalhesBinding
@@ -33,7 +33,7 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
 
     override val viewModel: DetalhesViewModel by viewModel()
     private val args: DetalhesFragmentArgs by navArgs()
-    private val movieAdapterPrimary by lazy { MovieAdapterPrimary() }
+    private val movieAdapter by lazy { MovieAdapterPrimary() }
     lateinit var globalMovie: MovieView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,6 +43,16 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
         movieObserver()
         similarObserver()
         favoritoObserver()
+        configuraClickAdapter()
+    }
+
+    private fun configuraClickAdapter() {
+        movieAdapter.setMovieOnClickListener { movieView ->
+            movieView.type = globalMovie.type
+            val action = DetalhesFragmentDirections
+                .acaoSimilaresParaDetalhes(movieView)
+            findNavController().navigate(action)
+        }
     }
 
     /**
@@ -52,7 +62,7 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
      * @param isFocusable é o parâmetro de foco.
      */
     private fun configuraRecyclerView() = with(binding) {
-        rvDetalhesSemelhantes.adapter = movieAdapterPrimary
+        rvDetalhesSemelhantes.adapter = movieAdapter
         rvDetalhesSemelhantes.layoutManager = GridLayoutManager(requireContext(), RV_COLUNS_DEFAULT)
         rvDetalhesSemelhantes.isFocusable = false
     }
@@ -115,7 +125,7 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
 
     private fun exibeListaSimilares(resources: ResourceState<List<MovieView>>) {
         resources.data?.let { results ->
-            movieAdapterPrimary.moviesList = results
+            movieAdapter.moviesList = results
         }
     }
 
@@ -207,7 +217,7 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
 
     private fun carregaFav() = lifecycleScope.launch {
         viewModel.verify.collect { resource ->
-            binding.detalhesFavoritar.isChecked = resource.data!!
+            binding.detalhesFavoritar.isChecked = resource
         }
     }
 

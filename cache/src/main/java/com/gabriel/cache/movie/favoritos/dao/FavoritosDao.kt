@@ -21,5 +21,5 @@ interface FavoritosDao {
     fun getQueryFav(query: String): Flow<List<MovieCache>>
 
     @Query("SELECT EXISTS (SELECT ID FROM MOVIES_FAVORITOS WHERE id = :id)")
-    fun verifyExistsMovie(id: Int): Boolean
+    fun verifyExistsMovie(id: Int): Flow<Boolean>
 }

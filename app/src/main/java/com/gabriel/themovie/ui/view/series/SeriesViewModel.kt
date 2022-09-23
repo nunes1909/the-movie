@@ -14,6 +14,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class SeriesViewModel(
@@ -33,8 +35,8 @@ class SeriesViewModel(
         MutableStateFlow<ResourceState<MovieView>>(ResourceState.Loading())
     val movieDetail: StateFlow<ResourceState<MovieView>> = _movieDetail
 
-    private val _verify = MutableStateFlow<ResourceState<Boolean>>(ResourceState.Empty())
-    val verify: StateFlow<ResourceState<Boolean>> = _verify
+    private val _verify = MutableStateFlow<Boolean>(true)
+    val verify: StateFlow<Boolean> = _verify
     // Endregion
 
     init {
@@ -117,10 +119,8 @@ class SeriesViewModel(
     // Endregion
 
     // Region verify if exists movie
-    private fun verifyExistsMovie(movieId: Int) {
-        CoroutineScope(IO).launch {
-            _verify.value = verifyExists.verifyExistsMovie(id = movieId)
-        }
+    private fun verifyExistsMovie(movieId: Int) = viewModelScope.launch {
+        _verify.value = verifyExists.verifyExistsMovie(id = movieId).first()
     }
     // Endregion
 

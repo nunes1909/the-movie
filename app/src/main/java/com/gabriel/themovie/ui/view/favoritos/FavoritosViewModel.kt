@@ -11,6 +11,7 @@ import com.gabriel.themovie.movie.model.MovieView
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class FavoritosViewModel(
@@ -20,6 +21,9 @@ class FavoritosViewModel(
     // Region StateFlow
     private val _getFav = MutableStateFlow<ResourceState<List<MovieView>>>(ResourceState.Empty())
     val getFav: StateFlow<ResourceState<List<MovieView>>> = _getFav
+
+    private val _empty = MutableStateFlow<Boolean>(false)
+    val empty: StateFlow<Boolean> = _empty
     // Endregion
 
     init {
@@ -32,17 +36,17 @@ class FavoritosViewModel(
     }
 
     private suspend fun collectFlow(flowFav: Flow<ResourceState<List<MovieDomain>>>) {
-        flowFav.collect {
-            _getFav.value = safeStateGetFav(it)
-        }
+        _getFav.value = safeStateGetFav(flowFav.first())
     }
 
     private fun safeStateGetFav(resource: ResourceState<List<MovieDomain>>):
             ResourceState<List<MovieView>> {
-        if (resource.data != null && resource.data!!.isNotEmpty()) {
+        if (!resource.data.isNullOrEmpty()) {
             val listView = mapper.mapToViewNonNull(resource.data!!)
+            _empty.value = true
             return ResourceState.Success(listView)
         }
+        _empty.value = false
         return ResourceState.Error(message = resource.message)
     }
     // Endregion
