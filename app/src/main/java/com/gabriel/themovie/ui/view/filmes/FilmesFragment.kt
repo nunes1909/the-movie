@@ -121,8 +121,8 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
     }
 
     private fun observerActionAdd() = lifecycleScope.launch {
-        viewModel.verify.collect { resource ->
-            if (resource.data != null && resource.data == true) {
+        viewModel.verify.collect { ifExists ->
+            if (ifExists) {
                 binding.includeActionsPrincipal.btnAddFav.load(R.drawable.ic_remove)
             } else {
                 binding.includeActionsPrincipal.btnAddFav.load(R.drawable.ic_add)
@@ -199,7 +199,7 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
 
     private fun FragmentFilmesBinding.actionFilmePrincipalSave() {
         includeActionsPrincipal.btnAddFav.setOnClickListener {
-            if (viewModel.verify.value.data!!) {
+            if (viewModel.verify.value) {
                 viewModel.deleteMovie(globalMovie)
                 toast("${globalMovie.title} removido dos favoritos.")
             } else {

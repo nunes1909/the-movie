@@ -13,6 +13,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class DetalhesViewModel(
@@ -32,8 +33,8 @@ class DetalhesViewModel(
         MutableStateFlow<ResourceState<List<MovieView>>>(ResourceState.Loading())
     val listSimilares: StateFlow<ResourceState<List<MovieView>>> = _listSimilares
 
-    private val _verify = MutableStateFlow<ResourceState<Boolean>>(ResourceState.Empty())
-    val verify: StateFlow<ResourceState<Boolean>> = _verify
+    private val _verify = MutableStateFlow<Boolean>(true)
+    val verify: StateFlow<Boolean> = _verify
     // Endregion
 
     // Region get movie
@@ -98,10 +99,8 @@ class DetalhesViewModel(
     // Endregion
 
     // Region verify if exists movie
-    private fun verifyExistsMovie(movieId: Int) {
-        CoroutineScope(IO).launch {
-            _verify.value = verifyExists.verifyExistsMovie(id = movieId)
-        }
+    private fun verifyExistsMovie(movieId: Int) = viewModelScope.launch {
+        _verify.value = verifyExists.verifyExistsMovie(id = movieId).first()
     }
     // Endregion
 

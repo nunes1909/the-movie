@@ -217,7 +217,7 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
 
     private fun carregaFav() = lifecycleScope.launch {
         viewModel.verify.collect { resource ->
-            binding.detalhesFavoritar.isChecked = resource.data!!
+            binding.detalhesFavoritar.isChecked = resource
         }
     }
 

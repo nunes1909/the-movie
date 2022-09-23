@@ -1,7 +1,7 @@
 package com.gabriel.data.movie.dataSource.movie
 
-import com.gabriel.domain.util.state.ResourceState
+import kotlinx.coroutines.flow.Flow
 
 interface VerifyExistsMovieDataSource {
-    suspend fun verifyExistsMovie(id: Int): ResourceState<Boolean>
+    suspend fun verifyExistsMovie(id: Int): Flow<Boolean>
 }
