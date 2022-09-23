@@ -33,7 +33,9 @@
             app:argType="com.gabriel.themovie.movie.model.MovieView" />
         <action
             android:id="@+id/acaoSimilaresParaDetalhes"
-            app:destination="@id/detalhesFragment" />
+            app:destination="@id/detalhesFragment"
+            app:popUpTo="@id/detalhesFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/favoritosFragment"
