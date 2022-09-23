@@ -206,10 +206,9 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
     }
 
     private fun carregaDescription(movieView: MovieView) {
-        movieView.description?.let { description ->
-            description.limitValue(LIMIT_DESCRIPTION, EXIBE_ELLIPSIZE)
-            binding.detalhesDescricao.text = description
+        movieView.description?.let {
             binding.detalhesDescricaoLerMais.show()
+            binding.detalhesDescricao.text = it.limitValue(LIMIT_DESCRIPTION, EXIBE_ELLIPSIZE)
         }
     }
 
