@@ -48,7 +48,7 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
     }
 
     private fun configuraClickDialog() {
-        binding.detalhesDescricao.setOnClickListener {
+        binding.tvDescricaoMovie.setOnClickListener {
             val action = DetalhesFragmentDirections
                 .acaoDetalhesParaDialog(globalMovie)
             findNavController().navigate(action)
@@ -71,9 +71,9 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
      * @param isFocusable é o parâmetro de foco.
      */
     private fun configuraRecyclerView() = with(binding) {
-        rvDetalhesSemelhantes.adapter = movieAdapter
-        rvDetalhesSemelhantes.layoutManager = GridLayoutManager(requireContext(), RV_COLUNS_DEFAULT)
-        rvDetalhesSemelhantes.isFocusable = false
+        rvMoviesSemelhantes.adapter = movieAdapter
+        rvMoviesSemelhantes.layoutManager = GridLayoutManager(requireContext(), RV_COLUNS_DEFAULT)
+        rvMoviesSemelhantes.isFocusable = false
     }
 
     private fun getDetails() {
@@ -85,14 +85,14 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
             when (resource) {
                 is ResourceState.Success -> {
                     preencheDetails(resource)
-                    ocultaProgressBar(binding.progressDetalhes)
+                    ocultaProgressBar(binding.pbLoadingDetalhes)
                 }
                 is ResourceState.Error -> {
                     toast(getString(R.string.um_erro_ocorreu))
-                    ocultaProgressBar(binding.progressDetalhes)
+                    ocultaProgressBar(binding.pbLoadingDetalhes)
                 }
                 is ResourceState.Loading -> {
-                    exibeProgressBar(binding.progressDetalhes)
+                    exibeProgressBar(binding.pbLoadingDetalhes)
                 }
                 else -> {}
             }
@@ -104,14 +104,14 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
             when (resources) {
                 is ResourceState.Success -> {
                     exibeListaSimilares(resources)
-                    ocultaProgressBar(binding.progressDetalhes)
+                    ocultaProgressBar(binding.pbLoadingDetalhes)
                 }
                 is ResourceState.Error -> {
                     toast(getString(R.string.um_erro_ocorreu))
-                    ocultaProgressBar(binding.progressDetalhes)
+                    ocultaProgressBar(binding.pbLoadingDetalhes)
                 }
                 is ResourceState.Loading -> {
-                    exibeProgressBar(binding.progressDetalhes)
+                    exibeProgressBar(binding.pbLoadingDetalhes)
                 }
                 else -> {}
             }
@@ -123,7 +123,7 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
     }
 
     private fun salvaMovie() {
-        binding.detalhesFavoritar.setOnCheckedChangeListener { _, isChecked ->
+        binding.cbFavoritarMovie.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 viewModel.saveFavorito(movieView = globalMovie)
             } else {
@@ -160,7 +160,7 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
     }
 
     private fun configuraClickTrailer(movieView: MovieView) = with(binding) {
-        imagePlay.setOnClickListener {
+        ivPlayTrailer.setOnClickListener {
             goTrailer(movieView.videos)
         }
     }
@@ -196,39 +196,39 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
     }
 
     private fun resolveGeneroUm(movieView: MovieView) {
-        binding.detalhesContainerGeneroUm.show()
-        binding.detalhesGeneroUm.text = movieView.generos!![0].name
+        binding.containerGeneroUm.show()
+        binding.tvGeneroUm.text = movieView.generos!![0].name
     }
 
     private fun resolveGeneroDois(movieView: MovieView) {
-        binding.detalhesContainerGeneroDois.show()
-        binding.detalhesGeneroDois.text = movieView.generos!![1].name
+        binding.containerGeneroDois.show()
+        binding.tvGeneroDois.text = movieView.generos!![1].name
     }
 
     private fun carregaDescription(movieView: MovieView) {
         movieView.description?.let {
-            binding.detalhesDescricaoLerMais.show()
-            binding.detalhesDescricao.text = it.limitValue(LIMIT_DESCRIPTION, EXIBE_ELLIPSIZE)
+            binding.tvInfoLerMais.show()
+            binding.tvDescricaoMovie.text = it.limitValue(LIMIT_DESCRIPTION, EXIBE_ELLIPSIZE)
         }
     }
 
     private fun carregaNota(movieView: MovieView) {
-        binding.detalhesNota.text =
+        binding.tvNotaMovie.text =
             movieView.nota.toString().limitValue(LIMIT_NOTA, NOT_EXIBE_ELLIPSIZE)
     }
 
     private fun carregaTitle(movieView: MovieView) {
-        binding.detalhesTitulo.text = movieView.title
+        binding.tvTituloMovie.text = movieView.title
     }
 
     private fun carregaImagens(movieView: MovieView) {
-        binding.imageBanner.tentaCarregar("${BASE_URL_IMAGES}${movieView.banner}")
-        binding.imageCartaz.tentaCarregar("${BASE_URL_IMAGES}${movieView.cartaz}")
+        binding.ivBanner.tentaCarregar("${BASE_URL_IMAGES}${movieView.banner}")
+        binding.ivCartaz.tentaCarregar("${BASE_URL_IMAGES}${movieView.cartaz}")
     }
 
     private fun carregaFav() = lifecycleScope.launch {
         viewModel.verify.collect { resource ->
-            binding.detalhesFavoritar.isChecked = resource
+            binding.cbFavoritarMovie.isChecked = resource
         }
     }
 

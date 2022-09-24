@@ -8,7 +8,16 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="colorDefaultBackg">#E0E0E0</color>
-    <color name="colorDefaultText">#FF000000</color>
+    <color name="colorDefaultBackg">#FF000000</color>
+
+    <color name="colorDefaultIcons">#34b729</color>
+
+    <color name="colorPrimaryText">#34b729</color>
+    <color name="colorSecondaryText">#FFFFFFFF</color>
+
+    <color name="colorPrimaryContainer">#292828</color>
+    <color name="colorSecondaryContainer">#FF000000</color>
+    <color name="colorTertiaryContainer">#333333</color>
+
     <color name="colorDefaultProgress">#000000</color>
 </resources>

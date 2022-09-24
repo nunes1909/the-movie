@@ -8,40 +8,43 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#000">
+        android:background="@color/colorSecondaryContainer">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/containerDetalhesMovie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#292828"
-            app:layout_constraintBottom_toTopOf="@+id/ddd"
+            android:background="@color/colorPrimaryContainer"
+            app:layout_constraintBottom_toTopOf="@+id/viewGradient"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/image_banner"
+                android:id="@+id/ivBanner"
                 android:layout_width="0dp"
                 android:layout_height="250dp"
+                android:contentDescription="@string/banner_filme"
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
             <ImageView
-                android:id="@+id/imagePlay"
+                android:id="@+id/ivPlayTrailer"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
+                android:contentDescription="@string/play_trailer"
                 android:scaleType="centerCrop"
                 android:src="@drawable/play"
-                app:layout_constraintBottom_toBottomOf="@+id/image_banner"
-                app:layout_constraintEnd_toEndOf="@+id/image_banner"
-                app:layout_constraintStart_toStartOf="@+id/image_banner"
-                app:layout_constraintTop_toTopOf="@+id/image_banner" />
+                app:layout_constraintBottom_toBottomOf="@+id/ivBanner"
+                app:layout_constraintEnd_toEndOf="@+id/ivBanner"
+                app:layout_constraintStart_toStartOf="@+id/ivBanner"
+                app:layout_constraintTop_toTopOf="@+id/ivBanner" />
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/detalhesContainerBanner"
+                android:id="@+id/containerCartaz"
                 android:layout_width="130dp"
                 android:layout_height="180dp"
                 android:layout_marginStart="12dp"
@@ -49,176 +52,181 @@
                 app:cardCornerRadius="12dp"
                 app:cardElevation="12dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/image_banner">
+                app:layout_constraintTop_toBottomOf="@id/ivBanner">
 
                 <ImageView
-                    android:id="@+id/image_cartaz"
+                    android:id="@+id/ivCartaz"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:contentDescription="@string/cartaz_filme"
                     android:scaleType="centerCrop"
                     tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/detalhesTitulo"
+                android:id="@+id/tvTituloMovie"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="8dp"
-                android:textColor="@color/white"
+                android:textColor="@color/colorPrimaryText"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@id/detalhesFavoritar"
-                app:layout_constraintStart_toEndOf="@id/detalhesContainerBanner"
-                app:layout_constraintTop_toBottomOf="@id/image_banner"
-                tools:text="Título de Teste" />
-
-            <CheckBox
-                android:id="@+id/detalhesFavoritar"
-                style="?android:attr/starStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:layout_constraintBottom_toBottomOf="@id/detalhesTitulo"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/detalhesTitulo"
-                app:layout_constraintTop_toTopOf="@id/detalhesTitulo" />
+                app:layout_constraintStart_toEndOf="@id/containerCartaz"
+                app:layout_constraintTop_toBottomOf="@id/ivBanner"
+                tools:text="@string/title_movie_teste" />
 
             <TextView
-                android:id="@+id/detalhesNota"
+                android:id="@+id/tvNotaMovie"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:textColor="#8BC34A"
+                android:textColor="@color/colorPrimaryText"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/detalhesTitulo"
-                app:layout_constraintStart_toStartOf="@+id/detalhesTitulo"
-                app:layout_constraintTop_toBottomOf="@+id/detalhesTitulo"
-                tools:text="9.6" />
+                app:layout_constraintEnd_toEndOf="@+id/tvTituloMovie"
+                app:layout_constraintStart_toStartOf="@+id/tvTituloMovie"
+                app:layout_constraintTop_toBottomOf="@+id/tvTituloMovie"
+                tools:text="@string/nota_movie_teste" />
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/detalhesContainerGeneroUm"
+                android:id="@+id/containerGeneroUm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:elevation="3dp"
                 android:visibility="invisible"
-                app:cardBackgroundColor="#292828"
+                app:cardBackgroundColor="@color/colorTertiaryContainer"
                 app:cardCornerRadius="3dp"
-                app:layout_constraintStart_toStartOf="@id/detalhesNota"
-                app:layout_constraintTop_toBottomOf="@id/detalhesNota">
+                app:layout_constraintStart_toStartOf="@id/tvNotaMovie"
+                app:layout_constraintTop_toBottomOf="@id/tvNotaMovie"
+                tools:visibility="@integer/xml_visible">
 
                 <TextView
-                    android:id="@+id/detalhesGeneroUm"
+                    android:id="@+id/tvGeneroUm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="3dp"
-                    android:textColor="@color/white"
-                    tools:text="Terror" />
+                    android:layout_margin="6dp"
+                    android:textColor="@color/colorPrimaryText"
+                    tools:text="@string/genero_teste" />
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/detalhesContainerGeneroDois"
+                android:id="@+id/containerGeneroDois"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:elevation="15dp"
                 android:visibility="invisible"
-                app:cardBackgroundColor="#292828"
+                app:cardBackgroundColor="@color/colorTertiaryContainer"
                 app:cardCornerRadius="3dp"
-                app:layout_constraintStart_toEndOf="@id/detalhesContainerGeneroUm"
-                app:layout_constraintTop_toTopOf="@id/detalhesContainerGeneroUm">
+                app:layout_constraintStart_toEndOf="@id/containerGeneroUm"
+                app:layout_constraintTop_toTopOf="@id/containerGeneroUm"
+                tools:visibility="@integer/xml_visible">
 
                 <TextView
-                    android:id="@+id/detalhesGeneroDois"
+                    android:id="@+id/tvGeneroDois"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="3dp"
-                    android:textColor="@color/white"
-                    tools:text="Drama" />
+                    android:layout_margin="6dp"
+                    android:textColor="@color/colorPrimaryText"
+                    tools:text="@string/genero_teste" />
             </androidx.cardview.widget.CardView>
 
+            <CheckBox
+                android:id="@+id/cbFavoritarMovie"
+                style="?android:attr/listChoiceIndicatorMultiple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/info_favoritar_movie"
+                android:textColor="@color/colorPrimaryText"
+                android:translationX="-5dp"
+                app:layout_constraintStart_toStartOf="@+id/tvTituloMovie"
+                app:layout_constraintTop_toBottomOf="@+id/containerGeneroUm"
+                tools:checked="true" />
+
             <TextView
-                android:id="@+id/destalhesTextDescricao"
+                android:id="@+id/tvInfoDescricaoMovie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="12dp"
-                android:text="Descrição:"
-                android:textColor="@color/white"
+                android:text="@string/info_descricao"
+                android:textColor="@color/colorSecondaryText"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@id/detalhesContainerBanner"
-                app:layout_constraintTop_toBottomOf="@id/detalhesContainerBanner" />
+                app:layout_constraintEnd_toEndOf="@id/containerCartaz"
+                app:layout_constraintTop_toBottomOf="@id/containerCartaz" />
 
             <TextView
-                android:id="@+id/detalhesDescricao"
+                android:id="@+id/tvDescricaoMovie"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:textColor="@color/white"
+                android:textColor="@color/colorPrimaryText"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/detalhesContainerGeneroUm"
-                app:layout_constraintTop_toTopOf="@+id/destalhesTextDescricao"
-                tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s." />
+                app:layout_constraintStart_toStartOf="@id/containerGeneroUm"
+                app:layout_constraintTop_toTopOf="@+id/tvInfoDescricaoMovie"
+                tools:text="@string/description_movie_teste" />
 
             <TextView
-                android:id="@+id/detalhesDescricaoLerMais"
+                android:id="@+id/tvInfoLerMais"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="Clique para ler mais."
-                android:textColor="@color/white"
+                android:text="@string/clique_ler_mais"
+                android:textColor="@color/colorSecondaryText"
                 android:textSize="9sp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toTopOf="@id/detalhesTextSemelhantes"
-                app:layout_constraintStart_toStartOf="@id/detalhesDescricao"
-                app:layout_constraintTop_toBottomOf="@id/detalhesDescricao" />
+                android:visibility="@integer/xml_gone"
+                app:layout_constraintBottom_toTopOf="@id/tvInfoSemelhantes"
+                app:layout_constraintStart_toStartOf="@id/tvDescricaoMovie"
+                app:layout_constraintTop_toBottomOf="@id/tvDescricaoMovie"
+                tools:visibility="@integer/xml_visible" />
 
             <TextView
-                android:id="@+id/detalhesTextSemelhantes"
+                android:id="@+id/tvInfoSemelhantes"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="12dp"
-                android:text="Semelhantes:"
+                android:text="@string/semelhantes"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/detalhesDescricaoLerMais" />
+                app:layout_constraintTop_toBottomOf="@id/tvInfoLerMais" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <View
-            android:id="@+id/ddd"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:background="@drawable/gradiant_detalhes"
-            app:layout_constraintBottom_toTopOf="@+id/rvDetalhesSemelhantes"
+        <LinearLayout
+            android:id="@+id/viewGradient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/rvMoviesSemelhantes"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/containerDetalhesMovie" />
+            app:layout_constraintTop_toBottomOf="@id/containerDetalhesMovie">
+
+            <include layout="@layout/item_gradient_default" />
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvDetalhesSemelhantes"
+            android:id="@+id/rvMoviesSemelhantes"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ddd"
-            app:spanCount="4"
-            tools:listitem="@layout/item_list_primary" />
+            app:layout_constraintTop_toBottomOf="@id/viewGradient"
+            tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            tools:listitem="@layout/item_list_primary"
+            tools:spanCount="4" />
 
         <ProgressBar
-            android:id="@+id/progressDetalhes"
+            android:id="@+id/pbLoadingDetalhes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="@integer/xml_gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

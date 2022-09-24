@@ -5,21 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="12dp"
-    app:cardBackgroundColor="#292828">
+    app:cardBackgroundColor="@color/colorPrimaryContainer">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imageDialogInfo"
+            android:id="@+id/ivDialogInfo"
             android:layout_width="0dp"
             android:layout_height="150dp"
+            android:contentDescription="@string/banner_filme"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toTopOf="@id/tvDialogInfoTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <TextView
             android:id="@+id/tvDialogInfoTitle"
@@ -29,28 +31,25 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:gravity="center"
-            android:textColor="@color/white"
+            android:textColor="@color/colorPrimaryText"
             android:textSize="22sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/imageDialogInfo"
-            app:layout_constraintStart_toStartOf="@id/imageDialogInfo"
-            app:layout_constraintTop_toBottomOf="@id/imageDialogInfo"
-            tools:text="Titulo teste de filme" />
+            app:layout_constraintEnd_toEndOf="@id/ivDialogInfo"
+            app:layout_constraintStart_toStartOf="@id/ivDialogInfo"
+            app:layout_constraintTop_toBottomOf="@id/ivDialogInfo"
+            tools:text="@string/title_movie_teste" />
 
         <TextView
             android:id="@+id/tvDialogInfoDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="26dp"
+            android:layout_marginTop="16dp"
             android:gravity="center"
-            android:textColor="@color/white"
+            android:textColor="@color/colorPrimaryText"
             app:layout_constraintEnd_toEndOf="@id/tvDialogInfoTitle"
             app:layout_constraintStart_toStartOf="@id/tvDialogInfoTitle"
             app:layout_constraintTop_toBottomOf="@id/tvDialogInfoTitle"
-            tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s." />
+            tools:text="@string/description_movie_teste" />
 
         <Button
             android:id="@+id/btnDialogInfoOk"
@@ -59,7 +58,10 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="12dp"
-            android:text="Ok"
+            android:backgroundTint="@color/colorDefaultIcons"
+            android:text="@string/info_ok"
+            android:textColor="@color/colorSecondaryText"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvDialogInfoDescription" />

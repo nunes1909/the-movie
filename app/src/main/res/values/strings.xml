@@ -1,12 +1,27 @@
 <resources>
     <string name="app_name">The Movie</string>
-
     <!-- region titles -->
     <string name="title_menu_filmes">Filmes</string>
     <string name="title_menu_series">Séries</string>
     <string name="title_menu_pesquisar">Pesquisar</string>
     <string name="title_menu_favoritos">Favoritos</string>
+
+    <string name="title_movie_teste">Titulo teste de filme</string>
+    <string name="description_movie_teste">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.</string>
+    <string name="nota_movie_teste">9.6</string>
+    <string name="genero_teste">Terror</string>
+    <!-- endregion -->
+
+    <!-- region messages -->
     <string name="um_erro_ocorreu">Um erro ocorreu.</string>
     <string name="salvo_favoritos">Salvo nos favoritos.</string>
+    <string name="banner_filme">Banner do filme</string>
+    <string name="cartaz_filme">Cartaz do filme</string>
+    <string name="play_trailer">Botão de play</string>
+    <string name="info_descricao">Descrição:</string>
+    <string name="info_favoritar_movie">Favoritar movie</string>
+    <string name="clique_ler_mais">Clique para ler mais.</string>
+    <string name="semelhantes">Semelhantes:</string>
+    <string name="info_ok">OK</string>
     <!-- endregion -->
 </resources>

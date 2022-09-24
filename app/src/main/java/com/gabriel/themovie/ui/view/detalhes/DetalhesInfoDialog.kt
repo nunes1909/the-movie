@@ -45,7 +45,7 @@ class DetalhesInfoDialog : DialogFragment() {
     private fun configuraComponentes(binding: DialogInfoMovieBinding) {
         binding.tvDialogInfoTitle.text = args.movieView.title
         binding.tvDialogInfoDescription.text = args.movieView.description
-        binding.imageDialogInfo.tentaCarregar(
+        binding.ivDialogInfo.tentaCarregar(
             "${BASE_URL_IMAGES}${args.movieView.banner ?: args.movieView.cartaz}"
         )
         binding.btnDialogInfoOk.setOnClickListener {
