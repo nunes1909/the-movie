@@ -5,28 +5,29 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageEmpty"
+        android:id="@+id/ivEmpty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
         android:src="@drawable/lista_vazia"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/textViewEmpty"
+        android:visibility="@integer/xml_gone"
+        app:layout_constraintBottom_toTopOf="@id/tvEmpty"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed"
+        android:contentDescription="@string/sem_fav" />
 
     <TextView
-        android:id="@+id/textViewEmpty"
+        android:id="@+id/tvEmpty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sem movies salvos aqui."
-        android:visibility="gone"
-        android:textColor="@color/white"
+        android:text="@string/sem_fav"
+        android:visibility="@integer/xml_gone"
+        android:textColor="@color/colorPrimaryText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageEmpty" />
+        app:layout_constraintTop_toBottomOf="@id/ivEmpty" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -76,17 +76,14 @@ class FavoritosFragment : BaseFragment<FragmentFavoritosBinding, FavoritosViewMo
                 is ResourceState.Success -> {
                     exibeFavoritos(resource)
                     binding.pbFavoritos.hide()
-                    binding.containerEtPesquisa.show()
                 }
                 is ResourceState.Error -> {
                     binding.pbFavoritos.hide()
-                    binding.containerEtPesquisa.hide()
                     Timber.tag("FilmesFragment/observerListaFilmes")
                         .e("Error -> ${resource.message} Cod -> ${resource.cod}")
                 }
                 is ResourceState.Loading -> {
                     binding.pbFavoritos.show()
-                    binding.etPesquisa.isEnabled = false
                 }
                 else -> {}
             }
@@ -97,11 +94,11 @@ class FavoritosFragment : BaseFragment<FragmentFavoritosBinding, FavoritosViewMo
         viewModel.empty.collect {
             if (!it) {
                 movieAdapter.moviesList = listOf()
-                binding.containerIncludeEmpty.imageEmpty.show()
-                binding.containerIncludeEmpty.textViewEmpty.show()
+                binding.containerIncludeEmpty.ivEmpty.show()
+                binding.containerIncludeEmpty.tvEmpty.show()
             } else {
-                binding.containerIncludeEmpty.imageEmpty.hide()
-                binding.containerIncludeEmpty.textViewEmpty.hide()
+                binding.containerIncludeEmpty.ivEmpty.hide()
+                binding.containerIncludeEmpty.tvEmpty.hide()
             }
         }
     }

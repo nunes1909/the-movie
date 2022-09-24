@@ -7,7 +7,10 @@
     <string name="title_menu_favoritos">Favoritos</string>
 
     <string name="title_movie_teste">Movie Teste</string>
-    <string name="description_movie_teste">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.</string>
+    <string name="description_movie_teste">Lorem Ipsum is simply dummy text of the printing and
+        typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since
+        the 1500s. Lorem Ipsum has been the industry standard dummy text ever since the 1500s.
+        Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.</string>
     <string name="nota_movie_teste">9.6</string>
     <string name="genero_teste">Terror</string>
     <string name="pesquisa_teste">Iron Man</string>
@@ -15,7 +18,14 @@
 
     <!-- region messages -->
     <string name="um_erro_ocorreu">Um erro ocorreu.</string>
-    <string name="salvo_favoritos">Salvo nos favoritos.</string>
+    <string name="movie_sem_video">Este movie não possui vídeo.</string>
+    <string name="pesquise_movies_fav">Pesquise aqui os seus movies salvos</string>
+    <string name="pesquise_filmes">Pesquise aqui os seus filmes</string>
+    <string name="sem_fav">Nenhum resultado encontrado.</string>
+    <string name="info_ok">OK</string>
+    <!-- endregion -->
+
+    <!-- region infos -->
     <string name="banner_movie">Banner do movie</string>
     <string name="cartaz_movie">Cartaz do movie</string>
     <string name="play_trailer">Botão de play</string>
@@ -23,8 +33,9 @@
     <string name="info_favoritar_movie">Favoritar movie</string>
     <string name="clique_ler_mais">Clique para ler mais.</string>
     <string name="semelhantes">Semelhantes:</string>
-    <string name="pesquise_movies_fav">Pesquise aqui os seus movies salvos</string>
-    <string name="info_ok">OK</string>
-    <string name="pesquise_filmes">Pesquise aqui os seus filmes</string>
+    <string name="salvar_favoritos">Salvar favoritos</string>
+    <string name="ler_mais">Ler mais</string>
+    <string name="info_favoritos">Favoritos</string>
+    <string name="info_ler_mais">Ler mais</string>
     <!-- endregion -->
 </resources>

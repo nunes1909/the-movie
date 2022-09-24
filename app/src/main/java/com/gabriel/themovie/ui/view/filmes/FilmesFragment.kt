@@ -158,7 +158,7 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
                 ).apply { startActivity(this) }
             }
         } else {
-            toast("Este movie não possui vídeo.")
+            toast(getString(R.string.movie_sem_video))
         }
     }
 

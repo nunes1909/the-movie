@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--region visibility -->
-    <integer name="xml_visible">0</integer> <!-- This is VISIBLE -->
-    <integer name="xml_invisible">1</integer> <!-- This is INVISIBLE -->
-    <integer name="xml_gone">2</integer> <!-- This is GONE -->
+    <integer name="xml_visible">0</integer>
+    <integer name="xml_invisible">1</integer>
+    <integer name="xml_gone">2</integer>
     <!--endregion-->
 </resources>
