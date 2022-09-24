@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/filmesFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/filmesFragment"
@@ -71,4 +71,19 @@
             android:name="movieView"
             app:argType="com.gabriel.themovie.movie.model.MovieView" />
     </dialog>
+    <fragment
+        android:id="@+id/splashFragment"
+        tools:layout="@layout/fragment_splash"
+        android:name="com.gabriel.themovie.ui.view.splash.SplashFragment"
+        android:label="SplashFragment" >
+        <action
+            android:id="@+id/acaoSplashParaFilmes"
+            app:destination="@id/filmesFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>
