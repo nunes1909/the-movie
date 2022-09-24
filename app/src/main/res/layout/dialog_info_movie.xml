@@ -15,7 +15,7 @@
             android:id="@+id/ivDialogInfo"
             android:layout_width="0dp"
             android:layout_height="150dp"
-            android:contentDescription="@string/banner_filme"
+            android:contentDescription="@string/banner_movie"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toTopOf="@id/tvDialogInfoTitle"
             app:layout_constraintEnd_toEndOf="parent"

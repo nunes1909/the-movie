@@ -24,7 +24,7 @@
                 android:id="@+id/ivBanner"
                 android:layout_width="0dp"
                 android:layout_height="250dp"
-                android:contentDescription="@string/banner_filme"
+                android:contentDescription="@string/banner_movie"
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +58,7 @@
                     android:id="@+id/ivCartaz"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:contentDescription="@string/cartaz_filme"
+                    android:contentDescription="@string/cartaz_movie"
                     android:scaleType="centerCrop"
                     tools:srcCompat="@tools:sample/backgrounds/scenic" />
 

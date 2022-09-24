@@ -63,16 +63,16 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
             when (resources) {
                 is ResourceState.Success -> {
                     exibeSeriesPopulares(resources)
-                    ocultaProgressBar(binding.progressSerie)
+                    ocultaProgressBar(binding.pbSerie)
                 }
                 is ResourceState.Error -> {
-                    ocultaProgressBar(binding.progressSerie)
+                    ocultaProgressBar(binding.pbSerie)
                     toast("Um erro ocorreu: ${resources.message}")
                     Timber.tag("SeriesFragment/observerListaSeries")
                         .e("Error -> ${resources.message} Cod -> ${resources.cod}")
                 }
                 is ResourceState.Loading -> {
-                    exibeProgressBar(binding.progressSerie)
+                    exibeProgressBar(binding.pbSerie)
                 }
                 else -> {}
             }
@@ -89,19 +89,19 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
         viewModel.movieDetail.collect { resource ->
             when (resource) {
                 is ResourceState.Success -> {
-                    ocultaProgressBar(binding.progressSerie)
+                    ocultaProgressBar(binding.pbSerie)
                     preencheSeriePrincipal(resource.data)
                 }
                 is ResourceState.Error -> {
                     toast(getString(R.string.um_erro_ocorreu))
-                    ocultaProgressBar(binding.progressSerie)
+                    ocultaProgressBar(binding.pbSerie)
                     exibeImagemDefault(binding.serieBannerPrincipal)
 
                     Timber.tag("FilmesFragment/observerFilmePrincipal")
                         .e("Error -> ${resource.message} Cod -> ${resource.cod}")
                 }
                 is ResourceState.Loading -> {
-                    exibeProgressBar(binding.progressSerie)
+                    exibeProgressBar(binding.pbSerie)
                     exibeImagemDefault(binding.serieBannerPrincipal)
                 }
                 else -> {}
