@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.themovie.R
@@ -14,6 +15,7 @@ import com.gabriel.themovie.databinding.FragmentPesquisaBinding
 import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.ui.adapters.MovieAdapterSecondary
 import com.gabriel.themovie.util.base.BaseFragment
+import com.gabriel.themovie.util.constants.ConstantsView.TYPE_FILME
 import com.gabriel.themovie.util.extensions.hide
 import com.gabriel.themovie.util.extensions.show
 import com.gabriel.themovie.util.extensions.toast
@@ -25,13 +27,22 @@ class PesquisaFragment : BaseFragment<FragmentPesquisaBinding, PesquisaViewModel
 
     override val viewModel: PesquisaViewModel by viewModel()
     private val movieAdapter by lazy { MovieAdapterSecondary() }
-    lateinit var globalMovie: MovieView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         configuraRecyclerView()
         configuraPesquisa()
         observerSearchList()
+        configuraClickAdapter()
+    }
+
+    private fun configuraClickAdapter() {
+        movieAdapter.setMovieOnClickListener { movieView ->
+            movieView.type = TYPE_FILME
+            val action = PesquisaFragmentDirections
+                .acaoPesquisaParaDetalhes(movieView = movieView)
+            findNavController().navigate(action)
+        }
     }
 
     private fun configuraRecyclerView() = with(binding) {
