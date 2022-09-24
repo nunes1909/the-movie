@@ -23,11 +23,13 @@
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/fragment_filmes.xml" value="0.1" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/fragment_pesquisa.xml" value="0.559375" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/fragment_series.xml" value="0.5" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/fragment_splash.xml" value="0.559375" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/item_add_filme_principal.xml" value="0.559375" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/item_gradient_default.xml" value="0.559375" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/item_info_filme_principal.xml" value="0.559375" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/item_list.xml" value="0.559375" />
-        <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/item_list_secondary.xml" value="0.559375" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/item_list_primary.xml" value="0.1" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/item_list_secondary.xml" value="0.33" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/item_movie.xml" value="0.559375" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/item_pesquisa.xml" value="0.41206896551724137" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/the-movie/app/src/main/res/layout/item_relacionado.xml" value="0.559375" />

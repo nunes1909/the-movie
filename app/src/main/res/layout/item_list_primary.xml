@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/ivItemMovie"
+            android:id="@+id/ivItemPrimary"
             android:layout_width="100dp"
             android:layout_height="150dp"
             android:contentDescription="@string/banner_movie"
@@ -25,17 +25,17 @@
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/containerItemTitle"
+            android:id="@+id/containerItemTitlePrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:elevation="8dp"
             app:cardBackgroundColor="@color/colorPrimaryContainer"
-            app:layout_constraintBottom_toBottomOf="@id/ivItemMovie"
+            app:layout_constraintBottom_toBottomOf="@id/ivItemPrimary"
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
-                android:id="@+id/tv_item_title"
+                android:id="@+id/tvItemTitlePrimary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp"

@@ -53,9 +53,9 @@ class MovieAdapterSecondary : RecyclerView.Adapter<MovieAdapterSecondary.SearchM
     override fun onBindViewHolder(holder: SearchMovieHolder, position: Int) {
         val movie = moviesList[position]
         holder.binding.apply {
-            itemMovieImage.tentaCarregar("${BASE_URL_IMAGES}${movie.cartaz}")
-            itemMovieTitle.text = movie.title.limitValue(15, true)
-            itemMovieDescription.text = movie.description?.limitValue(LIMIT_DESCRIPTION, EXIBE_ELLIPSIZE)
+            ivItemSeconday.tentaCarregar("${BASE_URL_IMAGES}${movie.cartaz}")
+            tvItemTitleSeconday.text = movie.title.limitValue(15, true)
+            tvItemDescriptionSeconday.text = movie.description?.limitValue(LIMIT_DESCRIPTION, EXIBE_ELLIPSIZE)
         }
 
         holder.itemView.setOnClickListener {

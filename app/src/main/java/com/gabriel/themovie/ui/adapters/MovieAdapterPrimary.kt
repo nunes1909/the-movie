@@ -49,8 +49,8 @@ class MovieAdapterPrimary : RecyclerView.Adapter<MovieAdapterPrimary.MovieViewHo
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = moviesList[position]
         holder.binding.apply {
-            ivItemMovie.tentaCarregar("${BASE_URL_IMAGES}${movie.cartaz}")
-            tvItemTitle.text = movie.title.limitValue(10, true)
+            ivItemPrimary.tentaCarregar("${BASE_URL_IMAGES}${movie.cartaz}")
+            tvItemTitlePrimary.text = movie.title.limitValue(10, true)
         }
 
         holder.itemView.setOnClickListener {
