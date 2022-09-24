@@ -10,6 +10,7 @@
     <string name="description_movie_teste">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.</string>
     <string name="nota_movie_teste">9.6</string>
     <string name="genero_teste">Terror</string>
+    <string name="pesquisa_teste">Iron Man</string>
     <!-- endregion -->
 
     <!-- region messages -->
@@ -22,6 +23,7 @@
     <string name="info_favoritar_movie">Favoritar movie</string>
     <string name="clique_ler_mais">Clique para ler mais.</string>
     <string name="semelhantes">Semelhantes:</string>
+    <string name="pesquise_movies_fav">Pesquise aqui os seus movies salvos</string>
     <string name="info_ok">OK</string>
     <!-- endregion -->
 </resources>

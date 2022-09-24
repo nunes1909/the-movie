@@ -43,7 +43,7 @@ class FavoritosFragment : BaseFragment<FragmentFavoritosBinding, FavoritosViewMo
     }
 
     private fun configuraPesquisa() = with(binding) {
-        editPesquisa.addTextChangedListener(searchMoviesWatcher())
+        etPesquisa.addTextChangedListener(searchMoviesWatcher())
     }
 
     private fun searchMoviesWatcher() = object : TextWatcher {
@@ -75,18 +75,17 @@ class FavoritosFragment : BaseFragment<FragmentFavoritosBinding, FavoritosViewMo
             when (resource) {
                 is ResourceState.Success -> {
                     exibeFavoritos(resource)
-                    binding.layoutEditPesquisa.show()
-                    binding.progressFavoritos.hide()
+                    binding.pbFavoritos.hide()
+                    binding.containerEtPesquisa.show()
                 }
                 is ResourceState.Error -> {
-                    binding.progressFavoritos.hide()
-                    binding.layoutEditPesquisa.hide()
+                    binding.pbFavoritos.hide()
+                    binding.containerEtPesquisa.hide()
                     Timber.tag("FilmesFragment/observerListaFilmes")
                         .e("Error -> ${resource.message} Cod -> ${resource.cod}")
                 }
                 is ResourceState.Loading -> {
-                    binding.progressFavoritos.show()
-                    binding.editPesquisa.isEnabled = false
+                    binding.pbFavoritos.show()
                 }
                 else -> {}
             }
@@ -97,11 +96,11 @@ class FavoritosFragment : BaseFragment<FragmentFavoritosBinding, FavoritosViewMo
         viewModel.empty.collect {
             if (!it) {
                 movieAdapter.moviesList = listOf()
-                binding.includeLayoutEmpty.imageEmpty.show()
-                binding.includeLayoutEmpty.textViewEmpty.show()
+                binding.containerIncludeEmpty.imageEmpty.show()
+                binding.containerIncludeEmpty.textViewEmpty.show()
             } else {
-                binding.includeLayoutEmpty.imageEmpty.hide()
-                binding.includeLayoutEmpty.textViewEmpty.hide()
+                binding.containerIncludeEmpty.imageEmpty.hide()
+                binding.containerIncludeEmpty.textViewEmpty.hide()
             }
         }
     }

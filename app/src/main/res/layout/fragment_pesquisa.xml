@@ -8,7 +8,7 @@
     android:padding="4dp">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutEditPesquisa"
+        android:id="@+id/containerEtPesquisa"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editPesquisa"
+            android:id="@+id/etPesquisa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Pesquise aqui os seus filmes"
@@ -46,7 +46,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutEditPesquisa"
+        app:layout_constraintTop_toBottomOf="@id/containerEtPesquisa"
         tools:listitem="@layout/item_list_secondary" />
 
     <ProgressBar

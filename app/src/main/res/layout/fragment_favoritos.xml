@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000"
+    android:background="@color/colorSecondaryContainer"
     android:padding="4dp">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutEditPesquisa"
+        android:id="@+id/containerEtPesquisa"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,21 +19,22 @@
         app:boxCornerRadiusTopStart="8dp"
         app:endIconDrawable="@drawable/ic_delete"
         app:endIconMode="clear_text"
-        app:endIconTint="@color/black"
+        app:endIconTint="@color/colorDefaultIcons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editPesquisa"
+            android:id="@+id/etPesquisa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Pesquise aqui os seus movies salvos"
+            android:hint="@string/pesquise_movies_fav"
             android:imeOptions="actionSearch"
             android:inputType="textCapWords"
             android:selectAllOnFocus="true"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="18sp"
+            tools:text="@string/pesquisa_teste" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -45,21 +46,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutEditPesquisa"
+        app:layout_constraintTop_toBottomOf="@+id/containerEtPesquisa"
         tools:listitem="@layout/item_list_secondary" />
 
     <ProgressBar
-        android:id="@+id/progressFavoritos"
+        android:id="@+id/pbFavoritos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="@integer/xml_gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
-        android:id="@+id/includeLayoutEmpty"
+        android:id="@+id/containerIncludeEmpty"
         layout="@layout/layout_list_empty"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
