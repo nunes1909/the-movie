@@ -64,16 +64,16 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
             when (resource) {
                 is ResourceState.Success -> {
                     exibeFilmesPopulares(resource)
-                    ocultaProgressBar(binding.progressFilme)
+                    ocultaProgressBar(binding.pbFilme)
                 }
                 is ResourceState.Error -> {
-                    ocultaProgressBar(binding.progressFilme)
+                    ocultaProgressBar(binding.pbFilme)
                     toast(getString(R.string.um_erro_ocorreu))
                     Timber.tag("FilmesFragment/observerListaFilmes")
                         .e("Error -> ${resource.message} Cod -> ${resource.cod}")
                 }
                 is ResourceState.Loading -> {
-                    exibeProgressBar(binding.progressFilme)
+                    exibeProgressBar(binding.pbFilme)
                 }
                 else -> {}
             }
@@ -90,20 +90,20 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
         viewModel.movieDetail.collect { resource ->
             when (resource) {
                 is ResourceState.Success -> {
-                    ocultaProgressBar(binding.progressFilme)
+                    ocultaProgressBar(binding.pbFilme)
                     preencheFilmePrincipal(resource.data)
                 }
                 is ResourceState.Error -> {
                     toast(getString(R.string.um_erro_ocorreu))
-                    ocultaProgressBar(binding.progressFilme)
-                    exibeImagemDefault(binding.bannerFilmePrincipal)
+                    ocultaProgressBar(binding.pbFilme)
+                    exibeImagemDefault(binding.ivBannerFilmePrincipal)
 
                     Timber.tag("FilmesFragment/observerFilmePrincipal")
                         .e("Error -> ${resource.message} Cod -> ${resource.cod}")
                 }
                 is ResourceState.Loading -> {
-                    exibeProgressBar(binding.progressFilme)
-                    exibeImagemDefault(binding.bannerFilmePrincipal)
+                    exibeProgressBar(binding.pbFilme)
+                    exibeImagemDefault(binding.ivBannerFilmePrincipal)
                 }
                 else -> {}
             }
@@ -131,7 +131,7 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
     }
 
     private fun carregaImagem(movie: MovieView) {
-        binding.bannerFilmePrincipal
+        binding.ivBannerFilmePrincipal
             .tentaCarregar("${ConstantsView.BASE_URL_IMAGES}${movie.cartaz}")
     }
 

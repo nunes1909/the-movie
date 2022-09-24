@@ -86,6 +86,7 @@ class FavoritosFragment : BaseFragment<FragmentFavoritosBinding, FavoritosViewMo
                 }
                 is ResourceState.Loading -> {
                     binding.pbFavoritos.show()
+                    binding.etPesquisa.isEnabled = false
                 }
                 else -> {}
             }
