@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import com.gabriel.themovie.databinding.ItemListPrimaryBinding
 import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.util.constants.ConstantsView.BASE_URL_IMAGES
@@ -50,8 +49,8 @@ class MovieAdapterPrimary : RecyclerView.Adapter<MovieAdapterPrimary.MovieViewHo
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = moviesList[position]
         holder.binding.apply {
-            itemListImage.tentaCarregar("${BASE_URL_IMAGES}${movie.cartaz}")
-            itemListTitle.text = movie.title.limitValue(10, true)
+            ivItemMovie.tentaCarregar("${BASE_URL_IMAGES}${movie.cartaz}")
+            tvItemTitle.text = movie.title.limitValue(10, true)
         }
 
         holder.itemView.setOnClickListener {
