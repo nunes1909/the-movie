@@ -55,6 +55,7 @@ dependencies {
     implementation dependencies.navUiKtx
     implementation dependencies.fragmentKtx
     implementation dependencies.coil
+    implementation dependencies.dataStore
 
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
     def koin_version = "3.2.0"

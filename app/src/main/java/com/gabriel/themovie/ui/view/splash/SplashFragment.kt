@@ -4,9 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.edit
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.gabriel.themovie.databinding.FragmentSplashBinding
+import com.gabriel.themovie.util.preferences.dataStore
+import kotlinx.coroutines.launch
 
 class SplashFragment : Fragment() {
 
@@ -15,6 +20,15 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         configuraLogoSplash()
+        configuraVisibilityBottomNav()
+    }
+
+    private fun configuraVisibilityBottomNav() {
+        lifecycleScope.launch {
+            requireContext().dataStore.edit { preferences ->
+                preferences[booleanPreferencesKey("exibeBottomNav")] = false
+            }
+        }
     }
 
     private fun configuraLogoSplash() = with(binding) {
