@@ -44,6 +44,15 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
         similarObserver()
         favoritoObserver()
         configuraClickAdapter()
+        configuraClickDialog()
+    }
+
+    private fun configuraClickDialog() {
+        binding.detalhesDescricao.setOnClickListener {
+            val action = DetalhesFragmentDirections
+                .acaoDetalhesParaDialog(globalMovie)
+            findNavController().navigate(action)
+        }
     }
 
     private fun configuraClickAdapter() {
@@ -197,8 +206,10 @@ class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel
     }
 
     private fun carregaDescription(movieView: MovieView) {
-        binding.detalhesDescricao.text =
-            movieView.description?.limitValue(LIMIT_DESCRIPTION, EXIBE_ELLIPSIZE)
+        movieView.description?.let {
+            binding.detalhesDescricaoLerMais.show()
+            binding.detalhesDescricao.text = it.limitValue(LIMIT_DESCRIPTION, EXIBE_ELLIPSIZE)
+        }
     }
 
     private fun carregaNota(movieView: MovieView) {
