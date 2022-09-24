@@ -8,7 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.ItemTouchHelper.LEFT
+import androidx.recyclerview.widget.ItemTouchHelper.RIGHT
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.themovie.databinding.FragmentFavoritosBinding
 import com.gabriel.themovie.movie.model.MovieView
@@ -16,6 +20,7 @@ import com.gabriel.themovie.ui.adapters.MovieAdapterSecondary
 import com.gabriel.themovie.util.base.BaseFragment
 import com.gabriel.themovie.util.extensions.hide
 import com.gabriel.themovie.util.extensions.show
+import com.gabriel.themovie.util.extensions.toast
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -44,6 +49,7 @@ class FavoritosFragment : BaseFragment<FragmentFavoritosBinding, FavoritosViewMo
 
     private fun configuraPesquisa() = with(binding) {
         etPesquisa.addTextChangedListener(searchMoviesWatcher())
+        etPesquisa.requestFocus()
     }
 
     private fun searchMoviesWatcher() = object : TextWatcher {
@@ -67,8 +73,25 @@ class FavoritosFragment : BaseFragment<FragmentFavoritosBinding, FavoritosViewMo
     private fun configuraRecyclerView() = with(binding) {
         rvFavoritos.adapter = movieAdapter
         rvFavoritos.layoutManager = LinearLayoutManager(requireContext())
+        ItemTouchHelper(configuraTouchHelper()).attachToRecyclerView(rvFavoritos)
     }
 
+    private fun configuraTouchHelper(): ItemTouchHelper.SimpleCallback {
+        return object : ItemTouchHelper.SimpleCallback(0, LEFT or RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ) = false
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val movieView = movieAdapter.moviesList[viewHolder.adapterPosition]
+                viewModel.deleteMovie(movieView = movieView).also {
+                    toast("${movieView.title} removido.")
+                }
+            }
+        }
+    }
 
     private fun observerListaFav() = lifecycleScope.launch {
         viewModel.getFav.collect { resource ->

@@ -52,6 +52,7 @@ class PesquisaFragment : BaseFragment<FragmentPesquisaBinding, PesquisaViewModel
 
     private fun configuraPesquisa() = with(binding) {
         etPesquisa.addTextChangedListener(searchMoviesWatcher())
+        etPesquisa.requestFocus()
     }
 
     private fun searchMoviesWatcher() = object : TextWatcher {
