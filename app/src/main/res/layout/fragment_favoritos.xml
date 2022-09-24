@@ -32,10 +32,9 @@
             android:imeOptions="actionSearch"
             android:inputType="textCapWords"
             android:selectAllOnFocus="true"
-            android:textColor="@color/colorPrimaryText"
+            android:textColor="@color/colorSecondaryText"
             android:textSize="18sp"
             tools:text="@string/pesquisa_teste" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.recyclerview.widget.RecyclerView

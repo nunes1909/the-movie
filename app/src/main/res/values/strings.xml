@@ -25,5 +25,6 @@
     <string name="semelhantes">Semelhantes:</string>
     <string name="pesquise_movies_fav">Pesquise aqui os seus movies salvos</string>
     <string name="info_ok">OK</string>
+    <string name="pesquise_filmes">Pesquise aqui os seus filmes</string>
     <!-- endregion -->
 </resources>

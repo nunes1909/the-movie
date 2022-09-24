@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000"
+    android:background="@color/colorSecondaryContainer"
     android:padding="4dp">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -19,7 +19,7 @@
         app:boxCornerRadiusTopStart="8dp"
         app:endIconDrawable="@drawable/ic_delete"
         app:endIconMode="clear_text"
-        app:endIconTint="@color/black"
+        app:endIconTint="@color/colorDefaultIcons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -28,13 +28,13 @@
             android:id="@+id/etPesquisa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Pesquise aqui os seus filmes"
+            android:hint="@string/pesquise_filmes"
             android:imeOptions="actionSearch"
             android:inputType="textCapWords"
             android:selectAllOnFocus="true"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="18sp"
+            tools:text="@string/pesquisa_teste" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -50,11 +50,11 @@
         tools:listitem="@layout/item_list_secondary" />
 
     <ProgressBar
-        android:id="@+id/progressPesquisa"
+        android:id="@+id/pbPesquisa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminateTint="@color/colorDefaultProgress"
-        android:visibility="gone"
+        android:visibility="@integer/xml_gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

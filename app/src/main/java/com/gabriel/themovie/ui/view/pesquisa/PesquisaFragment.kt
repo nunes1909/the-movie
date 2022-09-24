@@ -78,16 +78,16 @@ class PesquisaFragment : BaseFragment<FragmentPesquisaBinding, PesquisaViewModel
             when (resource) {
                 is ResourceState.Success -> {
                     exibeSearchList(resource)
-                    ocultaProgressBar(binding.progressPesquisa)
+                    ocultaProgressBar(binding.pbPesquisa)
                 }
                 is ResourceState.Error -> {
-                    ocultaProgressBar(binding.progressPesquisa)
+                    ocultaProgressBar(binding.pbPesquisa)
                     toast(getString(R.string.um_erro_ocorreu))
                     Timber.tag("PesquisaFragment/observerSearchList")
                         .e("Error -> ${resource.message} Cod -> ${resource.cod}")
                 }
                 is ResourceState.Loading -> {
-                    exibeProgressBar(binding.progressPesquisa)
+                    exibeProgressBar(binding.pbPesquisa)
                 }
                 else -> {}
             }
@@ -107,17 +107,6 @@ class PesquisaFragment : BaseFragment<FragmentPesquisaBinding, PesquisaViewModel
     private fun exibeProgressBar(progress: View) {
         progress.show()
     }
-
-    /**
-     * Inicializando um objeto global para utilizar ao abrir os detalhes do movie principal.
-     * Isso pois eu não tenho acesso ao [objeto] ao clicar no movie principal.
-     *
-     * @param globalMovie é o objeto global.
-     * @param movieView é o objeto inicializado.
-     */
-//    private fun inicializaGlobalMultiMovie(movieView: MovieView) {
-//        globalMovie = movieView
-//    }
 
     override fun getViewBinding(
         inflater: LayoutInflater,
