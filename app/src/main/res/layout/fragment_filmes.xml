@@ -38,7 +38,7 @@
             android:layout_margin="6dp"
             android:elegantTextHeight="true"
             android:shadowColor="@color/black"
-            android:shadowRadius="20"
+            android:shadowRadius="8"
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryText"
             android:textSize="26sp"

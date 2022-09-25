@@ -88,6 +88,7 @@ class FavoritosFragment : BaseFragment<FragmentFavoritosBinding, FavoritosViewMo
                 val movieView = movieAdapter.moviesList[viewHolder.adapterPosition]
                 viewModel.deleteMovie(movieView = movieView).also {
                     toast("${movieView.title} removido.")
+                    viewModel.getAllFav()
                 }
             }
         }
