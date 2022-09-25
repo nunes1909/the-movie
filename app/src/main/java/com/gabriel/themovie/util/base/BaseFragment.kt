@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
+import com.gabriel.themovie.util.constants.ConstantsView.KEY_BOTTOM_NAV
 import com.gabriel.themovie.util.preferences.dataStore
 import kotlinx.coroutines.launch
 
@@ -29,7 +30,7 @@ abstract class BaseFragment<viewBinding : ViewBinding, viewModel : ViewModel> : 
     private fun configuraVisibilityBottomNav() {
         lifecycleScope.launch {
             requireContext().dataStore.edit { preferences ->
-                preferences[booleanPreferencesKey("exibeBottomNav")] = true
+                preferences[booleanPreferencesKey(KEY_BOTTOM_NAV)] = true
             }
         }
     }

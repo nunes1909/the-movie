@@ -6,8 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -17,7 +15,6 @@ import com.gabriel.themovie.R
 import com.gabriel.themovie.databinding.FragmentFilmesBinding
 import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.ui.adapters.MovieAdapterPrimary
-import com.gabriel.themovie.ui.view.detalhes.DetalhesViewModel
 import com.gabriel.themovie.util.base.BaseFragment
 import com.gabriel.themovie.util.constants.ConstantsView
 import com.gabriel.themovie.util.constants.ConstantsView.BASE_URL_VIDEOS
@@ -53,27 +50,21 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
         rvFilme.layoutManager = GridLayoutManager(requireContext(), RV_COLUNS_DEFAULT)
     }
 
-    private fun configuraClickAdapter() {
-        movieAdapterPrimary.setMovieOnClickListener { movieView ->
-            actionGoDetails(entity = movieView)
-        }
-    }
-
     private fun observerListaFilmes() = lifecycleScope.launch {
         viewModel.list.collect { resource ->
             when (resource) {
                 is ResourceState.Success -> {
                     exibeFilmesPopulares(resource)
-                    ocultaProgressBar(binding.pbFilme)
+                    binding.pbFilme.hide()
                 }
                 is ResourceState.Error -> {
-                    ocultaProgressBar(binding.pbFilme)
+                    binding.pbFilme.hide()
                     toast(getString(R.string.um_erro_ocorreu))
                     Timber.tag("FilmesFragment/observerListaFilmes")
                         .e("Error -> ${resource.message} Cod -> ${resource.cod}")
                 }
                 is ResourceState.Loading -> {
-                    exibeProgressBar(binding.pbFilme)
+                    binding.pbFilme.show()
                 }
                 else -> {}
             }
@@ -90,20 +81,17 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
         viewModel.movieDetail.collect { resource ->
             when (resource) {
                 is ResourceState.Success -> {
-                    ocultaProgressBar(binding.pbFilme)
+                    binding.pbFilme.hide()
                     preencheFilmePrincipal(resource.data)
                 }
                 is ResourceState.Error -> {
                     toast(getString(R.string.um_erro_ocorreu))
-                    ocultaProgressBar(binding.pbFilme)
-                    exibeImagemDefault(binding.ivBannerFilmePrincipal)
-
+                    binding.pbFilme.hide()
                     Timber.tag("FilmesFragment/observerFilmePrincipal")
                         .e("Error -> ${resource.message} Cod -> ${resource.cod}")
                 }
                 is ResourceState.Loading -> {
-                    exibeProgressBar(binding.pbFilme)
-                    exibeImagemDefault(binding.ivBannerFilmePrincipal)
+                    binding.pbFilme.show()
                 }
                 else -> {}
             }
@@ -120,14 +108,16 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
         }
     }
 
-    private fun observerActionAdd() = lifecycleScope.launch {
-        viewModel.verify.collect { ifExists ->
-            if (ifExists) {
-                binding.includeActionsPrincipal.btnAddFav.load(R.drawable.ic_remove)
-            } else {
-                binding.includeActionsPrincipal.btnAddFav.load(R.drawable.ic_add)
-            }
-        }
+    /**
+     * Inicializando um objeto global para utilizar como argumento ao abrir os
+     * detalhes do movie principal. Isso pois eu não tenho acesso ao [objeto]
+     * ao clicar no movie principal.
+     *
+     * @param globalMovie é o objeto global.
+     * @param movieView é o objeto inicializado.
+     */
+    private fun inicializaGlobalMultiMovie(movieView: MovieView) {
+        globalMovie = movieView
     }
 
     private fun carregaImagem(movie: MovieView) {
@@ -162,28 +152,20 @@ class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
         }
     }
 
-    private fun exibeImagemDefault(image: ImageView) {
-        image.load(androidx.appcompat.R.color.material_grey_600)
+    private fun observerActionAdd() = lifecycleScope.launch {
+        viewModel.verify.collect { ifExists ->
+            if (ifExists) {
+                binding.includeActionsPrincipal.btnAddFav.load(R.drawable.ic_remove)
+            } else {
+                binding.includeActionsPrincipal.btnAddFav.load(R.drawable.ic_add)
+            }
+        }
     }
 
-    private fun ocultaProgressBar(progress: View) {
-        progress.hide()
-    }
-
-    private fun exibeProgressBar(progress: View) {
-        progress.show()
-    }
-
-    /**
-     * Inicializando um objeto global para utilizar como argumento ao abrir os
-     * detalhes do movie principal. Isso pois eu não tenho acesso ao [objeto]
-     * ao clicar no movie principal.
-     *
-     * @param globalMovie é o objeto global.
-     * @param movieView é o objeto inicializado.
-     */
-    private fun inicializaGlobalMultiMovie(movieView: MovieView) {
-        globalMovie = movieView
+    private fun configuraClickAdapter() {
+        movieAdapterPrimary.setMovieOnClickListener { movieView ->
+            actionGoDetails(entity = movieView)
+        }
     }
 
     private fun configuraClickFilmePrincipal() = with(binding) {

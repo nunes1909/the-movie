@@ -36,15 +36,6 @@ class PesquisaFragment : BaseFragment<FragmentPesquisaBinding, PesquisaViewModel
         configuraClickAdapter()
     }
 
-    private fun configuraClickAdapter() {
-        movieAdapter.setMovieOnClickListener { movieView ->
-            movieView.type = TYPE_FILME
-            val action = PesquisaFragmentDirections
-                .acaoPesquisaParaDetalhes(movieView = movieView)
-            findNavController().navigate(action)
-        }
-    }
-
     private fun configuraRecyclerView() = with(binding) {
         rvPesquisa.adapter = movieAdapter
         rvPesquisa.layoutManager = LinearLayoutManager(requireContext())
@@ -78,17 +69,17 @@ class PesquisaFragment : BaseFragment<FragmentPesquisaBinding, PesquisaViewModel
         viewModel.search.collect { resource ->
             when (resource) {
                 is ResourceState.Success -> {
+                    binding.pbPesquisa.hide()
                     exibeSearchList(resource)
-                    ocultaProgressBar(binding.pbPesquisa)
                 }
                 is ResourceState.Error -> {
-                    ocultaProgressBar(binding.pbPesquisa)
+                    binding.pbPesquisa.hide()
                     toast(getString(R.string.um_erro_ocorreu))
                     Timber.tag("PesquisaFragment/observerSearchList")
                         .e("Error -> ${resource.message} Cod -> ${resource.cod}")
                 }
                 is ResourceState.Loading -> {
-                    exibeProgressBar(binding.pbPesquisa)
+                    binding.pbPesquisa.show()
                 }
                 else -> {}
             }
@@ -101,12 +92,13 @@ class PesquisaFragment : BaseFragment<FragmentPesquisaBinding, PesquisaViewModel
         }
     }
 
-    private fun ocultaProgressBar(progress: View) {
-        progress.hide()
-    }
-
-    private fun exibeProgressBar(progress: View) {
-        progress.show()
+    private fun configuraClickAdapter() {
+        movieAdapter.setMovieOnClickListener { movieView ->
+            movieView.type = TYPE_FILME
+            val action = PesquisaFragmentDirections
+                .acaoPesquisaParaDetalhes(movieView = movieView)
+            findNavController().navigate(action)
+        }
     }
 
     override fun getViewBinding(

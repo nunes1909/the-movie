@@ -5,16 +5,16 @@ interface DataMapper<Data, Domain> {
 
     fun mapToData(type: Domain): Data
 
-    fun mapToDomain(entity: List<Data?>): List<Domain?> {
-        return entity.map { if (it == null) null else mapToDomain(it) }
+    fun mapToDomain(data: List<Data?>): List<Domain?> {
+        return data.map { if (it == null) null else mapToDomain(it) }
     }
 
     fun mapToData(domain: List<Domain?>): List<Data?> {
         return domain.map { if (it == null) null else mapToData(it) }
     }
 
-    fun mapToDomainNonNull(entityNonNull: List<Data>): List<Domain> {
-        return entityNonNull.map { mapToDomain(it) }
+    fun mapToDomainNonNull(dataNonNull: List<Data>): List<Domain> {
+        return dataNonNull.map { mapToDomain(it) }
     }
 
     fun mapToDataNonNull(domainNonNull: List<Domain>): List<Data> {

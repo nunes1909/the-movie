@@ -22,6 +22,7 @@
     <string name="pesquise_movies_fav">Pesquise aqui os seus movies salvos</string>
     <string name="pesquise_filmes">Pesquise aqui os seus filmes</string>
     <string name="sem_fav">Nenhum resultado encontrado.</string>
+    <string name="movie_sem_trailer">Este movie não possui vídeo.</string>
     <string name="info_ok">OK</string>
     <!-- endregion -->
 

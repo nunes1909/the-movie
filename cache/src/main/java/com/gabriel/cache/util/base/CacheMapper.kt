@@ -5,19 +5,19 @@ interface CacheMapper<Cache, Data> {
 
     fun mapToCache(type: Data): Cache
 
-    fun mapToData(entity: List<Cache?>): List<Data?> {
-        return entity.map { if (it == null) null else mapToData(it) }
+    fun mapToData(cache: List<Cache?>): List<Data?> {
+        return cache.map { if (it == null) null else mapToData(it) }
     }
 
-    fun mapToCache(domain: List<Data?>): List<Cache?> {
-        return domain.map { if (it == null) null else mapToCache(it) }
+    fun mapToCache(data: List<Data?>): List<Cache?> {
+        return data.map { if (it == null) null else mapToCache(it) }
     }
 
-    fun mapToDataNonNull(entity: List<Cache>): List<Data> {
-        return entity.map { mapToData(it) }
+    fun mapToDataNonNull(data: List<Cache>): List<Data> {
+        return data.map { mapToData(it) }
     }
 
-    fun mapToCacheNonNull(domain: List<Data>): List<Cache> {
-        return domain.map { mapToCache(it)!! }
+    fun mapToCacheNonNull(data: List<Data>): List<Cache> {
+        return data.map { mapToCache(it)!! }
     }
 }

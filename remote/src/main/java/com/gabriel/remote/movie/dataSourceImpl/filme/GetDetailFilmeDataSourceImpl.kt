@@ -89,7 +89,7 @@ class GetDetailFilmeDataSourceImpl(
                     this.videos = videos
                     this.description = pt.filme.descricao
                 }
-                return ResourceState.Undefined(data = resultData)
+                return ResourceState.Success(data = resultData)
             }
         }
         return ResourceState.Error(cod = response.code(), message = response.message())

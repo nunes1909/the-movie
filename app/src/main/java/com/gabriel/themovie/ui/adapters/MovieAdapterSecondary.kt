@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import com.gabriel.themovie.databinding.ItemListSecondaryBinding
 import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.util.constants.ConstantsView.BASE_URL_IMAGES
@@ -56,7 +55,8 @@ class MovieAdapterSecondary : RecyclerView.Adapter<MovieAdapterSecondary.SearchM
         holder.binding.apply {
             ivItemSeconday.tentaCarregar("${BASE_URL_IMAGES}${movie.cartaz}")
             tvItemTitleSeconday.text = movie.title.limitValue(LIMIT_TITLE, EXIBE_ELLIPSIZE)
-            tvItemDescriptionSeconday.text = movie.description?.limitValue(LIMIT_DESCRIPTION, EXIBE_ELLIPSIZE)
+            tvItemDescriptionSeconday.text =
+                movie.description?.limitValue(LIMIT_DESCRIPTION, EXIBE_ELLIPSIZE)
         }
 
         holder.itemView.setOnClickListener {

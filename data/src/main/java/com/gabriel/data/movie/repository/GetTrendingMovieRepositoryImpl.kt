@@ -13,7 +13,7 @@ class GetTrendingMovieRepositoryImpl(
     override suspend fun getTrendingMovie(type: String): ResourceState<List<MovieDomain>> {
         val resourceState = dataStore.getTrendingMovie(type = type)
         if (resourceState.data != null) {
-            val resultsDomain = mapper.mapToDomainNonNull(entityNonNull = resourceState.data!!)
+            val resultsDomain = mapper.mapToDomainNonNull(dataNonNull = resourceState.data!!)
             return ResourceState.Success(data = resultsDomain)
         }
         return ResourceState.Error(

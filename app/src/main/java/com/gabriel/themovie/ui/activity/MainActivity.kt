@@ -8,6 +8,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.gabriel.themovie.R
 import com.gabriel.themovie.databinding.ActivityMainBinding
+import com.gabriel.themovie.util.constants.ConstantsView.KEY_BOTTOM_NAV
 import com.gabriel.themovie.util.extensions.hide
 import com.gabriel.themovie.util.extensions.show
 import com.gabriel.themovie.util.preferences.dataStore
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun configuraBottomNav() = lifecycleScope.launch {
         dataStore.data.collect { preferences ->
-            preferences[booleanPreferencesKey("exibeBottomNav")]?.let {
+            preferences[booleanPreferencesKey(KEY_BOTTOM_NAV)]?.let {
                 if (it) {
                     binding.bottomNavigation.show()
                 } else {

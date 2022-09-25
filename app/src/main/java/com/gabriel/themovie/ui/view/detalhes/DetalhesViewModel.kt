@@ -38,6 +38,12 @@ class DetalhesViewModel(
     // Endregion
 
     // Region get movie
+    /**
+     * Ao buscar os detalhes ja é verificado se existe ou não o movie salvo.
+     * Caso exista, o status do checkbox de save é alterado
+     *
+     * @param verifyExistsMovie
+     */
     fun getDetail(movie: MovieView) {
         when (movie.type) {
             TYPE_FILME -> {
@@ -74,7 +80,7 @@ class DetalhesViewModel(
     // Endregion
 
     // Region get similar movies
-    fun getSimilarMovies(type: String, movieId: Int) = viewModelScope.launch {
+    private fun getSimilarMovies(type: String, movieId: Int) = viewModelScope.launch {
         val resourceState = getSimilarMoviesUseCase.getSimilarMovies(type = type, movieId = movieId)
         _listSimilares.value = safeStateGetMovies(resourceState)
     }

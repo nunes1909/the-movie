@@ -15,6 +15,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class TheMovieRetrofit {
+    // Region retrofit
     fun getRetrofit(client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -22,7 +23,9 @@ class TheMovieRetrofit {
             .client(client)
             .build()
     }
+    // Endregion
 
+    // Region services
     fun getFilmesService(retrofit: Retrofit): FilmesService {
         return retrofit.create(FilmesService::class.java)
     }
@@ -46,7 +49,9 @@ class TheMovieRetrofit {
     fun getTraducaoService(retrofit: Retrofit): TraducaoService {
         return retrofit.create(TraducaoService::class.java)
     }
+    // Endregion
 
+    // Region okhttp
     fun getOkHttpClient(): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -68,4 +73,5 @@ class TheMovieRetrofit {
             .addInterceptor(loggingInterceptor)
             .build()
     }
+    // Endregion
 }

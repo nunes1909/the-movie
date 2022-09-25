@@ -43,7 +43,7 @@ class GetSimilarFilmesDataSourceImpl(
             ResourceState<List<MovieData>> {
         if (response.isSuccessful) {
             response.body()?.let { values ->
-                val resultsData = mapper.mapToDataNonNull(entity = values.results)
+                val resultsData = mapper.mapToDataNonNull(remote = values.results)
                 return ResourceState.Success(data = resultsData)
             }
         }

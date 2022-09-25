@@ -7,14 +7,11 @@ import com.gabriel.domain.movie.useCase.*
 import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.themovie.movie.mapper.MovieViewMapper
 import com.gabriel.themovie.movie.model.MovieView
-import com.gabriel.themovie.util.constants.ConstantsView
 import com.gabriel.themovie.util.constants.ConstantsView.TYPE_SERIE
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
@@ -27,6 +24,12 @@ class SeriesViewModel(
     private val deleteMovieUseCase: DeleteMovieUseCase,
     private val mapper: MovieViewMapper
 ) : ViewModel() {
+
+    init {
+        getSeries()
+        getTranding()
+    }
+
     // Region StateFlow
     private val _list = MutableStateFlow<ResourceState<List<MovieView>>>(ResourceState.Loading())
     val list: StateFlow<ResourceState<List<MovieView>>> = _list
@@ -38,11 +41,6 @@ class SeriesViewModel(
     private val _verify = MutableStateFlow<Boolean>(true)
     val verify: StateFlow<Boolean> = _verify
     // Endregion
-
-    init {
-        getSeries()
-        getTranding()
-    }
 
     // Region get series populares
     private fun getSeries() = viewModelScope.launch {
@@ -77,6 +75,10 @@ class SeriesViewModel(
         return ResourceState.Error(cod = resourceState.cod, message = resourceState.message)
     }
 
+    /**
+     * O endpoint trás uma lista de series tendência, então para obter
+     * o movie principal é filtrado pela maior nota.
+     */
     private fun getFirstMovie(safeState: ResourceState<List<MovieView>>): MovieView {
         return safeState.data?.sortedByDescending { it.nota }?.first()!!
     }
@@ -126,7 +128,7 @@ class SeriesViewModel(
 
     // Region delete movie
     fun deleteMovie(movieView: MovieView) {
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(IO).launch {
             val movieDomain = mapper.mapToDomain(movieView)
             deleteMovieUseCase.delete(movieDomain)
             verifyExistsMovie(movieId = movieView.id)

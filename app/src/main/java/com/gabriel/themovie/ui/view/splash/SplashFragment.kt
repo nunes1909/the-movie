@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.gabriel.themovie.databinding.FragmentSplashBinding
+import com.gabriel.themovie.util.constants.ConstantsView.KEY_BOTTOM_NAV
 import com.gabriel.themovie.util.preferences.dataStore
 import kotlinx.coroutines.launch
 
@@ -26,7 +27,7 @@ class SplashFragment : Fragment() {
     private fun configuraVisibilityBottomNav() {
         lifecycleScope.launch {
             requireContext().dataStore.edit { preferences ->
-                preferences[booleanPreferencesKey("exibeBottomNav")] = false
+                preferences[booleanPreferencesKey(KEY_BOTTOM_NAV)] = false
             }
         }
     }

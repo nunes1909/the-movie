@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.gabriel.domain.movie.model.MovieDomain
 import com.gabriel.domain.movie.useCase.DeleteMovieUseCase
 import com.gabriel.domain.movie.useCase.GetFavMovieUseCase
-import com.gabriel.domain.movie.useCase.SaveMovieUseCase
 import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.themovie.movie.mapper.MovieViewMapper
 import com.gabriel.themovie.movie.model.MovieView
@@ -22,6 +21,11 @@ class FavoritosViewModel(
     private val deleteMovieUseCase: DeleteMovieUseCase,
     private val mapper: MovieViewMapper
 ) : ViewModel() {
+
+    init {
+        getAllFav()
+    }
+
     // Region StateFlow
     private val _getFav = MutableStateFlow<ResourceState<List<MovieView>>>(ResourceState.Empty())
     val getFav: StateFlow<ResourceState<List<MovieView>>> = _getFav
@@ -29,10 +33,6 @@ class FavoritosViewModel(
     private val _empty = MutableStateFlow<Boolean>(false)
     val empty: StateFlow<Boolean> = _empty
     // Endregion
-
-    init {
-        getAllFav()
-    }
 
     // Region get list fav
     fun getAllFav(query: String = "") = viewModelScope.launch {

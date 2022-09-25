@@ -24,6 +24,12 @@ class FilmesViewModel(
     private val deleteMovieUseCase: DeleteMovieUseCase,
     private val mapper: MovieViewMapper
 ) : ViewModel() {
+
+    init {
+        getFilmes()
+        getTranding()
+    }
+
     // Region StateFlow
     private val _list = MutableStateFlow<ResourceState<List<MovieView>>>(ResourceState.Loading())
     val list: StateFlow<ResourceState<List<MovieView>>> = _list
@@ -35,11 +41,6 @@ class FilmesViewModel(
     private val _verify = MutableStateFlow<Boolean>(true)
     val verify: StateFlow<Boolean> = _verify
     // Endregion
-
-    init {
-        getFilmes()
-        getTranding()
-    }
 
     // Region get filmes populares
     private fun getFilmes() = viewModelScope.launch {
@@ -74,6 +75,10 @@ class FilmesViewModel(
         return ResourceState.Error(cod = resourceState.cod, message = resourceState.message)
     }
 
+    /**
+     * O endpoint trás uma lista de filmes tendência, então para obter
+     * o movie principal é filtrado pela maior nota.
+     */
     private fun getFirstMovie(safeState: ResourceState<List<MovieView>>): MovieView {
         return safeState.data?.sortedByDescending { it.nota }?.first()!!
     }

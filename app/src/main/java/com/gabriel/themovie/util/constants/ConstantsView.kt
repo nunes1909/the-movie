@@ -24,4 +24,8 @@ object ConstantsView {
     const val EXIBE_ELLIPSIZE = true
     const val NOT_EXIBE_ELLIPSIZE = false
     // Endregion
+
+    // Keys data store
+    const val KEY_BOTTOM_NAV = "exibeBottomNav"
+    // Endregion
 }

@@ -7,8 +7,8 @@ import com.gabriel.cache.util.constants.CacheConstants.COLUMN_BANNER
 import com.gabriel.cache.util.constants.CacheConstants.COLUMN_CARTAZ
 import com.gabriel.cache.util.constants.CacheConstants.COLUMN_DESC
 import com.gabriel.cache.util.constants.CacheConstants.COLUMN_ID
-import com.gabriel.cache.util.constants.CacheConstants.COLUMN_TYPE
 import com.gabriel.cache.util.constants.CacheConstants.COLUMN_TITULO
+import com.gabriel.cache.util.constants.CacheConstants.COLUMN_TYPE
 import com.gabriel.cache.util.constants.CacheConstants.TABLE_FAV
 
 @Entity(tableName = TABLE_FAV)

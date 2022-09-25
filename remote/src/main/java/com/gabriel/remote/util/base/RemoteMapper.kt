@@ -9,15 +9,15 @@ interface RemoteMapper<Remote, Data> {
         return entity.map { if (it == null) null else mapToData(it) }
     }
 
-    fun mapToRemote(domain: List<Data?>): List<Remote?> {
-        return domain.map { if (it == null) null else mapToRemote(it) }
+    fun mapToRemote(data: List<Data?>): List<Remote?> {
+        return data.map { if (it == null) null else mapToRemote(it) }
     }
 
-    fun mapToDataNonNull(entity: List<Remote>): List<Data> {
-        return entity.map { mapToData(it) }
+    fun mapToDataNonNull(remote: List<Remote>): List<Data> {
+        return remote.map { mapToData(it) }
     }
 
-    fun mapToRemoteNonNull(domain: List<Data>): List<Remote> {
-        return domain.map { mapToRemote(it)!! }
+    fun mapToRemoteNonNull(data: List<Data>): List<Remote> {
+        return data.map { mapToRemote(it)!! }
     }
 }

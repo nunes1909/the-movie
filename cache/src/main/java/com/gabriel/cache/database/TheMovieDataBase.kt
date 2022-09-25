@@ -7,14 +7,16 @@ import androidx.room.RoomDatabase
 import com.gabriel.cache.movie.favoritos.dao.FavoritosDao
 import com.gabriel.cache.movie.favoritos.model.MovieCache
 import com.gabriel.cache.util.constants.CacheConstants.DB_NAME
+import com.gabriel.cache.util.constants.CacheConstants.VERSION_1
 
 @Database(
     entities = [MovieCache::class],
-    version = 1,
+    version = VERSION_1,
     exportSchema = true
 )
 abstract class TheMovieDataBase : RoomDatabase() {
     abstract fun getFavoritosDao(): FavoritosDao
+
     companion object {
         @Volatile
         private var db: TheMovieDataBase? = null

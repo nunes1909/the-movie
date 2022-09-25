@@ -39,11 +39,27 @@ class FavoritosFragment : BaseFragment<FragmentFavoritosBinding, FavoritosViewMo
         configuraClickAdapter()
     }
 
-    private fun configuraClickAdapter() {
-        movieAdapter.setMovieOnClickListener { movieView ->
-            val action = FavoritosFragmentDirections
-                .acaoFavoritosParaDetalhes(movieView = movieView)
-            findNavController().navigate(action)
+    private fun configuraRecyclerView() = with(binding) {
+        rvFavoritos.adapter = movieAdapter
+        rvFavoritos.layoutManager = LinearLayoutManager(requireContext())
+        ItemTouchHelper(configuraTouchHelper()).attachToRecyclerView(rvFavoritos)
+    }
+
+    private fun configuraTouchHelper(): ItemTouchHelper.SimpleCallback {
+        return object : ItemTouchHelper.SimpleCallback(0, LEFT or RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ) = false
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val movieView = movieAdapter.moviesList[viewHolder.adapterPosition]
+                viewModel.deleteMovie(movieView = movieView).also {
+                    toast("${movieView.title} removido.")
+                    viewModel.getAllFav()
+                }
+            }
         }
     }
 
@@ -70,30 +86,6 @@ class FavoritosFragment : BaseFragment<FragmentFavoritosBinding, FavoritosViewMo
         }
     }
 
-    private fun configuraRecyclerView() = with(binding) {
-        rvFavoritos.adapter = movieAdapter
-        rvFavoritos.layoutManager = LinearLayoutManager(requireContext())
-        ItemTouchHelper(configuraTouchHelper()).attachToRecyclerView(rvFavoritos)
-    }
-
-    private fun configuraTouchHelper(): ItemTouchHelper.SimpleCallback {
-        return object : ItemTouchHelper.SimpleCallback(0, LEFT or RIGHT) {
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ) = false
-
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val movieView = movieAdapter.moviesList[viewHolder.adapterPosition]
-                viewModel.deleteMovie(movieView = movieView).also {
-                    toast("${movieView.title} removido.")
-                    viewModel.getAllFav()
-                }
-            }
-        }
-    }
-
     private fun observerListaFav() = lifecycleScope.launch {
         viewModel.getFav.collect { resource ->
             when (resource) {
@@ -114,6 +106,12 @@ class FavoritosFragment : BaseFragment<FragmentFavoritosBinding, FavoritosViewMo
         }
     }
 
+    private fun exibeFavoritos(resource: ResourceState.Success<List<MovieView>>) {
+        resource.data?.let { results ->
+            movieAdapter.moviesList = results
+        }
+    }
+
     private fun observerEmpty() = lifecycleScope.launch {
         viewModel.empty.collect {
             if (!it) {
@@ -127,9 +125,11 @@ class FavoritosFragment : BaseFragment<FragmentFavoritosBinding, FavoritosViewMo
         }
     }
 
-    private fun exibeFavoritos(resource: ResourceState.Success<List<MovieView>>) {
-        resource.data?.let { results ->
-            movieAdapter.moviesList = results
+    private fun configuraClickAdapter() {
+        movieAdapter.setMovieOnClickListener { movieView ->
+            val action = FavoritosFragmentDirections
+                .acaoFavoritosParaDetalhes(movieView = movieView)
+            findNavController().navigate(action)
         }
     }
 

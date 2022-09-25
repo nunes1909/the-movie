@@ -27,7 +27,7 @@ class GetFavMovieRespositoryImpl(
     private fun validateState(resourceState: ResourceState<List<MovieData>>):
             ResourceState<List<MovieDomain>> {
         if (resourceState.data != null) {
-            val resultsDomain = mapper.mapToDomainNonNull(entityNonNull = resourceState.data!!)
+            val resultsDomain = mapper.mapToDomainNonNull(dataNonNull = resourceState.data!!)
             return ResourceState.Success(data = resultsDomain)
         }
         return ResourceState.Error(

@@ -1,6 +1,7 @@
 package com.gabriel.remote.movie.service.traducao
 
 import com.gabriel.remote.traducao.model.filme.TraducaoFilmeContainer
+import com.gabriel.remote.traducao.model.serie.TraducaoSerieContainer
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -16,5 +17,5 @@ interface TraducaoService {
     suspend fun getTraducaoSerie(
         @Path(value = "tv_id", encoded = true)
         serieId: Int
-    ): Response<TraducaoFilmeContainer>
+    ): Response<TraducaoSerieContainer>
 }
