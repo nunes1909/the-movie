@@ -24,13 +24,13 @@ class GetRecentSerieDataSourceImpl(
                     Timber
                         .tag("GetRecentFilmeDataSourceImpl/getRecentMovie")
                         .e("Error -> $t")
-                    ResourceState.Undefined(message = "Erro de conexão.")
+                    ResourceState.Error(message = "Erro de conexão.")
                 }
                 else -> {
                     Timber
                         .tag("GetRecentFilmeDataSourceImpl/getRecentMovie")
                         .e("Error -> $t")
-                    ResourceState.Undefined(message = "Erro na conversão dos dados.")
+                    ResourceState.Error(message = "Erro na conversão dos dados.")
                 }
             }
         }
@@ -41,9 +41,9 @@ class GetRecentSerieDataSourceImpl(
         if (response.isSuccessful) {
             response.body()?.let { value ->
                 val resultData = mapper.mapToData(value)
-                return ResourceState.Undefined(data = resultData)
+                return ResourceState.Success(data = resultData)
             }
         }
-        return ResourceState.Undefined(cod = response.code(), message = response.message())
+        return ResourceState.Error(cod = response.code(), message = response.message())
     }
 }

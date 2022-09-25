@@ -36,22 +36,14 @@ class PesquisaFragment : BaseFragment<FragmentPesquisaBinding, PesquisaViewModel
         configuraClickAdapter()
     }
 
-    private fun configuraClickAdapter() {
-        movieAdapter.setMovieOnClickListener { movieView ->
-            movieView.type = TYPE_FILME
-            val action = PesquisaFragmentDirections
-                .acaoPesquisaParaDetalhes(movieView = movieView)
-            findNavController().navigate(action)
-        }
-    }
-
     private fun configuraRecyclerView() = with(binding) {
         rvPesquisa.adapter = movieAdapter
         rvPesquisa.layoutManager = LinearLayoutManager(requireContext())
     }
 
     private fun configuraPesquisa() = with(binding) {
-        editPesquisa.addTextChangedListener(searchMoviesWatcher())
+        etPesquisa.addTextChangedListener(searchMoviesWatcher())
+        etPesquisa.requestFocus()
     }
 
     private fun searchMoviesWatcher() = object : TextWatcher {
@@ -77,17 +69,17 @@ class PesquisaFragment : BaseFragment<FragmentPesquisaBinding, PesquisaViewModel
         viewModel.search.collect { resource ->
             when (resource) {
                 is ResourceState.Success -> {
+                    binding.pbPesquisa.hide()
                     exibeSearchList(resource)
-                    ocultaProgressBar(binding.progressPesquisa)
                 }
                 is ResourceState.Error -> {
-                    ocultaProgressBar(binding.progressPesquisa)
+                    binding.pbPesquisa.hide()
                     toast(getString(R.string.um_erro_ocorreu))
                     Timber.tag("PesquisaFragment/observerSearchList")
                         .e("Error -> ${resource.message} Cod -> ${resource.cod}")
                 }
                 is ResourceState.Loading -> {
-                    exibeProgressBar(binding.progressPesquisa)
+                    binding.pbPesquisa.show()
                 }
                 else -> {}
             }
@@ -100,24 +92,14 @@ class PesquisaFragment : BaseFragment<FragmentPesquisaBinding, PesquisaViewModel
         }
     }
 
-    private fun ocultaProgressBar(progress: View) {
-        progress.hide()
+    private fun configuraClickAdapter() {
+        movieAdapter.setMovieOnClickListener { movieView ->
+            movieView.type = TYPE_FILME
+            val action = PesquisaFragmentDirections
+                .acaoPesquisaParaDetalhes(movieView = movieView)
+            findNavController().navigate(action)
+        }
     }
-
-    private fun exibeProgressBar(progress: View) {
-        progress.show()
-    }
-
-    /**
-     * Inicializando um objeto global para utilizar ao abrir os detalhes do movie principal.
-     * Isso pois eu não tenho acesso ao [objeto] ao clicar no movie principal.
-     *
-     * @param globalMovie é o objeto global.
-     * @param movieView é o objeto inicializado.
-     */
-//    private fun inicializaGlobalMultiMovie(movieView: MovieView) {
-//        globalMovie = movieView
-//    }
 
     override fun getViewBinding(
         inflater: LayoutInflater,

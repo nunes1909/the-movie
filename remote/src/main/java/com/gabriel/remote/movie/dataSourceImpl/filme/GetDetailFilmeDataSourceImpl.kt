@@ -44,13 +44,13 @@ class GetDetailFilmeDataSourceImpl(
                     Timber
                         .tag("GetDetailFilmeDataSourceImpl/getDetailFilme")
                         .e("Error -> $t")
-                    ResourceState.Undefined(message = "Erro de conexão.")
+                    ResourceState.Error(message = "Erro de conexão.")
                 }
                 else -> {
                     Timber
                         .tag("GetDetailFilmeDataSourceImpl/getDetailFilme")
                         .e("Error -> $t")
-                    ResourceState.Undefined(message = "Erro na conversão dos dados.")
+                    ResourceState.Error(message = "Erro na conversão dos dados.")
                 }
             }
         }
@@ -89,9 +89,9 @@ class GetDetailFilmeDataSourceImpl(
                     this.videos = videos
                     this.description = pt.filme.descricao
                 }
-                return ResourceState.Undefined(data = resultData)
+                return ResourceState.Success(data = resultData)
             }
         }
-        return ResourceState.Undefined(cod = response.code(), message = response.message())
+        return ResourceState.Error(cod = response.code(), message = response.message())
     }
 }

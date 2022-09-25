@@ -6,55 +6,55 @@
     android:layout_height="wrap_content"
     android:layout_margin="6dp"
     android:elevation="8dp"
-    app:cardBackgroundColor="#292828"
+    app:cardBackgroundColor="@color/colorPrimaryContainer"
     app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="200dp">
 
         <ImageView
-            android:id="@+id/itemMovieImage"
+            android:id="@+id/ivItemSeconday"
             android:layout_width="150dp"
-            android:layout_height="200dp"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/banner_movie"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <TextView
-            android:id="@+id/itemMovieTitle"
+            android:id="@+id/tvItemTitleSeconday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="25dp"
             android:layout_marginEnd="16dp"
-            android:textColor="@color/white"
+            android:textColor="@color/colorPrimaryText"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toEndOf="@id/itemMovieImage"
+            app:layout_constraintStart_toEndOf="@id/ivItemSeconday"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Teste titulo filme" />
+            tools:text="@string/title_movie_teste" />
 
         <TextView
-            android:id="@+id/itemMovieDescription"
+            android:id="@+id/tvItemDescriptionSeconday"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:textColor="@color/white"
             android:layout_marginBottom="16dp"
+            android:textColor="@color/colorPrimaryText"
             android:textSize="14sp"
-            app:layout_constraintVertical_bias="0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="@+id/itemMovieTitle"
-            app:layout_constraintTop_toBottomOf="@+id/itemMovieTitle"
-            tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s." />
+            app:layout_constraintStart_toStartOf="@+id/tvItemTitleSeconday"
+            app:layout_constraintTop_toBottomOf="@+id/tvItemTitleSeconday"
+            app:layout_constraintVertical_bias="0"
+            tools:text="@string/description_movie_teste" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

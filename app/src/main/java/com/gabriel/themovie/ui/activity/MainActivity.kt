@@ -1,11 +1,18 @@
 package com.gabriel.themovie.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.gabriel.themovie.R
 import com.gabriel.themovie.databinding.ActivityMainBinding
+import com.gabriel.themovie.util.constants.ConstantsView.KEY_BOTTOM_NAV
+import com.gabriel.themovie.util.extensions.hide
+import com.gabriel.themovie.util.extensions.show
+import com.gabriel.themovie.util.preferences.dataStore
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,6 +23,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         inicializaView()
+        configuraBottomNav()
+    }
+
+    private fun configuraBottomNav() = lifecycleScope.launch {
+        dataStore.data.collect { preferences ->
+            preferences[booleanPreferencesKey(KEY_BOTTOM_NAV)]?.let {
+                if (it) {
+                    binding.bottomNavigation.show()
+                } else {
+                    binding.bottomNavigation.hide()
+                }
+            }
+        }
     }
 
     private fun inicializaView() {
@@ -26,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigation.apply {
             setupWithNavController(navController)
-            setOnNavigationItemReselectedListener {  }
+            setOnNavigationItemReselectedListener { }
         }
     }
 }

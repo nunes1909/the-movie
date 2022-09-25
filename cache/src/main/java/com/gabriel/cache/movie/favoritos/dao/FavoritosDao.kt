@@ -2,9 +2,7 @@ package com.gabriel.cache.movie.favoritos.dao
 
 import androidx.room.*
 import com.gabriel.cache.movie.favoritos.model.MovieCache
-import com.gabriel.domain.util.state.ResourceState
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 
 @Dao
 interface FavoritosDao {

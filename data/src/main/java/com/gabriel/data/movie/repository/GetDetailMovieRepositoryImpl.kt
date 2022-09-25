@@ -14,9 +14,9 @@ class GetDetailMovieRepositoryImpl(
         val resourceState = dataStore.getDetailMovie(type = type, movieId = movieId)
         if (resourceState.data != null) {
             val resultsDomain = mapper.mapToDomain(type = resourceState.data!!)
-            return ResourceState.Undefined(data = resultsDomain)
+            return ResourceState.Success(data = resultsDomain)
         }
-        return ResourceState.Undefined(
+        return ResourceState.Error(
             cod = resourceState.cod,
             message = resourceState.message
         )

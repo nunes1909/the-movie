@@ -19,8 +19,13 @@ object ConstantsView {
 
     // Details region
     const val LIMIT_NOTA = 3
+    const val LIMIT_TITLE = 20
     const val LIMIT_DESCRIPTION = 200
     const val EXIBE_ELLIPSIZE = true
     const val NOT_EXIBE_ELLIPSIZE = false
+    // Endregion
+
+    // Keys data store
+    const val KEY_BOTTOM_NAV = "exibeBottomNav"
     // Endregion
 }

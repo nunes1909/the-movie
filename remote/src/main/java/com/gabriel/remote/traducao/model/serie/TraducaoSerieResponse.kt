@@ -11,5 +11,5 @@ data class TraducaoSerieResponse(
     @SerializedName("name")
     val name: String,
     @SerializedName("data")
-    val filme: TraducaoSerie
+    val serie: TraducaoSerie
 ) : Serializable

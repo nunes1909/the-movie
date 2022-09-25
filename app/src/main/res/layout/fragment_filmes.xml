@@ -8,27 +8,28 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#000">
+        android:background="@color/colorSecondaryContainer">
 
         <ImageView
-            android:id="@+id/bannerFilmePrincipal"
+            android:id="@+id/ivBannerFilmePrincipal"
             android:layout_width="0dp"
             android:layout_height="500dp"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            tools:srcCompat="@tools:sample/backgrounds/scenic"
+            android:contentDescription="@string/banner_movie" />
 
         <View
-            android:id="@+id/ddd"
+            android:id="@+id/viewGradient"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:background="@drawable/gradiant_movies"
-            app:layout_constraintBottom_toBottomOf="@id/bannerFilmePrincipal"
+            app:layout_constraintBottom_toBottomOf="@id/ivBannerFilmePrincipal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bannerFilmePrincipal" />
+            app:layout_constraintTop_toBottomOf="@id/ivBannerFilmePrincipal" />
 
         <TextView
             android:id="@+id/tituloFilmePrincipal"
@@ -37,25 +38,26 @@
             android:layout_margin="6dp"
             android:elegantTextHeight="true"
             android:shadowColor="@color/black"
-            android:shadowRadius="20"
+            android:shadowRadius="8"
             android:textAlignment="center"
-            android:textColor="@color/white"
+            android:textColor="@color/colorPrimaryText"
             android:textSize="26sp"
-            app:layout_constraintBottom_toBottomOf="@id/bannerFilmePrincipal"
-            app:layout_constraintEnd_toEndOf="@id/bannerFilmePrincipal"
-            app:layout_constraintStart_toStartOf="@id/bannerFilmePrincipal"
-            app:layout_constraintTop_toTopOf="@id/bannerFilmePrincipal"
+            app:layout_constraintBottom_toBottomOf="@id/ivBannerFilmePrincipal"
+            app:layout_constraintEnd_toEndOf="@id/ivBannerFilmePrincipal"
+            app:layout_constraintStart_toStartOf="@id/ivBannerFilmePrincipal"
+            app:layout_constraintTop_toTopOf="@id/ivBannerFilmePrincipal"
             app:layout_constraintVertical_bias="0.7"
-            tools:text="Teste filme principal" />
+            tools:text="@string/title_movie_teste" />
 
         <LinearLayout
+            android:id="@+id/containerIncludeActionsPrincipal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:padding="6dp"
             android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="@id/bannerFilmePrincipal"
-            app:layout_constraintStart_toStartOf="@id/bannerFilmePrincipal"
+            android:padding="6dp"
+            app:layout_constraintEnd_toEndOf="@id/ivBannerFilmePrincipal"
+            app:layout_constraintStart_toStartOf="@id/ivBannerFilmePrincipal"
             app:layout_constraintTop_toBottomOf="@id/tituloFilmePrincipal">
 
             <include
@@ -63,7 +65,6 @@
                 layout="@layout/itens_actions_principal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -73,13 +74,13 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bannerFilmePrincipal"
-            app:spanCount="4"
+            app:layout_constraintTop_toBottomOf="@id/ivBannerFilmePrincipal"
             tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            tools:listitem="@layout/item_list_primary" />
+            tools:listitem="@layout/item_list_primary"
+            tools:spanCount="4" />
 
         <ProgressBar
-            android:id="@+id/progressFilme"
+            android:id="@+id/pbFilme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
@@ -89,5 +90,4 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </ScrollView>

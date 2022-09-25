@@ -9,8 +9,8 @@ import com.gabriel.remote.movie.modelsApi.serie.SerieDetailResponse
 import com.gabriel.remote.movie.service.serie.SeriesService
 import com.gabriel.remote.movie.service.traducao.TraducaoService
 import com.gabriel.remote.movie.service.video.VideoService
-import com.gabriel.remote.traducao.model.filme.TraducaoFilmeContainer
-import com.gabriel.remote.traducao.model.filme.TraducaoFilmeResponse
+import com.gabriel.remote.traducao.model.serie.TraducaoSerieContainer
+import com.gabriel.remote.traducao.model.serie.TraducaoSerieResponse
 import com.gabriel.remote.util.constants.ConstantsRemote
 import com.gabriel.remote.video.mapper.serie.VideoSerieRemoteMapper
 import com.gabriel.remote.video.model.serie.SerieVideoContainer
@@ -44,20 +44,20 @@ class GetDetailSerieDataSourceImpl(
                     Timber
                         .tag("GetDetailSerieDataSourceImpl/getDetailSerie")
                         .e("Error -> $t")
-                    ResourceState.Undefined(message = "Erro de conexão.")
+                    ResourceState.Error(message = "Erro de conexão.")
                 }
                 else -> {
                     Timber
                         .tag("GetDetailSerieDataSourceImpl/getDetailSerie")
                         .e("Error -> $t")
-                    ResourceState.Undefined(message = "Erro na conversão dos dados.")
+                    ResourceState.Error(message = "Erro na conversão dos dados.")
                 }
             }
         }
     }
 
-    private fun validateTraducaoResponse(response: Response<TraducaoFilmeContainer>):
-            List<TraducaoFilmeResponse> {
+    private fun validateTraducaoResponse(response: Response<TraducaoSerieContainer>):
+            List<TraducaoSerieResponse> {
         if (response.isSuccessful) {
             response.body()?.let { value ->
                 return value.translations
@@ -80,18 +80,18 @@ class GetDetailSerieDataSourceImpl(
     private fun validateListResponse(
         response: Response<SerieDetailResponse>,
         videos: List<VideoData>,
-        traducoes: List<TraducaoFilmeResponse>
+        traducoes: List<TraducaoSerieResponse>
     ): ResourceState<MovieData> {
         val pt = traducoes.first { it.pais == ConstantsRemote.TYPE_BR }
         if (response.isSuccessful) {
             response.body()?.let { value ->
                 val resultsData = mapper.mapToData(type = value).apply {
                     this.videos = videos
-                    this.description = pt.filme.descricao
+                    this.description = pt.serie.descricao
                 }
-                return ResourceState.Undefined(data = resultsData)
+                return ResourceState.Success(data = resultsData)
             }
         }
-        return ResourceState.Undefined(cod = response.code(), message = response.message())
+        return ResourceState.Error(cod = response.code(), message = response.message())
     }
 }

@@ -5,12 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import com.gabriel.themovie.databinding.ItemListSecondaryBinding
 import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.util.constants.ConstantsView.BASE_URL_IMAGES
 import com.gabriel.themovie.util.constants.ConstantsView.EXIBE_ELLIPSIZE
 import com.gabriel.themovie.util.constants.ConstantsView.LIMIT_DESCRIPTION
+import com.gabriel.themovie.util.constants.ConstantsView.LIMIT_TITLE
 import com.gabriel.themovie.util.extensions.limitValue
 import com.gabriel.themovie.util.extensions.tentaCarregar
 
@@ -53,9 +53,10 @@ class MovieAdapterSecondary : RecyclerView.Adapter<MovieAdapterSecondary.SearchM
     override fun onBindViewHolder(holder: SearchMovieHolder, position: Int) {
         val movie = moviesList[position]
         holder.binding.apply {
-            itemMovieImage.tentaCarregar("${BASE_URL_IMAGES}${movie.cartaz}")
-            itemMovieTitle.text = movie.title.limitValue(15, true)
-            itemMovieDescription.text = movie.description?.limitValue(LIMIT_DESCRIPTION, EXIBE_ELLIPSIZE)
+            ivItemSeconday.tentaCarregar("${BASE_URL_IMAGES}${movie.cartaz}")
+            tvItemTitleSeconday.text = movie.title.limitValue(LIMIT_TITLE, EXIBE_ELLIPSIZE)
+            tvItemDescriptionSeconday.text =
+                movie.description?.limitValue(LIMIT_DESCRIPTION, EXIBE_ELLIPSIZE)
         }
 
         holder.itemView.setOnClickListener {

@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#000">
+        android:background="@color/colorSecondaryContainer">
 
         <ImageView
             android:id="@+id/serieBannerPrincipal"
@@ -18,10 +18,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            tools:srcCompat="@tools:sample/backgrounds/scenic"
+            android:contentDescription="@string/banner_movie" />
 
         <View
-            android:id="@+id/ddd"
+            android:id="@+id/viewGradient"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:background="@drawable/gradiant_movies"
@@ -37,16 +38,16 @@
             android:layout_margin="6dp"
             android:elegantTextHeight="true"
             android:shadowColor="@color/black"
-            android:shadowRadius="20"
+            android:shadowRadius="8"
             android:textAlignment="center"
-            android:textColor="@color/white"
+            android:textColor="@color/colorPrimaryText"
             android:textSize="26sp"
             app:layout_constraintBottom_toBottomOf="@id/serieBannerPrincipal"
             app:layout_constraintEnd_toEndOf="@id/serieBannerPrincipal"
             app:layout_constraintStart_toStartOf="@id/serieBannerPrincipal"
             app:layout_constraintTop_toTopOf="@id/serieBannerPrincipal"
             app:layout_constraintVertical_bias="0.7"
-            tools:text="Teste Serie principal" />
+            tools:text="@string/title_movie_teste" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -63,7 +64,6 @@
                 layout="@layout/itens_actions_principal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -79,7 +79,7 @@
             tools:spanCount="4" />
 
         <ProgressBar
-            android:id="@+id/progressSerie"
+            android:id="@+id/pbSerie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"

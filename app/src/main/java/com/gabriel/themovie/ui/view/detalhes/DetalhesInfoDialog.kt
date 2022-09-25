@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.navArgs
-import coil.load
 import com.gabriel.themovie.databinding.DialogInfoMovieBinding
 import com.gabriel.themovie.util.constants.ConstantsView.BASE_URL_IMAGES
 import com.gabriel.themovie.util.extensions.tentaCarregar
@@ -45,7 +44,7 @@ class DetalhesInfoDialog : DialogFragment() {
     private fun configuraComponentes(binding: DialogInfoMovieBinding) {
         binding.tvDialogInfoTitle.text = args.movieView.title
         binding.tvDialogInfoDescription.text = args.movieView.description
-        binding.imageDialogInfo.tentaCarregar(
+        binding.ivDialogInfo.tentaCarregar(
             "${BASE_URL_IMAGES}${args.movieView.banner ?: args.movieView.cartaz}"
         )
         binding.btnDialogInfoOk.setOnClickListener {

@@ -69,6 +69,7 @@ fun getViewModules() = module {
     viewModel {
         FavoritosViewModel(
             getFavMovieUseCase = get(),
+            deleteMovieUseCase = get(),
             mapper = get()
         )
     }

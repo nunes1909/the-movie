@@ -7,7 +7,7 @@
     tools:context=".ui.activity.MainActivity">
 
     <FrameLayout
-        android:id="@+id/containerFragment"
+        android:id="@+id/frameContainerFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
@@ -28,13 +28,13 @@
         android:id="@+id/bottomNavigation"
         android:layout_width="0dp"
         android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/black"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
+        android:background="@color/colorDefaultBackg"
+        app:itemIconTint="@color/colorDefaultIcons"
+        app:itemTextColor="@color/colorPrimaryText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/containerFragment"
+        app:layout_constraintTop_toBottomOf="@id/frameContainerFragment"
         app:menu="@menu/menu_nav" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

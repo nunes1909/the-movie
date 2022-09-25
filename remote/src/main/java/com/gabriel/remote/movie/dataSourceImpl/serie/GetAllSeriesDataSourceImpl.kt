@@ -24,13 +24,13 @@ class GetAllSeriesDataSourceImpl(
                     Timber
                         .tag("GetAllSeriesDataSourceImpl/getAllSeries")
                         .e("Error -> $t")
-                    ResourceState.Undefined(message = "Erro de conexão.")
+                    ResourceState.Error(message = "Erro de conexão.")
                 }
                 else -> {
                     Timber
                         .tag("GetAllSeriesDataSourceImpl/getAllSeries")
                         .e("Error -> $t")
-                    ResourceState.Undefined(message = "Erro na conversão dos dados.")
+                    ResourceState.Error(message = "Erro na conversão dos dados.")
                 }
             }
         }
@@ -40,10 +40,10 @@ class GetAllSeriesDataSourceImpl(
             ResourceState<List<MovieData>> {
         if (response.isSuccessful) {
             response.body()?.let { values ->
-                val resultsData = mapper.mapToDataNonNull(entity = values.results)
-                return ResourceState.Undefined(data = resultsData)
+                val resultsData = mapper.mapToDataNonNull(remote = values.results)
+                return ResourceState.Success(data = resultsData)
             }
         }
-        return ResourceState.Undefined(cod = response.code(), message = response.message())
+        return ResourceState.Error(cod = response.code(), message = response.message())
     }
 }
