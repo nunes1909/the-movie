@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -22,18 +25,45 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding true
     }
 }
 
 dependencies {
+    implementation project(':domain')
+    implementation project(':data')
+    implementation project(':cache')
+    implementation project(':remote')
 
-    implementation 'androidx.core:core-ktx:1.7.0'
+    def dependencies = rootProject.ext.dependencies
+    implementation dependencies.kotlin
+    implementation dependencies.koin
+    implementation dependencies.coroutine
+    implementation dependencies.lifecycle
+    implementation dependencies.navFragment
+    implementation dependencies.navUiKtx
+    implementation dependencies.fragmentKtx
+    implementation dependencies.coil
+    implementation dependencies.dataStore
+
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    def koin_version = "3.2.0"
+    implementation "io.insert-koin:koin-android:$koin_version"
+    implementation 'com.jakewharton.timber:timber:5.0.1'
+
+
+    implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.5.0'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'

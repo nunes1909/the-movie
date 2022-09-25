@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="11" />
+    <bytecodeTargetLevel target="11">
+      <module name="The_Movie.app" target="18" />
+      <module name="The_Movie.cache" target="18" />
+      <module name="The_Movie.data" target="18" />
+      <module name="The_Movie.remote" target="18" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,0 +1,50 @@
+ext {
+    buildTools = '3.4.0-beta04'
+
+    // Kotlin
+    kotlinVersion = '1.7.10'
+
+    // Koin
+    koinVersion = '3.2.0'
+
+    // Retrofit
+    retrofit_version = '2.9.0'
+    logging_version = '4.10.0'
+
+    // Room
+    room_version = '2.4.3'
+
+    // Coroutines
+    coroutines_version = '1.6.2'
+
+    // Lifecycle
+    lifecycle_version = "2.5.0-rc01"
+
+    // Navigation
+    nav_version = "2.5.1"
+    frag_ktx_version = "1.5.1"
+
+    // Data Store
+    dataStore_version = "1.0.0"
+
+    // Coil images
+    coil_version = "2.1.0"
+
+    dependencies = [
+            kotlin         : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
+            koin           : "io.insert-koin:koin-core:$koinVersion",
+            retrofit       : "com.squareup.retrofit2:retrofit:$retrofit_version",
+            gson           : "com.squareup.retrofit2:converter-gson:$retrofit_version",
+            logging        : "com.squareup.okhttp3:logging-interceptor:$logging_version",
+            room           : "androidx.room:room-runtime:$room_version",
+            roomKtx        : "androidx.room:room-ktx:$room_version",
+            kapt           : "androidx.room:room-compiler:$room_version",
+            coroutine      : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version",
+            lifecycle      : "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version",
+            navFragment    : "androidx.navigation:navigation-fragment-ktx:$nav_version",
+            navUiKtx       : "androidx.navigation:navigation-ui-ktx:$nav_version",
+            fragmentKtx    : "androidx.fragment:fragment-ktx:$frag_ktx_version",
+            dataStore      : "androidx.datastore:datastore-preferences:$dataStore_version",
+            coil           : "io.coil-kt:coil:$coil_version"
+    ]
+}

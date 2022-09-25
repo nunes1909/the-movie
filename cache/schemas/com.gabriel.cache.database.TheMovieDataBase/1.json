@@ -1,0 +1,64 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "d2da99bf2f616e2cb68b959140d55293",
+    "entities": [
+      {
+        "tableName": "MOVIES_FAVORITOS",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ID` INTEGER NOT NULL, `TITULO` TEXT NOT NULL, `TIPO` TEXT, `DESCRICAO` TEXT, `PATH_CARTAZ` TEXT, `PATH_BANNER` TEXT, PRIMARY KEY(`ID`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "ID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "TITULO",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "TIPO",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "DESCRICAO",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cartaz",
+            "columnName": "PATH_CARTAZ",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "banner",
+            "columnName": "PATH_BANNER",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "ID"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd2da99bf2f616e2cb68b959140d55293')"
+    ]
+  }
+}
