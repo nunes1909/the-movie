@@ -24,13 +24,13 @@ class SearchMovieDataSourceImpl(
                     Timber
                         .tag("GetFilmesDataSourceImpl/searchMulti")
                         .e("Error -> $t")
-                    ResourceState.Undefined(message = "Erro de conexão.")
+                    ResourceState.Error(message = "Erro de conexão.")
                 }
                 else -> {
                     Timber
                         .tag("GetFilmesDataSourceImpl/searchMulti")
                         .e("Error -> $t")
-                    ResourceState.Undefined(message = "Erro na conversão dos dados.")
+                    ResourceState.Error(message = "Erro na conversão dos dados.")
                 }
             }
         }
@@ -41,9 +41,9 @@ class SearchMovieDataSourceImpl(
         if (response.isSuccessful) {
             response.body()?.let { values ->
                 val resultsData = mapper.mapToDataNonNull(values.results)
-                return ResourceState.Undefined(data = resultsData)
+                return ResourceState.Success(data = resultsData)
             }
         }
-        return ResourceState.Undefined(cod = response.code(), message = response.message())
+        return ResourceState.Error(cod = response.code(), message = response.message())
     }
 }

@@ -14,9 +14,9 @@ class GetTrendingMovieRepositoryImpl(
         val resourceState = dataStore.getTrendingMovie(type = type)
         if (resourceState.data != null) {
             val resultsDomain = mapper.mapToDomainNonNull(entityNonNull = resourceState.data!!)
-            return ResourceState.Undefined(data = resultsDomain)
+            return ResourceState.Success(data = resultsDomain)
         }
-        return ResourceState.Undefined(
+        return ResourceState.Error(
             cod = resourceState.cod,
             message = resourceState.message
         )

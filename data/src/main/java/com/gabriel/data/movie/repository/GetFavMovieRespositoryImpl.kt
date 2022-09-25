@@ -28,9 +28,9 @@ class GetFavMovieRespositoryImpl(
             ResourceState<List<MovieDomain>> {
         if (resourceState.data != null) {
             val resultsDomain = mapper.mapToDomainNonNull(entityNonNull = resourceState.data!!)
-            return ResourceState.Undefined(data = resultsDomain)
+            return ResourceState.Success(data = resultsDomain)
         }
-        return ResourceState.Undefined(
+        return ResourceState.Error(
             message = resourceState.message
         )
     }

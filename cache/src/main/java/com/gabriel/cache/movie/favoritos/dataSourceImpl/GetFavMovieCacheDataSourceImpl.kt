@@ -29,13 +29,13 @@ class GetFavMovieCacheDataSourceImpl(
         )
     }
 
-    private fun validateState(resourceState: List<MovieCache>):
+    private fun validateState(resourceState: List<MovieCache>?):
             ResourceState<List<MovieData>> {
         if (resourceState != null) {
             val resultsDomain = mapper.mapToDataNonNull(resourceState)
-            return ResourceState.Undefined(data = resultsDomain)
+            return ResourceState.Success(data = resultsDomain)
         }
-        return ResourceState.Undefined(
+        return ResourceState.Error(
             message = "Um erro interno ocorreu, não foi possível buscar os dados."
         )
     }
