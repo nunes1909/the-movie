@@ -38,7 +38,7 @@ Este aplicativo faz parte do meu portfólio pessoal e eu o desenvolvi visando os
 - Para acessar a Wiki do projeto: 
   - <a href="https://github.com/nunes1909/the-movie/wiki">Clique aqui</a>.
 - Para acessar a documentação da Arquitetura do projeto:
-  - <a href="https://github.com/nunes1909/the-movie/wiki/The-Movie-Wiki">Clique aqui</a>.
+  - <a href="https://github.com/nunes1909/the-movie/wiki/Arquitetura">Clique aqui</a>.
 - Para acessar as features e animações do projeto:
   - <a href="https://github.com/nunes1909/the-movie/wiki/Features">Clique aqui</a>.
 
