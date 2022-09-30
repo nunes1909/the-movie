@@ -36,6 +36,9 @@ Este aplicativo faz parte do meu portfólio pessoal e eu o desenvolvi visando os
 - Injeção de dependência com Koin.
 - Processamento de imagens com Coil.
 
+## Demonstração:
+- Clicando <a href="https://github.com/nunes1909/the-movie/wiki/Anima%C3%A7%C3%B5es">aqui</a> é possível observar animações de cada feature do App.
+
 ## Formas de acessar o app:
 1. Download do Apk na <a href="https://github.com/nunes1909/the-movie/releases/tag/v1.0">release</a> do projeto.
 2. Clonando o repositório:
