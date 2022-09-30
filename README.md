@@ -20,8 +20,6 @@ Este aplicativo faz parte do meu portfólio pessoal e eu o desenvolvi visando os
 - Feature de Favoritos.
 - Feature de Detalhes.
 
-<a href="">Clique aqui para mais detalhes.</a>
-
 ## Observações:
 - Este projeto ainda não da suporte para Crud de usuários e Login/Logout.
 - Este projeto ainda não da suporte para Dark Theme.
