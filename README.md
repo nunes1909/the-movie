@@ -45,7 +45,8 @@ Este aplicativo faz parte do meu portfólio pessoal e eu o desenvolvi visando os
   - <a href="https://github.com/nunes1909/the-movie/wiki/Anima%C3%A7%C3%B5es">Clicando aqui</a>.
 
 ## Formas de acessar o app:
-1. Download do Apk na <a href="https://github.com/nunes1909/the-movie/releases/tag/v1.0">release</a> do projeto.
-2. Clonando o repositório:
-    - ``` git clone https://github.com/nunes1909/the-movie.git ```
+- Download do Apk na release do projeto.
+  - <a href="https://github.com/nunes1909/the-movie/releases/tag/v1.0">Clique aqui</a>.
+- Clonando o repositório:
+  - ``` git clone https://github.com/nunes1909/the-movie.git ```
 
