@@ -37,9 +37,12 @@ Este aplicativo faz parte do meu portfólio pessoal e eu o desenvolvi visando os
 - Processamento de imagens com Coil.
 
 ## Índices:
-- <a href="https://github.com/nunes1909/the-movie/wiki">Clicando aqui</a> é possível acessar a Wiki do projeto.
-- <a href="https://github.com/nunes1909/the-movie/wiki/The-Movie-Wiki">Clicando aqui</a> é possível visualizar a Arquiteatura do projeto.
-- <a href="https://github.com/nunes1909/the-movie/wiki/Anima%C3%A7%C3%B5es">Clicando aqui</a> é possível observar animações de cada feature do App.
+- Para acessar a Wiki do projeto: 
+  - <a href="https://github.com/nunes1909/the-movie/wiki">Clique aqui</a>.
+- Para acessar a documentação da Arquitetura do projeto:
+  - <a href="https://github.com/nunes1909/the-movie/wiki/The-Movie-Wiki">Clique aqui</a>.
+- Para acessar as animações do projeto:
+  - <a href="https://github.com/nunes1909/the-movie/wiki/Anima%C3%A7%C3%B5es">Clicando aqui</a>.
 
 ## Formas de acessar o app:
 1. Download do Apk na <a href="https://github.com/nunes1909/the-movie/releases/tag/v1.0">release</a> do projeto.
