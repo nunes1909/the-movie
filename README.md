@@ -8,9 +8,9 @@ A ideia deste aplicativo é:
 - Praticar o conceito de Modularização Android.
 
 ## Motivação:
-Este aplicativo faz parte do meu portfólio pessoal e eu o desenvolvi visando os meus estudos e a prática dos meus conhecimentos. Caso você faça o download deste repositório e observe pontos de melhoria, seja no código, estrutura, UI/UX, etc... Ou queira apenas dar um simples feedback eu ficarei extremamente feliz. Estou aqui para aprender e me tornar um desenvolvedor cada vez melhor. 😁</p>
+Este aplicativo faz parte do meu portfólio pessoal e eu o desenvolvi visando os meus estudos e a prática dos meus conhecimentos. Caso você faça o download deste repositório e observe pontos de melhoria, seja no código, estrutura, UI/UX, etc... Ou queira apenas dar um simples feedback eu ficarei extremamente feliz. Estou aqui para aprender e me tornar um desenvolvedor cada vez melhor. 😁
 
-<p>Você pode entrar em contato comigo através do <a href="https://www.linkedin.com/in/nunes1909/">Linkedin</a> e também através do e-mail: <a href="mailto:gnunes1909@gmail.com">gnunes1909@gmail.com</a></p>
+Você pode entrar em contato comigo através do <a href="https://www.linkedin.com/in/nunes1909/">Linkedin</a> e também através do e-mail: <a href="mailto:gnunes1909@gmail.com">gnunes1909@gmail.com</a>
 
 ## Funcionalidades:
 - Feature de Splash Screen.
