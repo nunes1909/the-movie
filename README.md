@@ -18,6 +18,7 @@ Este aplicativo faz parte do meu portfólio pessoal e eu o desenvolvi visando os
 - Feature de Séries.
 - Feature de Pesquisa.
 - Feature de Favoritos.
+- Feature de Detalhes.
 
 <a href="https://github.com/nunes1909/the-movie/wiki/The-Movie-App">Clique aqui para mais detalhes.</a>
 
