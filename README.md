@@ -19,7 +19,7 @@ Este aplicativo faz parte do meu portfólio pessoal e eu o desenvolvi visando os
 - Feature de Pesquisa.
 - Feature de Favoritos.
 
-Clique aqui para mais detalhes.
+<a href="https://github.com/nunes1909/the-movie/wiki/The-Movie-App">Clique aqui para mais detalhes.</a>
 
 ## Observações:
 - Este projeto ainda não da suporte para Crud de usuários e Login/Logout.
