@@ -1,7 +1,14 @@
 # The Movie App
 
-## Sobre este projeto:
+## Índices:
+- Para acessar a Wiki do projeto: 
+  - <a href="https://github.com/nunes1909/the-movie/wiki">Clique aqui</a>.
+- Para acessar a documentação da Arquitetura do projeto:
+  - <a href="https://github.com/nunes1909/the-movie/wiki/Arquitetura">Clique aqui</a>.
+- Para acessar as features e animações do projeto:
+  - <a href="https://github.com/nunes1909/the-movie/wiki/Features">Clique aqui</a>.
 
+## Sobre este projeto:
 A ideia deste aplicativo é:
 - Consumir a API <a href="https://www.themoviedb.org/documentation/api">The Movie Database</a> e listar Filmes e Séries.
 - Implementar um CRUD local de Movies.
@@ -33,14 +40,6 @@ Você pode entrar em contato comigo através do <a href="https://www.linkedin.co
   - ViewModel, Fragments, Lifecycle, Navigation, StateFlow, Room, etc...
 - Injeção de dependência com Koin.
 - Processamento de imagens com Coil.
-
-## Índices:
-- Para acessar a Wiki do projeto: 
-  - <a href="https://github.com/nunes1909/the-movie/wiki">Clique aqui</a>.
-- Para acessar a documentação da Arquitetura do projeto:
-  - <a href="https://github.com/nunes1909/the-movie/wiki/Arquitetura">Clique aqui</a>.
-- Para acessar as features e animações do projeto:
-  - <a href="https://github.com/nunes1909/the-movie/wiki/Features">Clique aqui</a>.
 
 ## Formas de acessar o app:
 - Download do Apk na release do projeto.
