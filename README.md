@@ -39,6 +39,7 @@ Você pode entrar em contato comigo através do <a href="https://www.linkedin.co
 - Componentes da Arquitetura Android:
   - ViewModel, Fragments, Lifecycle, Navigation, StateFlow, Room, etc...
 - Injeção de dependência com Koin.
+- Consumo de API Rest com Retrofit.
 - Processamento de imagens com Coil.
 
 ## Formas de acessar o app:
