@@ -19,6 +19,12 @@ Este aplicativo faz parte do meu portfólio pessoal e eu o desenvolvi visando os
 
 Você pode entrar em contato comigo através do <a href="https://www.linkedin.com/in/nunes1909/">Linkedin</a> e também através do e-mail: <a href="mailto:gnunes1909@gmail.com">gnunes1909@gmail.com</a>
 
+## Observações:
+- Este projeto ainda não da suporte para Crud de usuários e Login/Logout.
+- Este projeto ainda não da suporte para Dark Theme.
+- Este projeto possui pesquisa somente por Filmes, pois o endpoint de Multi Pesquisas estava off durante o desenvolvimento.
+- Este projeto segue uma arquitetura propria.
+
 ## Funcionalidades:
 - Feature de Splash Screen.
 - Feature de Filmes.
@@ -27,20 +33,17 @@ Você pode entrar em contato comigo através do <a href="https://www.linkedin.co
 - Feature de Favoritos.
 - Feature de Detalhes.
 
-## Observações:
-- Este projeto ainda não da suporte para Crud de usuários e Login/Logout.
-- Este projeto ainda não da suporte para Dark Theme.
-- Este projeto possui pesquisa somente por Filmes, pois o endpoint de Multi Pesquisas estava off durante o desenvolvimento.
-- Este projeto segue uma arquitetura propria.
-
 ## Componentes:
-- Modularização com Arquitetura.
-- Conceitos de Clean Architecture e MVVM.
 - Componentes da Arquitetura Android:
   - ViewModel, Fragments, Lifecycle, Navigation, StateFlow, Room, etc...
 - Injeção de dependência com Koin.
 - Consumo de API Rest com Retrofit.
 - Processamento de imagens com Coil.
+- Armazenamento de dados com DataStore.
+
+## Conceitos:
+- Modularização com Arquitetura.
+- Clean Architecture e MVVM.
 
 ## Formas de acessar o app:
 - Download do Apk na release do projeto.
