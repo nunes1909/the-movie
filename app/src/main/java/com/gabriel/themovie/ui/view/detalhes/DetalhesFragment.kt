@@ -29,10 +29,10 @@ import com.gabriel.themovie.video.model.VideoView
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DetalhesFragmentIn : BaseFragmentIn<FragmentDetalhesBinding, DetalhesViewModel>() {
+class DetalhesFragment : BaseFragmentIn<FragmentDetalhesBinding, DetalhesViewModel>() {
 
     override val viewModel: DetalhesViewModel by viewModel()
-    private val args: DetalhesFragmentInArgs by navArgs()
+    private val args: DetalhesFragmentArgs by navArgs()
     private val movieAdapter by lazy { MovieAdapterPrimary() }
     lateinit var globalMovie: MovieView
 
@@ -203,7 +203,7 @@ class DetalhesFragmentIn : BaseFragmentIn<FragmentDetalhesBinding, DetalhesViewM
     private fun configuraClickAdapter() {
         movieAdapter.setMovieOnClickListener { movieView ->
             movieView.type = globalMovie.type
-            val action = DetalhesFragmentInDirections
+            val action = DetalhesFragmentDirections
                 .acaoSimilaresParaDetalhes(movieView)
             findNavController().navigate(action)
         }
@@ -211,7 +211,7 @@ class DetalhesFragmentIn : BaseFragmentIn<FragmentDetalhesBinding, DetalhesViewM
 
     private fun configuraClickDialog() {
         binding.tvDescricaoMovie.setOnClickListener {
-            val action = DetalhesFragmentInDirections
+            val action = DetalhesFragmentDirections
                 .acaoDetalhesParaDialog(globalMovie)
             findNavController().navigate(action)
         }

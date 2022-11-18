@@ -1,4 +1,4 @@
-package com.gabriel.themovie.ui.view.filmes
+package com.gabriel.themovie.ui.view.series
 
 import android.content.Intent
 import android.net.Uri
@@ -12,15 +12,13 @@ import androidx.recyclerview.widget.GridLayoutManager
 import coil.load
 import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.themovie.R
-import com.gabriel.themovie.databinding.FragmentFilmesBinding
+import com.gabriel.themovie.databinding.FragmentSeriesBinding
 import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.ui.adapters.MovieAdapterPrimary
 import com.gabriel.themovie.util.base.BaseFragmentIn
 import com.gabriel.themovie.util.constants.ConstantsView
-import com.gabriel.themovie.util.constants.ConstantsView.BASE_URL_VIDEOS
 import com.gabriel.themovie.util.constants.ConstantsView.RV_COLUNS_DEFAULT
-import com.gabriel.themovie.util.constants.ConstantsView.TYPE_FILME
-import com.gabriel.themovie.util.constants.ConstantsView.TYPE_VIDEO
+import com.gabriel.themovie.util.constants.ConstantsView.TYPE_SERIE
 import com.gabriel.themovie.util.extensions.hide
 import com.gabriel.themovie.util.extensions.show
 import com.gabriel.themovie.util.extensions.tentaCarregar
@@ -30,88 +28,93 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-class FilmesFragmentIn : BaseFragmentIn<FragmentFilmesBinding, FilmesViewModel>() {
+class SeriesFragment : BaseFragmentIn<FragmentSeriesBinding, SeriesViewModel>() {
 
-    override val viewModel: FilmesViewModel by viewModel()
-    private val movieAdapterPrimary by lazy { MovieAdapterPrimary() }
+    override val viewModel: SeriesViewModel by viewModel()
+    private val serieAdapter by lazy { MovieAdapterPrimary() }
     lateinit var globalMovie: MovieView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         configuraRecyclerView()
-        observerListaFilmes()
-        observerFilmePrincipal()
         configuraClickAdapter()
-        configuraClickFilmePrincipal()
+        observerListaSeries()
+        observerSeriePrincipal()
+        configuraClickSeriePrincipal()
     }
 
     private fun configuraRecyclerView() = with(binding) {
-        rvFilme.adapter = movieAdapterPrimary
-        rvFilme.layoutManager = GridLayoutManager(requireContext(), RV_COLUNS_DEFAULT)
+        rvSerie.adapter = serieAdapter
+        rvSerie.layoutManager = GridLayoutManager(requireContext(), RV_COLUNS_DEFAULT)
     }
 
-    private fun observerListaFilmes() = lifecycleScope.launch {
-        viewModel.list.collect { resource ->
-            when (resource) {
+    private fun configuraClickAdapter() {
+        serieAdapter.setMovieOnClickListener { movieView ->
+            actionGoDetails(entity = movieView)
+        }
+    }
+
+    private fun observerListaSeries() = lifecycleScope.launch {
+        viewModel.list.collect { resources ->
+            when (resources) {
                 is ResourceState.Success -> {
-                    exibeFilmesPopulares(resource)
-                    binding.pbFilme.hide()
+                    exibeSeriesPopulares(resources)
+                    binding.pbSerie.hide()
                 }
                 is ResourceState.Error -> {
-                    binding.pbFilme.hide()
-                    toast(getString(R.string.um_erro_ocorreu))
-                    Timber.tag("FilmesFragment/observerListaFilmes")
-                        .e("Error -> ${resource.message} Cod -> ${resource.cod}")
+                    binding.pbSerie.hide()
+                    toast("Um erro ocorreu: ${resources.message}")
+                    Timber.tag("SeriesFragment/observerListaSeries")
+                        .e("Error -> ${resources.message} Cod -> ${resources.cod}")
                 }
                 is ResourceState.Loading -> {
-                    binding.pbFilme.show()
+                    binding.pbSerie.show()
                 }
                 else -> {}
             }
         }
     }
 
-    private fun exibeFilmesPopulares(resource: ResourceState<List<MovieView>>) {
-        resource.data?.let { results ->
-            movieAdapterPrimary.moviesList = results
+    private fun exibeSeriesPopulares(resources: ResourceState<List<MovieView>>) {
+        resources.data?.let { results ->
+            serieAdapter.moviesList = results
         }
     }
 
-    private fun observerFilmePrincipal() = lifecycleScope.launch {
+    private fun observerSeriePrincipal() = lifecycleScope.launch {
         viewModel.movieDetail.collect { resource ->
             when (resource) {
                 is ResourceState.Success -> {
-                    binding.pbFilme.hide()
-                    preencheFilmePrincipal(resource.data)
+                    binding.pbSerie.hide()
+                    preencheSeriePrincipal(resource.data)
                 }
                 is ResourceState.Error -> {
+                    binding.pbSerie.hide()
                     toast(getString(R.string.um_erro_ocorreu))
-                    binding.pbFilme.hide()
                     Timber.tag("FilmesFragment/observerFilmePrincipal")
                         .e("Error -> ${resource.message} Cod -> ${resource.cod}")
                 }
                 is ResourceState.Loading -> {
-                    binding.pbFilme.show()
+                    binding.pbSerie.show()
                 }
                 else -> {}
             }
         }
     }
 
-    private fun preencheFilmePrincipal(movieView: MovieView?) {
+    private fun preencheSeriePrincipal(movieView: MovieView?) {
         movieView?.let { movie ->
             inicializaGlobalMultiMovie(movie)
             carregaImagem(movie)
             carregaTitulo(movie)
-            carregaActionTrailer(movie)
             observerActionAdd()
+            carregaActionTrailer(movie)
         }
     }
 
     /**
-     * Inicializando um objeto global para utilizar como argumento ao abrir os
-     * detalhes do movie principal. Isso pois eu não tenho acesso ao [objeto]
-     * ao clicar no movie principal.
+     * Inicializando um objeto global para utilizar ao abrir os detalhes do movie principal.
+     * Isso pois eu não tenho acesso ao [objeto] ao clicar no movie principal.
      *
      * @param globalMovie é o objeto global.
      * @param movieView é o objeto inicializado.
@@ -121,12 +124,22 @@ class FilmesFragmentIn : BaseFragmentIn<FragmentFilmesBinding, FilmesViewModel>(
     }
 
     private fun carregaImagem(movie: MovieView) {
-        binding.ivBannerFilmePrincipal
-            .tentaCarregar("${ConstantsView.BASE_URL_IMAGES}${movie.cartaz}")
+        binding.serieBannerPrincipal
+            .tentaCarregar("${ConstantsView.BASE_URL_IMAGES}${movie.banner}")
     }
 
     private fun carregaTitulo(movie: MovieView) {
-        binding.tituloFilmePrincipal.text = movie.title
+        binding.serieTituloPrincipal.text = movie.title
+    }
+
+    private fun observerActionAdd() = lifecycleScope.launch {
+        viewModel.verify.collect { resource ->
+            if (resource) {
+                binding.includeActionsPrincipal.btnAddFav.load(R.drawable.ic_remove)
+            } else {
+                binding.includeActionsPrincipal.btnAddFav.load(R.drawable.ic_add)
+            }
+        }
     }
 
     private fun carregaActionTrailer(movie: MovieView) {
@@ -138,13 +151,13 @@ class FilmesFragmentIn : BaseFragmentIn<FragmentFilmesBinding, FilmesViewModel>(
     private fun goTrailer(videos: List<VideoView>?) {
         if (!videos.isNullOrEmpty()) {
             val videoKey = videos.filter {
-                (it.type == TYPE_VIDEO) || (it.official == true)
+                (it.type == ConstantsView.TYPE_VIDEO) || (it.official == true)
             }[0].key
 
             if (!videoKey.isNullOrEmpty()) {
                 Intent(
                     Intent.ACTION_VIEW,
-                    Uri.parse("${BASE_URL_VIDEOS}$videoKey")
+                    Uri.parse("${ConstantsView.BASE_URL_VIDEOS}$videoKey")
                 ).apply { startActivity(this) }
             }
         } else {
@@ -152,34 +165,18 @@ class FilmesFragmentIn : BaseFragmentIn<FragmentFilmesBinding, FilmesViewModel>(
         }
     }
 
-    private fun observerActionAdd() = lifecycleScope.launch {
-        viewModel.verify.collect { ifExists ->
-            if (ifExists) {
-                binding.includeActionsPrincipal.btnAddFav.load(R.drawable.ic_remove)
-            } else {
-                binding.includeActionsPrincipal.btnAddFav.load(R.drawable.ic_add)
-            }
-        }
+    private fun configuraClickSeriePrincipal() = with(binding) {
+        actionSeriePrincipalGoDetails()
+        actionSeriePrincipalSave()
     }
 
-    private fun configuraClickAdapter() {
-        movieAdapterPrimary.setMovieOnClickListener { movieView ->
-            actionGoDetails(entity = movieView)
-        }
-    }
-
-    private fun configuraClickFilmePrincipal() = with(binding) {
-        actionFilmePrincipalGoDetails()
-        actionFilmePrincipalSave()
-    }
-
-    private fun FragmentFilmesBinding.actionFilmePrincipalGoDetails() {
+    private fun FragmentSeriesBinding.actionSeriePrincipalGoDetails() {
         includeActionsPrincipal.btnLerMais.setOnClickListener {
             actionGoDetails(globalMovie)
         }
     }
 
-    private fun FragmentFilmesBinding.actionFilmePrincipalSave() {
+    private fun FragmentSeriesBinding.actionSeriePrincipalSave() {
         includeActionsPrincipal.btnAddFav.setOnClickListener {
             if (viewModel.verify.value) {
                 viewModel.deleteMovie(globalMovie)
@@ -197,15 +194,15 @@ class FilmesFragmentIn : BaseFragmentIn<FragmentFilmesBinding, FilmesViewModel>(
      * @param entity é o argumento esperado pela tela de Detalhes.
      */
     private fun actionGoDetails(entity: MovieView) {
-        entity.type = TYPE_FILME
-        val action = FilmesFragmentInDirections
-            .acaoFilmesParaDetalhes(entity)
+        entity.type = TYPE_SERIE
+        val action = SeriesFragmentDirections
+            .acaoSeriesParaDetalhes(entity)
         findNavController().navigate(action)
     }
 
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
-    ): FragmentFilmesBinding =
-        FragmentFilmesBinding.inflate(layoutInflater, container, false)
+    ): FragmentSeriesBinding =
+        FragmentSeriesBinding.inflate(layoutInflater, container, false)
 }

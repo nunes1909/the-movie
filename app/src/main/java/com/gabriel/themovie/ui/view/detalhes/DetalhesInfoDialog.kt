@@ -13,7 +13,7 @@ import com.gabriel.themovie.util.extensions.tentaCarregar
 
 class DetalhesInfoDialog : DialogFragment() {
 
-    private val args: DetalhesFragmentInArgs by navArgs()
+    private val args: DetalhesFragmentArgs by navArgs()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(context)

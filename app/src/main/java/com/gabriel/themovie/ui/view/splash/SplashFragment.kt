@@ -6,22 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
+import com.gabriel.themovie.NavGraphDirections
 import com.gabriel.themovie.databinding.FragmentSplashBinding
+import com.gabriel.themovie.ui.view.login.LoginViewModel
+import com.gabriel.themovie.util.base.BaseFragmentOut
 import com.gabriel.themovie.util.constants.ConstantsView.KEY_BOTTOM_NAV
 import com.gabriel.themovie.util.preferences.dataStore
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SplashFragment : Fragment() {
+class SplashFragment : BaseFragmentOut<FragmentSplashBinding, LoginViewModel>() {
 
-    private val binding by lazy { FragmentSplashBinding.inflate(layoutInflater) }
+    override val viewModel: LoginViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         configuraLogoSplash()
         configuraVisibilityBottomNav()
+        firebaseAuth.signOut()
     }
 
     private fun configuraVisibilityBottomNav() {
@@ -34,18 +37,22 @@ class SplashFragment : Fragment() {
 
     private fun configuraLogoSplash() = with(binding) {
         imageSplash.alpha = 0f
-        imageSplash.animate().setDuration(2000).alpha(1f).withEndAction { goToFilmes() }
+        imageSplash.animate().setDuration(2000).alpha(1f).withEndAction { verificaEstaLogado() }
     }
 
-    private fun goToFilmes() {
-        val action = SplashFragmentDirections
-            .acaoGlobalParaLogin()
-        findNavController().navigate(action)
+    private fun verificaEstaLogado() {
+        if (firebaseAuth.currentUser != null) {
+            val actionFilmes = NavGraphDirections.acaoGlobaParaFilmes()
+            controller.navigate(actionFilmes)
+        } else {
+            val actionLogin = SplashFragmentDirections.acaoGlobalParaLogin()
+            controller.navigate(actionLogin)
+        }
     }
 
-    override fun onCreateView(
+    override fun getViewBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = binding.root
+        container: ViewGroup?
+    ): FragmentSplashBinding =
+        FragmentSplashBinding.inflate(inflater, container, false)
 }

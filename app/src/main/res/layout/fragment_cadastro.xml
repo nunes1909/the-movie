@@ -67,13 +67,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColorHint="@color/colorPrimaryText"
-        app:layout_constraintBottom_toTopOf="@+id/btnLoginCadastrar"
+        app:layout_constraintBottom_toTopOf="@+id/btnCadastroCadastrar"
         app:layout_constraintEnd_toEndOf="@+id/containerEtCadastroSenha"
         app:layout_constraintStart_toStartOf="@+id/containerEtCadastroSenha"
         app:layout_constraintTop_toBottomOf="@+id/containerEtCadastroSenha">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etLoginConfirmaSenha"
+            android:id="@+id/etCadastroConfirmaSenha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/confirme_senha"
@@ -85,7 +85,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnLoginCadastrar"
+        android:id="@+id/btnCadastroCadastrar"
         style="@style/ButtonLogin"
         android:layout_marginBottom="16dp"
         android:text="@string/cadastrar"

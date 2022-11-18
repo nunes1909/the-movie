@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-class FavoritosFragmentIn : BaseFragmentIn<FragmentFavoritosBinding, FavoritosViewModel>() {
+class FavoritosFragment : BaseFragmentIn<FragmentFavoritosBinding, FavoritosViewModel>() {
 
     override val viewModel: FavoritosViewModel by viewModel()
     private val movieAdapter by lazy { MovieAdapterSecondary() }
@@ -127,7 +127,7 @@ class FavoritosFragmentIn : BaseFragmentIn<FragmentFavoritosBinding, FavoritosVi
 
     private fun configuraClickAdapter() {
         movieAdapter.setMovieOnClickListener { movieView ->
-            val action = FavoritosFragmentInDirections
+            val action = FavoritosFragmentDirections
                 .acaoFavoritosParaDetalhes(movieView = movieView)
             findNavController().navigate(action)
         }

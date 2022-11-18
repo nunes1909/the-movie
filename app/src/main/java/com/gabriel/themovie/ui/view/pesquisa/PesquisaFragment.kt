@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-class PesquisaFragmentIn : BaseFragmentIn<FragmentPesquisaBinding, PesquisaViewModel>() {
+class PesquisaFragment : BaseFragmentIn<FragmentPesquisaBinding, PesquisaViewModel>() {
 
     override val viewModel: PesquisaViewModel by viewModel()
     private val movieAdapter by lazy { MovieAdapterSecondary() }
@@ -95,7 +95,7 @@ class PesquisaFragmentIn : BaseFragmentIn<FragmentPesquisaBinding, PesquisaViewM
     private fun configuraClickAdapter() {
         movieAdapter.setMovieOnClickListener { movieView ->
             movieView.type = TYPE_FILME
-            val action = PesquisaFragmentInDirections
+            val action = PesquisaFragmentDirections
                 .acaoPesquisaParaDetalhes(movieView = movieView)
             findNavController().navigate(action)
         }
