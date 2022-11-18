@@ -6,7 +6,6 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.gabriel.themovie.R
 import com.gabriel.themovie.databinding.ActivityMainBinding
 import com.gabriel.themovie.util.constants.ConstantsView.KEY_BOTTOM_NAV
 import com.gabriel.themovie.util.extensions.hide
@@ -40,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun inicializaView() {
         navHostFragment = supportFragmentManager
-            .findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+            .findFragmentById(binding.fragmentContainerView.id) as NavHostFragment
 
         val navController = navHostFragment.navController
 

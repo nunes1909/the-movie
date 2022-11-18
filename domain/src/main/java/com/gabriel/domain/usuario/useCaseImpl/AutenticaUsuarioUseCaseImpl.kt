@@ -10,4 +10,8 @@ class AutenticaUsuarioUseCaseImpl(private val repository: AutenticaUsuarioReposi
     override suspend fun autenticaUsuario(usuario: Usuario): ResourceState<Boolean> {
         return repository.autenticaUsuario(usuario)
     }
+
+    override suspend fun autenticaGoogle(tokenId: String): ResourceState<Boolean> {
+        return repository.autenticaGoogle(tokenId)
+    }
 }

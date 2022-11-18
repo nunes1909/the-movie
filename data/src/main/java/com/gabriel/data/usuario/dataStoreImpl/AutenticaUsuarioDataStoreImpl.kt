@@ -10,4 +10,8 @@ class AutenticaUsuarioDataStoreImpl(private val dataSource: AutenticaUsuarioData
     override suspend fun autenticaUsuario(usuario: UsuarioData): ResourceState<Boolean> {
         return dataSource.autenticaUsuario(usuario)
     }
+
+    override suspend fun autenticaGoogle(tokenId: String): ResourceState<Boolean> {
+        return dataSource.autenticaGoogle(tokenId)
+    }
 }

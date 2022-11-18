@@ -64,23 +64,23 @@
     </fragment>
     <dialog
         android:id="@+id/detalhesInfoDialog"
-        tools:layout="@layout/dialog_info_movie"
         android:name="com.gabriel.themovie.ui.view.detalhes.DetalhesInfoDialog"
-        android:label="DetalhesInfoDialog" >
+        android:label="DetalhesInfoDialog"
+        tools:layout="@layout/dialog_info_movie">
         <argument
             android:name="movieView"
             app:argType="com.gabriel.themovie.movie.model.MovieView" />
     </dialog>
     <fragment
         android:id="@+id/splashFragment"
-        tools:layout="@layout/fragment_splash"
         android:name="com.gabriel.themovie.ui.view.splash.SplashFragment"
-        android:label="SplashFragment" />
+        android:label="SplashFragment"
+        tools:layout="@layout/fragment_splash" />
     <fragment
         android:id="@+id/loginFragment"
-        tools:layout="@layout/fragment_login"
         android:name="com.gabriel.themovie.ui.view.login.LoginFragment"
-        android:label="LoginFragment" >
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/acaoLoginParaCadastro"
             app:destination="@id/cadastroFragment"
@@ -90,10 +90,10 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
-        tools:layout="@layout/fragment_cadastro"
         android:id="@+id/cadastroFragment"
         android:name="com.gabriel.themovie.ui.view.cadastro.CadastroFragment"
-        android:label="CadastroFragment" />
+        android:label="CadastroFragment"
+        tools:layout="@layout/fragment_cadastro" />
     <action
         android:id="@+id/acaoGlobalParaLogin"
         app:destination="@id/loginFragment"
@@ -109,10 +109,10 @@
         app:popEnterAnim="@anim/nav_default_pop_enter_anim"
         app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     <fragment
-        tools:layout="@layout/fragment_conta"
         android:id="@+id/contaFragment"
-        android:name="com.gabriel.themovie.conta.ContaFragment"
-        android:label="ContaFragment" >
+        android:name="com.gabriel.themovie.ui.view.conta.ContaFragment"
+        android:label="ContaFragment"
+        tools:layout="@layout/fragment_conta">
         <action
             android:id="@+id/acaoContaParaFavoritos"
             app:destination="@id/favoritosFragment"

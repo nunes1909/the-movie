@@ -6,6 +6,7 @@ import com.gabriel.domain.util.state.ResourceState
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
+import com.google.firebase.auth.GoogleAuthProvider
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -16,6 +17,20 @@ class AutenticaUsuarioDataSourceImpl(private val firebaseAuth: FirebaseAuth) :
             firebaseAuth.signInWithEmailAndPassword(usuario.email!!, usuario.senha!!)
                 .addOnSuccessListener {
                     continuation.resume(ResourceState.Default(data = true))
+                }
+                .addOnFailureListener { exception ->
+                    val message = catchErrorAuth(exception)
+                    continuation.resume(ResourceState.Default(data = false, message = message))
+                }
+        }
+    }
+
+    override suspend fun autenticaGoogle(tokenId: String): ResourceState<Boolean> {
+        return suspendCoroutine { continuation ->
+            val credential = GoogleAuthProvider.getCredential(tokenId, null)
+            firebaseAuth.signInWithCredential(credential)
+                .addOnSuccessListener {
+                    continuation.resume(ResourceState.Default(true))
                 }
                 .addOnFailureListener { exception ->
                     val message = catchErrorAuth(exception)
