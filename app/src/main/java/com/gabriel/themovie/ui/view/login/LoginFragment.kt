@@ -7,27 +7,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
-import com.gabriel.themovie.ui.view.login.validaLogin.ValidaLogin
 import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.themovie.databinding.FragmentLoginBinding
+import com.gabriel.themovie.ui.view.login.validaLogin.ValidaLogin
 import com.gabriel.themovie.usuario.model.UsuarioView
 import com.gabriel.themovie.util.base.BaseFragmentOut
-import com.gabriel.themovie.util.constants.ConstantsView.TOKEN_ID_CLIENT
 import com.gabriel.themovie.util.extensions.toast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginFragment : BaseFragmentOut<FragmentLoginBinding, LoginViewModel>() {
 
     override val viewModel: LoginViewModel by viewModel()
-    private lateinit var googleSignInClient: GoogleSignInClient
+    private val googleSignInClient: GoogleSignInClient by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        configuraGoogle()
         goLogin()
         goLoginGoogle()
         goCadastro()
@@ -82,7 +80,7 @@ class LoginFragment : BaseFragmentOut<FragmentLoginBinding, LoginViewModel>() {
 
     private fun defineAcaoPosAuth(resource: ResourceState<Boolean>) {
         if (resource.data!!) {
-            val action = LoginFragmentDirections.acaoGlobaParaFilmes()
+            val action = LoginFragmentDirections.acaoGlobalParaFilmes()
             controller.navigate(action)
         } else {
             toast(resource.message!!)
@@ -94,15 +92,6 @@ class LoginFragment : BaseFragmentOut<FragmentLoginBinding, LoginViewModel>() {
             val action = LoginFragmentDirections.acaoLoginParaCadastro()
             controller.navigate(action)
         }
-    }
-
-    private fun configuraGoogle() {
-        val googleSign = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(TOKEN_ID_CLIENT)
-            .requestEmail()
-            .build()
-
-        googleSignInClient = GoogleSignIn.getClient(requireContext(), googleSign)
     }
 
     private fun signInGoogle() {

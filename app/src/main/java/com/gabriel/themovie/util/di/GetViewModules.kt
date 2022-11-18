@@ -10,11 +10,25 @@ import com.gabriel.themovie.ui.view.login.LoginViewModel
 import com.gabriel.themovie.ui.view.pesquisa.PesquisaViewModel
 import com.gabriel.themovie.ui.view.series.SeriesViewModel
 import com.gabriel.themovie.usuario.mapper.UsuarioViewMapper
+import com.gabriel.themovie.util.constants.ConstantsView
 import com.gabriel.themovie.video.mapper.VideoViewMapper
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 fun getViewModules() = module {
+    single<GoogleSignInClient> {
+        val googleSign = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(ConstantsView.TOKEN_ID_CLIENT)
+            .requestEmail()
+            .build()
+
+        GoogleSignIn.getClient(androidContext(), googleSign)
+    }
+
     // Region Mappers
     factory { GeneroViewMapper() }
     factory { VideoViewMapper() }
