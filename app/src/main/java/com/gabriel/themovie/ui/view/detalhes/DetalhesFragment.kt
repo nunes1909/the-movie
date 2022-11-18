@@ -15,7 +15,7 @@ import com.gabriel.themovie.R
 import com.gabriel.themovie.databinding.FragmentDetalhesBinding
 import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.ui.adapters.MovieAdapterPrimary
-import com.gabriel.themovie.util.base.BaseFragment
+import com.gabriel.themovie.util.base.BaseFragmentIn
 import com.gabriel.themovie.util.constants.ConstantsView
 import com.gabriel.themovie.util.constants.ConstantsView.BASE_URL_IMAGES
 import com.gabriel.themovie.util.constants.ConstantsView.EXIBE_ELLIPSIZE
@@ -29,7 +29,7 @@ import com.gabriel.themovie.video.model.VideoView
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DetalhesFragment : BaseFragment<FragmentDetalhesBinding, DetalhesViewModel>() {
+class DetalhesFragment : BaseFragmentIn<FragmentDetalhesBinding, DetalhesViewModel>() {
 
     override val viewModel: DetalhesViewModel by viewModel()
     private val args: DetalhesFragmentArgs by navArgs()

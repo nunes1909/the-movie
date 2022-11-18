@@ -17,7 +17,7 @@ import com.gabriel.domain.util.state.ResourceState
 import com.gabriel.themovie.databinding.FragmentFavoritosBinding
 import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.ui.adapters.MovieAdapterSecondary
-import com.gabriel.themovie.util.base.BaseFragment
+import com.gabriel.themovie.util.base.BaseFragmentIn
 import com.gabriel.themovie.util.extensions.hide
 import com.gabriel.themovie.util.extensions.show
 import com.gabriel.themovie.util.extensions.toast
@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-class FavoritosFragment : BaseFragment<FragmentFavoritosBinding, FavoritosViewModel>() {
+class FavoritosFragment : BaseFragmentIn<FragmentFavoritosBinding, FavoritosViewModel>() {
 
     override val viewModel: FavoritosViewModel by viewModel()
     private val movieAdapter by lazy { MovieAdapterSecondary() }

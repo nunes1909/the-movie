@@ -38,5 +38,16 @@
     <string name="ler_mais">Ler mais</string>
     <string name="info_favoritos">Favoritos</string>
     <string name="info_ler_mais">Ler mais</string>
+    <string name="imagem_login_logo">Imagem Login Logo</string>
+    <string name="digite_email">Digite aqui o seu e-mail</string>
+    <string name="digite_senha">Digite aqui a sua senha</string>
+    <string name="logar">Logar</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="confirme_senha">Confirme aqui a sua senha</string>
+    <string name="sair">Sair</string>
+    <string name="minha_lista">Favoritos</string>
+    <string name="title_menu_conta">Conta</string>
+    <string name="imagem_conta">Imagem conta person</string>
+    <string name="botao_login_google">Botão login conta google</string>
     <!-- endregion -->
 </resources>

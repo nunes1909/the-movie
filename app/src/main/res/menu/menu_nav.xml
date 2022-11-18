@@ -16,8 +16,13 @@
         android:icon="@drawable/ic_pesquisar"
         android:title="@string/title_menu_pesquisar" />
 
+<!--    <item-->
+<!--        android:id="@+id/favoritosFragment"-->
+<!--        android:icon="@drawable/ic_favoritos"-->
+<!--        android:title="@string/title_menu_favoritos" />-->
+
     <item
-        android:id="@+id/favoritosFragment"
-        android:icon="@drawable/ic_favoritos"
-        android:title="@string/title_menu_favoritos" />
+        android:id="@+id/contaFragment"
+        android:icon="@drawable/ic_conta"
+        android:title="@string/title_menu_conta" />
 </menu>
