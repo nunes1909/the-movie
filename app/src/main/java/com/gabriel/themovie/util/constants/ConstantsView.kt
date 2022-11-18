@@ -28,4 +28,8 @@ object ConstantsView {
     // Keys data store
     const val KEY_BOTTOM_NAV = "exibeBottomNav"
     // Endregion
+
+    // region firebase
+    const val TOKEN_ID_CLIENT = "757876271601-6d732lgle7faevqfanhmefblnrs4qopk.apps.googleusercontent.com"
+    // endregion
 }

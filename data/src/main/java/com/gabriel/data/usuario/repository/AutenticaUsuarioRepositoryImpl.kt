@@ -14,4 +14,8 @@ class AutenticaUsuarioRepositoryImpl(
         val usuarioData = mapper.mapToData(usuario)
         return dataStore.autenticaUsuario(usuarioData)
     }
+
+    override suspend fun autenticaGoogle(tokenId: String): ResourceState<Boolean> {
+        return dataStore.autenticaGoogle(tokenId)
+    }
 }

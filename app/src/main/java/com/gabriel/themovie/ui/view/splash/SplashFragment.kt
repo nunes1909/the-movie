@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.gabriel.themovie.NavGraphDirections
 import com.gabriel.themovie.databinding.FragmentSplashBinding
 import com.gabriel.themovie.ui.view.login.LoginViewModel
@@ -36,18 +37,9 @@ class SplashFragment : BaseFragmentOut<FragmentSplashBinding, LoginViewModel>() 
 
     private fun configuraLogoSplash() = with(binding) {
         imageSplash.alpha = 0f
-        imageSplash.animate().setDuration(2000).alpha(1f).withEndAction {
-            verificaEstaLogado()
-        }
-    }
-
-    private fun verificaEstaLogado() {
-        if (firebaseAuth.currentUser != null) {
-            val actionFilmes = NavGraphDirections.acaoGlobaParaFilmes()
-            controller.navigate(actionFilmes)
-        } else {
-            val actionLogin = SplashFragmentDirections.acaoGlobalParaLogin()
-            controller.navigate(actionLogin)
+        imageSplash.animate().setDuration(1000).alpha(1f).withEndAction {
+            val action = NavGraphDirections.acaoGlobalParaLogin()
+            controller.navigate(action)
         }
     }
 

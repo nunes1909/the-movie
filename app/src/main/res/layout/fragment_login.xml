@@ -65,16 +65,29 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnLoginLogar"
         style="@style/ButtonLogin"
+        android:layout_marginEnd="8dp"
         android:text="@string/logar"
-        app:layout_constraintEnd_toEndOf="@+id/containerEtLoginSenha"
+        app:layout_constraintEnd_toStartOf="@+id/btnLoginGoogle"
         app:layout_constraintStart_toStartOf="@+id/containerEtLoginSenha"
         app:layout_constraintTop_toBottomOf="@+id/containerEtLoginSenha" />
+
+    <ImageView
+        android:id="@+id/btnLoginGoogle"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/botao_login_google"
+        android:src="@drawable/google"
+        app:layout_constraintBottom_toBottomOf="@+id/btnLoginLogar"
+        app:layout_constraintEnd_toEndOf="@+id/containerEtLoginSenha"
+        app:layout_constraintTop_toTopOf="@+id/btnLoginLogar" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnLoginCadastrar"
         style="@style/ButtonLogin"
         android:text="@string/cadastrar"
-        app:layout_constraintEnd_toEndOf="@+id/btnLoginLogar"
+        app:layout_constraintEnd_toEndOf="@+id/btnLoginGoogle"
         app:layout_constraintStart_toStartOf="@+id/btnLoginLogar"
         app:layout_constraintTop_toBottomOf="@+id/btnLoginLogar" />
 
