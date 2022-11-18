@@ -39,7 +39,7 @@ class SplashFragment : Fragment() {
 
     private fun goToFilmes() {
         val action = SplashFragmentDirections
-            .acaoSplashParaFilmes()
+            .acaoGlobalParaLogin()
         findNavController().navigate(action)
     }
 

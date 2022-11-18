@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/filmesFragment"
-        android:name="com.gabriel.themovie.ui.view.filmes.FilmesFragment"
+        android:name="com.gabriel.themovie.ui.view.filmes.FilmesFragmentIn"
         android:label="FilmesFragment"
         tools:layout="@layout/fragment_filmes">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/seriesFragment"
-        android:name="com.gabriel.themovie.ui.view.series.SeriesFragment"
+        android:name="com.gabriel.themovie.ui.view.series.SeriesFragmentIn"
         android:label="SeriesFragment"
         tools:layout="@layout/fragment_series">
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/detalhesFragment"
-        android:name="com.gabriel.themovie.ui.view.detalhes.DetalhesFragment"
+        android:name="com.gabriel.themovie.ui.view.detalhes.DetalhesFragmentIn"
         android:label="DetalhesFragment"
         tools:layout="@layout/fragment_detalhes">
         <argument
@@ -46,7 +46,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoritosFragment"
-        android:name="com.gabriel.themovie.ui.view.favoritos.FavoritosFragment"
+        android:name="com.gabriel.themovie.ui.view.favoritos.FavoritosFragmentIn"
         android:label="FavoritosFragment"
         tools:layout="@layout/fragment_favoritos">
         <action
@@ -55,7 +55,7 @@
     </fragment>
     <fragment
         android:id="@+id/pesquisaFragment"
-        android:name="com.gabriel.themovie.ui.view.pesquisa.PesquisaFragment"
+        android:name="com.gabriel.themovie.ui.view.pesquisa.PesquisaFragmentIn"
         android:label="PesquisaFragment"
         tools:layout="@layout/fragment_favoritos">
         <action
@@ -75,15 +75,39 @@
         android:id="@+id/splashFragment"
         tools:layout="@layout/fragment_splash"
         android:name="com.gabriel.themovie.ui.view.splash.SplashFragment"
-        android:label="SplashFragment" >
+        android:label="SplashFragment" />
+    <fragment
+        android:id="@+id/loginFragment"
+        tools:layout="@layout/fragment_login"
+        android:name="com.gabriel.themovie.ui.view.login.LoginFragmentIn"
+        android:label="LoginFragment" >
         <action
-            android:id="@+id/acaoSplashParaFilmes"
+            android:id="@+id/acaoLoginParaFilmes"
             app:destination="@id/filmesFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
-            app:popUpTo="@id/splashFragment"
+            app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/acaoLoginParaCadastro"
+            app:destination="@id/cadastroFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
+    <fragment
+        tools:layout="@layout/fragment_cadastro"
+        android:id="@+id/cadastroFragment"
+        android:name="com.gabriel.themovie.ui.view.cadastro.CadastroFragmentIn"
+        android:label="CadastroFragment" />
+    <action
+        android:id="@+id/acaoGlobalParaLogin"
+        app:destination="@id/loginFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 </navigation>

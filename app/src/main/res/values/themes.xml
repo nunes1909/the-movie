@@ -20,7 +20,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">320dp</item>
         <item name="android:background">@drawable/background_container</item>
-        <item name="android:layout_margin">16dp</item>
+        <item name="android:layout_margin">20dp</item>
     </style>
 
     <style name="ButtonLogin">
@@ -32,6 +32,5 @@
         <item name="textAllCaps">false</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textStyle">bold</item>
     </style>
 </resources>

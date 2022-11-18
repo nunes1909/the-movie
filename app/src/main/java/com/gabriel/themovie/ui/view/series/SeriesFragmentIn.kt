@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -16,7 +15,7 @@ import com.gabriel.themovie.R
 import com.gabriel.themovie.databinding.FragmentSeriesBinding
 import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.ui.adapters.MovieAdapterPrimary
-import com.gabriel.themovie.util.base.BaseFragment
+import com.gabriel.themovie.util.base.BaseFragmentIn
 import com.gabriel.themovie.util.constants.ConstantsView
 import com.gabriel.themovie.util.constants.ConstantsView.RV_COLUNS_DEFAULT
 import com.gabriel.themovie.util.constants.ConstantsView.TYPE_SERIE
@@ -29,7 +28,7 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
+class SeriesFragmentIn : BaseFragmentIn<FragmentSeriesBinding, SeriesViewModel>() {
 
     override val viewModel: SeriesViewModel by viewModel()
     private val serieAdapter by lazy { MovieAdapterPrimary() }
@@ -196,7 +195,7 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
      */
     private fun actionGoDetails(entity: MovieView) {
         entity.type = TYPE_SERIE
-        val action = SeriesFragmentDirections
+        val action = SeriesFragmentInDirections
             .acaoSeriesParaDetalhes(entity)
         findNavController().navigate(action)
     }
