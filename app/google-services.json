@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "757876271601",
+    "project_id": "the-movie-5e429",
+    "storage_bucket": "the-movie-5e429.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:757876271601:android:f19adca20d988e8ea5fc50",
+        "android_client_info": {
+          "package_name": "com.gabriel.themovie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "757876271601-dc5tqhk491nglpvt7g7h93m046cf84f4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gabriel.themovie",
+            "certificate_hash": "a018095e2d29493b32bcbfa52f8ac9293ff06550"
+          }
+        },
+        {
+          "client_id": "757876271601-6d732lgle7faevqfanhmefblnrs4qopk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrb2-KwXv9eaPIt1yFG2U96Q3zl-cBLvE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "757876271601-6d732lgle7faevqfanhmefblnrs4qopk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
