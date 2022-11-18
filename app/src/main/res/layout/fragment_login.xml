@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/containerComponentes"
+        style="@style/ContainerComponentes"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/containerEtLoginEmail"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textColorHint="@color/colorPrimaryText"
+        app:endIconDrawable="@drawable/ic_action_email"
+        app:endIconMode="custom"
+        app:endIconTint="@color/white"
+        app:layout_constraintEnd_toEndOf="@id/containerComponentes"
+        app:layout_constraintStart_toStartOf="@id/containerComponentes"
+        app:layout_constraintTop_toTopOf="@id/containerComponentes">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etLoginEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/digite_email"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            tools:text="teste@teste.com" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/containerEtLoginSenha"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColorHint="@color/colorPrimaryText"
+        app:endIconMode="password_toggle"
+        app:endIconTint="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/containerEtLoginEmail"
+        app:layout_constraintStart_toStartOf="@+id/containerEtLoginEmail"
+        app:layout_constraintTop_toBottomOf="@+id/containerEtLoginEmail">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etLoginSenha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/digite_senha"
+            android:inputType="numberPassword"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            tools:text="teste@teste.com" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnLoginLogar"
+        style="@style/ButtonLogin"
+        android:text="@string/logar"
+        app:layout_constraintEnd_toEndOf="@+id/containerEtLoginSenha"
+        app:layout_constraintStart_toStartOf="@+id/containerEtLoginSenha"
+        app:layout_constraintTop_toBottomOf="@+id/containerEtLoginSenha" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnLoginCadastrar"
+        style="@style/ButtonLogin"
+        android:text="@string/cadastrar"
+        app:layout_constraintEnd_toEndOf="@+id/btnLoginLogar"
+        app:layout_constraintStart_toStartOf="@+id/btnLoginLogar"
+        app:layout_constraintTop_toBottomOf="@+id/btnLoginLogar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

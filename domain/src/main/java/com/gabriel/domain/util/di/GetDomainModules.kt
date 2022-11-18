@@ -2,6 +2,10 @@ package com.gabriel.domain.util.di
 
 import com.gabriel.domain.movie.useCase.*
 import com.gabriel.domain.movie.useCaseImpl.*
+import com.gabriel.domain.usuario.useCase.AutenticaUsuarioUseCase
+import com.gabriel.domain.usuario.useCase.CadastraUsuarioUseCase
+import com.gabriel.domain.usuario.useCaseImpl.AutenticaUsuarioUseCaseImpl
+import com.gabriel.domain.usuario.useCaseImpl.CadastraUsuarioUseCaseImpl
 import org.koin.dsl.module
 
 fun getDomainModules() = module {
@@ -43,4 +47,14 @@ fun getDomainModules() = module {
     factory<SearchMovieUseCase> {
         SearchMovieUseCaseImpl(repository = get())
     }
+    // Endregion
+
+    // Region usuario
+    factory<AutenticaUsuarioUseCase> {
+        AutenticaUsuarioUseCaseImpl(repository = get())
+    }
+    factory<CadastraUsuarioUseCase> {
+        CadastraUsuarioUseCaseImpl(repository = get())
+    }
+    // Endregion
 }

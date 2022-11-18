@@ -9,22 +9,29 @@ import androidx.datastore.preferences.core.edit
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
+import com.gabriel.themovie.NavGraphDirections
 import com.gabriel.themovie.util.constants.ConstantsView.KEY_BOTTOM_NAV
 import com.gabriel.themovie.util.preferences.dataStore
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 
-abstract class BaseFragment<viewBinding : ViewBinding, viewModel : ViewModel> : Fragment() {
+abstract class BaseFragmentIn<viewBinding : ViewBinding, viewModel : ViewModel> : Fragment() {
 
     private var _binding: viewBinding? = null
     protected val binding get() = _binding!!
 
     protected abstract val viewModel: viewModel
+    protected val controller by lazy { findNavController() }
+    protected val firebaseAuth: FirebaseAuth by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         configuraVisibilityBottomNav()
+        verificaEstaLogado()
     }
 
     private fun configuraVisibilityBottomNav() {
@@ -32,6 +39,13 @@ abstract class BaseFragment<viewBinding : ViewBinding, viewModel : ViewModel> : 
             requireContext().dataStore.edit { preferences ->
                 preferences[booleanPreferencesKey(KEY_BOTTOM_NAV)] = true
             }
+        }
+    }
+
+    fun verificaEstaLogado() {
+        if (firebaseAuth.currentUser == null) {
+            val action = NavGraphDirections.acaoGlobalParaLogin()
+            controller.navigate(action)
         }
     }
 
