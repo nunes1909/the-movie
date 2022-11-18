@@ -15,7 +15,7 @@ import com.gabriel.themovie.R
 import com.gabriel.themovie.databinding.FragmentFilmesBinding
 import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.ui.adapters.MovieAdapterPrimary
-import com.gabriel.themovie.util.base.BaseFragment
+import com.gabriel.themovie.util.base.BaseFragmentIn
 import com.gabriel.themovie.util.constants.ConstantsView
 import com.gabriel.themovie.util.constants.ConstantsView.BASE_URL_VIDEOS
 import com.gabriel.themovie.util.constants.ConstantsView.RV_COLUNS_DEFAULT
@@ -30,7 +30,7 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-class FilmesFragment : BaseFragment<FragmentFilmesBinding, FilmesViewModel>() {
+class FilmesFragment : BaseFragmentIn<FragmentFilmesBinding, FilmesViewModel>() {
 
     override val viewModel: FilmesViewModel by viewModel()
     private val movieAdapterPrimary by lazy { MovieAdapterPrimary() }

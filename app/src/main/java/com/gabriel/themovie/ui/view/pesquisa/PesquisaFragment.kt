@@ -14,7 +14,7 @@ import com.gabriel.themovie.R
 import com.gabriel.themovie.databinding.FragmentPesquisaBinding
 import com.gabriel.themovie.movie.model.MovieView
 import com.gabriel.themovie.ui.adapters.MovieAdapterSecondary
-import com.gabriel.themovie.util.base.BaseFragment
+import com.gabriel.themovie.util.base.BaseFragmentIn
 import com.gabriel.themovie.util.constants.ConstantsView.TYPE_FILME
 import com.gabriel.themovie.util.extensions.hide
 import com.gabriel.themovie.util.extensions.show
@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-class PesquisaFragment : BaseFragment<FragmentPesquisaBinding, PesquisaViewModel>() {
+class PesquisaFragment : BaseFragmentIn<FragmentPesquisaBinding, PesquisaViewModel>() {
 
     override val viewModel: PesquisaViewModel by viewModel()
     private val movieAdapter by lazy { MovieAdapterSecondary() }

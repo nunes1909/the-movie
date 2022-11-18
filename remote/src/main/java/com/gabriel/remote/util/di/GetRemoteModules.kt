@@ -6,6 +6,8 @@ import com.gabriel.data.movie.dataSource.filme.GetSimilarFilmesDataSource
 import com.gabriel.data.movie.dataSource.filme.GetTrendingFilmeDataSource
 import com.gabriel.data.movie.dataSource.movie.SearchMovieDataSource
 import com.gabriel.data.movie.dataSource.serie.*
+import com.gabriel.data.usuario.dataSource.AutenticaUsuarioDataSource
+import com.gabriel.data.usuario.dataSource.CadastraUsuarioDataSource
 import com.gabriel.remote.genero.mapper.GeneroRemoteMapper
 import com.gabriel.remote.movie.dataSourceImpl.filme.GetAllFilmesDataSourceImpl
 import com.gabriel.remote.movie.dataSourceImpl.filme.GetDetailFilmeDataSourceImpl
@@ -25,8 +27,16 @@ import com.gabriel.remote.movie.service.traducao.TraducaoService
 import com.gabriel.remote.movie.service.trending.TrendingService
 import com.gabriel.remote.movie.service.video.VideoService
 import com.gabriel.remote.network.retrofit.TheMovieRetrofit
+import com.gabriel.remote.usuario.dataSource.AutenticaUsuarioDataSourceImpl
+import com.gabriel.remote.usuario.dataSource.CadastraUsuarioDataSourceImpl
+import com.gabriel.remote.usuario.mapper.UsuarioRemoteMapper
 import com.gabriel.remote.video.mapper.filme.VideoFilmeRemoteMapper
 import com.gabriel.remote.video.mapper.serie.VideoSerieRemoteMapper
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
@@ -70,6 +80,7 @@ fun getRemoteModules() = module {
     factory { SerieDetailResponseToDataMapper() }
     factory { SerieResponseToDataMapper() }
     factory { MultiRemoteToMovieMapper() }
+    factory { UsuarioRemoteMapper() }
     // Endregion
 
     // Region Data Source modules
@@ -137,5 +148,20 @@ fun getRemoteModules() = module {
             mapper = get()
         )
     }
+    single<CadastraUsuarioDataSource> {
+        CadastraUsuarioDataSourceImpl(
+            firebaseAuth = get()
+        )
+    }
+    single<AutenticaUsuarioDataSource> {
+        AutenticaUsuarioDataSourceImpl(
+            firebaseAuth = get()
+        )
+    }
     // Endregion
+
+    // region firebase
+    single<FirebaseAuth> { Firebase.auth }
+    single<FirebaseFirestore> { Firebase.firestore }
+    // endregion
 }
