@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
-import com.gabriel.themovie.NavGraphDirections
 import com.gabriel.themovie.util.constants.ConstantsView.KEY_BOTTOM_NAV
 import com.gabriel.themovie.util.preferences.dataStore
 import com.google.firebase.auth.FirebaseAuth

@@ -48,5 +48,6 @@
     <string name="minha_lista">Favoritos</string>
     <string name="title_menu_conta">Conta</string>
     <string name="imagem_conta">Imagem conta person</string>
+    <string name="botao_login_google">Botão login conta google</string>
     <!-- endregion -->
 </resources>
