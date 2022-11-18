@@ -7,6 +7,7 @@ import com.gabriel.themovie.ui.view.favoritos.FavoritosViewModel
 import com.gabriel.themovie.ui.view.filmes.FilmesViewModel
 import com.gabriel.themovie.ui.view.pesquisa.PesquisaViewModel
 import com.gabriel.themovie.ui.view.series.SeriesViewModel
+import com.gabriel.themovie.usuario.mapper.UsuarioViewMapper
 import com.gabriel.themovie.video.mapper.VideoViewMapper
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -21,6 +22,7 @@ fun getViewModules() = module {
             videoMapper = get()
         )
     }
+    factory { UsuarioViewMapper() }
     // Endregion
 
     // Region ViewModels

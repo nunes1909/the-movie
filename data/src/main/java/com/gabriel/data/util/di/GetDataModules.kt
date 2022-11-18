@@ -5,14 +5,24 @@ import com.gabriel.data.movie.dataStore.*
 import com.gabriel.data.movie.dataStoreImpl.*
 import com.gabriel.data.movie.mapper.MovieDataMapper
 import com.gabriel.data.movie.repository.*
+import com.gabriel.data.usuario.dataStore.AutenticaUsuarioDataStore
+import com.gabriel.data.usuario.dataStore.CadastraUsuarioDataStore
+import com.gabriel.data.usuario.dataStoreImpl.AutenticaUsuarioDataStoreImpl
+import com.gabriel.data.usuario.dataStoreImpl.CadastraUsuarioDataStoreImpl
+import com.gabriel.data.usuario.mapper.UsuarioDataMapper
+import com.gabriel.data.usuario.repository.AutenticaUsuarioRepositoryImpl
+import com.gabriel.data.usuario.repository.CadastraUsuarioRepositoryImpl
 import com.gabriel.data.video.mapper.VideoDataMapper
 import com.gabriel.domain.movie.repository.*
+import com.gabriel.domain.usuario.repository.AutenticaUsuarioRepository
+import com.gabriel.domain.usuario.repository.CadastraUsuarioRepository
 import org.koin.dsl.module
 
 fun getDataModules() = module {
     // Genero modules
     factory { GeneroDataMapper() }
     factory { VideoDataMapper() }
+    factory { UsuarioDataMapper() }
     // Endregion
 
     // Region data mapper
@@ -82,6 +92,18 @@ fun getDataModules() = module {
             source = get()
         )
     }
+
+    factory<CadastraUsuarioDataStore> {
+        CadastraUsuarioDataStoreImpl(
+            dataSource = get()
+        )
+    }
+
+    factory<AutenticaUsuarioDataStore> {
+        AutenticaUsuarioDataStoreImpl(
+            dataSource = get()
+        )
+    }
     // Endregion
 
     // Region Repository
@@ -142,6 +164,18 @@ fun getDataModules() = module {
 
     factory<DeleteMovieRepository> {
         DeleteMovieRepositoryImpl(
+            dataStore = get(),
+            mapper = get()
+        )
+    }
+    factory<CadastraUsuarioRepository> {
+        CadastraUsuarioRepositoryImpl(
+            dataStore = get(),
+            mapper = get()
+        )
+    }
+    factory<AutenticaUsuarioRepository> {
+        AutenticaUsuarioRepositoryImpl(
             dataStore = get(),
             mapper = get()
         )
