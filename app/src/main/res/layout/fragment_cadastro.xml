@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/containerComponentesCadastro"
+        style="@style/ContainerComponentes"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/containerEtCadastroEmail"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textColorHint="@color/colorPrimaryText"
+        app:layout_constraintBottom_toTopOf="@+id/containerEtCadastroSenha"
+        app:layout_constraintEnd_toEndOf="@id/containerComponentesCadastro"
+        app:layout_constraintStart_toStartOf="@id/containerComponentesCadastro"
+        app:layout_constraintTop_toTopOf="@+id/containerComponentesCadastro"
+        app:layout_constraintVertical_chainStyle="packed">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etCadastroEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/digite_email"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            tools:text="teste@teste.com" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/containerEtCadastroSenha"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:textColorHint="@color/colorPrimaryText"
+        app:layout_constraintBottom_toTopOf="@+id/containerEtCadastroConfirmaSenha"
+        app:layout_constraintEnd_toEndOf="@+id/containerEtCadastroEmail"
+        app:layout_constraintStart_toStartOf="@+id/containerEtCadastroEmail"
+        app:layout_constraintTop_toBottomOf="@+id/containerEtCadastroEmail">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etCadastroSenha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/digite_senha"
+            android:inputType="number"
+            android:maxLength="10"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            tools:text="111111" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/containerEtCadastroConfirmaSenha"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/colorPrimaryText"
+        app:layout_constraintBottom_toTopOf="@+id/btnLoginCadastrar"
+        app:layout_constraintEnd_toEndOf="@+id/containerEtCadastroSenha"
+        app:layout_constraintStart_toStartOf="@+id/containerEtCadastroSenha"
+        app:layout_constraintTop_toBottomOf="@+id/containerEtCadastroSenha">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etLoginConfirmaSenha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/confirme_senha"
+            android:inputType="number"
+            android:maxLength="10"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            tools:text="111111" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnLoginCadastrar"
+        style="@style/ButtonLogin"
+        android:layout_marginBottom="16dp"
+        android:text="@string/cadastrar"
+        app:layout_constraintBottom_toBottomOf="@+id/containerComponentesCadastro"
+        app:layout_constraintEnd_toEndOf="@+id/containerEtCadastroConfirmaSenha"
+        app:layout_constraintStart_toStartOf="@+id/containerEtCadastroConfirmaSenha"
+        app:layout_constraintTop_toBottomOf="@+id/containerEtCadastroConfirmaSenha" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
