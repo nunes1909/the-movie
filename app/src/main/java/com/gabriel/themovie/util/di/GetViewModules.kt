@@ -20,6 +20,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 fun getViewModules() = module {
+    // region firebase/google
     single<GoogleSignInClient> {
         val googleSign = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(ConstantsView.TOKEN_ID_CLIENT)
@@ -28,6 +29,7 @@ fun getViewModules() = module {
 
         GoogleSignIn.getClient(androidContext(), googleSign)
     }
+    // endregion
 
     // Region Mappers
     factory { GeneroViewMapper() }
