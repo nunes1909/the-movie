@@ -24,7 +24,6 @@ class SplashFragment : BaseFragmentOut<FragmentSplashBinding, LoginViewModel>() 
         super.onViewCreated(view, savedInstanceState)
         configuraLogoSplash()
         configuraVisibilityBottomNav()
-        firebaseAuth.signOut()
     }
 
     private fun configuraVisibilityBottomNav() {
@@ -37,7 +36,9 @@ class SplashFragment : BaseFragmentOut<FragmentSplashBinding, LoginViewModel>() 
 
     private fun configuraLogoSplash() = with(binding) {
         imageSplash.alpha = 0f
-        imageSplash.animate().setDuration(2000).alpha(1f).withEndAction { verificaEstaLogado() }
+        imageSplash.animate().setDuration(2000).alpha(1f).withEndAction {
+            verificaEstaLogado()
+        }
     }
 
     private fun verificaEstaLogado() {

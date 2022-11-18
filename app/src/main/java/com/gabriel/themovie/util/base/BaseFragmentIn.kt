@@ -42,7 +42,7 @@ abstract class BaseFragmentIn<viewBinding : ViewBinding, viewModel : ViewModel> 
         }
     }
 
-    private fun verificaEstaLogado() {
+    fun verificaEstaLogado() {
         if (firebaseAuth.currentUser == null) {
             val action = NavGraphDirections.acaoGlobalParaLogin()
             controller.navigate(action)

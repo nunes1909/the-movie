@@ -44,5 +44,9 @@
     <string name="logar">Logar</string>
     <string name="cadastrar">Cadastrar</string>
     <string name="confirme_senha">Confirme aqui a sua senha</string>
+    <string name="sair">Sair</string>
+    <string name="minha_lista">Favoritos</string>
+    <string name="title_menu_conta">Conta</string>
+    <string name="imagem_conta">Imagem conta person</string>
     <!-- endregion -->
 </resources>
