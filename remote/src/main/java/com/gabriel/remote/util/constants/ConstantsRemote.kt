@@ -15,4 +15,9 @@ object ConstantsRemote {
     // Traducao types
     const val TYPE_BR = "BR"
     const val TYPE_US = "US"
+
+    // Firebase
+    const val COLECAO_FAV = "favoritos"
+    const val USUARIO_ID = "usuarioId"
+    const val MOVIE_ID = "id"
 }

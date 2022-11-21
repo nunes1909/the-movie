@@ -3,11 +3,9 @@ package com.gabriel.cache.util.di
 //import com.gabriel.cache.movie.favoritos.dataSourceImpl.SaveMovieCacheDataSourceImpl
 import com.gabriel.cache.database.TheMovieDataBase
 import com.gabriel.cache.movie.favoritos.dataSourceImpl.DeleteMovieDataSourceImpl
-import com.gabriel.cache.movie.favoritos.dataSourceImpl.GetFavMovieCacheDataSourceImpl
 import com.gabriel.cache.movie.favoritos.dataSourceImpl.VerifyExistsMovieDataSourceImpl
 import com.gabriel.cache.movie.favoritos.mapper.MovieCacheMapper
 import com.gabriel.data.movie.dataSource.movie.DeleteMovieDataSource
-import com.gabriel.data.movie.dataSource.movie.GetFavMovieCacheDataSource
 import com.gabriel.data.movie.dataSource.movie.VerifyExistsMovieDataSource
 import org.koin.dsl.module
 
@@ -22,20 +20,6 @@ fun getCacheModules() = module {
     // Endregion
 
     // Region Data Source
-//    factory<SaveMovieDataSource> {
-//        SaveMovieCacheDataSourceImpl(
-//            dao = get(),
-//            mapper = get()
-//        )
-//    }
-
-    factory<GetFavMovieCacheDataSource> {
-        GetFavMovieCacheDataSourceImpl(
-            dao = get(),
-            mapper = get()
-        )
-    }
-
     factory<VerifyExistsMovieDataSource> {
         VerifyExistsMovieDataSourceImpl(
             dao = get()

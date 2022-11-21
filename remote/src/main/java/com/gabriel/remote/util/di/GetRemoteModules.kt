@@ -4,6 +4,7 @@ import com.gabriel.data.movie.dataSource.filme.GetAllFilmesDataSource
 import com.gabriel.data.movie.dataSource.filme.GetDetailFilmeDataSource
 import com.gabriel.data.movie.dataSource.filme.GetSimilarFilmesDataSource
 import com.gabriel.data.movie.dataSource.filme.GetTrendingFilmeDataSource
+import com.gabriel.data.movie.dataSource.movie.GetFavMovieDataSource
 import com.gabriel.data.movie.dataSource.movie.SaveMovieDataSource
 import com.gabriel.data.movie.dataSource.movie.SearchMovieDataSource
 import com.gabriel.data.movie.dataSource.serie.*
@@ -14,6 +15,7 @@ import com.gabriel.remote.movie.dataSourceImpl.filme.GetAllFilmesDataSourceImpl
 import com.gabriel.remote.movie.dataSourceImpl.filme.GetDetailFilmeDataSourceImpl
 import com.gabriel.remote.movie.dataSourceImpl.filme.GetSimilarFilmesDataSourceImpl
 import com.gabriel.remote.movie.dataSourceImpl.filme.GetTrendingFilmeDataSourceImpl
+import com.gabriel.remote.movie.dataSourceImpl.movie.GetFavMovieDataSourceImpl
 import com.gabriel.remote.movie.dataSourceImpl.movie.SaveMovieDataSourceImpl
 import com.gabriel.remote.movie.dataSourceImpl.movie.SearchMovieDataSourceImpl
 import com.gabriel.remote.movie.dataSourceImpl.serie.*
@@ -164,6 +166,13 @@ fun getRemoteModules() = module {
     }
     single<SaveMovieDataSource> {
         SaveMovieDataSourceImpl(
+            firestore = get(),
+            firebaseAuth = get(),
+            mapper = get()
+        )
+    }
+    single<GetFavMovieDataSource> {
+        GetFavMovieDataSourceImpl(
             firestore = get(),
             firebaseAuth = get(),
             mapper = get()

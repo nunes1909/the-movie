@@ -77,7 +77,7 @@ fun getDataModules() = module {
 
     factory<GetFavMovieDataStore> {
         GetFavMovieDataStoreImpl(
-            source = get()
+            dataSource = get()
         )
     }
 
