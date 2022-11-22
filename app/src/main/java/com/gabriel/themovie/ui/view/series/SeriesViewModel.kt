@@ -12,6 +12,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
@@ -122,7 +123,9 @@ class SeriesViewModel(
 
     // Region verify if exists movie
     private fun verifyExistsMovie(movieId: Int) = viewModelScope.launch {
-        _verify.value = verifyExists.verifyExistsMovie(id = movieId).first()
+        verifyExists.verifyExistsMovie(id = movieId).collect { ifExists ->
+            _verify.value = ifExists
+        }
     }
     // Endregion
 
