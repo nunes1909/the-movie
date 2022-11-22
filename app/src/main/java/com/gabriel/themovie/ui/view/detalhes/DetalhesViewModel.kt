@@ -34,7 +34,7 @@ class DetalhesViewModel(
         MutableStateFlow<ResourceState<List<MovieView>>>(ResourceState.Loading())
     val listSimilares: StateFlow<ResourceState<List<MovieView>>> = _listSimilares
 
-    private val _verify = MutableStateFlow<Boolean>(true)
+    private val _verify = MutableStateFlow<Boolean>(false)
     val verify: StateFlow<Boolean> = _verify
     // Endregion
 
@@ -107,9 +107,7 @@ class DetalhesViewModel(
 
     // Region verify if exists movie
     private fun verifyExistsMovie(movieId: Int) = viewModelScope.launch {
-        verifyExists.verifyExistsMovie(id = movieId).collect { ifExists ->
-            _verify.value = ifExists
-        }
+        _verify.value = verifyExists.verifyExistsMovie(id = movieId)
     }
     // Endregion
 

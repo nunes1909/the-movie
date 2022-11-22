@@ -123,9 +123,7 @@ class SeriesViewModel(
 
     // Region verify if exists movie
     private fun verifyExistsMovie(movieId: Int) = viewModelScope.launch {
-        verifyExists.verifyExistsMovie(id = movieId).collect { ifExists ->
-            _verify.value = ifExists
-        }
+        _verify.value = verifyExists.verifyExistsMovie(id = movieId)
     }
     // Endregion
 
