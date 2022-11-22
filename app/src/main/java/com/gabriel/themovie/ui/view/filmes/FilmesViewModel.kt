@@ -65,6 +65,7 @@ class FilmesViewModel(
         val safeState = safeStateTrandingFilmes(resourceState)
         val firstMovie = getFirstMovie(safeState).also { it.type = TYPE_FILME }
         getDetailMovie(firstMovie.type!!, firstMovie.id)
+        verifyExistsMovie(firstMovie.id)
     }
 
     private fun safeStateTrandingFilmes(resourceState: ResourceState<List<MovieDomain>>):
