@@ -43,7 +43,9 @@ class GetFavMovieDataSourceImpl(
                     if (query.isEmpty()) {
                         continuation.resumeWith(Result.success(ResourceState.Success(listData)))
                     } else {
-                        val listFilter = listData.filter { it.title == query }
+                        val listFilter = listData.filter {
+                            it.title.uppercase().contains(query.uppercase())
+                        }
                         continuation.resumeWith(Result.success(ResourceState.Success(listFilter)))
                     }
                 }
