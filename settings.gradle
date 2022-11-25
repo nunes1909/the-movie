@@ -16,5 +16,4 @@ rootProject.name = "The Movie"
 include ':app'
 include ':domain'
 include ':data'
-include ':cache'
 include ':remote'
