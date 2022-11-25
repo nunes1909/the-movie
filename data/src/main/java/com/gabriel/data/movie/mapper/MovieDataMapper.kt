@@ -29,7 +29,8 @@ class MovieDataMapper(
             videos = videos,
             favorito = type.favorito,
             cartaz = type.cartaz,
-            banner = type.banner
+            banner = type.banner,
+            usuarioId = type.usuarioId
         )
     }
 
@@ -52,7 +53,8 @@ class MovieDataMapper(
             generos = generos,
             videos = videos,
             cartaz = type.cartaz,
-            banner = type.banner
+            banner = type.banner,
+            usuarioId = type.usuarioId
         )
     }
 }

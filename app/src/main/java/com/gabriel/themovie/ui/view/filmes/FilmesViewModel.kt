@@ -12,6 +12,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
@@ -64,6 +65,7 @@ class FilmesViewModel(
         val safeState = safeStateTrandingFilmes(resourceState)
         val firstMovie = getFirstMovie(safeState).also { it.type = TYPE_FILME }
         getDetailMovie(firstMovie.type!!, firstMovie.id)
+        verifyExistsMovie(firstMovie.id)
     }
 
     private fun safeStateTrandingFilmes(resourceState: ResourceState<List<MovieDomain>>):
@@ -122,7 +124,7 @@ class FilmesViewModel(
 
     // Region verify if exists movie
     private fun verifyExistsMovie(movieId: Int) = viewModelScope.launch {
-        _verify.value = verifyExists.verifyExistsMovie(id = movieId).first()
+        _verify.value = verifyExists.verifyExistsMovie(id = movieId)
     }
     // Endregion
 

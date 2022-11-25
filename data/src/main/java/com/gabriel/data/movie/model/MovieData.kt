@@ -13,5 +13,6 @@ data class MovieData(
     var videos: List<VideoData>? = null,
     val favorito: Boolean? = false,
     val cartaz: String? = null,
-    val banner: String? = null
+    val banner: String? = null,
+    val usuarioId: String? = null
 )

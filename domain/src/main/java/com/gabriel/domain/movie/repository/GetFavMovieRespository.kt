@@ -2,8 +2,7 @@ package com.gabriel.domain.movie.repository
 
 import com.gabriel.domain.movie.model.MovieDomain
 import com.gabriel.domain.util.state.ResourceState
-import kotlinx.coroutines.flow.Flow
 
 interface GetFavMovieRespository {
-    suspend fun getAllFav(query: String): Flow<ResourceState<List<MovieDomain>>>
+    suspend fun getAllFav(query: String): ResourceState<List<MovieDomain>>
 }

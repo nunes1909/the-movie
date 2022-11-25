@@ -44,7 +44,6 @@ android {
 dependencies {
     implementation project(':domain')
     implementation project(':data')
-    implementation project(':cache')
     implementation project(':remote')
 
     def dependencies = rootProject.ext.dependencies
