@@ -2,19 +2,19 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:elevation="12dp"
     app:cardCornerRadius="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/ivItemPrimary"
-            android:layout_width="100dp"
+            android:layout_width="0dp"
             android:layout_height="150dp"
             android:contentDescription="@string/banner_movie"
             android:scaleType="centerCrop"
@@ -26,7 +26,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/containerItemTitlePrimary"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:elevation="8dp"
@@ -36,11 +36,11 @@
 
             <TextView
                 android:id="@+id/tvItemTitlePrimary"
-                android:layout_width="wrap_content"
+                style="@style/TitleItens"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp"
-                android:textColor="@color/colorPrimaryText"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 tools:text="@string/title_movie_teste" />
 
