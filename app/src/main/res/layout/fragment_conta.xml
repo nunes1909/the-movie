@@ -16,9 +16,9 @@
         android:id="@+id/ivContaPerson"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:contentDescription="@string/imagem_conta"
         android:src="@drawable/ic_conta"
-        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="@id/tvContaEmail"
         app:layout_constraintEnd_toStartOf="@id/tvContaEmail"
         app:layout_constraintHorizontal_chainStyle="packed"
@@ -38,37 +38,45 @@
         app:layout_constraintTop_toTopOf="@+id/containerConta"
         tools:text="gnunes1909@gmail.com" />
 
-    <View
-        android:id="@+id/containerOptions"
-        style="@style/ContainerComponentes"
-        android:layout_height="160dp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/containerGoFavoritos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardBackgroundColor="@color/colorPrimaryContainer"
+        app:cardCornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/containerConta" />
+        app:layout_constraintTop_toBottomOf="@+id/containerConta">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnContaGoFavoritos"
-        style="@style/ButtonLogin"
-        android:layout_margin="16dp"
-        android:drawableStart="@drawable/ic_favoritos"
-        android:drawableTint="@color/white"
-        android:text="@string/minha_lista"
-        app:layout_constraintBottom_toTopOf="@+id/btnContaSair"
-        app:layout_constraintEnd_toEndOf="@+id/containerOptions"
-        app:layout_constraintStart_toStartOf="@+id/containerOptions"
-        app:layout_constraintTop_toTopOf="@+id/containerOptions"
-        app:layout_constraintVertical_bias="0"
-        app:layout_constraintVertical_chainStyle="packed" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnContaGoFavoritos"
+            style="@style/ButtonLogin"
+            android:layout_width="match_parent"
+            android:layout_margin="16dp"
+            android:drawableStart="@drawable/ic_favoritos"
+            android:drawableTint="@color/white"
+            android:text="@string/minha_lista" />
+    </androidx.cardview.widget.CardView>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnContaSair"
-        style="@style/ButtonLogin"
-        android:drawableStart="@drawable/ic_sair"
-        android:drawableTint="@color/white"
-        android:text="@string/sair"
-        app:layout_constraintBottom_toBottomOf="@+id/containerOptions"
-        app:layout_constraintEnd_toEndOf="@+id/btnContaGoFavoritos"
-        app:layout_constraintStart_toStartOf="@+id/btnContaGoFavoritos"
-        app:layout_constraintTop_toBottomOf="@+id/btnContaGoFavoritos" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/containerGoSair"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="@color/colorPrimaryContainer"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/containerGoFavoritos"
+        app:layout_constraintStart_toStartOf="@+id/containerGoFavoritos"
+        app:layout_constraintTop_toBottomOf="@+id/containerGoFavoritos">
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnContaSair"
+            style="@style/ButtonLogin"
+            android:layout_width="match_parent"
+            android:layout_margin="16dp"
+            android:drawableStart="@drawable/ic_sair"
+            android:drawableTint="@color/white"
+            android:text="@string/sair" />
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
