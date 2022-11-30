@@ -35,7 +35,6 @@ class FavoritosFragment : BaseFragmentIn<FragmentFavoritosBinding, FavoritosView
         configuraRecyclerView()
         configuraPesquisa()
         observerListaFav()
-        observerEmpty()
         configuraClickAdapter()
     }
 
@@ -109,19 +108,6 @@ class FavoritosFragment : BaseFragmentIn<FragmentFavoritosBinding, FavoritosView
     private fun exibeFavoritos(resource: ResourceState.Success<List<MovieView>>) {
         resource.data?.let { results ->
             movieAdapter.moviesList = results
-        }
-    }
-
-    private fun observerEmpty() = lifecycleScope.launch {
-        viewModel.empty.collect {
-            if (!it) {
-                movieAdapter.moviesList = listOf()
-                binding.containerIncludeEmpty.ivEmpty.show()
-                binding.containerIncludeEmpty.tvEmpty.show()
-            } else {
-                binding.containerIncludeEmpty.ivEmpty.hide()
-                binding.containerIncludeEmpty.tvEmpty.hide()
-            }
         }
     }
 

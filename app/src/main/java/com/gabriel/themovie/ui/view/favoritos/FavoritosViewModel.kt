@@ -27,9 +27,6 @@ class FavoritosViewModel(
     // Region StateFlow
     private val _getFav = MutableStateFlow<ResourceState<List<MovieView>>>(ResourceState.Empty())
     val getFav: StateFlow<ResourceState<List<MovieView>>> = _getFav
-
-    private val _empty = MutableStateFlow<Boolean>(false)
-    val empty: StateFlow<Boolean> = _empty
     // Endregion
 
     // Region get list fav
@@ -41,10 +38,8 @@ class FavoritosViewModel(
             ResourceState<List<MovieView>> {
         if (!resource.data.isNullOrEmpty()) {
             val listView = mapper.mapToViewNonNull(resource.data!!)
-            _empty.value = true
             return ResourceState.Success(listView)
         }
-        _empty.value = false
         return ResourceState.Error(message = resource.message)
     }
     // Endregion
