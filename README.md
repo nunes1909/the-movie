@@ -2,9 +2,9 @@
 
 ## Sumário:
 * Para acessar a Arquitetura do projeto: <a href="https://github.com/nunes1909/the-movie/wiki/Arquitetura">Clique aqui</a>. <br>
-* Para acessar as features do projeto: <a href="https://github.com/nunes1909/the-movie/wiki/Features">Clique aqui</a>. <br>
-* Para acessar a galeria do projeto: <a href="https://github.com/nunes1909/the-movie/wiki/Galeria">Clique aqui</a>. <br>
-* Para acessar as notas de atualização: <a href="https://github.com/nunes1909/the-movie/wiki/Notas-de-Atualiza%C3%A7%C3%B5es:">Clique aqui</a>. <br>
+* Para acessar as Features do projeto: <a href="https://github.com/nunes1909/the-movie/wiki/Features">Clique aqui</a>. <br>
+* Para acessar a Galeria do projeto: <a href="https://github.com/nunes1909/the-movie/wiki/Galeria">Clique aqui</a>. <br>
+* Para acessar as Notas de Atualização: <a href="https://github.com/nunes1909/the-movie/wiki/Notas-de-Atualiza%C3%A7%C3%B5es:">Clique aqui</a>. <br>
 
 ## Sobre este projeto:
 A ideia deste aplicativo é:
