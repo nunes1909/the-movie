@@ -9,8 +9,9 @@
 ## Sobre este projeto:
 A ideia deste aplicativo é:
 - Consumir a API <a href="https://www.themoviedb.org/documentation/api">The Movie Database</a> e listar Filmes e Séries.
-- Implementar um CRUD local de Movies.
 - Praticar o conceito de Modularização Android.
+- Praticar o conceito de Clean Architecture.
+- Praticar integração de Apps Android com Firebase.
 
 ## Motivação:
 Este aplicativo faz parte do meu portfólio pessoal e eu o desenvolvi visando os meus estudos e a prática dos meus conhecimentos. Caso você faça o download deste repositório e observe pontos de melhoria, seja no código, estrutura, UI/UX, etc... Ou queira apenas dar um simples feedback eu ficarei extremamente feliz. Estou aqui para aprender e me tornar um desenvolvedor cada vez melhor. 😁
