@@ -1,6 +1,7 @@
 # The Movie App
 
 ## Sumário:
+- Para acessar a Wiki do projeto: <a href="https://github.com/nunes1909/the-movie/wiki">Clique aqui</a>.
 - Para acessar a Arquitetura do projeto: <a href="https://github.com/nunes1909/the-movie/wiki/Arquitetura">Clique aqui</a>. <br>
 - Para acessar as Features do projeto: <a href="https://github.com/nunes1909/the-movie/wiki/Features">Clique aqui</a>. <br>
 - Para acessar a Galeria do projeto: <a href="https://github.com/nunes1909/the-movie/wiki/Galeria">Clique aqui</a>. <br>
