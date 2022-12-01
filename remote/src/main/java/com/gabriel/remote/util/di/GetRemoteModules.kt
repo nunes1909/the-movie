@@ -4,7 +4,7 @@ import com.gabriel.data.movie.dataSource.filme.GetAllFilmesDataSource
 import com.gabriel.data.movie.dataSource.filme.GetDetailFilmeDataSource
 import com.gabriel.data.movie.dataSource.filme.GetSimilarFilmesDataSource
 import com.gabriel.data.movie.dataSource.filme.GetTrendingFilmeDataSource
-import com.gabriel.data.movie.dataSource.movie.SearchMovieDataSource
+import com.gabriel.data.movie.dataSource.movie.*
 import com.gabriel.data.movie.dataSource.serie.*
 import com.gabriel.data.usuario.dataSource.AutenticaUsuarioDataSource
 import com.gabriel.data.usuario.dataSource.CadastraUsuarioDataSource
@@ -13,10 +13,11 @@ import com.gabriel.remote.movie.dataSourceImpl.filme.GetAllFilmesDataSourceImpl
 import com.gabriel.remote.movie.dataSourceImpl.filme.GetDetailFilmeDataSourceImpl
 import com.gabriel.remote.movie.dataSourceImpl.filme.GetSimilarFilmesDataSourceImpl
 import com.gabriel.remote.movie.dataSourceImpl.filme.GetTrendingFilmeDataSourceImpl
-import com.gabriel.remote.movie.dataSourceImpl.movie.SearchMovieDataSourceImpl
+import com.gabriel.remote.movie.dataSourceImpl.movie.*
 import com.gabriel.remote.movie.dataSourceImpl.serie.*
 import com.gabriel.remote.movie.mapper.filme.FilmeDetailResponseToDataMapper
 import com.gabriel.remote.movie.mapper.filme.FilmeResponseToDataMapper
+import com.gabriel.remote.movie.mapper.movie.MovieRemoteMapper
 import com.gabriel.remote.movie.mapper.multi.MultiRemoteToMovieMapper
 import com.gabriel.remote.movie.mapper.serie.SerieDetailResponseToDataMapper
 import com.gabriel.remote.movie.mapper.serie.SerieResponseToDataMapper
@@ -81,6 +82,7 @@ fun getRemoteModules() = module {
     factory { SerieResponseToDataMapper() }
     factory { MultiRemoteToMovieMapper() }
     factory { UsuarioRemoteMapper() }
+    factory { MovieRemoteMapper() }
     // Endregion
 
     // Region Data Source modules
@@ -155,6 +157,33 @@ fun getRemoteModules() = module {
     }
     single<AutenticaUsuarioDataSource> {
         AutenticaUsuarioDataSourceImpl(
+            firebaseAuth = get()
+        )
+    }
+    single<SaveMovieDataSource> {
+        SaveMovieDataSourceImpl(
+            firestore = get(),
+            firebaseAuth = get(),
+            mapper = get()
+        )
+    }
+    single<GetFavMovieDataSource> {
+        GetFavMovieDataSourceImpl(
+            firestore = get(),
+            firebaseAuth = get(),
+            mapper = get()
+        )
+    }
+    single<DeleteMovieDataSource> {
+        DeleteMovieDataSourceImpl(
+            firestore = get(),
+            firebaseAuth = get(),
+            mapper = get()
+        )
+    }
+    single<VerifyExistsMovieDataSource> {
+        VerifyExistsMovieDataSourceImpl(
+            firestore = get(),
             firebaseAuth = get()
         )
     }

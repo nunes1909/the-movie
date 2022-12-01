@@ -21,7 +21,6 @@
     <string name="movie_sem_video">Este movie não possui vídeo.</string>
     <string name="pesquise_movies_fav">Pesquise aqui os seus movies salvos</string>
     <string name="pesquise_filmes">Pesquise aqui os seus filmes</string>
-    <string name="sem_fav">Nenhum resultado encontrado.</string>
     <string name="movie_sem_trailer">Este movie não possui vídeo.</string>
     <string name="info_ok">OK</string>
     <!-- endregion -->
@@ -49,5 +48,6 @@
     <string name="title_menu_conta">Conta</string>
     <string name="imagem_conta">Imagem conta person</string>
     <string name="botao_login_google">Botão login conta google</string>
+    <string name="trailer">Trailer</string>
     <!-- endregion -->
 </resources>

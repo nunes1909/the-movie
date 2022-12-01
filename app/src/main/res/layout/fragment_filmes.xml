@@ -14,12 +14,12 @@
             android:id="@+id/ivBannerFilmePrincipal"
             android:layout_width="0dp"
             android:layout_height="500dp"
+            android:contentDescription="@string/banner_movie"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/backgrounds/scenic"
-            android:contentDescription="@string/banner_movie" />
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <View
             android:id="@+id/viewGradient"
@@ -33,15 +33,10 @@
 
         <TextView
             android:id="@+id/tituloFilmePrincipal"
+            style="@style/TitlePrincipal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
-            android:elegantTextHeight="true"
-            android:shadowColor="@color/black"
-            android:shadowRadius="8"
-            android:textAlignment="center"
-            android:textColor="@color/colorPrimaryText"
-            android:textSize="26sp"
             app:layout_constraintBottom_toBottomOf="@id/ivBannerFilmePrincipal"
             app:layout_constraintEnd_toEndOf="@id/ivBannerFilmePrincipal"
             app:layout_constraintStart_toStartOf="@id/ivBannerFilmePrincipal"
