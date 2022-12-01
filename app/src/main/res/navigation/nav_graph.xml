@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/filmesFragment"
-        android:name="com.gabriel.themovie.ui.view.filmes.FilmesFragment"
+        android:name="com.gabriel.themovie.view.ui.filmes.FilmesFragment"
         android:label="FilmesFragment" >
         <action
             android:id="@+id/acaoFilmesParaDetalhes"
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.gabriel.themovie.ui.view.login.LoginFragment"
+        android:name="com.gabriel.themovie.view.ui.login.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/acaoLoginParaCadastro"
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/cadastroFragment"
-        android:name="com.gabriel.themovie.ui.view.cadastro.CadastroFragment"
+        android:name="com.gabriel.themovie.view.ui.cadastro.CadastroFragment"
         android:label="CadastroFragment" />
     <action
         android:id="@+id/acaoGlobalParaLogin"
@@ -52,7 +52,7 @@
         app:popUpToInclusive="true" />
     <fragment
         android:id="@+id/seriesFragment"
-        android:name="com.gabriel.themovie.ui.view.series.SeriesFragment"
+        android:name="com.gabriel.themovie.view.ui.series.SeriesFragment"
         android:label="SeriesFragment" >
         <action
             android:id="@+id/acaoSeriesParaDetalhes"
@@ -64,7 +64,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoritosFragment"
-        android:name="com.gabriel.themovie.ui.view.favoritos.FavoritosFragment"
+        android:name="com.gabriel.themovie.view.ui.favoritos.FavoritosFragment"
         android:label="FavoritosFragment" >
         <action
             android:id="@+id/acaoFavoritosParaDetalhes"
@@ -76,7 +76,7 @@
     </fragment>
     <fragment
         android:id="@+id/contaFragment"
-        android:name="com.gabriel.themovie.ui.view.conta.ContaFragment"
+        android:name="com.gabriel.themovie.view.ui.conta.ContaFragment"
         android:label="ContaFragment" >
         <action
             android:id="@+id/acaoContaParaFavoritos"
@@ -88,7 +88,7 @@
     </fragment>
     <fragment
         android:id="@+id/detalhesFragment"
-        android:name="com.gabriel.themovie.ui.view.detalhes.DetalhesFragment"
+        android:name="com.gabriel.themovie.view.ui.detalhes.DetalhesFragment"
         android:label="DetalhesFragment" >
         <action
             android:id="@+id/acaoDetalhesParaDialog"
@@ -112,7 +112,7 @@
     </fragment>
     <dialog
         android:id="@+id/detalhesInfoDialog"
-        android:name="com.gabriel.themovie.ui.view.detalhes.DetalhesInfoDialog"
+        android:name="com.gabriel.themovie.view.ui.detalhes.DetalhesInfoDialog"
         android:label="DetalhesInfoDialog" >
         <argument
             android:name="movieView"
@@ -120,11 +120,11 @@
     </dialog>
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.gabriel.themovie.ui.view.splash.SplashFragment"
+        android:name="com.gabriel.themovie.view.ui.splash.SplashFragment"
         android:label="SplashFragment" />
     <fragment
         android:id="@+id/pesquisaFragment"
-        android:name="com.gabriel.themovie.ui.view.pesquisa.PesquisaFragment"
+        android:name="com.gabriel.themovie.view.ui.pesquisa.PesquisaFragment"
         android:label="PesquisaFragment" >
         <action
             android:id="@+id/acaoPesquisaParaDetalhes"
